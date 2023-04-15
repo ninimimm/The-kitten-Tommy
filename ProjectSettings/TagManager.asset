@@ -44,6 +44,9 @@ TagManager:
   - name: BackGround
     uniqueID: 67524445
     locked: 0
+  - name: Trees
+    uniqueID: 1166786255
+    locked: 0
   - name: HotSand
     uniqueID: 1490834467
     locked: 0
