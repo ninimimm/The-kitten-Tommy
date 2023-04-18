@@ -53,3 +53,6 @@ TagManager:
   - name: Map
     uniqueID: 2151074531
     locked: 0
+  - name: Phone
+    uniqueID: 1301735017
+    locked: 0
