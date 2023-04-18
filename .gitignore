@@ -46,6 +46,8 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.dnnl.lib
+*.torch_cpu.dll
 
 # Unity3D generated meta files
 *.pidb.meta
