@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MovePerson : MonoBehaviour
+public class CatSprite : MonoBehaviour
 {
     // Start is called before the first frame update
     // Add a jumpForce variable to control the jump strength
