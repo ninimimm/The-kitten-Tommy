@@ -3,9 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="7c03cdd7-afde-43bb-9359-0156d4a71423" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CatSprite.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cat.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CatSprite.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/Cat-Sheet_48 (1).controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimationPlayer/Cat-Sheet_48 (1).controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CatSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CatSprite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Kitten.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Kitten.jpg.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Snake.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Snake.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Snake.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Snake.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,15 +26,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Discover.Launch.Via.Unity": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.22f1\Editor\Unity.exe" />
@@ -68,6 +74,9 @@
       <option name="presentableId" value="Default" />
       <updated>1681828864509</updated>
       <workItem from="1681828917209" duration="1294000" />
+      <workItem from="1681837728674" duration="1164000" />
+      <workItem from="1681838940348" duration="10405000" />
+      <workItem from="1681877619363" duration="6539000" />
     </task>
     <servers />
   </component>

@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using Unity.VisualScripting;
 
 public class Snake : Agent
 {
