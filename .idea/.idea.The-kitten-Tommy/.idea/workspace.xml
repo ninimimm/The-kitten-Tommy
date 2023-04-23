@@ -3,15 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7c03cdd7-afde-43bb-9359-0156d4a71423" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/Cat-Sheet_48 (1).controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimationPlayer/Cat-Sheet_48 (1).controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/CatSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CatSprite.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Kitten.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Kitten.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ComponentSnake.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ComponentSnake.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Snake.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Snake.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +72,8 @@
       <workItem from="1681837728674" duration="1164000" />
       <workItem from="1681838940348" duration="10405000" />
       <workItem from="1681877619363" duration="6539000" />
+      <workItem from="1681901214958" duration="482000" />
+      <workItem from="1682244493590" duration="1459000" />
     </task>
     <servers />
   </component>
