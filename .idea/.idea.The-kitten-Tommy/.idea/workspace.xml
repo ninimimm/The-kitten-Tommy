@@ -3,15 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="7c03cdd7-afde-43bb-9359-0156d4a71423" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/Cat-Sheet_48 (1).controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimationPlayer/Cat-Sheet_48 (1).controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimationSnake/Snake.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/attake.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimationSnake/attake.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/hurt.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimationSnake/hurt.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CameraFollowCat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CameraFollowCat.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/CatSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CatSprite.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ComponentSnake.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ComponentSnake.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Damage.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Damage.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82ff21ca19ff4a6c94c6df953addbbcc7400/8e/7c98826e/Input.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -73,7 +83,9 @@
       <workItem from="1681838940348" duration="10405000" />
       <workItem from="1681877619363" duration="6539000" />
       <workItem from="1681901214958" duration="482000" />
-      <workItem from="1682244493590" duration="1459000" />
+      <workItem from="1682244493590" duration="9470000" />
+      <workItem from="1682254274448" duration="20954000" />
+      <workItem from="1682489271023" duration="365000" />
     </task>
     <servers />
   </component>
