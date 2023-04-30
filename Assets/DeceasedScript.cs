@@ -14,11 +14,13 @@ public class DeceasedScript : MonoBehaviour, IDamageable
     public float distanseAttack = 0.2f;
     public Transform attack;
     public LayerMask catLayer;
+    public int takeDamage = 1;
     private bool damageNow = false;
     private PolygonCollider2D _col;
     private Animator targetAnimation;
-    const float speedMove = 30.0f;
+    const float speedMove = 1.0f;
     private Rigidbody2D _rb;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
