@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cat;
 
-public class DeceasedScript : MonoBehaviour
+
+public class DeceasedScript : MonoBehaviour, IDamageable
 {
     [SerializeField] private float HP = 3;
     [SerializeField] private GameObject target;
@@ -11,6 +11,10 @@ public class DeceasedScript : MonoBehaviour
     public enum MovementState { Deceased_Idle, Deceased_Run, Deceased_Attack, Deceased_Dead, Deceased_Hurt };
     public static MovementState _stateDeceased;
     private SpriteRenderer _deceased;
+    public float distanseAttack = 0.2f;
+    public Transform attack;
+    public LayerMask catLayer;
+    private bool damageNow = false;
     private PolygonCollider2D _col;
     private Animator targetAnimation;
     const float speedMove = 30.0f;
@@ -35,11 +39,7 @@ public class DeceasedScript : MonoBehaviour
         }
         if (transform.position.x < 35.02)
             transform.position = new Vector3(35.1f, transform.position.y, transform.position.z);
-        if (HP <= 0)
-        {
-            _stateDeceased = MovementState.Deceased_Dead;
-            transform.position = new Vector3(5, -0.6f, 0);
-        }
+       
         if (_rb.velocity.x > 0)
         {
             _stateDeceased = MovementState.Deceased_Run;
@@ -54,17 +54,47 @@ public class DeceasedScript : MonoBehaviour
             _stateDeceased = MovementState.Deceased_Idle;
         if (Vector2.Distance(transform.localPosition, target.transform.localPosition) < 1)
         {
-            if (transform.position.x > target.transform.position.x) _deceased.flipX = false;
-            else _deceased.flipX = true;
-            _stateDeceased = MovementState.Deceased_Attack;
+            Attake();
+            //_stateDeceased = MovementState.Deceased_Attack;
         }
-        if (Vector3.Distance(transform.localPosition, target.transform.localPosition) < 1 && CatSprite._stateCat == CatSprite.MovementState.hit)
+        if (damageNow)
         {
             _stateDeceased = MovementState.Deceased_Hurt;
-            HP -= 1;
+            damageNow = false;
+            //  HP -= 1;
         }
+
         _animator.SetInteger("state", (int)_stateDeceased);
     }
-        
-    
+
+    void Attake()
+    {
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("attake"))
+        {
+            var hitCat = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
+            if (hitCat.Length > 0)
+            {
+                _stateDeceased = MovementState.Deceased_Attack;
+                _animator.SetInteger("state", (int)_stateDeceased);
+            }
+            foreach (var cat in hitCat)
+                cat.GetComponent<CatSprite>().TakeDamage(takeDamage);
+        }
+    }
+    public void TakeDamage(int damage)
+    {
+        damageNow = true;
+        HP -= damage;
+        if (HP <= 0)
+        {
+            _stateDeceased = MovementState.Deceased_Dead;
+            transform.position = new Vector3(-100, 0, 0);
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (attack.position == null)
+            return;
+        Gizmos.DrawWireSphere(attack.position, distanseAttack);
+    }
 }

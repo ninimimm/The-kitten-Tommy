@@ -2,87 +2,127 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using SnakeTarget;
 using UnityEngine;
 
-namespace Cat
+public class CatSprite : MonoBehaviour
 {
-    public class CatSprite : MonoBehaviour
+    private Rigidbody2D _rb;
+    private float move;
+    public static MovementState _stateCat;
+    private bool rotation = true;
+    public static Animator _animator;
+    public static Animation _Animation;
+    public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage };
+    private SpriteRenderer Cat;
+    private Animator _snakeAnimator;
+    private bool IsSnakeAttack;
+    private bool IsLastSnakeAttack;
+    [SerializeField] private float HP = 100;
+    [SerializeField] public float speed = 4.0f;
+    [SerializeField] public float jumpForce = 7f;
+    [SerializeField] public GameObject Snake;
+    public Transform smallAttack;
+    public float distanseSmallAttack = 0.2f;
+    public LayerMask enemyLayers;
+    public int takeDamage = 1;
+    private float speedMultiplier = 1f;
+
+    public void SetSpeedMultiplier(float multiplier)
     {
-        // Start is called before the first frame update
-        // Add a jumpForce variable to control the jump strength
-        private Rigidbody2D _rb; // Add a RigidBody variable
-        private float move;
-        public static MovementState _stateCat;
-        private bool rotation = true;
-        private Animator _animator;
-        public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage };
-        private SpriteRenderer Cat;
-        private Animator _snakeAnimator;
-        [SerializeField] private float HP = 10;
-        [SerializeField] public float speed = 100.0f;
-        [SerializeField] public float jumpForce = 1f;
-        [SerializeField] public GameObject Snake;
-        private void Start()
-        {
-            _rb = GetComponent<Rigidbody2D>(); // Initialize the RigidBody variable
-            Cat = GetComponent<SpriteRenderer>();
-            _animator = GetComponent<Animator>();
-            _snakeAnimator = Snake.GetComponent<Animator>();
-            transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
-        }
+        speedMultiplier = multiplier;
+    }
 
-        // Add a new method to check if the character is grounded
-        private void Update()
-        {
-            move = Input.GetAxisRaw("Horizontal");
-            transform.position += new Vector3(move, 0, 0)*speed*Time.deltaTime;
-            if (Input.GetButtonDown("Jump") && CanJump())
-                _rb.AddForce(new Vector2(0,jumpForce),ForceMode2D.Impulse);
-            SwitchAnimation();
-        }
 
-        private bool CanJump() => _stateCat != MovementState.jumpup && _stateCat != MovementState.jumpdown;
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        Cat = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+        _snakeAnimator = Snake.GetComponent<Animator>();
+        _Animation = GetComponent<Animation>();
+    }
 
-        private void SwitchAnimation()
+    private void Update()
+    {
+        move = Input.GetAxisRaw("Horizontal");
+        transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;
+        if (Input.GetButtonDown("Jump") && CanJump())
+            _rb.AddForce(new Vector2(0, jumpForce * speedMultiplier), ForceMode2D.Impulse);
+        SwitchAnimation();
+    }
+
+    private bool CanJump() => _stateCat != MovementState.jumpup && _stateCat != MovementState.jumpdown;
+
+    private void SwitchAnimation()
+    {
+        if (move > 0)
         {
-            if (move > 0)
+            _stateCat = MovementState.Run;
+            if (rotation)
             {
-                _stateCat = MovementState.Run;
-                if (rotation)
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
+                rotation = false;
+            }
+        }
+        else if (move < 0)
+        {
+            _stateCat = MovementState.Run;
+            if (!rotation)
+            {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
+                rotation = true;
+            }
+        }
+        else
+            _stateCat = MovementState.Stay;
+
+        if (_rb.velocity.y > .001f) _stateCat = MovementState.jumpup;
+        else if (_rb.velocity.y < -.001f) _stateCat = MovementState.jumpdown;
+
+        if (Vector2.Distance(transform.position, Snake.transform.position) < 1 &&
+            ComponentSnake._animator.GetCurrentAnimatorStateInfo(0).IsName("attake"))
+            _stateCat = MovementState.damage;
+
+        if (Input.GetKeyDown(KeyCode.Q))
+            Attake();
+        _animator.SetInteger("State", (int)_stateCat);
+    }
+
+    void Attake()
+    {
+        if (_stateCat == MovementState.damage) return;
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("hit"))
+        {
+            _stateCat = MovementState.hit;
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, enemyLayers);
+            foreach (var enemy in hitEnemies)
+            {
+                IDamageable damageable = enemy.GetComponent<IDamageable>();
+                if (damageable != null)
                 {
-                    transform.localScale = new Vector3(-transform.localScale.x,transform.localScale.y,transform.localScale.y);
-                    rotation = false;
+                    damageable.TakeDamage(takeDamage);
                 }
             }
-            else if (move < 0)
-            {
-                _stateCat = MovementState.Run;
-                if (!rotation)
-                {
-                    transform.localScale = new Vector3(-transform.localScale.x,transform.localScale.y,transform.localScale.y);
-                    rotation = true;
-                }
-            }
-            else
-                _stateCat = MovementState.Stay;
-            if (_rb.velocity.y > .001f)
-                _stateCat = MovementState.jumpup;
-            else if (_rb.velocity.y < -.001f)
-                _stateCat = MovementState.jumpdown;
-            if (Vector2.Distance(transform.position,Snake.transform.position) < 1 && ComponentSnake._stateSnake == ComponentSnake.MovementState.attake)
-            {
-                _stateCat = MovementState.damage;
-                HP -= 1;
-            }
-            if (Input.GetButton("Fire1"))
-                _stateCat = MovementState.hit;
-            if (HP < 0)
-            {
-                HP = 100;
-                transform.position = new Vector3(1, -0.6f, 0);
-            }
-            _animator.SetInteger("State", (int)_stateCat);
         }
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        if (smallAttack.position == null)
+            return;
+        Gizmos.DrawWireSphere(smallAttack.position, distanseSmallAttack);
+    }
+    public void TakeDamage(float damage)
+    {
+        HP -= damage;
+        _stateCat = MovementState.damage;
+        _animator.SetInteger("State", (int)_stateCat);
+        if (HP <= 0)
+        {
+            HP = 10;
+            transform.position = new Vector3(1, 0, 0);
+        }
+
     }
 }
