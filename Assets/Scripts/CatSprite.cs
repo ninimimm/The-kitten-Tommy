@@ -25,6 +25,13 @@ public class CatSprite : MonoBehaviour
     public float distanseSmallAttack = 0.2f;
     public LayerMask enemyLayers;
     public int takeDamage = 1;
+    private float speedMultiplier = 1f;
+
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = multiplier;
+    }
+
 
     private void Start()
     {
@@ -38,7 +45,7 @@ public class CatSprite : MonoBehaviour
     private void Update()
     {
         move = Input.GetAxisRaw("Horizontal");
-        transform.position += new Vector3(move, 0, 0) * speed * Time.deltaTime;
+        transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;
         if (Input.GetButtonDown("Jump") && CanJump())
             _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         SwitchAnimation();
@@ -83,16 +90,22 @@ public class CatSprite : MonoBehaviour
 
     void Attake()
     {
+        if (_stateCat == MovementState.damage) return;
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("hit"))
         {
             _stateCat = MovementState.hit;
-            _animator.SetInteger("State", (int)_stateCat);
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, enemyLayers);
             foreach (var enemy in hitEnemies)
-                enemy.GetComponent<ComponentSnake>().TakeDamage(takeDamage);
+            {
+                IDamageable damageable = enemy.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    damageable.TakeDamage(takeDamage);
+                }
+            }
         }
-        
     }
+
 
     private void OnDrawGizmosSelected()
     {
