@@ -47,7 +47,7 @@ public class CatSprite : MonoBehaviour
         move = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;
         if (Input.GetButtonDown("Jump") && CanJump())
-            _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            _rb.AddForce(new Vector2(0, jumpForce * speedMultiplier), ForceMode2D.Impulse);
         SwitchAnimation();
     }
 
@@ -113,7 +113,7 @@ public class CatSprite : MonoBehaviour
             return;
         Gizmos.DrawWireSphere(smallAttack.position,distanseSmallAttack);
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         HP -= damage;
         _stateCat = MovementState.damage;

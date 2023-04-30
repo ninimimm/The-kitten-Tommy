@@ -5,101 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c03cdd7-afde-43bb-9359-0156d4a71423" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/Cat-Sheet_48 (1).controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/Cat-Sheet_48 (1).controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/Run.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/Run.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/Stay.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/Stay.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/jumpdown.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/jumpdown.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/jumpup.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationPlayer/jumpup.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake_attack.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake_attack.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake_death.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake_death.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake_hurt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake_hurt.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake_walk.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Snake_walk.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Walk.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/Walk.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/attake.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/attake.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/death.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/death.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/hurt.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/hurt.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/stay.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimationSnake/stay.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BigTree.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BigTree.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CameraFollowCat.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CameraFollowCat.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cat-Sheet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cat-Sheet.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cat-Sheet_0 (1).prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cat-Sheet_0 (1).prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CatSprite.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CatSprite.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ComponentSnake.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ComponentSnake.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Damage.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Damage.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FatCactus.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FatCactus.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/For Sand.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/For Sand.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LeftPeacePit.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LeftPeacePit.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PipCactus.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PipCactus.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Platform.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Platform.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RightPeacePit.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RightPeacePit.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sand.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sand.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Skeleton.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Skeleton.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SkeletonOnTerrarian.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SkeletonOnTerrarian.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SmallCactus.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SmallCactus.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SmallPlatform.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SmallPlatform.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SmallTree.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SmallTree.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SmallTreeOnPlatform.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SmallTreeOnPlatform.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Stone2.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Stone2.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Stone3.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Stone3.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TallCactus.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TallCactus.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Very small cactus.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Very small cactus.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/fire_0.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/fire_0.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/hit.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/hit.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/page.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/page.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CatSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CatSprite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HotSand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HotSand.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +109,7 @@
       <workItem from="1682244493590" duration="9470000" />
       <workItem from="1682254274448" duration="20954000" />
       <workItem from="1682489271023" duration="365000" />
-      <workItem from="1682832602760" duration="25606000" />
+      <workItem from="1682832602760" duration="25956000" />
     </task>
     <servers />
   </component>
