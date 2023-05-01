@@ -40,6 +40,7 @@ public class CatSprite : MonoBehaviour
         _animator = GetComponent<Animator>();
         _snakeAnimator = Snake.GetComponent<Animator>();
         _Animation = GetComponent<Animation>();
+        transform.Rotate(0f,180f,0f);
     }
 
     private void Update()
@@ -47,7 +48,7 @@ public class CatSprite : MonoBehaviour
         move = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;
         if (Input.GetButtonDown("Jump") && CanJump())
-            _rb.AddForce(new Vector2(0, jumpForce * speedMultiplier), ForceMode2D.Impulse);
+            _rb.AddForce(new Vector2(0, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
         SwitchAnimation();
     }
 
@@ -60,7 +61,7 @@ public class CatSprite : MonoBehaviour
             _stateCat = MovementState.Run;
             if (rotation)
             {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
+                transform.Rotate(0f,180f,0f);
                 rotation = false;
             }
         }
@@ -69,7 +70,7 @@ public class CatSprite : MonoBehaviour
             _stateCat = MovementState.Run;
             if (!rotation)
             {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
+                transform.Rotate(0f,180f,0f);
                 rotation = true;
             }
         }

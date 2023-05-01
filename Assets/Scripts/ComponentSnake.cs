@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ComponentSnake : MonoBehaviour, IDamageable
 {
-    [SerializeField] public int HP = 100;
+    [SerializeField] public float HP = 100;
     [SerializeField] private GameObject target;
     public static Animator _animator;
     public enum MovementState { stay, Walk, attake, death, hurt };
@@ -77,7 +77,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
                 cat.GetComponent<CatSprite>().TakeDamage(takeDamage);
         }
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         damageNow = true;
         HP -= damage;

@@ -14,13 +14,13 @@ public class Hawk : MonoBehaviour, IDamageable
     [SerializeField] private float minY = -2.0f;
     [SerializeField] private float maxY = 2.0f;
     [SerializeField] private GameObject Cat;
-    [SerializeField] private int HP;
+    [SerializeField] private float HP;
     public float distanseAttack = 0.2f;
     public Transform attack;
     public LayerMask catLayer;
     private CatSprite _catSprite;
-
     private Animator _animator;
+    private bool damageNow = false;
 
     void Start()
     {
@@ -63,6 +63,11 @@ public class Hawk : MonoBehaviour, IDamageable
         {
             direction.y = 1;
         }
+        if (damageNow)
+        {
+            _stateHawk = MovementState.hurt;
+            damageNow = false;
+        }
         _animator.SetInteger("state", (int)_stateHawk);
         _rigidbody2D.velocity = direction * speed;
         Flip(direction.x);
@@ -102,17 +107,16 @@ public class Hawk : MonoBehaviour, IDamageable
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         HP -= damage;
+        damageNow = true;
         _stateHawk = MovementState.hurt;
-        _animator.SetInteger("State", (int)_stateHawk);
         if (HP <= 0)
         {
             HP = 10;
             transform.position = new Vector3(1, 0, 0);
         }
-            
     }
     private void OnDrawGizmosSelected()
     {

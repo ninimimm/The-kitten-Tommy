@@ -5,9 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c03cdd7-afde-43bb-9359-0156d4a71423" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Crate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Crate.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Crate100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Crate100.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Group 14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Group 14.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Materials.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Materials/Crate100.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Materials/Crate100.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Materials/Group 14.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/Materials/Group 14.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/klipartz 1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/klipartz 1.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/веревка.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/веревка.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/крюк.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/крюк.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/крюк1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/крюк1.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/крюк2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/крюк2.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GrabbingHook.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GrabbingHook.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Knife.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Knife.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/logicKnife.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/logicKnife.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/klipartz 1.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/klipartz 1.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectSettings/BurstAotSettings_StandaloneWindows.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectSettings/CommonBurstAotSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/CatSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CatSprite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentSnake.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ComponentSnake.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Hawk.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Hawk.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/HotSand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HotSand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/IDamageable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/IDamageable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/hawk/hawk_walk_0.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/hawk/hawk_walk_0.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +54,12 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Fire.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GrabbingHook.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Hawk.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HotSand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Knife.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/logicKnife.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -28,25 +69,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Discover.Launch.Via.Unity": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\nik_chern\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\nik_chern\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\nik_chern\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\nik_chern\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\nik_chern\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\nik_chern\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.22f1\Editor\Unity.exe" />
@@ -82,10 +123,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="19520">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="19520" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -110,6 +151,8 @@
       <workItem from="1682254274448" duration="20954000" />
       <workItem from="1682489271023" duration="365000" />
       <workItem from="1682832602760" duration="25956000" />
+      <workItem from="1682923976409" duration="3082000" />
+      <workItem from="1682927420374" duration="1477000" />
     </task>
     <servers />
   </component>
