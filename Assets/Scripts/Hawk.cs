@@ -14,7 +14,8 @@ public class Hawk : MonoBehaviour, IDamageable
     [SerializeField] private float minY = -2.0f;
     [SerializeField] private float maxY = 2.0f;
     [SerializeField] private GameObject Cat;
-    [SerializeField] private float HP;
+    [SerializeField] private float maxHP;
+    private float HP;
     public float distanseAttack = 0.2f;
     public Transform attack;
     public LayerMask catLayer;
@@ -24,6 +25,7 @@ public class Hawk : MonoBehaviour, IDamageable
 
     void Start()
     {
+        HP = maxHP;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _catSprite = Cat.GetComponent<CatSprite>();
@@ -32,11 +34,7 @@ public class Hawk : MonoBehaviour, IDamageable
     void Update()
     {
         Move();
-        if (IsCloseToCat())
-        {
-            Attack();
-        }
-        UpdateAnimation();
+        Attack();
     }
 
     private void Move()
@@ -74,11 +72,6 @@ public class Hawk : MonoBehaviour, IDamageable
         
     }
 
-    private bool IsCloseToCat()
-    {
-        return Vector2.Distance(transform.position, Cat.transform.position) < attackRange;
-    }
-
     private void Attack()
     {
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_attack"))
@@ -90,11 +83,7 @@ public class Hawk : MonoBehaviour, IDamageable
                 cat.GetComponent<CatSprite>().TakeDamage(damage);;
         }
     }
-
-    private void UpdateAnimation()
-    {
-        _animator.SetInteger("state", (int)_stateHawk);
-    }
+    
 
     private void Flip(float horizontalDirection)
     {
@@ -111,10 +100,9 @@ public class Hawk : MonoBehaviour, IDamageable
     {
         HP -= damage;
         damageNow = true;
-        _stateHawk = MovementState.hurt;
         if (HP <= 0)
         {
-            HP = 10;
+            HP = maxHP;
             transform.position = new Vector3(1, 0, 0);
         }
     }

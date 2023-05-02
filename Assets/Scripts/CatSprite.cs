@@ -79,13 +79,14 @@ public class CatSprite : MonoBehaviour
 
         if (_rb.velocity.y > .001f) _stateCat = MovementState.jumpup;
         else if (_rb.velocity.y < -.001f) _stateCat = MovementState.jumpdown;
-
+        
+        if (Input.GetKeyDown(KeyCode.Q))
+            Attake();
+        
         if (Vector2.Distance(transform.position, Snake.transform.position) < 1 &&
             ComponentSnake._animator.GetCurrentAnimatorStateInfo(0).IsName("attake"))
             _stateCat = MovementState.damage;
 
-        if (Input.GetKeyDown(KeyCode.Q))
-            Attake();
         _animator.SetInteger("State", (int)_stateCat);
     }
 
@@ -118,7 +119,6 @@ public class CatSprite : MonoBehaviour
     {
         HP -= damage;
         _stateCat = MovementState.damage;
-        _animator.SetInteger("State", (int)_stateCat);
         if (HP <= 0)
         {
             HP = 10;
