@@ -6,6 +6,7 @@ public class GrabbingHook : MonoBehaviour
 {
     [SerializeField] public float distanse = 10f;
     [SerializeField] public float stopping = 0.2f;
+    [SerializeField] private float distanseIn;
     public LineRenderer line;
     public LayerMask mask;
     private DistanceJoint2D _joint2D;
@@ -42,7 +43,7 @@ public class GrabbingHook : MonoBehaviour
                 _joint2D.distance = Vector2.Distance(transform.position, _raycast.point);
                 line.enabled = true;
                 line.SetPosition(0,transform.position);
-                line.SetPosition(1,_raycast.point);
+                line.SetPosition(1,_raycast.point + new Vector2(distanseIn,distanseIn));
             }
         }
 
