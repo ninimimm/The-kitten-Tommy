@@ -154,37 +154,6 @@ Transform:
   m_Father: {fileID: 1292863298}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &86843238
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 86843239}
-  m_Layer: 7
-  m_Name: AttackCircle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &86843239
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86843238}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1308863, y: 0.19515043, z: 0}
-  m_LocalScale: {x: 0.6139112, y: 0.58428276, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2090104574}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &116538133
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +361,7 @@ MonoBehaviour:
     m_Bits: 256
   attack: {fileID: 1521518262}
   distanseAttack: 0.2
-  damage: 3
+  damage: 0.0003
   maxHP: 20
   HP: 0
   stateHyena: 0
@@ -1481,6 +1450,37 @@ PolygonCollider2D:
       - {x: 0.38, y: -0.12}
       - {x: 0.31, y: -0.12}
       - {x: 0.29999998, y: -0.14999999}
+--- !u!1 &657074917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 657074918}
+  m_Layer: 0
+  m_Name: AttackCircle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &657074918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657074917}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2090104574}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &668409792
 GameObject:
   m_ObjectHideFlags: 0
@@ -6482,7 +6482,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &2090104572
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -6579,7 +6579,7 @@ Transform:
   m_LocalScale: {x: 1.6289, y: 1.7115, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 86843239}
+  - {fileID: 657074918}
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6601,9 +6601,9 @@ MonoBehaviour:
   catLayer:
     serializedVersion: 2
     m_Bits: 256
-  attack: {fileID: 86843239}
-  distanseAttack: 0.2
-  damage: 3
+  attack: {fileID: 657074918}
+  distanseAttack: 0.3
+  damage: 0.001
   maxHP: 20
   HP: 0
   stateMommy: 0
