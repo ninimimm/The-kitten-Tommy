@@ -22,6 +22,7 @@ public class Hawk : MonoBehaviour, IDamageable
     private CatSprite _catSprite;
     private Animator _animator;
     private bool damageNow = false;
+    private CapsuleCollider2D[] caps;
 
     void Start()
     {
@@ -29,12 +30,21 @@ public class Hawk : MonoBehaviour, IDamageable
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _catSprite = Cat.GetComponent<CatSprite>();
+        caps = GetComponents<CapsuleCollider2D>();
     }
 
     void Update()
     {
-        Move();
-        Attack();
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_death"))
+        {
+            Move();
+            Attack();
+        }
+        else
+        {
+            caps[0].enabled = false;
+            caps[1].enabled = true;
+        }
     }
 
     private void Move()
@@ -61,11 +71,13 @@ public class Hawk : MonoBehaviour, IDamageable
         {
             direction.y = 1;
         }
-        if (damageNow)
+        if (damageNow && HP > 0)
         {
             _stateHawk = MovementState.hurt;
             damageNow = false;
         }
+        else if (damageNow && HP <= 0)
+            _stateHawk = MovementState.death;
         _animator.SetInteger("state", (int)_stateHawk);
         _rigidbody2D.velocity = direction * speed;
         Flip(direction.x);
@@ -100,11 +112,6 @@ public class Hawk : MonoBehaviour, IDamageable
     {
         HP -= damage;
         damageNow = true;
-        if (HP <= 0)
-        {
-            HP = maxHP;
-            transform.position = new Vector3(1, 0, 0);
-        }
     }
     private void OnDrawGizmosSelected()
     {

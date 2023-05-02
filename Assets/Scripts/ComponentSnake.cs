@@ -20,6 +20,8 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     public int takeDamage = 1;
     private bool rotation = true;
     private bool damageNow = false;
+    private PolygonCollider2D poly;
+    private CapsuleCollider2D cap;
 
     void Start()
     {
@@ -28,39 +30,51 @@ public class ComponentSnake : MonoBehaviour, IDamageable
         _snake = GetComponent<SpriteRenderer>();
         _col = GetComponent<PolygonCollider2D>();
         targetAnimation = target.GetComponent<Animator>();
+        poly = GetComponent<PolygonCollider2D>();
+        cap = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
     {
         if (transform.position.x > 12.7)
             transform.position = new Vector3(12.67f, transform.position.y, transform.position.z);
-        if (_rb.velocity.x > 0.5)
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("death"))
         {
-            if (rotation)
+            if (_rb.velocity.x > 0.5)
             {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
-                rotation = false;
+                if (rotation)
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
+                    rotation = false;
+                }
+                _stateSnake = MovementState.Walk;
             }
-            _stateSnake = MovementState.Walk;
-        }
-        else if (_rb.velocity.x < -0.5)   
-        {
-            if (!rotation)
+            else if (_rb.velocity.x < -0.5)   
             {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
-                rotation = true;
+                if (!rotation)
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
+                    rotation = true;
+                }
+                _stateSnake = MovementState.Walk;
             }
-            _stateSnake = MovementState.Walk;
+            else _stateSnake = MovementState.stay;
+            Attake();
+            if (damageNow && HP > 0)
+            {
+                _stateSnake = MovementState.hurt;
+                damageNow = false;
+            }
+            else if (damageNow && HP <= 0)
+                _stateSnake = MovementState.death;
+            _animator.SetInteger("state", (int)_stateSnake);
         }
-        else _stateSnake = MovementState.stay;
-        Attake();
-        if (damageNow)
+        else
         {
-            _stateSnake = MovementState.hurt;
-            damageNow = false;
+            _rb.velocity = new Vector2(0, 0);
+            poly.enabled = false;
+            cap.enabled = true;
         }
-
-        _animator.SetInteger("state", (int)_stateSnake);
     }
 
     void Attake()
@@ -81,11 +95,6 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     {
         damageNow = true;
         HP -= damage;
-        if (HP <= 0)
-        {
-            _stateSnake = MovementState.death;
-            transform.position = new Vector3(-100, 0, 0);
-        }
     }
     private void OnDrawGizmosSelected()
     {

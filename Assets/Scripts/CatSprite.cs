@@ -26,6 +26,7 @@ public class CatSprite : MonoBehaviour
     public LayerMask enemyLayers;
     public int takeDamage = 1;
     private float speedMultiplier = 1f;
+    private bool damageNow = false;
 
     public void SetSpeedMultiplier(float multiplier)
     {
@@ -82,11 +83,12 @@ public class CatSprite : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Q))
             Attake();
-        
-        if (Vector2.Distance(transform.position, Snake.transform.position) < 1 &&
-            ComponentSnake._animator.GetCurrentAnimatorStateInfo(0).IsName("attake"))
-            _stateCat = MovementState.damage;
 
+        if (damageNow)
+        {
+            _stateCat = MovementState.damage;
+            damageNow = false;
+        }
         _animator.SetInteger("State", (int)_stateCat);
     }
 
@@ -118,7 +120,7 @@ public class CatSprite : MonoBehaviour
     public void TakeDamage(float damage)
     {
         HP -= damage;
-        _stateCat = MovementState.damage;
+        damageNow = true;
         if (HP <= 0)
         {
             HP = 10;
