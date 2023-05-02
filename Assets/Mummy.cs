@@ -79,7 +79,10 @@ public class Mummy : MonoBehaviour, IDamageable
         {
             var hitCat = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
             if (hitCat.Length > 0)
+            {
                 stateMommy = MovementState.attake;
+                animator.SetInteger("state", (int)stateMommy);
+            }
             foreach (var cat in hitCat)
                 cat.GetComponent<CatSprite>().TakeDamage(damage);
         }
@@ -88,6 +91,7 @@ public class Mummy : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        stateMommy = MovementState.hurt;
         damageNow = true;
     }
     private void Flip(float horizontalDirection)

@@ -225,7 +225,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116538133}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -372,14 +372,14 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116538133}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.030911004, y: -0.26496997}
-  m_Size: {x: 1.1794854, y: 0.35006478}
+  m_Offset: {x: -0.030910969, y: 0.03719724}
+  m_Size: {x: 1.1794856, y: 0.9544027}
   m_Direction: 1
 --- !u!213 &159810025
 Sprite:
@@ -1390,7 +1390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 657074917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.13, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4825,7 +4825,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292863295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.77, y: 2.92, z: 0}
+  m_LocalPosition: {x: 36.98, y: -0.26, z: 0}
   m_LocalScale: {x: 9.33212, y: 9.33212, z: 9.33212}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6189,7 +6189,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090104568}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -6274,13 +6274,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090104568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.487, y: -0.706, z: 0}
-  m_LocalScale: {x: 1.6289, y: 1.7115, z: 1}
+  m_LocalPosition: {x: 49.0511, y: -0.3764, z: 0}
+  m_LocalScale: {x: 3.5308998, y: 3.7099488, z: 2.1676593}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 657074918}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2090104575
 MonoBehaviour:
@@ -6301,7 +6301,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attack: {fileID: 657074918}
-  distanseAttack: 0.3
+  distanseAttack: 0.2
   damage: 0.001
   maxHP: 20
   HP: 0
