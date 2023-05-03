@@ -6,28 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7c03cdd7-afde-43bb-9359-0156d4a71423" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cat/Animation/Cat-Sheet_48 (1).controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cat/Animation/Cat-Sheet_48 (1).controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/line.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/line.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/веревка.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/веревка.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/крюк.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/крюк.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/крюк1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/крюк1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/крюк2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/крюк2.png.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CatSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CatSprite.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentSnake.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ComponentSnake.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GrabbingHook.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GrabbingHook.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Hawk.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Hawk.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake/Animation/Snake.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Snake/Animation/Snake.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake/Animation/death.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Snake/Animation/death.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Snake/Snake_death.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Snake/Snake_death.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/hawk/hawk_death.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/hawk/hawk_death.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/hawk/hawk_death.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/hawk/hawk_death.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Hyena.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Hyena.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +22,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HotSand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Knife.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SandBoss.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/logicKnife.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -60,6 +42,7 @@
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "editor.preferences.smartKeys_rider",
     "vue.rearranger.settings.migration": "true"
   },
@@ -137,7 +120,7 @@
       <workItem from="1682923976409" duration="3082000" />
       <workItem from="1682927420374" duration="1477000" />
       <workItem from="1683006630693" duration="15785000" />
-      <workItem from="1683043349979" duration="5213000" />
+      <workItem from="1683043349979" duration="14194000" />
     </task>
     <servers />
   </component>
