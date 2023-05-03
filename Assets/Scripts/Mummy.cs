@@ -12,6 +12,7 @@ public class Mummy : MonoBehaviour, IDamageable
     [SerializeField] private float speed;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private Transform attack;
+    [SerializeField] private GameObject Boss;
     [SerializeField] private float distanseAttack;
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
@@ -41,6 +42,7 @@ public class Mummy : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
+        coordinates = Boss.transform.position;
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MummyDeath"))
         {
             Vector2 direction = new Vector2(0, 0);
