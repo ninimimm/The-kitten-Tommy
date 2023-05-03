@@ -4,14 +4,13 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Hyena : MonoBehaviour, IDamageable
+public class SandBoss : MonoBehaviour, IDamageable
 {
     
     [SerializeField] private GameObject _cat;
     [SerializeField] private float distanceWalk;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask catLayer;
-    [SerializeField] private Transform attack;
     [SerializeField] private float distanseAttack;
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
@@ -19,17 +18,22 @@ public class Hyena : MonoBehaviour, IDamageable
     private PolygonCollider2D pol;
     private CapsuleCollider2D cap;
     private bool damageNow = false;
-    public enum MovementState { stay, walk, attake, death, hurt };
-    public MovementState stateHyena;
+    public enum MovementState { stay, walk, attake, death, hurt};
+    public MovementState stateBoss;
     private Vector3 coordinates;
     private Rigidbody2D _rb;
     private Vector3 delta;
     private Animator animator;
     private bool rotation = true;
+    
+    public GameObject ballPrefab; // префаб шара-спрайта
+    public float attackInterval = 2.0f; // интервал атаки (в секундах)
+    private float attackTimer; // таймер для атаки
 
     // Start is called before the first frame update
     void Start()
     {
+        attackTimer = attackInterval;
         HP = maxHP;
         coordinates = transform.position;
         _rb = GetComponent<Rigidbody2D>();
@@ -41,30 +45,34 @@ public class Hyena : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("HyenaDeath"))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("death"))
         {
+            attackTimer -= Time.deltaTime;
             Vector2 direction = new Vector2(0, 0);
-            if (Vector3.Distance(_cat.transform.position, coordinates) < distanceWalk)
+            if (Vector3.Distance(_cat.transform.position, transform.position) > distanceWalk)
             {
                 direction.x = _cat.transform.position.x > transform.position.x ? 1 : -1;
-                stateHyena = MovementState.walk;    
+                stateBoss = MovementState.walk;    
             }
-            else if (Vector3.Distance(_cat.transform.position, coordinates) >= distanceWalk &&
-                     Vector3.Distance(coordinates,transform.position) > 0.1)
-                direction = (coordinates - transform.position);
             else
-                stateHyena = MovementState.stay;
-            Attack();
+                stateBoss = MovementState.stay;
+            if (attackTimer <= 0 && stateBoss != MovementState.attake && Vector3.Distance(_cat.transform.position, transform.position) < distanseAttack)
+            {
+                stateBoss = MovementState.attake;
+                attackTimer = attackInterval;
+            }
+            if (stateBoss == MovementState.attake)
+                Attack();
             if (damageNow && HP > 0)
             {
-                stateHyena = MovementState.hurt;
+                stateBoss = MovementState.hurt;
                 damageNow = false;
             }
             else if (damageNow && HP <= 0)
-                stateHyena = MovementState.death;
+                stateBoss = MovementState.death;
             Flip(direction.x);
             _rb.velocity = direction * speed;
-            animator.SetInteger("state", (int)stateHyena);
+            animator.SetInteger("state", (int)stateBoss);
         }
         else
         {
@@ -75,14 +83,11 @@ public class Hyena : MonoBehaviour, IDamageable
 
     void Attack()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("HyenaAttack"))
-        {
-            var hitCat = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
-            if (hitCat.Length > 0)
-                stateHyena = MovementState.attake;
-            foreach (var cat in hitCat)
-                cat.GetComponent<CatSprite>().TakeDamage(damage);
-        }
+        stateBoss = MovementState.attake;
+        Vector3 spawnPosition = transform.position;
+        spawnPosition.y += 5.0f;
+        spawnPosition.x += Random.Range(-distanseAttack, distanseAttack);
+        GameObject ball = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
     }
     
     public void TakeDamage(float damage)
@@ -100,11 +105,5 @@ public class Hyena : MonoBehaviour, IDamageable
         {
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
-    }
-    private void OnDrawGizmosSelected()
-    {
-        if (attack.position == null)
-            return;
-        Gizmos.DrawWireSphere(attack.position,distanseAttack);
     }
 }
