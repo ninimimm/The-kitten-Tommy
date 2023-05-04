@@ -12,7 +12,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     [SerializeField] private GameObject cat;
     [SerializeField] private GameObject leftBound;
     [SerializeField] private GameObject rightBound;
-    [SerializeField] private int health = 20;
+    [SerializeField] private float health = 20;
     [SerializeField] private float speed = 3.0f;
     [SerializeField] private float damage = 0.1f; 
     [SerializeField] private float attackRange = 0.5f; 
@@ -77,7 +77,7 @@ public class Scorpio : MonoBehaviour, IDamageable
         return Vector2.Distance(transform.position, cat.transform.position) < attackRange;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (!isDead)
         {
