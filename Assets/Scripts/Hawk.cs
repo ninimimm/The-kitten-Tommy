@@ -15,7 +15,7 @@ public class Hawk : MonoBehaviour, IDamageable
     [SerializeField] private float maxY = 2.0f;
     [SerializeField] private GameObject Cat;
     [SerializeField] private float maxHP;
-    private float HP;
+    [SerializeField] private float HP;
     public float distanseAttack = 0.2f;
     public Transform attack;
     public LayerMask catLayer;
@@ -36,10 +36,7 @@ public class Hawk : MonoBehaviour, IDamageable
     void Update()
     {
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_death"))
-        {
             Move();
-            Attack();
-        }
         else
         {
             caps[0].enabled = false;
@@ -61,7 +58,6 @@ public class Hawk : MonoBehaviour, IDamageable
         {
             _stateHawk = MovementState.stay;
         }
-        
 
         if (transform.position.y > maxY)
         {
@@ -71,6 +67,7 @@ public class Hawk : MonoBehaviour, IDamageable
         {
             direction.y = 1;
         }
+        Attack();
         if (damageNow && HP > 0)
         {
             _stateHawk = MovementState.hurt;
@@ -90,7 +87,10 @@ public class Hawk : MonoBehaviour, IDamageable
         {
             var hitCat = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
             if (hitCat.Length > 0)
+            {
                 _stateHawk = MovementState.attack;
+                _animator.SetInteger("state", (int)_stateHawk);
+            }
             foreach (var cat in hitCat)
                 cat.GetComponent<CatSprite>().TakeDamage(damage);;
         }
