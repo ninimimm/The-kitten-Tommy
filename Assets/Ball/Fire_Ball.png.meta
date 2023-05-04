@@ -105,15 +105,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fire_Ball_7
+      name: Fire_Ball_6
       rect:
         serializedVersion: 2
-        x: 1221
+        x: 1220
         y: 54
         width: 194
-        height: 117
+        height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -126,15 +126,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_Ball_20
+      name: Fire_Ball_4
       rect:
         serializedVersion: 2
         x: 773
         y: 61
         width: 131
-        height: 77
+        height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,15 +147,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_Ball_37
+      name: Fire_Ball_2
       rect:
         serializedVersion: 2
         x: 324
         y: 66
         width: 69
-        height: 60
+        height: 139
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,15 +168,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_Ball_48
+      name: Fire_Ball_5
       rect:
         serializedVersion: 2
         x: 989
         y: 53
         width: 178
-        height: 97
+        height: 154
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,15 +189,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_Ball_57
+      name: Fire_Ball_7
       rect:
         serializedVersion: 2
         x: 1457
         y: 51
         width: 202
-        height: 126
+        height: 156
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,15 +210,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_Ball_63
+      name: Fire_Ball_3
       rect:
         serializedVersion: 2
         x: 545
         y: 63
         width: 109
-        height: 52
+        height: 142
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -231,15 +231,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_Ball_71
+      name: Fire_Ball_1
       rect:
         serializedVersion: 2
         x: 93
         y: 70
         width: 53
-        height: 38
+        height: 133
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -252,15 +252,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_Ball_129
+      name: Fire_Ball_8
       rect:
         serializedVersion: 2
         x: 1690
         y: 49
         width: 214
-        height: 136
+        height: 156
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -284,7 +284,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Fire_Ball_0: -1837342892
-      Fire_Ball_1: -782866793
+      Fire_Ball_1: -698959809
       Fire_Ball_10: 1151531094
       Fire_Ball_100: 1097416776
       Fire_Ball_101: 1186512955
@@ -317,7 +317,6 @@ TextureImporter:
       Fire_Ball_126: 1933181728
       Fire_Ball_127: 841406606
       Fire_Ball_128: 311194593
-      Fire_Ball_129: 347600380
       Fire_Ball_13: -1247071831
       Fire_Ball_130: -474353521
       Fire_Ball_131: 1144441929
@@ -332,8 +331,7 @@ TextureImporter:
       Fire_Ball_17: -822405488
       Fire_Ball_18: 308186771
       Fire_Ball_19: 1057942270
-      Fire_Ball_2: 545556903
-      Fire_Ball_20: -1805334828
+      Fire_Ball_2: 1099643234
       Fire_Ball_21: -838872499
       Fire_Ball_22: 761171052
       Fire_Ball_23: -1837755522
@@ -343,7 +341,7 @@ TextureImporter:
       Fire_Ball_27: 1608315880
       Fire_Ball_28: 1848373937
       Fire_Ball_29: 400777362
-      Fire_Ball_3: -632938536
+      Fire_Ball_3: 1615091864
       Fire_Ball_30: -12454452
       Fire_Ball_31: 1913350021
       Fire_Ball_32: -2024077029
@@ -351,10 +349,9 @@ TextureImporter:
       Fire_Ball_34: -1523963914
       Fire_Ball_35: 1496222947
       Fire_Ball_36: -615516725
-      Fire_Ball_37: 1099643234
       Fire_Ball_38: -1038209471
       Fire_Ball_39: 439509902
-      Fire_Ball_4: -682761958
+      Fire_Ball_4: -1805334828
       Fire_Ball_40: -115261695
       Fire_Ball_41: -1096355972
       Fire_Ball_42: 908663525
@@ -363,9 +360,8 @@ TextureImporter:
       Fire_Ball_45: 1804234770
       Fire_Ball_46: -1246435268
       Fire_Ball_47: 201793001
-      Fire_Ball_48: 1792800790
       Fire_Ball_49: 523500177
-      Fire_Ball_5: -2061702703
+      Fire_Ball_5: 1792800790
       Fire_Ball_50: 1569232804
       Fire_Ball_51: -904187342
       Fire_Ball_52: -1724905182
@@ -373,23 +369,20 @@ TextureImporter:
       Fire_Ball_54: 1845166280
       Fire_Ball_55: 44186083
       Fire_Ball_56: -1554838172
-      Fire_Ball_57: 1679291284
       Fire_Ball_58: -1106478840
       Fire_Ball_59: -342274987
-      Fire_Ball_6: -264428218
+      Fire_Ball_6: -1459301438
       Fire_Ball_60: 713942095
       Fire_Ball_61: 780872976
       Fire_Ball_62: -1583028171
-      Fire_Ball_63: 1615091864
       Fire_Ball_64: 232882189
       Fire_Ball_65: -1959887817
       Fire_Ball_66: 1379474384
       Fire_Ball_67: -375165141
       Fire_Ball_68: -1908338384
       Fire_Ball_69: 1920586023
-      Fire_Ball_7: -1459301438
+      Fire_Ball_7: 1679291284
       Fire_Ball_70: 983803568
-      Fire_Ball_71: -698959809
       Fire_Ball_72: 645050692
       Fire_Ball_73: 1611006919
       Fire_Ball_74: 433489406
@@ -398,7 +391,7 @@ TextureImporter:
       Fire_Ball_77: -1399805067
       Fire_Ball_78: -435311000
       Fire_Ball_79: 1429253123
-      Fire_Ball_8: -488131461
+      Fire_Ball_8: 347600380
       Fire_Ball_80: -1763456353
       Fire_Ball_81: 600143927
       Fire_Ball_82: -2083732183

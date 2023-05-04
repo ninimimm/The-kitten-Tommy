@@ -7,8 +7,12 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private Transform Radius;
+    [SerializeField] private Transform DestroyRadius;
     [SerializeField] private float RadiusAttack;
+    [SerializeField] private float RadiusDestroy;
     [SerializeField] private LayerMask catLayer;
+    [SerializeField] private LayerMask ground;
+    [SerializeField] private LayerMask enemies;
     [SerializeField] private float damage;
     private enum MovementState
     {
@@ -29,14 +33,23 @@ public class Ball : MonoBehaviour
     private void Update()
     {
         var hitCat = Physics2D.OverlapCircleAll(Radius.position, RadiusAttack, catLayer);
-        if (_rb.velocity.y == 0 && transform.position.y < 3 && CanDamage)
+        var player = Physics2D.OverlapCircleAll(DestroyRadius.position, RadiusDestroy, catLayer);
+        var Ground = Physics2D.OverlapCircleAll(DestroyRadius.position, RadiusDestroy, ground);
+        var Enemies = Physics2D.OverlapCircleAll(DestroyRadius.position, RadiusDestroy, enemies);
+        if (CanDamage && player.Length > 0)
         {
             CanDamage = false;
             foreach (var cat in hitCat)
                 cat.GetComponent<CatSprite>().TakeDamage(damage);
             ballState = MovementState.fire;
             _animator.SetInteger("state",(int)ballState);
-            Destroy(gameObject,1f);
+            Destroy(gameObject,0.6f);
+        }
+        else if (Ground.Length > 0 || Enemies.Length > 0)
+        {
+            ballState = MovementState.fire;
+            _animator.SetInteger("state",(int)ballState);
+            Destroy(gameObject,0.6f);
         }
     }
     private void OnDrawGizmosSelected()

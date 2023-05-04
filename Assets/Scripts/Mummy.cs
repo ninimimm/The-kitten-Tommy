@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -17,6 +19,7 @@ public class Mummy : MonoBehaviour, IDamageable
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
     [SerializeField] private float HP;
+    private Rigidbody2D rbBoss;
     private PolygonCollider2D pol;
     private CapsuleCollider2D cap;
     private bool damageNow = false;
@@ -37,6 +40,7 @@ public class Mummy : MonoBehaviour, IDamageable
         pol = GetComponent<PolygonCollider2D>();
         cap = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
+        rbBoss = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -53,9 +57,17 @@ public class Mummy : MonoBehaviour, IDamageable
             }
             else if (Vector3.Distance(_cat.transform.position, coordinates) >= distanceWalk &&
                      Vector3.Distance(coordinates, transform.position) > 0.1)
-                direction = (coordinates - transform.position);
+            {
+                direction.x = (coordinates.x - transform.position.x);
+                if (Math.Abs(Boss.transform.position.x - transform.position.x) < 1)
+                {
+                    stateMommy = MovementState.stay;
+                    direction = new Vector2(0, 0);
+                }
+            }
             else
                 stateMommy = MovementState.stay;
+
             Attack();
             if (damageNow && HP > 0)
             {

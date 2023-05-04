@@ -26,14 +26,18 @@ public class SandBoss : MonoBehaviour, IDamageable
     private Animator animator;
     private bool rotation = true;
     
-    public GameObject ballPrefab; // префаб шара-спрайта
-    public float attackInterval = 2.0f; // интервал атаки (в секундах)
-    private float attackTimer; // таймер для атаки
+    public GameObject ballPrefab;
+    public GameObject MummyPrefab;// префаб шара-спрайта
+    public float attackInterval = 2.0f;
+    public float spawnInterval = 2.0f;// интервал атаки (в секундах)
+    private float attackTimer;
+    private float spawnTimer;// таймер для атаки
 
     // Start is called before the first frame update
     void Start()
     {
         attackTimer = attackInterval;
+        spawnTimer = spawnInterval;
         HP = maxHP;
         coordinates = transform.position;
         _rb = GetComponent<Rigidbody2D>();
@@ -48,6 +52,7 @@ public class SandBoss : MonoBehaviour, IDamageable
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("death"))
         {
             attackTimer -= Time.deltaTime;
+            spawnTimer -= Time.deltaTime;
             Vector2 direction = new Vector2(0, 0);
             if (Vector3.Distance(_cat.transform.position, transform.position) > distanceWalk)
             {
@@ -70,6 +75,13 @@ public class SandBoss : MonoBehaviour, IDamageable
             }
             else if (damageNow && HP <= 0)
                 stateBoss = MovementState.death;
+
+            if (spawnTimer <= 0)
+            {
+                Spawn();
+                spawnTimer = spawnInterval;
+            }
+                
             Flip(direction.x);
             _rb.velocity = direction * speed;
             animator.SetInteger("state", (int)stateBoss);
@@ -83,11 +95,20 @@ public class SandBoss : MonoBehaviour, IDamageable
 
     void Attack()
     {
-        stateBoss = MovementState.attake;
         Vector3 spawnPosition = transform.position;
         spawnPosition.y += 5.0f;
-        spawnPosition.x += Random.Range(-distanseAttack, distanseAttack);
+        spawnPosition.x = (_cat.transform.position.x<transform.position.x)?Random.Range(-distanseAttack+transform.position.x, transform.position.x-1):Random.Range(transform.position.x+1, transform.position.x+distanseAttack);
+        if (ballPrefab == null)
+            return;
         GameObject ball = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
+    }
+    void Spawn()
+    {
+        Vector3 spawnPosition = transform.position;
+        spawnPosition.x += (transform.position.x > _cat.transform.position.x) ? -1 : 1;
+        if (MummyPrefab == null)
+            return;
+        GameObject Mummy = Instantiate(MummyPrefab, spawnPosition, Quaternion.identity);
     }
     
     public void TakeDamage(float damage)
