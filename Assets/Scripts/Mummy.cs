@@ -9,12 +9,12 @@ using UnityEngine.Serialization;
 public class Mummy : MonoBehaviour, IDamageable
 {
 
-    [SerializeField] private GameObject _cat;
+    [SerializeField] public GameObject _cat;
     [SerializeField] private float distanceWalk;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private Transform attack;
-    [SerializeField] private GameObject Boss;
+    [SerializeField] public GameObject Boss;
     [SerializeField] private float distanseAttack;
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
@@ -41,6 +41,8 @@ public class Mummy : MonoBehaviour, IDamageable
         cap = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
         rbBoss = GetComponent<Rigidbody2D>();
+        cap.enabled = true;
+        pol.enabled = false;
     }
 
     // Update is called once per frame
@@ -86,7 +88,6 @@ public class Mummy : MonoBehaviour, IDamageable
             cap.enabled = false;
         }
     }
-
     void Attack()
     {
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MummyAttack"))

@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 public class SandBoss : MonoBehaviour, IDamageable
 {
     
-    [SerializeField] private GameObject _cat;
+    [SerializeField] public GameObject _cat;
     [SerializeField] private float distanceWalk;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask catLayer;
@@ -44,6 +44,8 @@ public class SandBoss : MonoBehaviour, IDamageable
         pol = GetComponent<PolygonCollider2D>();
         cap = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
+        pol.enabled = true;
+        cap.enabled = false;
     }
 
     // Update is called once per frame
@@ -109,6 +111,8 @@ public class SandBoss : MonoBehaviour, IDamageable
         if (MummyPrefab == null)
             return;
         GameObject Mummy = Instantiate(MummyPrefab, spawnPosition, Quaternion.identity);
+        Mummy.GetComponent<Mummy>()._cat = _cat;
+        Mummy.GetComponent<Mummy>().Boss = gameObject;
     }
     
     public void TakeDamage(float damage)
