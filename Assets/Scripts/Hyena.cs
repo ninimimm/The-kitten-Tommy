@@ -36,6 +36,8 @@ public class Hyena : MonoBehaviour, IDamageable
         pol = GetComponent<PolygonCollider2D>();
         cap = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
+        pol.enabled = false;
+        cap.enabled = true;
     }
 
     // Update is called once per frame
@@ -50,8 +52,11 @@ public class Hyena : MonoBehaviour, IDamageable
                 stateHyena = MovementState.walk;    
             }
             else if (Vector3.Distance(_cat.transform.position, coordinates) >= distanceWalk &&
-                     Vector3.Distance(coordinates,transform.position) > 0.1)
+                     Vector3.Distance(coordinates, transform.position) > 0.5)
+            {
                 direction = (coordinates - transform.position);
+                stateHyena = MovementState.walk;
+            }
             else
                 stateHyena = MovementState.stay;
             Attack();
@@ -68,8 +73,8 @@ public class Hyena : MonoBehaviour, IDamageable
         }
         else
         {
-            pol.enabled = false;
-            cap.enabled = true;
+            pol.enabled = true;
+            cap.enabled = false;
         }
     }
 
