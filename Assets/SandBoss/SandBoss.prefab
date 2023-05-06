@@ -210,7 +210,7 @@ MonoBehaviour:
   maxHP: 50
   HP: 0
   stateBoss: 0
-  ballPrefab: {fileID: 5745300302654022367, guid: a6202fce25d6e9c43bfa69fc3ec0f624, type: 3}
+  ballPrefab: {fileID: 5745300302654022367, guid: da2e20d3b1b8c3f43b1ed24de2d6e33a, type: 3}
   MummyPrefab: {fileID: 2737841178826078145, guid: cf47c0075c843454c95f92367b25e42c, type: 3}
   attackInterval: 1
   spawnInterval: 20

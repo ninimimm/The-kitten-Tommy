@@ -17,10 +17,12 @@ public class CatSprite : MonoBehaviour
     private Animator _snakeAnimator;
     private bool IsSnakeAttack;
     private bool IsLastSnakeAttack;
-    [SerializeField] private float HP = 100;
+    private float HP;
+    [SerializeField] private float maxHP;
     [SerializeField] public float speed = 4.0f;
     [SerializeField] public float jumpForce = 7f;
     [SerializeField] public GameObject Snake;
+    [SerializeField] private HealthBar _healthBar;
     public Transform smallAttack;
     public float distanseSmallAttack = 0.2f;
     public LayerMask enemyLayers;
@@ -42,6 +44,8 @@ public class CatSprite : MonoBehaviour
         _snakeAnimator = Snake.GetComponent<Animator>();
         _Animation = GetComponent<Animation>();
         transform.Rotate(0f,180f,0f);
+        _healthBar.SetMaxHealth(maxHP);
+        HP = maxHP;
     }
 
     private void Update()
@@ -120,10 +124,12 @@ public class CatSprite : MonoBehaviour
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        _healthBar.SetHealth(HP);
         damageNow = true;
         if (HP <= 0)
         {
-            HP = 10;
+            HP = maxHP;
+            _healthBar.SetMaxHealth(maxHP);
             transform.position = new Vector3(1, 0, 0);
         }
             

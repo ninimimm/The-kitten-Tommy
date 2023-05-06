@@ -57,3 +57,6 @@ TagManager:
   - name: Phone
     uniqueID: 1301735017
     locked: 0
+  - name: GUI
+    uniqueID: 860305493
+    locked: 0

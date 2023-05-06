@@ -173,7 +173,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &4735376989662725559
 CapsuleCollider2D:
@@ -231,7 +231,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   attack: {fileID: 4735376989126278682}
-  Boss: {fileID: 7940281430885853015, guid: 628ce4b712b488a478c877f4bbed3fed, type: 3}
+  Boss: {fileID: 7940281430885853015, guid: 875e27c2e25bc2648ab3d82b018631d0, type: 3}
   distanseAttack: 0.2
   damage: 1
   maxHP: 20
