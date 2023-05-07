@@ -30,6 +30,8 @@ public class CatSprite : MonoBehaviour
     private float speedMultiplier = 1f;
     private bool damageNow = false;
 
+    public int money = 0;
+
     public void SetSpeedMultiplier(float multiplier)
     {
         speedMultiplier = multiplier;
