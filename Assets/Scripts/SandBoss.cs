@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class SandBoss : MonoBehaviour, IDamageable
 {
@@ -15,6 +16,11 @@ public class SandBoss : MonoBehaviour, IDamageable
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
     [SerializeField] private float HP;
+    public float _valueMummy;
+    public Canvas _canvasMummy;
+    public Image fill;
+    public Image bar; 
+    public HealthBar _healthBar;
     private PolygonCollider2D pol;
     private CapsuleCollider2D cap;
     private bool damageNow = false;
@@ -39,6 +45,7 @@ public class SandBoss : MonoBehaviour, IDamageable
         attackTimer = attackInterval;
         spawnTimer = spawnInterval;
         HP = maxHP;
+        _healthBar.SetMaxHealth(maxHP);
         coordinates = transform.position;
         _rb = GetComponent<Rigidbody2D>();
         pol = GetComponent<PolygonCollider2D>();
@@ -92,6 +99,8 @@ public class SandBoss : MonoBehaviour, IDamageable
         {
             pol.enabled = false;
             cap.enabled = true;
+            fill.enabled = false;
+            bar.enabled = false;
         }
     }
 
@@ -113,11 +122,22 @@ public class SandBoss : MonoBehaviour, IDamageable
         GameObject Mummy = Instantiate(MummyPrefab, spawnPosition, Quaternion.identity);
         Mummy.GetComponent<Mummy>()._cat = _cat;
         Mummy.GetComponent<Mummy>().Boss = gameObject;
+        var newCanvas = Instantiate(_canvasMummy,
+            new Vector3(spawnPosition.x, spawnPosition.y + _valueMummy, spawnPosition.z), Quaternion.identity);
+        var healthBar = newCanvas.GetComponentInChildren<HealthBar>();
+        var _fill = healthBar.GetComponentsInChildren<Image>()[0].GetComponent<Image>();
+        var _bar = healthBar.GetComponentsInChildren<Image>()[1].GetComponent<Image>();
+        healthBar.GetComponent<EnemyHealthBar>()._target = Mummy.transform;
+        healthBar.GetComponent<EnemyHealthBar>()._value = _valueMummy;
+        Mummy.GetComponent<Mummy>()._healthBar = healthBar;
+        Mummy.GetComponent<Mummy>().__fill = _fill;
+        Mummy.GetComponent<Mummy>().__bar = _bar;
     }
     
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        _healthBar.SetHealth(HP);
         damageNow = true;
     }
     private void Flip(float horizontalDirection)

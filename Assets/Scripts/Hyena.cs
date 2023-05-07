@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Hyena : MonoBehaviour, IDamageable
 {
@@ -16,6 +17,9 @@ public class Hyena : MonoBehaviour, IDamageable
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
     [SerializeField] private float HP;
+    [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private Image _fill;
+    [SerializeField] private Image _bar;
     private PolygonCollider2D pol;
     private CapsuleCollider2D cap;
     private bool damageNow = false;
@@ -31,6 +35,7 @@ public class Hyena : MonoBehaviour, IDamageable
     void Start()
     {
         HP = maxHP;
+        _healthBar.SetMaxHealth(maxHP);
         coordinates = transform.position;
         _rb = GetComponent<Rigidbody2D>();
         pol = GetComponent<PolygonCollider2D>();
@@ -75,6 +80,8 @@ public class Hyena : MonoBehaviour, IDamageable
         {
             pol.enabled = true;
             cap.enabled = false;
+            _fill.enabled = false;
+            _bar.enabled = false;
         }
     }
 
@@ -93,6 +100,7 @@ public class Hyena : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        _healthBar.SetHealth(HP);
         damageNow = true;
     }
     private void Flip(float horizontalDirection)

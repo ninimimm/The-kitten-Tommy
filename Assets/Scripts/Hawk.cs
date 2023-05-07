@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Hawk : MonoBehaviour, IDamageable
 {
     private Rigidbody2D _rigidbody2D;
@@ -16,6 +16,9 @@ public class Hawk : MonoBehaviour, IDamageable
     [SerializeField] private GameObject Cat;
     [SerializeField] private float maxHP;
     [SerializeField] private float HP;
+    [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private Image _fill;
+    [SerializeField] private Image _bar;
     public float distanseAttack = 0.2f;
     public Transform attack;
     public LayerMask catLayer;
@@ -27,6 +30,7 @@ public class Hawk : MonoBehaviour, IDamageable
     void Start()
     {
         HP = maxHP;
+        _healthBar.SetMaxHealth(maxHP);
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _catSprite = Cat.GetComponent<CatSprite>();
@@ -41,6 +45,8 @@ public class Hawk : MonoBehaviour, IDamageable
         {
             caps[0].enabled = false;
             caps[1].enabled = true;
+            _fill.enabled = false;
+            _bar.enabled = false;
         }
     }
 
@@ -111,6 +117,7 @@ public class Hawk : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        _healthBar.SetHealth(HP);
         damageNow = true;
     }
     private void OnDrawGizmosSelected()

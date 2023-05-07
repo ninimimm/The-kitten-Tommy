@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ComponentSnake : MonoBehaviour, IDamageable
 {
-    [SerializeField] public float HP = 100;
+    private float HP;
+    [SerializeField] private float maxHP;
     [SerializeField] private GameObject target;
+    [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private Image _fill;
+    [SerializeField] private Image _bar;
     public static Animator _animator;
     public enum MovementState { stay, Walk, attake, death, hurt };
     public static MovementState _stateSnake;
@@ -32,6 +37,8 @@ public class ComponentSnake : MonoBehaviour, IDamageable
         targetAnimation = target.GetComponent<Animator>();
         poly = GetComponent<PolygonCollider2D>();
         cap = GetComponent<CapsuleCollider2D>();
+        _healthBar.SetMaxHealth(maxHP);
+        HP = maxHP;
     }
 
     void Update()
@@ -74,6 +81,8 @@ public class ComponentSnake : MonoBehaviour, IDamageable
             _rb.velocity = new Vector2(0, 0);
             poly.enabled = false;
             cap.enabled = true;
+            _fill.enabled = false;
+            _bar.enabled = false;
         }
     }
 
@@ -95,6 +104,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     {
         damageNow = true;
         HP -= damage;
+        _healthBar.SetHealth(HP);
     }
     private void OnDrawGizmosSelected()
     {

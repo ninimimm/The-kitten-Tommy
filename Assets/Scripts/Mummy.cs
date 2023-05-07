@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Mummy : MonoBehaviour, IDamageable
 {
@@ -19,6 +20,9 @@ public class Mummy : MonoBehaviour, IDamageable
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
     [SerializeField] private float HP;
+    public HealthBar _healthBar;
+    public Image __fill;
+    public Image __bar;
     private Rigidbody2D rbBoss;
     private PolygonCollider2D pol;
     private CapsuleCollider2D cap;
@@ -35,6 +39,7 @@ public class Mummy : MonoBehaviour, IDamageable
     void Start()
     {
         HP = maxHP;
+        _healthBar.SetMaxHealth(maxHP);
         coordinates = transform.position;
         _rb = GetComponent<Rigidbody2D>();
         pol = GetComponent<PolygonCollider2D>();
@@ -86,6 +91,8 @@ public class Mummy : MonoBehaviour, IDamageable
         {
             pol.enabled = true;
             cap.enabled = false;
+            __fill.enabled = false;
+            __bar.enabled = false;
         }
     }
     void Attack()
@@ -103,6 +110,7 @@ public class Mummy : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        _healthBar.SetHealth(HP);
         damageNow = true;
     }
     private void Flip(float horizontalDirection)
