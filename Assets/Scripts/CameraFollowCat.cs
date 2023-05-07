@@ -10,7 +10,7 @@ public class CameraFollowCat : MonoBehaviour
     [SerializeField] public float startY;
     [SerializeField] private Vector2 defaulResolution = new Vector2(1080, 1980);
     [Range(0f, 1f)] public float widthOrHeight;
-    private Camera _camera;
+    public Camera _camera;
     private float initialSize;
     private float targetAspect;
     private float value;

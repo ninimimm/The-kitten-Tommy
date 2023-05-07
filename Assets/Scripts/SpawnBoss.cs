@@ -33,7 +33,7 @@ public class SpawnBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (snakeAnim.GetCurrentAnimatorStateInfo(0).IsName("death") && canSpawn)
+        if (snakeAnim.GetCurrentAnimatorStateInfo(0).IsName("death") && canSpawn && Cat.transform.position.x > 36)
         {
             canSpawn = false;
             
