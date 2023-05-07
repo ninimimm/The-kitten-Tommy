@@ -22,6 +22,7 @@ public class Mummy : MonoBehaviour, IDamageable
     private bool damageNow = false;
     public enum MovementState { stay, walk, attake, hurt, death };
     public MovementState stateMommy;
+    private Animator _bossAnimator;
     private Vector3 coordinates;
     private Rigidbody2D _rb;
     private Vector3 delta;
@@ -36,13 +37,15 @@ public class Mummy : MonoBehaviour, IDamageable
         _rb = GetComponent<Rigidbody2D>();
         pol = GetComponent<PolygonCollider2D>();
         cap = GetComponent<CapsuleCollider2D>();
+        _bossAnimator = Boss.GetComponent<Animator>();
         animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        coordinates = Boss.transform.position;
+        coordinates.x = Boss.transform.position.x;
+        coordinates.y = 0;
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MummyDeath"))
         {
             Vector2 direction = new Vector2(0, 0);
@@ -53,7 +56,12 @@ public class Mummy : MonoBehaviour, IDamageable
             }
             else if (Vector3.Distance(_cat.transform.position, coordinates) >= distanceWalk &&
                      Vector3.Distance(coordinates, transform.position) > 0.1)
-                direction = (coordinates - transform.position);
+            {
+                direction.x = (coordinates.x - transform.position.x);
+                direction.y = 0;
+                if (_bossAnimator.GetCurrentAnimatorStateInfo(0).IsName("walk"))
+                    stateMommy = MovementState.walk;
+            }
             else
                 stateMommy = MovementState.stay;
             Attack();
@@ -84,6 +92,7 @@ public class Mummy : MonoBehaviour, IDamageable
                 stateMommy = MovementState.attake;
             foreach (var cat in hitCat)
                 cat.GetComponent<CatSprite>().TakeDamage(damage);
+
         }
     }
 
