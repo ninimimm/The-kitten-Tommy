@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CatSprite : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] public float jumpForce = 7f;
     [SerializeField] public GameObject Snake;
     [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private Text _text;
     public Transform smallAttack;
     public float distanseSmallAttack = 0.2f;
     public LayerMask enemyLayers;
@@ -52,6 +54,7 @@ public class CatSprite : MonoBehaviour
 
     private void Update()
     {
+        _text.text = money.ToString();
         move = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;
         if (Input.GetButtonDown("Jump") && CanJump())

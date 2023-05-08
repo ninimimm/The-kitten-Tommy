@@ -5,6 +5,9 @@ using UnityEngine;
 public class Crate : MonoBehaviour, IDamageable
 {
     [SerializeField] private GameObject _cat;
+    [SerializeField] private GameObject coin;
+    [SerializeField] private LayerMask catLayer;
+    [SerializeField] private float distanseAttack;
     private bool getHit = false;
 
     // Update is called once per frame
@@ -12,7 +15,10 @@ public class Crate : MonoBehaviour, IDamageable
     {
         if (transform.position.y < 1 && getHit)
         {
-            _cat.GetComponent<CatSprite>().money += 1;
+            var _coin = Instantiate(coin, transform.position, Quaternion.identity);
+            _coin.GetComponent<Coin>()._cat = _cat;
+            _coin.GetComponent<Coin>().distanseAttack = distanseAttack;
+            _coin.GetComponent<Coin>().catLayer = catLayer;
             Destroy(gameObject);
         }
     }

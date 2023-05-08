@@ -6,17 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="55fa4810-3dfe-4bbb-ba0f-5fbedc5e584d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.The-kitten-Tommy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Chest/EmptyChest.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chest/EmptyChest.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Chest/EmptyChest.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chest/EmptyChest.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/SampleScene_timers.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/Interier/Materials/Phone.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/Interier/Materials/Phone.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/Interier/PipCactus.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/Interier/PipCactus.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/Interier/Stone 1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/Interier/Stone 1.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/Interier/Stone1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/Interier/Stone1.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/Map.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/Map.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraFollowCat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraFollowCat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CatSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CatSprite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Crate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Crate.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +19,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Chest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Crate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Scorpio.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/coin.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2PKhdSfntaVwcA5dKwdVUta1Tcz" />
   <component name="ProjectViewState">
