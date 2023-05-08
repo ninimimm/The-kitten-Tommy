@@ -1,0 +1,651 @@
+fileFormatVersion: 2
+guid: 0c2ae12a06fa0634a87b2da1e82ee5b2
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SafariLableBroke_0
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 4618
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 613efad9add6c0a4895e1044dc17fcf4
+      internalID: -333036367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_1
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 6765
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de7eaec135514c043ae4f4fe698385c3
+      internalID: 2095897067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_2
+      rect:
+        serializedVersion: 2
+        x: 2922
+        y: 6855
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65a9814808d82c849bd10a9a49c56312
+      internalID: 625494759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_3
+      rect:
+        serializedVersion: 2
+        x: 5935
+        y: 6944
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99f0ffec68861f84daf0fd02457a1a5d
+      internalID: -1816467178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_4
+      rect:
+        serializedVersion: 2
+        x: 8930
+        y: 6900
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21a1d2fb6d4ad45469732a1de166a7b6
+      internalID: 1897015756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_5
+      rect:
+        serializedVersion: 2
+        x: 11882
+        y: 7051
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cae9e52a0cfc48e41bf61fd93eb67fad
+      internalID: -2011676742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_6
+      rect:
+        serializedVersion: 2
+        x: 14946
+        y: 7132
+        width: 2699
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97346b48ba7a8164d8e98ac0cb7e183c
+      internalID: -508500797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_7
+      rect:
+        serializedVersion: 2
+        x: 3065
+        y: 4618
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6091012d87d1cb4393007e9a2bbeba1
+      internalID: 429838929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_8
+      rect:
+        serializedVersion: 2
+        x: 6204
+        y: 4618
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b1bfcf5cea09b4418f90840a96d1654
+      internalID: -1476413131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_9
+      rect:
+        serializedVersion: 2
+        x: 9047
+        y: 4621
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9126e5d691dabb45998605e1ddb2f4f
+      internalID: 1973377360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_10
+      rect:
+        serializedVersion: 2
+        x: 11879
+        y: 4716
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0ec681f2de3b4f4c830d0127f31d428
+      internalID: -447709873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_11
+      rect:
+        serializedVersion: 2
+        x: 14549
+        y: 4717
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b14088050986aea4aa8f501f4bb1986c
+      internalID: 2016341281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_12
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 2601
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b88620465e3ed114484c4c4bfa713b4e
+      internalID: 452697857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_13
+      rect:
+        serializedVersion: 2
+        x: 3228
+        y: 2602
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92a194ee4118fd54eb190e0bff55cf4d
+      internalID: 591028072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_14
+      rect:
+        serializedVersion: 2
+        x: 6127
+        y: 2603
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11a6d854bbdd65f4289ddcf9d353a82f
+      internalID: 946559233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_15
+      rect:
+        serializedVersion: 2
+        x: 9307
+        y: 2602
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ad9cb4e2c360284186742fb64165f70
+      internalID: -972538237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_16
+      rect:
+        serializedVersion: 2
+        x: 12115
+        y: 2603
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8278c355df138174c80b8e91dd00f28c
+      internalID: -82421756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_17
+      rect:
+        serializedVersion: 2
+        x: 15019
+        y: 2603
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff0362eb701d83d409aec9eaa8208525
+      internalID: -1529584530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_18
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 375
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2649139293ad3c34dbf369fc17e87e01
+      internalID: 1109084259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_19
+      rect:
+        serializedVersion: 2
+        x: 3082
+        y: 375
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81ecf0c842da81f4f86c427fef2fdbca
+      internalID: -1435848199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_20
+      rect:
+        serializedVersion: 2
+        x: 6321
+        y: 375
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f3f2ddf27c093345ba2cd016245eb6a
+      internalID: -88885940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_21
+      rect:
+        serializedVersion: 2
+        x: 9306
+        y: 740
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6953116693ff9a43ac94e49627d83d3
+      internalID: -1403767210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_22
+      rect:
+        serializedVersion: 2
+        x: 12371
+        y: 740
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b0b7161b35e29040bc3d56e9fb68e72
+      internalID: -1642277665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SafariLableBroke_23
+      rect:
+        serializedVersion: 2
+        x: 15211
+        y: 588
+        width: 2730
+        height: 1840
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c311a1b4a931491439f469ead5796ef6
+      internalID: -2053469836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 14a47e0187b4d8e4b8962bd7c8d4ff5e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      SafariLableBroke_0: 1840106993
+      SafariLableBroke_1: -838804269
+      SafariLableBroke_10: -508500797
+      SafariLableBroke_11: 429838929
+      SafariLableBroke_12: -1476413131
+      SafariLableBroke_13: 1973377360
+      SafariLableBroke_14: -447709873
+      SafariLableBroke_15: 2016341281
+      SafariLableBroke_16: 452697857
+      SafariLableBroke_17: 591028072
+      SafariLableBroke_18: 946559233
+      SafariLableBroke_19: -972538237
+      SafariLableBroke_2: 1078773460
+      SafariLableBroke_20: -82421756
+      SafariLableBroke_21: -1529584530
+      SafariLableBroke_22: 1109084259
+      SafariLableBroke_23: -1435848199
+      SafariLableBroke_3: 46779924
+      SafariLableBroke_4: -333036367
+      SafariLableBroke_5: 2095897067
+      SafariLableBroke_6: 625494759
+      SafariLableBroke_7: -1816467178
+      SafariLableBroke_8: 1897015756
+      SafariLableBroke_9: -2011676742
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
