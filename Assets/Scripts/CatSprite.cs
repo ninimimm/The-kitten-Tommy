@@ -56,8 +56,7 @@ public class CatSprite : MonoBehaviour
 
     private void Update()
     {
-        if (GetComponent<Knife>() != null)
-            _knifeBar.SetHealth(GetComponent<Knife>().timer);
+        _knifeBar.SetHealth(GetComponent<Knife>().timer);
         _text.text = money.ToString();
         move = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;

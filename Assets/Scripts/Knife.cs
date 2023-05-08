@@ -9,6 +9,7 @@ public class Knife : MonoBehaviour
     public Transform fireKnife;
     public GameObject knife;
     public float timer;
+    private bool nowIsShoot = false;
 
 
     private void Start()
@@ -19,11 +20,14 @@ public class Knife : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && timer < 0)
+        if (timer > attackIntervale)
+            nowIsShoot = false;
+        if (nowIsShoot) timer += Time.deltaTime;
+        else if (Input.GetButtonDown("Fire1"))
         {
-            timer = attackIntervale;
+            timer = 0;
             Shoot();
+            nowIsShoot = true;
         }
     }
 
