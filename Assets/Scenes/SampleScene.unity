@@ -608,7 +608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cat: {fileID: 18447}
-  distanseAttack: 0.13
+  distanseAttack: 0.14
   catLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1279,11 +1279,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4472698094438656505, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.96
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 4472698094438656505, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.19
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 4472698094438656505, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3358,7 +3358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cat: {fileID: 18447}
-  distanseAttack: 0.13
+  distanseAttack: 0.14
   catLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -3904,6 +3904,7 @@ GameObject:
   - component: {fileID: 749397955}
   - component: {fileID: 749397954}
   - component: {fileID: 749397953}
+  - component: {fileID: 749397956}
   m_Layer: 0
   m_Name: SafariLable
   m_TagString: Untagged
@@ -3999,6 +4000,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &749397956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749397952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd809bfdae891946890b2821b4e15f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cat: {fileID: 18456}
 --- !u!1 &868389830
 GameObject:
   m_ObjectHideFlags: 0
@@ -8976,7 +8990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cat: {fileID: 18447}
-  distanseAttack: 0.13
+  distanseAttack: 0.14
   catLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -9471,9 +9485,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2143892765
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: 1301735017
+  m_SortingLayer: 5
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: fc793f1e03592ed4884690391e687f15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11962,6 +11976,10 @@ PrefabInstance:
       propertyPath: _cat
       value: 
       objectReference: {fileID: 18447}
+    - target: {fileID: 2166180238160518626, guid: a919b231fec07df40a14a38917c30f56, type: 3}
+      propertyPath: distanseAttack
+      value: 0.14
+      objectReference: {fileID: 0}
     - target: {fileID: 2166180238160518636, guid: a919b231fec07df40a14a38917c30f56, type: 3}
       propertyPath: m_Name
       value: Coin
