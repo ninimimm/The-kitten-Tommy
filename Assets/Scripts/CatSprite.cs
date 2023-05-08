@@ -24,6 +24,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] public float jumpForce = 7f;
     [SerializeField] public GameObject Snake;
     [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private KnifeBar _knifeBar;
     [SerializeField] private Text _text;
     public Transform smallAttack;
     public float distanseSmallAttack = 0.2f;
@@ -49,11 +50,14 @@ public class CatSprite : MonoBehaviour
         _Animation = GetComponent<Animation>();
         transform.Rotate(0f,180f,0f);
         _healthBar.SetMaxHealth(maxHP);
+        _knifeBar.SetMaxHealth(GetComponent<Knife>().attackIntervale);
         HP = maxHP;
     }
 
     private void Update()
     {
+        if (GetComponent<Knife>() != null)
+            _knifeBar.SetHealth(GetComponent<Knife>().timer);
         _text.text = money.ToString();
         move = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;

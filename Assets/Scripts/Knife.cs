@@ -1,17 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
+    [SerializeField] public float attackIntervale;
     public Transform fireKnife;
     public GameObject knife;
+    public float timer;
+
+
+    private void Start()
+    {
+        timer = attackIntervale;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        timer -= Time.deltaTime;
+        if (Input.GetButtonDown("Fire1") && timer < 0)
         {
+            timer = attackIntervale;
             Shoot();
         }
     }
