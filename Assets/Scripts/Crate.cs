@@ -13,7 +13,7 @@ public class Crate : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < 1 && getHit)
+        if (transform.position.y < -0.3 && getHit)
         {
             var _coin = Instantiate(coin, transform.position, Quaternion.identity);
             _coin.GetComponent<Coin>()._cat = _cat;
