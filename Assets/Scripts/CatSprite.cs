@@ -13,7 +13,7 @@ public class CatSprite : MonoBehaviour
     private bool rotation = true;
     public static Animator _animator;
     public static Animation _Animation;
-    public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage };
+    public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage, shit };
     private SpriteRenderer Cat;
     private Animator _snakeAnimator;
     private bool IsSnakeAttack;
@@ -69,39 +69,47 @@ public class CatSprite : MonoBehaviour
 
     private void SwitchAnimation()
     {
-        if (move > 0)
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Stay") && Input.GetKeyDown(KeyCode.CapsLock))
         {
-            _stateCat = MovementState.Run;
-            if (rotation)
-            {
-                transform.Rotate(0f,180f,0f);
-                rotation = false;
-            }
-        }
-        else if (move < 0)
-        {
-            _stateCat = MovementState.Run;
-            if (!rotation)
-            {
-                transform.Rotate(0f,180f,0f);
-                rotation = true;
-            }
+            _stateCat = MovementState.shit;
+            _animator.SetInteger("State", (int)_stateCat);
         }
         else
-            _stateCat = MovementState.Stay;
-
-        if (_rb.velocity.y > .001f) _stateCat = MovementState.jumpup;
-        else if (_rb.velocity.y < -.001f) _stateCat = MovementState.jumpdown;
-        
-        if (Input.GetKeyDown(KeyCode.Q))
-            Attake();
-
-        if (damageNow)
         {
-            _stateCat = MovementState.damage;
-            damageNow = false;
+            if (move > 0)
+            {
+                _stateCat = MovementState.Run;
+                if (rotation)
+                {
+                    transform.Rotate(0f,180f,0f);
+                    rotation = false;
+                }
+            }
+            else if (move < 0)
+            {
+                _stateCat = MovementState.Run;
+                if (!rotation)
+                {
+                    transform.Rotate(0f,180f,0f);
+                    rotation = true;
+                }
+            }
+            else
+                _stateCat = MovementState.Stay;
+
+            if (_rb.velocity.y > .001f) _stateCat = MovementState.jumpup;
+            else if (_rb.velocity.y < -.001f) _stateCat = MovementState.jumpdown;
+        
+            if (Input.GetKeyDown(KeyCode.Q))
+                Attake();
+
+            if (damageNow)
+            {
+                _stateCat = MovementState.damage;
+                damageNow = false;
+            }
+            _animator.SetInteger("State", (int)_stateCat);
         }
-        _animator.SetInteger("State", (int)_stateCat);
     }
 
     void Attake()

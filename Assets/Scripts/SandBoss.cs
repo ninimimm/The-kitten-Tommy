@@ -10,6 +10,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     
     [SerializeField] public GameObject _cat;
     [SerializeField] private float distanceWalk;
+    [SerializeField] private float distanseStay;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private float distanseAttack;
@@ -63,7 +64,8 @@ public class SandBoss : MonoBehaviour, IDamageable
             attackTimer -= Time.deltaTime;
             spawnTimer -= Time.deltaTime;
             Vector2 direction = new Vector2(0, 0);
-            if (Vector3.Distance(_cat.transform.position, transform.position) > distanceWalk)
+            if (Vector3.Distance(_cat.transform.position, transform.position) > distanceWalk && 
+                Vector3.Distance(_cat.transform.position, transform.position) < distanseStay)
             {
                 direction.x = _cat.transform.position.x > transform.position.x ? 1 : -1;
                 stateBoss = MovementState.walk;    
@@ -119,7 +121,8 @@ public class SandBoss : MonoBehaviour, IDamageable
         spawnPosition.x += (transform.position.x > _cat.transform.position.x) ? -1 : 1;
         if (MummyPrefab == null)
             return;
-        GameObject Mummy = Instantiate(MummyPrefab, spawnPosition, Quaternion.identity);
+        GameObject Mummy = Instantiate(MummyPrefab, new Vector3(spawnPosition.x,spawnPosition.y-1,
+            spawnPosition.y), Quaternion.identity);
         Mummy.GetComponent<Mummy>()._cat = _cat;
         Mummy.GetComponent<Mummy>().Boss = gameObject;
         var newCanvas = Instantiate(_canvasMummy,

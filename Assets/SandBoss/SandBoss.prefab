@@ -200,7 +200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cat: {fileID: 4472698094438656388, guid: 596cd40eb34a21b4a8e8300c185c8f6b, type: 3}
-  distanceWalk: 6
+  distanceWalk: 5
+  distanseStay: 6
   speed: 1
   catLayer:
     serializedVersion: 2
@@ -209,11 +210,16 @@ MonoBehaviour:
   damage: 2
   maxHP: 50
   HP: 0
+  _valueMummy: 0
+  _canvasMummy: {fileID: 0}
+  fill: {fileID: 0}
+  bar: {fileID: 0}
+  _healthBar: {fileID: 0}
   stateBoss: 0
   ballPrefab: {fileID: 5745300302654022367, guid: da2e20d3b1b8c3f43b1ed24de2d6e33a, type: 3}
   MummyPrefab: {fileID: 2737841178826078145, guid: cf47c0075c843454c95f92367b25e42c, type: 3}
   attackInterval: 1
-  spawnInterval: 20
+  spawnInterval: 10
 --- !u!95 &7940281430885853016
 Animator:
   serializedVersion: 5

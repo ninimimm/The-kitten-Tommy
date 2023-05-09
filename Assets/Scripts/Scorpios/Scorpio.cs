@@ -11,6 +11,7 @@ public class Scorpio : MonoBehaviour, IDamageable
 {
     [SerializeField] private GameObject leftBound;
     [SerializeField] private GameObject rightBound;
+    [SerializeField] private float maxHP;
     [SerializeField] private float health;
     [SerializeField] private float speed;
     [SerializeField] private float damage; 
@@ -18,6 +19,9 @@ public class Scorpio : MonoBehaviour, IDamageable
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private Transform attackCircle;
     [SerializeField] private float idleTime;
+    [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private Image _fill;
+    [SerializeField] private Image _bar;
     private float idleTimer = 0.0f;
     private bool damageNow = false;
     private BoxCollider2D boxCollider;
@@ -30,6 +34,8 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        health = maxHP;
+        _healthBar.SetMaxHealth(maxHP);
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -52,6 +58,8 @@ public class Scorpio : MonoBehaviour, IDamageable
         {
             polygonCollider.enabled = true;
             boxCollider.enabled = false;
+            _fill.enabled = false;
+            _bar.enabled = false;
         }
     }
 
@@ -101,6 +109,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         health -= damage;
+        _healthBar.SetHealth(health);
         damageNow = true;
     }
 
