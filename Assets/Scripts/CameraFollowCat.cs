@@ -10,7 +10,7 @@ public class CameraFollowCat : MonoBehaviour
     [SerializeField] public float startY;
     [SerializeField] private Vector2 defaulResolution = new Vector2(1080, 1980);
     [Range(0f, 1f)] public float widthOrHeight;
-    private Camera _camera;
+    public Camera _camera;
     private float initialSize;
     private float targetAspect;
     private float value;
@@ -27,7 +27,7 @@ public class CameraFollowCat : MonoBehaviour
         var constantWidthSize = initialSize * (targetAspect / _camera.aspect);
         _camera.orthographicSize = Mathf.Lerp(constantWidthSize, initialSize, widthOrHeight);
         if (target.position.x <= 3.97f) value = 3.97f;
-        else if (target.position.x >= 48f) value = 48f;
+        else if (target.position.x >= 48f) value = 49f;
         else value = target.position.x;
         Vector3 desiredPosition = new Vector3(value + offset.x, maintainY ? transform.position.y+startY : target.position.y + offset.y+startY, transform.position.z);
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);

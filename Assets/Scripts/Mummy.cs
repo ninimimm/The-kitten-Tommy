@@ -24,6 +24,7 @@ public class Mummy : MonoBehaviour, IDamageable
     public Image __fill;
     public Image __bar;
     private Rigidbody2D rbBoss;
+    private Animator _bossAnimator;
     private PolygonCollider2D pol;
     private CapsuleCollider2D cap;
     private bool damageNow = false;
@@ -46,6 +47,7 @@ public class Mummy : MonoBehaviour, IDamageable
         cap = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
         rbBoss = GetComponent<Rigidbody2D>();
+        _bossAnimator = Boss.GetComponent<Animator>();
         cap.enabled = true;
         pol.enabled = false;
     }
@@ -53,7 +55,8 @@ public class Mummy : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        coordinates = Boss.transform.position;
+        coordinates.x = Boss.transform.position.x;
+        coordinates.y = 0;
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MummyDeath"))
         {
             Vector2 direction = new Vector2(0, 0);
@@ -66,6 +69,9 @@ public class Mummy : MonoBehaviour, IDamageable
                      Vector3.Distance(coordinates, transform.position) > 0.1)
             {
                 direction.x = (coordinates.x - transform.position.x);
+                direction.y = 0;
+                if (_bossAnimator.GetCurrentAnimatorStateInfo(0).IsName("walk"))
+                    stateMommy = MovementState.walk;
                 if (Math.Abs(Boss.transform.position.x - transform.position.x) < 1)
                 {
                     stateMommy = MovementState.stay;

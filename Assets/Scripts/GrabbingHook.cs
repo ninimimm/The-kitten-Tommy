@@ -50,6 +50,7 @@ public class GrabbingHook : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             line.SetPosition(0,transform.position);
+            line.SetPosition(1, _joint2D.connectedBody.transform.position + (Vector3)_joint2D.connectedAnchor);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {

@@ -101,6 +101,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -111,7 +123,7 @@ TextureImporter:
         x: 1220
         y: 54
         width: 194
-        height: 153
+        height: 163
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,7 +144,7 @@ TextureImporter:
         x: 773
         y: 61
         width: 131
-        height: 144
+        height: 156
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,9 +163,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 324
-        y: 66
+        y: 68
         width: 69
-        height: 139
+        height: 149
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,7 +186,7 @@ TextureImporter:
         x: 989
         y: 53
         width: 178
-        height: 154
+        height: 164
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +204,10 @@ TextureImporter:
       name: Fire_Ball_7
       rect:
         serializedVersion: 2
-        x: 1457
+        x: 1458
         y: 51
         width: 202
-        height: 156
+        height: 166
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +225,10 @@ TextureImporter:
       name: Fire_Ball_3
       rect:
         serializedVersion: 2
-        x: 545
+        x: 546
         y: 63
         width: 109
-        height: 142
+        height: 154
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,7 +249,7 @@ TextureImporter:
         x: 93
         y: 70
         width: 53
-        height: 133
+        height: 147
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,7 +270,7 @@ TextureImporter:
         x: 1690
         y: 49
         width: 214
-        height: 156
+        height: 168
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
