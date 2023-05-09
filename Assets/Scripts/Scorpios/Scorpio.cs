@@ -62,7 +62,7 @@ public class Scorpio : MonoBehaviour, IDamageable
             stateScorpio = MovementState.hurt;
             damageNow = false;
         }
-        else if (damageNow && health <= 0)
+        else if (health <= 0)
             stateScorpio = MovementState.death;
     }
 
