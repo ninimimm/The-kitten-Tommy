@@ -17,7 +17,7 @@ public class Label : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_cat.position.x > 7.1)
+        if (_cat.position.x > 9.1 && Input.GetKeyDown(KeyCode.Mouse1))
             _animator.SetBool("Broken", false);
     }
 }
