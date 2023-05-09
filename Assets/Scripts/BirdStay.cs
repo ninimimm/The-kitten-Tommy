@@ -27,8 +27,7 @@ public class BirdStay : MonoBehaviour
             _spriteRenderer.sortingLayerName = "GUI";
             _spriteRenderer.sortingOrder = 5;
         }
-            
-        if (Vector3.Distance(_cat.position, transform.position) < scaryDistance)
+        else if (Vector3.Distance(_cat.position, transform.position) < scaryDistance)
         {
             _animator.SetInteger("state", 2);
             _spriteRenderer.flipX = false;
