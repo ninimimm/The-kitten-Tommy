@@ -22,6 +22,9 @@ public class Scorpio : MonoBehaviour, IDamageable
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
+    [SerializeField] private AudioClip runSound;
+    [Range(0, 1f)] public float volume;
+    private AudioSource _audioSource;
     private float idleTimer = 0.0f;
     private bool damageNow = false;
     private BoxCollider2D boxCollider;
@@ -42,6 +45,7 @@ public class Scorpio : MonoBehaviour, IDamageable
         polygonCollider = GetComponent<PolygonCollider2D>();
         polygonCollider.enabled = false;
         boxCollider.enabled = true;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -76,6 +80,11 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     private void TryMove()
     {
+        if (!_audioSource.isPlaying)
+        {
+            _audioSource.volume = volume;
+            _audioSource.PlayOneShot(runSound);
+        }
         stateScorpio = MovementState.walk;
         if (isFacingRight)
             rb.velocity = new Vector2(speed, 0);

@@ -10,6 +10,9 @@ public class BirdStay : MonoBehaviour
     [SerializeField] private float scaryDistance;
     [SerializeField] private Vector3 movingVector;
     [SerializeField] private float speed;
+    [SerializeField] private AudioClip flySound;
+    [Range(0, 1f)] public float volume;
+    private AudioSource _audioSource;
     private SpriteRenderer _spriteRenderer;
     void Start()
     {
@@ -17,6 +20,7 @@ public class BirdStay : MonoBehaviour
         _animator.SetInteger("state", 0);
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sortingLayerName = default;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -27,10 +31,12 @@ public class BirdStay : MonoBehaviour
             _spriteRenderer.sortingLayerName = "GUI";
             _spriteRenderer.sortingOrder = 5;
         }
-        else if (Vector3.Distance(_cat.position, transform.position) < scaryDistance)
+        else if (Vector3.Distance(_cat.position, transform.position) < scaryDistance && !_audioSource.isPlaying)
         {
             _animator.SetInteger("state", 2);
             _spriteRenderer.flipX = false;
+            _audioSource.volume = volume;
+            _audioSource.PlayOneShot(flySound);
         }
             
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("fly")) transform.position += movingVector * speed * Time.deltaTime;

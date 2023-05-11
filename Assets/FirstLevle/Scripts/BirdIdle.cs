@@ -14,6 +14,9 @@ public class BirdIdle : MonoBehaviour
     [SerializeField] private float speedWalk;
     [SerializeField] private float leftBound;
     [SerializeField] private float rightBound;
+    [SerializeField] private AudioClip flySound;
+    [Range(0, 1f)] public float volume;
+    private AudioSource _audioSource;
     private bool goRight;
     private SpriteRenderer _spriteRenderer;
     void Start()
@@ -21,6 +24,7 @@ public class BirdIdle : MonoBehaviour
         _animator = GetComponent<Animator>();
         _animator.SetInteger("state", 1);
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -43,10 +47,12 @@ public class BirdIdle : MonoBehaviour
             else
                 transform.position -= new Vector3(1,0,0)* speedWalk;
         }
-        if (Vector3.Distance(_cat.position, transform.position) < scaryDistance)
+        if (Vector3.Distance(_cat.position, transform.position) < scaryDistance && !_audioSource.isPlaying)
         {
             _animator.SetInteger("state", 2);
             _spriteRenderer.flipX = true;
+            _audioSource.volume = volume;
+            _audioSource.PlayOneShot(flySound);
         }
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("fly")) transform.position += flyVector * speedFly * Time.deltaTime;
         if (transform.position.y > 6) Destroy(gameObject);

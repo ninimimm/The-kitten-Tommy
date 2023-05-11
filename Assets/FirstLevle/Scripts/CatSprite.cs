@@ -11,7 +11,7 @@ public class CatSprite : MonoBehaviour
     private float move;
     public static MovementState _stateCat;
     private bool rotation = true;
-    public static Animator _animator;
+    public  Animator _animator;
     public static Animation _Animation;
     public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage, shit };
     private SpriteRenderer Cat;
@@ -30,6 +30,11 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float timeToJump;
+    [SerializeField] private AudioClip audioRun;
+    [SerializeField] private AudioClip audioJump;
+    [SerializeField] private AudioClip audioDamage;
+    [SerializeField] private AudioClip audioFly;
+    private AudioSource audioSource;
     private float timerJump;
     private PolygonCollider2D _poly;
     public Transform smallAttack;
@@ -38,6 +43,10 @@ public class CatSprite : MonoBehaviour
     public int takeDamage = 1;
     private float speedMultiplier = 1f;
     private bool damageNow;
+    private bool isAudioFly;
+    [Range(0, 1f)] public float volumeRun;
+    [Range(0, 1f)] public float volumeDamage;
+    [Range(0, 1f)] public float volumeFly;
 
     public int money = 0;
 
@@ -60,10 +69,17 @@ public class CatSprite : MonoBehaviour
         _knifeBar.SetMaxHealth(GetComponent<Knife>().attackIntervale);
         HP = maxHP;
         timerJump = timeToJump;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
+        if (transform.position.x > 14f && !isAudioFly)
+        {
+            audioSource.volume = volumeFly;
+            audioSource.PlayOneShot(audioFly);
+            isAudioFly = true;
+        }
         _knifeBar.SetHealth(GetComponent<Knife>().timer);
         _text.text = money.ToString();
         move = Input.GetAxisRaw("Horizontal");
@@ -76,18 +92,29 @@ public class CatSprite : MonoBehaviour
         {
             if (Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer).Length > 0)
             {
+                audioSource.volume = volumeRun;
+                audioSource.PlayOneShot(audioJump);
                 _rb.velocity = Vector2.zero;
                 _rb.AddForce(new Vector2(0, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
                 timerJump = 0;
             }
         }
-        
+
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Run") && !GetComponent<GrabbingHook>().isHooked)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.volume = volumeRun;
+                audioSource.PlayOneShot(audioRun);
+            }
+        }
         SwitchAnimation();
     }
 
     private void SwitchAnimation()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Stay") && Input.GetKeyDown(KeyCode.CapsLock))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Stay") && Input.GetKeyDown(KeyCode.CapsLock)
+            && !GetComponent<GrabbingHook>().isHooked)
         {
             _stateCat = MovementState.shit;
             _animator.SetInteger("State", (int)_stateCat);
@@ -105,6 +132,7 @@ public class CatSprite : MonoBehaviour
             }
             else if (move < 0)
             {
+                audioSource.Play();
                 _stateCat = MovementState.Run;
                 if (!rotation)
                 {
@@ -158,6 +186,8 @@ public class CatSprite : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        audioSource.volume = volumeDamage;
+        audioSource.PlayOneShot(audioDamage);
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;
