@@ -50,20 +50,23 @@ public class GrabbingHook : MonoBehaviour
                     _raycast.collider.transform.position.y);
                 _joint2D.distance = Vector2.Distance(transform.position, _raycast.point);
                 line.enabled = true;
-                line.SetPosition(0,transform.position);
+                line.SetPosition(0,transform.position-new Vector3(-0.1f,0.1f,0));
                 line.SetPosition(1,_raycast.point + new Vector2(distanseIn,distanseIn));
             }
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (Vector3.Distance(line.GetPosition(1),line.GetPosition(0)) - (line.GetPosition(1).y - GetComponent<CatSprite>().transform.position.y) < 0.1
-                && isHooked && !_audioSource.isPlaying)
+            
+            if (isHooked && 
+                Vector3.Distance(line.GetPosition(1),line.GetPosition(0) + new Vector3(-0.1f,0.1f,0)) - 
+                (line.GetPosition(1).y - GetComponent<CatSprite>().transform.position.y) < 0.1
+                && !_audioSource.isPlaying && Math.Abs(GetComponent<CatSprite>()._rb.velocity.x) > 1.5)
             {
                 _audioSource.volume = volume;
                 _audioSource.PlayOneShot(woosh);
             }
-            line.SetPosition(0,transform.position);
+            line.SetPosition(0,transform.position - new Vector3(-0.1f,0.1f,0));
             line.SetPosition(1, _joint2D.connectedBody.transform.position + (Vector3)_joint2D.connectedAnchor);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))

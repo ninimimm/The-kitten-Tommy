@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class CatSprite : MonoBehaviour
 {
-    private Rigidbody2D _rb;
+    public Rigidbody2D _rb;
     private float move;
     public static MovementState _stateCat;
     private bool rotation = true;
@@ -97,20 +97,20 @@ public class CatSprite : MonoBehaviour
         {
             if (Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer).Length > 0)
             {
-                runSourse.volume = volumeRun;
-                runSourse.Play();
+                jumpSourse.volume = volumeJump;
+                jumpSourse.Play();
                 _rb.velocity = Vector2.zero;
                 _rb.AddForce(new Vector2(0, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
                 timerJump = 0;
             }
         }
 
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Run") && !GetComponent<GrabbingHook>().isHooked)
+        if (move != 0 && Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer).Length > 0)
         {
-            if (!audioSource.isPlaying)
+            if (!runSourse.isPlaying)
             {
-                jumpSourse.volume = volumeJump;
-                jumpSourse.Play();
+                runSourse.volume = volumeRun;
+                runSourse.Play();
             }
         }
         SwitchAnimation();
@@ -128,11 +128,6 @@ public class CatSprite : MonoBehaviour
         {
             if (move > 0)
             {
-                if (!runSourse.isPlaying)
-                {
-                    runSourse.volume = volumeRun;
-                    runSourse.PlayOneShot(runClip);
-                }
                 _stateCat = MovementState.Run;
                 if (rotation)
                 {
@@ -142,11 +137,6 @@ public class CatSprite : MonoBehaviour
             }
             else if (move < 0)
             {
-                if (!runSourse.isPlaying)
-                {
-                    runSourse.volume = volumeRun;
-                    runSourse.PlayOneShot(runClip);
-                }
                 _stateCat = MovementState.Run;
                 if (!rotation)
                 {

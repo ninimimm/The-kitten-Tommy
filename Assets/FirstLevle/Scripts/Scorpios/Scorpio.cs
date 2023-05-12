@@ -53,7 +53,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     private void Update()
     {
         audioSource.volume = Math.Abs(catTransform.position.x-transform.position.x) < distanseRunSourse ?
-            Math.Abs(catTransform.position.x-transform.position.x)/distanseRunSourse + 0.1f : 0;
+            Math.Abs(catTransform.position.x-transform.position.x)/distanseRunSourse + 0.2f : 0;
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ScorpioDeath"))
         {
             TryMove();
