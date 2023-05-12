@@ -81,9 +81,13 @@ public class CatSprite : MonoBehaviour
     private void Update()
     {
         if (Fly1 != null)
-            fliesSourse.volume = Math.Abs(18 - transform.position.x) < 2
-                ? Math.Abs(2 - (18 - transform.position.x)) / 2
-                : 0;
+        {
+            if (Fly1.transform.position.x > 20 && fliesSourse.volume > 0) fliesSourse.volume -= 0.005f;
+            else
+                fliesSourse.volume = Math.Abs(18 - transform.position.x) < 2
+                    ? Math.Abs(2 - (18 - transform.position.x)) / 2
+                    : 0;
+        }
         else fliesSourse.volume = 0;
         _knifeBar.SetHealth(GetComponent<Knife>().timer);
         _text.text = money.ToString();
