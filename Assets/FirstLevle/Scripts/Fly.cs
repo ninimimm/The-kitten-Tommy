@@ -47,6 +47,6 @@ public class Fly : MonoBehaviour
             _spriteRenderer.flipX = true;
         }
         if (isFly) transform.position += flyVector * speedFly2 * Time.deltaTime;
-        if (transform.position.y > 6) Destroy(gameObject);
+        if (transform.position.x > 30) Destroy(gameObject);
     }
 }

@@ -30,10 +30,13 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float timeToJump;
-    [SerializeField] private AudioClip audioRun;
-    [SerializeField] private AudioClip audioJump;
-    [SerializeField] private AudioClip audioDamage;
+    [SerializeField] private AudioSource runSourse;
+    [SerializeField] private AudioSource jumpSourse;
+    [SerializeField] private AudioSource damageSourse;
     [SerializeField] private AudioClip audioFly;
+    [SerializeField] private AudioClip runClip;
+    [SerializeField] private AudioSource fliesSourse;
+    [SerializeField] private GameObject Fly1;
     private AudioSource audioSource;
     private float timerJump;
     private PolygonCollider2D _poly;
@@ -43,8 +46,9 @@ public class CatSprite : MonoBehaviour
     public int takeDamage = 1;
     private float speedMultiplier = 1f;
     private bool damageNow;
-    private bool isAudioFly;
+    private AudioListener _audioListener;
     [Range(0, 1f)] public float volumeRun;
+    [Range(0, 1f)] public float volumeJump;
     [Range(0, 1f)] public float volumeDamage;
     [Range(0, 1f)] public float volumeFly;
 
@@ -70,16 +74,17 @@ public class CatSprite : MonoBehaviour
         HP = maxHP;
         timerJump = timeToJump;
         audioSource = GetComponent<AudioSource>();
+        _audioListener = GetComponent<AudioListener>();
+        _audioListener.enabled = true;
     }
 
     private void Update()
     {
-        if (transform.position.x > 14f && !isAudioFly)
-        {
-            audioSource.volume = volumeFly;
-            audioSource.PlayOneShot(audioFly);
-            isAudioFly = true;
-        }
+        if (Fly1 != null)
+            fliesSourse.volume = Math.Abs(18 - transform.position.x) < 2
+                ? Math.Abs(2 - (18 - transform.position.x)) / 2
+                : 0;
+        else fliesSourse.volume = 0;
         _knifeBar.SetHealth(GetComponent<Knife>().timer);
         _text.text = money.ToString();
         move = Input.GetAxisRaw("Horizontal");
@@ -92,8 +97,8 @@ public class CatSprite : MonoBehaviour
         {
             if (Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer).Length > 0)
             {
-                audioSource.volume = volumeRun;
-                audioSource.PlayOneShot(audioJump);
+                runSourse.volume = volumeRun;
+                runSourse.Play();
                 _rb.velocity = Vector2.zero;
                 _rb.AddForce(new Vector2(0, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
                 timerJump = 0;
@@ -104,8 +109,8 @@ public class CatSprite : MonoBehaviour
         {
             if (!audioSource.isPlaying)
             {
-                audioSource.volume = volumeRun;
-                audioSource.PlayOneShot(audioRun);
+                jumpSourse.volume = volumeJump;
+                jumpSourse.Play();
             }
         }
         SwitchAnimation();
@@ -123,6 +128,11 @@ public class CatSprite : MonoBehaviour
         {
             if (move > 0)
             {
+                if (!runSourse.isPlaying)
+                {
+                    runSourse.volume = volumeRun;
+                    runSourse.PlayOneShot(runClip);
+                }
                 _stateCat = MovementState.Run;
                 if (rotation)
                 {
@@ -132,7 +142,11 @@ public class CatSprite : MonoBehaviour
             }
             else if (move < 0)
             {
-                audioSource.Play();
+                if (!runSourse.isPlaying)
+                {
+                    runSourse.volume = volumeRun;
+                    runSourse.PlayOneShot(runClip);
+                }
                 _stateCat = MovementState.Run;
                 if (!rotation)
                 {
@@ -186,8 +200,8 @@ public class CatSprite : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        audioSource.volume = volumeDamage;
-        audioSource.PlayOneShot(audioDamage);
+        damageSourse.volume = volumeDamage;
+        damageSourse.Play();
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;

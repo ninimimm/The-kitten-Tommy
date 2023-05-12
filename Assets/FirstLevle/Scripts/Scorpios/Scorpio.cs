@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,10 @@ public class Scorpio : MonoBehaviour, IDamageable
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
-    [SerializeField] private AudioClip runSound;
-    [Range(0, 1f)] public float volume;
-    private AudioSource _audioSource;
+    [SerializeField] private AudioClip runClip;
+    [SerializeField] private float distanseRunSourse;
+    [SerializeField] private Transform catTransform;
+    private AudioSource audioSource;
     private float idleTimer = 0.0f;
     private bool damageNow = false;
     private BoxCollider2D boxCollider;
@@ -45,11 +47,13 @@ public class Scorpio : MonoBehaviour, IDamageable
         polygonCollider = GetComponent<PolygonCollider2D>();
         polygonCollider.enabled = false;
         boxCollider.enabled = true;
-        _audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
+        audioSource.volume = Math.Abs(catTransform.position.x-transform.position.x) < distanseRunSourse ?
+            Math.Abs(catTransform.position.x-transform.position.x)/distanseRunSourse + 0.1f : 0;
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ScorpioDeath"))
         {
             TryMove();
@@ -80,11 +84,8 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     private void TryMove()
     {
-        if (!_audioSource.isPlaying)
-        {
-            _audioSource.volume = volume;
-            _audioSource.PlayOneShot(runSound);
-        }
+        if (!audioSource.isPlaying)
+            audioSource.PlayOneShot(runClip);
         stateScorpio = MovementState.walk;
         if (isFacingRight)
             rb.velocity = new Vector2(speed, 0);

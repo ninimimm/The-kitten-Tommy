@@ -12,6 +12,8 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
+    [SerializeField] private AudioClip damageClip;
+    private AudioSource _audioSource;
     public static Animator _animator;
     public enum MovementState { stay, Walk, attake, death, hurt };
     public static MovementState _stateSnake;
@@ -39,6 +41,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
         cap = GetComponent<CapsuleCollider2D>();
         _healthBar.SetMaxHealth(maxHP);
         HP = maxHP;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -102,6 +105,8 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
+        if (!_audioSource.isPlaying)
+            _audioSource.PlayOneShot(damageClip);
         damageNow = true;
         HP -= damage;
         _healthBar.SetHealth(HP);
