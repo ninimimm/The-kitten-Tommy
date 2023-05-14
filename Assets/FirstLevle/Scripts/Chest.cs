@@ -9,6 +9,7 @@ public class Chest : MonoBehaviour, IDamageable
     [SerializeField] private GameObject _cat;
     [SerializeField] float distanseAttack;
     [SerializeField] private LayerMask catLayer;
+    [SerializeField] private AudioSource _audioOpenSource;
     public enum MovementState { close, opened, empty};
     private MovementState _stateChest;
     private Animator _animator;
@@ -36,6 +37,7 @@ public class Chest : MonoBehaviour, IDamageable
                 if (isOpened)
                 {
                     _stateChest = MovementState.opened;
+                    _audioOpenSource.Play();
                     isOpened = false;
                     _poly[0].enabled = true;
                     _poly[1].enabled = false;

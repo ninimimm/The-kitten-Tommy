@@ -254,4 +254,6 @@ MonoBehaviour:
   enemies:
     serializedVersion: 2
     m_Bits: 256
+  _audioSource: {fileID: 8475665058626463116, guid: ba808e96938011e4ea066d29642bee25, type: 3}
+  volume: 1
   damage: 3

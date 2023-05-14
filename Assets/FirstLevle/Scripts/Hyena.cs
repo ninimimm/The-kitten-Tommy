@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Hyena : MonoBehaviour, IDamageable
 {
-    
     [SerializeField] private GameObject _cat;
     [SerializeField] private float distanceWalk;
     [SerializeField] private float speed;
@@ -29,7 +24,6 @@ public class Hyena : MonoBehaviour, IDamageable
     private Rigidbody2D _rb;
     private Vector3 delta;
     private Animator animator;
-    private bool rotation = true;
 
     // Start is called before the first frame update
     void Start()

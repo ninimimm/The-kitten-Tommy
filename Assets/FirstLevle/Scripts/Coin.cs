@@ -10,7 +10,6 @@ public class Coin : MonoBehaviour
     [SerializeField] public LayerMask catLayer;
     private AudioSource audioSource;
     public AudioClip audioCoin;
-    private bool take = false;
 
     private void Start()
     {

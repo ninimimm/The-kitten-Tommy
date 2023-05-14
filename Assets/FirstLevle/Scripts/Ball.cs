@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private LayerMask ground;
     [SerializeField] private LayerMask enemies;
     [SerializeField] private float damage;
+    public AudioSource _audioSource;
     private enum MovementState
     {
         fall,
@@ -49,6 +50,7 @@ public class Ball : MonoBehaviour
         {
             ballState = MovementState.fire;
             _animator.SetInteger("state",(int)ballState);
+            _audioSource.Play();
             Destroy(gameObject,0.6f);
         }
     }

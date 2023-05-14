@@ -8,7 +8,6 @@ public class Hawk : MonoBehaviour, IDamageable
     public static MovementState _stateHawk;
 
     [SerializeField] private float speed = 3.0f;
-    [SerializeField] private float attackRange = 1.0f;
     [SerializeField] private int damage = 10;
     [SerializeField] private float followRange = 5.0f;
     [SerializeField] private float minY = -2.0f;

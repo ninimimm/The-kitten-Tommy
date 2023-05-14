@@ -25,7 +25,8 @@ public class CatSprite : MonoBehaviour
     [SerializeField] public GameObject Snake;
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private KnifeBar _knifeBar;
-    [SerializeField] private Text _text;
+    [SerializeField] private Text _textMoney;
+    [SerializeField] private Text _textHealth;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
@@ -37,6 +38,10 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private AudioClip runClip;
     [SerializeField] private AudioSource fliesSourse;
     [SerializeField] private GameObject Fly1;
+    [SerializeField] private int maxCountHealth;
+    [SerializeField] private LayerMask checkpointLayer;
+    private Vector3 spawn = new Vector3(1,0,0);
+    private int countHealth;
     private AudioSource audioSource;
     private float timerJump;
     private PolygonCollider2D _poly;
@@ -72,14 +77,19 @@ public class CatSprite : MonoBehaviour
         _healthBar.SetMaxHealth(maxHP);
         _knifeBar.SetMaxHealth(GetComponent<Knife>().attackIntervale);
         HP = maxHP;
+        countHealth = maxCountHealth;
         timerJump = timeToJump;
         audioSource = GetComponent<AudioSource>();
         _audioListener = GetComponent<AudioListener>();
         _audioListener.enabled = true;
+        _textHealth.text = maxCountHealth.ToString();
     }
 
     private void Update()
     {
+        if (Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, checkpointLayer).Length > 0 &&
+            _animator.GetCurrentAnimatorStateInfo(0).IsName("shit"))
+            spawn = transform.position;
         if (Fly1 != null)
         {
             if (Fly1.transform.position.x > 20 && fliesSourse.volume > 0) fliesSourse.volume -= 0.005f;
@@ -90,7 +100,7 @@ public class CatSprite : MonoBehaviour
         }
         else fliesSourse.volume = 0;
         _knifeBar.SetHealth(GetComponent<Knife>().timer);
-        _text.text = money.ToString();
+        _textMoney.text = money.ToString();
         move = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
@@ -201,10 +211,11 @@ public class CatSprite : MonoBehaviour
         damageNow = true;
         if (HP <= 0)
         {
+            countHealth -= 1;
+            _textHealth.text = countHealth.ToString();
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
-            transform.position = new Vector3(1, 0, 0);
+            transform.position = spawn;
         }
-            
     }
 }

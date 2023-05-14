@@ -16,6 +16,7 @@ public class SpawnBoss : MonoBehaviour
     [SerializeField] private Canvas canvasMummy;
     [SerializeField] private float valueBoss;
     [SerializeField] private float valueMummy;
+    [SerializeField] private AudioSource _audioBall;
     //[SerializeField] private GameObject Scorpio;
     private Animator snakeAnim;
 
@@ -52,6 +53,7 @@ public class SpawnBoss : MonoBehaviour
             boss.GetComponent<SandBoss>().bar = _bar;
             boss.GetComponent<SandBoss>()._canvasMummy = canvasMummy;
             boss.GetComponent<SandBoss>()._valueMummy = valueMummy;
+            boss.GetComponent<SandBoss>()._audioBall = _audioBall;
         }
             
     }

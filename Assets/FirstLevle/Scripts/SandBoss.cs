@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -18,6 +17,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
     [SerializeField] private float HP;
+    public AudioSource _audioBall;
     public float _valueMummy;
     public Canvas _canvasMummy;
     public Image fill;
@@ -32,7 +32,6 @@ public class SandBoss : MonoBehaviour, IDamageable
     private Rigidbody2D _rb;
     private Vector3 delta;
     private Animator animator;
-    private bool rotation = true;
     public bool alive = true;
     
     public GameObject ballPrefab;
@@ -117,6 +116,7 @@ public class SandBoss : MonoBehaviour, IDamageable
         if (ballPrefab == null)
             return;
         GameObject ball = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
+        ball.GetComponent<Ball>()._audioSource = _audioBall;
     }
     void Spawn()
     {

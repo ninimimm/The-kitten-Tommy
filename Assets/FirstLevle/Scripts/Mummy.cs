@@ -1,10 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Mummy : MonoBehaviour, IDamageable
@@ -35,7 +30,6 @@ public class Mummy : MonoBehaviour, IDamageable
     private Rigidbody2D _rb;
     private Vector3 delta;
     private Animator animator;
-    private bool rotation = true;
 
     // Start is called before the first frame update
     void Start()

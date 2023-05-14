@@ -8,6 +8,7 @@ public class Crate : MonoBehaviour, IDamageable
     [SerializeField] private GameObject coin;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private float distanseAttack;
+    [SerializeField] private AudioSource _audioSource;
     private bool getHit = false;
 
     // Update is called once per frame
@@ -19,6 +20,7 @@ public class Crate : MonoBehaviour, IDamageable
             _coin.GetComponent<Coin>()._cat = _cat;
             _coin.GetComponent<Coin>().distanseAttack = distanseAttack;
             _coin.GetComponent<Coin>().catLayer = catLayer;
+            _audioSource.Play();
             Destroy(gameObject);
         }
     }
