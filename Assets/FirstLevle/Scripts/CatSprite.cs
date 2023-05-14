@@ -40,6 +40,9 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private GameObject Fly1;
     [SerializeField] private int maxCountHealth;
     [SerializeField] private LayerMask checkpointLayer;
+    [SerializeField] private LayerMask iceLayer;
+    [SerializeField] private float slide;
+    private Vector2 vectorX;
     private Vector3 spawn = new Vector3(1,0,0);
     private int countHealth;
     private AudioSource audioSource;
@@ -101,10 +104,23 @@ public class CatSprite : MonoBehaviour
         else fliesSourse.volume = 0;
         _knifeBar.SetHealth(GetComponent<Knife>().timer);
         _textMoney.text = money.ToString();
-        move = Input.GetAxisRaw("Horizontal");
-        transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;
+        var isIce = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, iceLayer).Length > 0;
+        move = _animator.GetCurrentAnimatorStateInfo(0).IsName("shit") ? 0 : Input.GetAxisRaw("Horizontal");
+        if (!isIce)
+            transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;
+        else
+        {
+            if (Input.GetAxis("Horizontal") > 0)
+                vectorX = new Vector2(Math.Max(Input.GetAxis("Horizontal"),10f), 0)*slide;
+            else if (Input.GetAxis("Horizontal") < 0)
+                vectorX = new Vector2(Math.Min(Input.GetAxis("Horizontal"), -10f), 0) * slide;
+            else
+                vectorX = new Vector2(0, 0);
+            _rb.AddForce(vectorX, ForceMode2D.Impulse);
+        }
+            
         if (Input.GetButtonDown("Jump"))
-            timerJump = timeToJump;
+            timerJump = timeToJump; 
 
         if (timerJump > 0) timerJump -= Time.deltaTime;
         if (timerJump > 0)
@@ -113,8 +129,10 @@ public class CatSprite : MonoBehaviour
             {
                 jumpSourse.volume = volumeJump;
                 jumpSourse.Play();
-                _rb.velocity = Vector2.zero;
-                _rb.AddForce(new Vector2(0, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
+                if (!isIce)
+                    _rb.velocity = Vector2.zero;
+                if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("shit"))
+                    _rb.AddForce(new Vector2(_rb.velocity.x/10, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
                 timerJump = 0;
             }
         }

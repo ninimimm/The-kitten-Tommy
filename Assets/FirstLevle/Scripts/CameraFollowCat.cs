@@ -26,8 +26,8 @@ public class CameraFollowCat : MonoBehaviour
     {
         var constantWidthSize = initialSize * (targetAspect / _camera.aspect);
         _camera.orthographicSize = Mathf.Lerp(constantWidthSize, initialSize, widthOrHeight);
-        if (target.position.x <= -20f) value = -20f;
-        else if (target.position.x >= 48f) value = 49f;
+        if (target.position.x <= -20) value = -20f;
+        else if (target.position.x >= 48f) value = 48f;
         else value = target.position.x;
         Vector3 desiredPosition = new Vector3(value + offset.x, maintainY ? transform.position.y+startY : target.position.y + offset.y+startY, transform.position.z);
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);

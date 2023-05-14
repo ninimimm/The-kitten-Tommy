@@ -18,7 +18,7 @@ public class Label : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_cat.position.x > 9.1 && Input.GetKeyDown(KeyCode.Mouse1))
+        if (_cat.position.x > 9.1 && Input.GetKeyDown(KeyCode.Mouse1) && !_animator.GetCurrentAnimatorStateInfo(0).IsName("IdleLabel"))
         {
             _audioSource.Play();
             _animator.SetBool("Broken", false);
