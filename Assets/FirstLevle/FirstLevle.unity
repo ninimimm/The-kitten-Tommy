@@ -2371,6 +2371,10 @@ PrefabInstance:
       value: 0.393
       objectReference: {fileID: 0}
     - target: {fileID: 4472698094438656497, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
+      propertyPath: normalGravity
+      value: 2.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472698094438656497, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: maxCountHealth
       value: 3
       objectReference: {fileID: 0}

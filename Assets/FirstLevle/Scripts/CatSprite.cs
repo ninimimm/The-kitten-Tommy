@@ -42,6 +42,10 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private LayerMask checkpointLayer;
     [SerializeField] private LayerMask iceLayer;
     [SerializeField] private float slide;
+    [SerializeField] private LayerMask waterLayer;
+    [SerializeField] private float swimSpeed;
+    [SerializeField] private float normalGravity;
+    public bool isWater;
     private Vector2 vectorX;
     private Vector3 spawn = new Vector3(1,0,0);
     private int countHealth;
@@ -105,20 +109,23 @@ public class CatSprite : MonoBehaviour
         _knifeBar.SetHealth(GetComponent<Knife>().timer);
         _textMoney.text = money.ToString();
         var isIce = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, iceLayer).Length > 0;
+        isWater = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, waterLayer).Length > 0;
         move = _animator.GetCurrentAnimatorStateInfo(0).IsName("shit") ? 0 : Input.GetAxisRaw("Horizontal");
-        if (!isIce)
+        if (!isIce && !isWater)
+        {
+            _rb.gravityScale = normalGravity;
             transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;
+        }
+        else if (isWater)
+        {
+            _rb.gravityScale /= 2;
+            _rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * swimSpeed,Input.GetAxis("Vertical") * swimSpeed), ForceMode2D.Force);
+        }
         else
         {
-            if (Input.GetAxis("Horizontal") > 0)
-                vectorX = new Vector2(Math.Max(Input.GetAxis("Horizontal"),10f), 0)*slide;
-            else if (Input.GetAxis("Horizontal") < 0)
-                vectorX = new Vector2(Math.Min(Input.GetAxis("Horizontal"), -10f), 0) * slide;
-            else
-                vectorX = new Vector2(0, 0);
-            _rb.AddForce(vectorX, ForceMode2D.Impulse);
+            _rb.gravityScale = normalGravity;
+            _rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * slide,0), ForceMode2D.Impulse);
         }
-            
         if (Input.GetButtonDown("Jump"))
             timerJump = timeToJump; 
 
@@ -131,7 +138,7 @@ public class CatSprite : MonoBehaviour
                 jumpSourse.Play();
                 if (!isIce)
                     _rb.velocity = Vector2.zero;
-                if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("shit"))
+                if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("shit") && !isWater)
                     _rb.AddForce(new Vector2(_rb.velocity.x/10, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
                 timerJump = 0;
             }
