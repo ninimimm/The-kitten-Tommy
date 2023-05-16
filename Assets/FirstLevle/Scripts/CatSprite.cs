@@ -118,8 +118,8 @@ public class CatSprite : MonoBehaviour
         }
         else if (isWater)
         {
-            _rb.gravityScale /= 2;
-            _rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * swimSpeed,Input.GetAxis("Vertical") * swimSpeed), ForceMode2D.Force);
+            _rb.gravityScale = 0.1f;
+            _rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * swimSpeed/2.5f,Input.GetAxis("Vertical") * swimSpeed)/1.1f, ForceMode2D.Force);
         }
         else
         {
