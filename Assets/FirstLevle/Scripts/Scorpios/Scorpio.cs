@@ -129,7 +129,11 @@ public class Scorpio : MonoBehaviour, IDamageable
         {
             var hitCat = Physics2D.OverlapCircleAll(attackCircle.position, attackRange, catLayer);
             if (hitCat.Length > 0)
+            {
                 stateScorpio = MovementState.attack;
+                animator.SetInteger("stateScorpio", (int)stateScorpio);
+            }
+                
             foreach (var cat in hitCat)
                 cat.GetComponent<CatSprite>().TakeDamage(damage);
         }

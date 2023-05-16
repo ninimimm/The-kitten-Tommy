@@ -26,7 +26,7 @@ public class TextComic : MonoBehaviour
         StartCoroutine(WriteTexts());
         
     }
-
+    
     IEnumerator WriteTexts()
     {
         while (textsToWrite.Count > 0)
@@ -35,6 +35,7 @@ public class TextComic : MonoBehaviour
             yield return StartCoroutine(WriteText(textToWrite));
             yield return StartCoroutine(Clear(textToWrite));
         }
+        
     }
 
     IEnumerator WriteText(string textToWrite)
@@ -54,5 +55,6 @@ public class TextComic : MonoBehaviour
             TextGameObject.text = clearText.Substring(0, i);
             yield return new WaitForSeconds(speed/5);
         }
+        yield return new WaitForSeconds(1f);
     }
 }

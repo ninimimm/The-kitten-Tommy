@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Comic/FirstLevleComic.unity
+    guid: 9dbe9ca5eaa0f8142ab862f280c0dcb2
+  - enabled: 1
     path: Assets/MainMenu/MainMenu.unity
     guid: abc48ec6963475b4f96c0ff6e0328ae4
   - enabled: 1

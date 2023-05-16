@@ -17,20 +17,20 @@ public class Move : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (GetComponent<TextComic>().TextGameObject.text ==
-            "Листик заводил его все дальше и дальше от дома, пока громкий звук молнии не остановил его")
+            "Однажды, в один прекрасный солнечный денек, пока остальные кошки были заняты охотой, маленький Томми отвлекся на игривый листик, пляшущий в ветре. Он весело гнался за ним, забыв обо всем на свете")
             triger = true;
         if (triger)
         {
-            transform.position -= new Vector3(speedImage + 0.01f,0,0);
-            textImage.transform.position += new Vector3(speedImage + 0.01f, 0, 0);
+            transform.position -= new Vector3(speedImage + diff,0,0);
+            textImage.transform.position += new Vector3(speedImage + diff, 0, 0);
         }
         else
         {
-            transform.position -= new Vector3(speedImage + diff,0,0);
-            textImage.transform.position += new Vector3(speedImage + diff, 0, 0);
+            transform.position -= new Vector3(speedImage,0,0);
+            textImage.transform.position += new Vector3(speedImage, 0, 0);
         }
     }
 }
