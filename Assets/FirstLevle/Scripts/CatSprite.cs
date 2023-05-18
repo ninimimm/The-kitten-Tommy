@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CatSprite : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class CatSprite : MonoBehaviour
     private bool IsSnakeAttack;
     private bool IsLastSnakeAttack;
     private float HP;
+    public Joystick joystick;
     [SerializeField] private float maxHP;
     [SerializeField] public float speed = 4.0f;
     [SerializeField] public float jumpForce = 7f;
@@ -59,6 +61,10 @@ public class CatSprite : MonoBehaviour
     private float speedMultiplier = 1f;
     private bool damageNow;
     private AudioListener _audioListener;
+    public Button shitButton;
+    public Button hitButton;
+    private bool pressedAttack;
+    private bool pressedShit;
     [Range(0, 1f)] public float volumeRun;
     [Range(0, 1f)] public float volumeJump;
     [Range(0, 1f)] public float volumeDamage;
@@ -90,6 +96,17 @@ public class CatSprite : MonoBehaviour
         _audioListener = GetComponent<AudioListener>();
         _audioListener.enabled = true;
         _textHealth.text = maxCountHealth.ToString();
+        #if UNITY_ANDROID
+        shitButton.gameObject.SetActive(true);
+        hitButton.gameObject.SetActive(true);
+        shitButton.onClick.AddListener(DoShit);
+        hitButton.onClick.AddListener(DoHit);
+        joystick.gameObject.SetActive(true);
+        #else
+        shitButton.gameObject.SetActive(false);
+        hitButton.gameObject.SetActive(false);
+        joystick.gameObject.SetActive(false);
+        #endif
     }
 
     private void Update()
@@ -110,7 +127,13 @@ public class CatSprite : MonoBehaviour
         _textMoney.text = money.ToString();
         var isIce = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, iceLayer).Length > 0;
         isWater = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, waterLayer).Length > 0;
-        move = _animator.GetCurrentAnimatorStateInfo(0).IsName("shit") ? 0 : Input.GetAxisRaw("Horizontal");
+        // замените эту строку
+        move = _animator.GetCurrentAnimatorStateInfo(0).IsName("shit") ? 0 :
+        #if UNITY_ANDROID
+            joystick.Horizontal;
+        #elif UNITY_STANDALONE
+            Input.GetAxisRaw("Horizontal");
+        #endif
         if (!isIce && !isWater)
         {
             _rb.gravityScale = normalGravity;
@@ -119,14 +142,29 @@ public class CatSprite : MonoBehaviour
         else if (isWater)
         {
             _rb.gravityScale = 0.1f;
-            _rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * swimSpeed/2.5f,Input.GetAxis("Vertical") * swimSpeed), ForceMode2D.Force);
+            // замените эту строку
+            #if UNITY_ANDROID
+                _rb.AddForce(new Vector2(joystick.Horizontal * swimSpeed * 10,joystick.Vertical * swimSpeed * 10), ForceMode2D.Force);
+            #elif UNITY_STANDALONE
+                _rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * swimSpeed/2.5f,Input.GetAxis("Vertical") * swimSpeed), ForceMode2D.Force);
+            #endif
         }
         else
         {
             _rb.gravityScale = normalGravity;
-            _rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * slide,0), ForceMode2D.Impulse);
+            // замените эту строку
+            #if UNITY_ANDROID
+                _rb.AddForce(new Vector2(joystick.Horizontal * slide,0), ForceMode2D.Impulse);
+            #elif UNITY_STANDALONE
+                _rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * slide,0), ForceMode2D.Impulse);
+            #endif
         }
-        if (Input.GetButtonDown("Jump"))
+        // замените эту строку
+        #if UNITY_ANDROID
+            if (joystick.Vertical > 0.5)
+        #elif UNITY_STANDALONE
+            if (Input.GetButtonDown("Jump"))
+        #endif
             timerJump = timeToJump; 
 
         if (timerJump > 0) timerJump -= Time.deltaTime;
@@ -154,9 +192,26 @@ public class CatSprite : MonoBehaviour
         }
         SwitchAnimation();
     }
-
+    
+    void DoShit() 
+    {
+        pressedShit = true;
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Stay") && !GetComponent<GrabbingHook>().isHooked)
+        {
+            _stateCat = MovementState.shit;
+            _animator.SetInteger("State", (int)_stateCat);
+        }
+    }
+    
+    void DoHit()
+    {
+        pressedAttack = true;
+        Attake();
+    }
+    
     private void SwitchAnimation()
     {
+        #if UNITY_STANDALONE
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Stay") && Input.GetKeyDown(KeyCode.CapsLock)
             && !GetComponent<GrabbingHook>().isHooked)
         {
@@ -199,6 +254,47 @@ public class CatSprite : MonoBehaviour
             }
             _animator.SetInteger("State", (int)_stateCat);
         }
+        #elif UNITY_ANDROID
+        if (move > 0)
+        {
+            _stateCat = MovementState.Run;
+            if (rotation)
+            {
+                transform.Rotate(0f,180f,0f);
+                rotation = false;
+            }
+        }
+        else if (move < 0)
+        {
+            _stateCat = MovementState.Run;
+            if (!rotation)
+            {
+                transform.Rotate(0f,180f,0f);
+                rotation = true;
+            }
+        }
+        else
+            _stateCat = MovementState.Stay;
+
+        if (_rb.velocity.y > 1f) _stateCat = MovementState.jumpup;
+        else if (_rb.velocity.y < - 1f) _stateCat = MovementState.jumpdown;
+        if (pressedAttack)
+        {
+            _stateCat = MovementState.hit;
+            pressedAttack = false;
+        }
+        if (damageNow)
+        {
+            _stateCat = MovementState.damage;
+            damageNow = false;
+        }
+        if (pressedShit)
+        {
+            _stateCat = MovementState.shit;
+            pressedShit = false;
+        }
+        _animator.SetInteger("State", (int)_stateCat);
+        #endif
     }
 
     void Attake()
@@ -236,11 +332,20 @@ public class CatSprite : MonoBehaviour
         damageNow = true;
         if (HP <= 0)
         {
-            countHealth -= 1;
+            if (countHealth <= 1)
+            {
+                countHealth = maxCountHealth;
+                transform.position = new Vector3(1,0,0);
+                SceneManager.LoadScene("FirstLevle");
+            }
+            else
+            {
+                countHealth -= 1;
+                transform.position = spawn;
+            }
             _textHealth.text = countHealth.ToString();
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
-            transform.position = spawn;
         }
     }
 }
