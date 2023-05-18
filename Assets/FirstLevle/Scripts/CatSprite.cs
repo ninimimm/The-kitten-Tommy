@@ -12,9 +12,20 @@ public class CatSprite : MonoBehaviour
     private float move;
     public static MovementState _stateCat;
     private bool rotation = true;
-    public  Animator _animator;
+    public Animator _animator;
     public static Animation _Animation;
-    public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage, shit };
+
+    public enum MovementState
+    {
+        Stay,
+        Run,
+        jumpup,
+        jumpdown,
+        hit,
+        damage,
+        shit
+    };
+
     private SpriteRenderer Cat;
     private Animator _snakeAnimator;
     private bool IsSnakeAttack;
@@ -49,7 +60,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private float normalGravity;
     public bool isWater;
     private Vector2 vectorX;
-    private Vector3 spawn = new Vector3(1,0,0);
+    private Vector3 spawn = new Vector3(1, 0, 0);
     private int countHealth;
     private AudioSource audioSource;
     private float timerJump;
@@ -61,8 +72,8 @@ public class CatSprite : MonoBehaviour
     private float speedMultiplier = 1f;
     private bool damageNow;
     private AudioListener _audioListener;
-    public Button shitButton;
-    public Button hitButton;
+    [SerializeField] public Button shitButton;
+    [SerializeField] public Button hitButton;
     private bool pressedAttack;
     private bool pressedShit;
     [Range(0, 1f)] public float volumeRun;
