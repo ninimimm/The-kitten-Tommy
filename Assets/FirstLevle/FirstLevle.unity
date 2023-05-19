@@ -2299,6 +2299,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: bc276a795143cde499a3f4e33cf930e4, type: 3}
     - target: {fileID: 4472698094438656497, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
+      propertyPath: spawn.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472698094438656497, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: audioFly
       value: 
       objectReference: {fileID: 8300000, guid: 40da936091dfa0e4b9845efc8b225856, type: 3}
@@ -2321,7 +2325,7 @@ PrefabInstance:
     - target: {fileID: 4472698094438656497, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: hitButton
       value: 
-      objectReference: {fileID: 624805658}
+      objectReference: {fileID: 0}
     - target: {fileID: 4472698094438656497, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: runSourse
       value: 
@@ -2349,7 +2353,7 @@ PrefabInstance:
     - target: {fileID: 4472698094438656497, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: shitButton
       value: 
-      objectReference: {fileID: 1754254252}
+      objectReference: {fileID: 0}
     - target: {fileID: 4472698094438656497, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: timeToJump
       value: 0.16
@@ -6068,7 +6072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &624805655
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14956,6 +14960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fixed Joystick
       objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
 --- !u!1 &1408362379
@@ -19409,7 +19417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1754254249
 RectTransform:
   m_ObjectHideFlags: 0

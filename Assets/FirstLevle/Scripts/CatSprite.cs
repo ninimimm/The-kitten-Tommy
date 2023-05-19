@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -60,7 +61,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private float normalGravity;
     public bool isWater;
     private Vector2 vectorX;
-    private Vector3 spawn = new Vector3(1, 0, 0);
+    [SerializeField] private Vector3 spawn;
     private int countHealth;
     private AudioSource audioSource;
     private float timerJump;
@@ -113,15 +114,22 @@ public class CatSprite : MonoBehaviour
         shitButton.onClick.AddListener(DoShit);
         hitButton.onClick.AddListener(DoHit);
         joystick.gameObject.SetActive(true);
-        #else
-        shitButton.gameObject.SetActive(false);
-        hitButton.gameObject.SetActive(false);
-        joystick.gameObject.SetActive(false);
+        //#else
+        //shitButton.gameObject.SetActive(false);
+        //hitButton.gameObject.SetActive(false);
+        //joystick.gameObject.SetActive(false);
         #endif
     }
 
     private void Update()
     {
+        var lights = GetComponentsInChildren<Light2D>();
+        if (transform.position.y < -1.7 && !isWater)
+            foreach (var light in lights)
+                light.enabled = true;
+        else
+            foreach (var light in lights)
+                light.enabled = false;
         if (Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, checkpointLayer).Length > 0 &&
             _animator.GetCurrentAnimatorStateInfo(0).IsName("shit"))
             spawn = transform.position;

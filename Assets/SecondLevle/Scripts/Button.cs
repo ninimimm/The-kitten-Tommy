@@ -22,12 +22,13 @@ public class Button : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics2D.OverlapCircleAll(_pressedTransform.position, distancePressed, catLayer).Length > 0 && state == MovementState.Stay)
+        if (Physics2D.OverlapCircleAll(_pressedTransform.position, distancePressed, catLayer).Length > 0 && state == MovementState.Stay
+            && manager.GetComponent<ManageButtons>().timer < 0)
         {
             state = MovementState.Pressed;
             manager.GetComponent<ManageButtons>().keys.Append(key);
         }
-        _animator.SetInteger("state",(int)state);
+        _animator.SetInteger("state", (int)state);
     }
     private void OnDrawGizmosSelected()
     {

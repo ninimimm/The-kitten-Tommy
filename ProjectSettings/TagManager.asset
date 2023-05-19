@@ -57,6 +57,9 @@ TagManager:
   - name: Phone
     uniqueID: 1301735017
     locked: 0
+  - name: Cat
+    uniqueID: 1117947389
+    locked: 0
   - name: GUI
     uniqueID: 860305493
     locked: 0
