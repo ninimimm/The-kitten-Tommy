@@ -32,7 +32,6 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 2800000, guid: f17734bb8862e9040af861de57150dce, type: 3}
     - {fileID: 2800000, guid: 660760344957dcc43ac3634eaa7eb6c3, type: 3}
     - {fileID: 2800000, guid: 60d1d724abc214440ba51d4d29ef8499, type: 3}
     - {fileID: 2800000, guid: 667104e347734774a8f74259e7829119, type: 3}
@@ -60,7 +59,6 @@ SpriteAtlas:
   - {fileID: -1794383059, guid: 83ccab58939ebe7499e48cad230ded57, type: 3}
   - {fileID: 21300000, guid: e4d4ac7960603184caf096387c63e31f, type: 3}
   - {fileID: 21300000, guid: 2a69c17ab5d12404e8dbb40279efacfe, type: 3}
-  - {fileID: 21300000, guid: f17734bb8862e9040af861de57150dce, type: 3}
   - {fileID: 21300000, guid: 9e648abca4e32954a9432d2be1a81b7f, type: 3}
   - {fileID: 21300000, guid: fd447c3dbc212e941beb0ec476400d72, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -76,7 +74,6 @@ SpriteAtlas:
   - ButtonPressed_1
   - Torch_Sheet_Normal
   - LandLeft
-  - cave
   - Button
   - MidleIceBox
   m_RenderDataMap: {}

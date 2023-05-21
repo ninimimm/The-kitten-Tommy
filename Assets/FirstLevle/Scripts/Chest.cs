@@ -5,18 +5,20 @@ using UnityEngine.UIElements;
 
 public class Chest : MonoBehaviour, IDamageable
 {
-    // Start is called before the first frame update
+    private const int MONEY_REWARD = 5;
+    
     [SerializeField] private GameObject _cat;
     [SerializeField] float distanseAttack;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private AudioSource _audioOpenSource;
-    public enum MovementState { close, opened, empty};
+    
+    private enum MovementState { close, opened, empty};
     private MovementState _stateChest;
     private Animator _animator;
     private PolygonCollider2D[] _poly;
     private bool isOpened = false;
     private bool haveMoney = true;
-    
+    private CatSprite _catSprite;
     
     void Start()
     {
@@ -24,15 +26,17 @@ public class Chest : MonoBehaviour, IDamageable
         _poly = GetComponents<PolygonCollider2D>();
         _poly[1].enabled = true;
         _poly[0].enabled = false;
+        _catSprite = _cat.GetComponent<CatSprite>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("empty"))
+        bool isEmpty = _animator.GetCurrentAnimatorStateInfo(0).IsName("empty");
+        if (!isEmpty)
         {
             var catTouch = Physics2D.OverlapCircleAll(transform.position, distanseAttack, catLayer);
-            if (!(catTouch.Length > 0 && _animator.GetCurrentAnimatorStateInfo(0).IsName("opened")))
+            bool isOpenedAnim = _animator.GetCurrentAnimatorStateInfo(0).IsName("opened");
+            if (!(catTouch.Length > 0 && isOpenedAnim))
             {
                 if (isOpened)
                 {
@@ -50,10 +54,11 @@ public class Chest : MonoBehaviour, IDamageable
                 haveMoney = false;
                 _stateChest = MovementState.empty;
                 _animator.SetInteger("state", (int)_stateChest);
-                _cat.GetComponent<CatSprite>().money += 5;
+                _catSprite.money += MONEY_REWARD;
             }
         }
     }
+
     public void TakeDamage(float damage)
     {
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("empty"))

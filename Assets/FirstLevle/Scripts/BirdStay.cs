@@ -23,22 +23,21 @@ public class BirdStay : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (transform.position.y > 1.3)
+        if (transform.position.y > 1.3 && _spriteRenderer.sortingLayerName != "GUI")
         {
             _spriteRenderer.sortingLayerName = "GUI";
             _spriteRenderer.sortingOrder = 5;
         }
-        else if (Vector3.Distance(_cat.position, transform.position) < scaryDistance && !_audioSource.isPlaying)
+        else if ((_cat.position - transform.position).sqrMagnitude < scaryDistance * scaryDistance && !_audioSource.isPlaying)
         {
             _animator.SetInteger("state", 2);
             _spriteRenderer.flipX = false;
             _audioSource.volume = volume;
             _audioSource.PlayOneShot(flySound);
         }
-            
+        
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("fly")) transform.position += movingVector * speed * Time.deltaTime;
         if (transform.position.y > 6) Destroy(gameObject);
     }

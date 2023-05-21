@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Hawk : MonoBehaviour, IDamageable
 {
-    private Rigidbody2D _rigidbody2D;
     public enum MovementState { stay, walk, fly, attack, hurt, death }
     public static MovementState _stateHawk;
 
@@ -21,10 +20,13 @@ public class Hawk : MonoBehaviour, IDamageable
     public float distanseAttack = 0.2f;
     public Transform attack;
     public LayerMask catLayer;
-    private CatSprite _catSprite;
-    private Animator _animator;
     private bool damageNow = false;
     private CapsuleCollider2D[] caps;
+
+    private Rigidbody2D _rigidbody2D;
+    private CatSprite _catSprite;
+    private Animator _animator;
+    private Vector3 catPosition;
 
     void Start()
     {
@@ -38,6 +40,8 @@ public class Hawk : MonoBehaviour, IDamageable
 
     void Update()
     {
+        catPosition = Cat.transform.position; // Store the cat position
+
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_death"))
             Move();
         else

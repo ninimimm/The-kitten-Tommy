@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class Crate : MonoBehaviour, IDamageable
 {
-    [SerializeField] private GameObject _cat;
-    [SerializeField] private GameObject coin;
+    [SerializeField] public GameObject Cat;
+    [SerializeField] private GameObject coinPrefab;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private float distanseAttack;
     [SerializeField] private AudioSource _audioSource;
     private bool getHit = false;
 
-    // Update is called once per frame
     void Update()
     {
         if (transform.position.y < -0.3 && getHit)
         {
-            var _coin = Instantiate(coin, transform.position, Quaternion.identity);
-            _coin.GetComponent<Coin>()._cat = _cat;
-            _coin.GetComponent<Coin>().distanseAttack = distanseAttack;
-            _coin.GetComponent<Coin>().catLayer = catLayer;
-            _audioSource.Play();
+            var coinInstance = Instantiate(coinPrefab, transform.position, Quaternion.identity);
+            var coinComponent = coinInstance.GetComponent<Coin>();
+            if (coinComponent != null)
+            {
+                coinComponent._cat = Cat;
+                coinComponent.distanseAttack = distanseAttack;
+                coinComponent.catLayer = catLayer;
+            }
+            if (_audioSource != null)
+            {
+                _audioSource.Play();
+            }
             Destroy(gameObject);
         }
     }

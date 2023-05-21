@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Label : MonoBehaviour
@@ -8,20 +6,38 @@ public class Label : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
 
     private Animator _animator;
-    // Start is called before the first frame update
-    void Start()
+    private bool isIdleLabel = false;
+
+    private void Start()
     {
         _animator = GetComponent<Animator>();
         _animator.SetBool("Broken", true);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (_cat.position.x > 9.1 && Input.GetKeyDown(KeyCode.Mouse1) && !_animator.GetCurrentAnimatorStateInfo(0).IsName("IdleLabel"))
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        bool isIdleLabelState = stateInfo.IsName("IdleLabel");
+
+        if (_cat.position.x > 9.1f && Input.GetKeyDown(KeyCode.Mouse1) && !isIdleLabelState)
         {
             _audioSource.Play();
             _animator.SetBool("Broken", false);
+            isIdleLabel = false;
+        }
+        else
+        {
+            isIdleLabel = isIdleLabelState;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Cat") && _cat.position.x > 9.1f && !isIdleLabel)
+        {
+            _audioSource.Play();
+            _animator.SetBool("Broken", false);
+            isIdleLabel = false;
         }
     }
 }

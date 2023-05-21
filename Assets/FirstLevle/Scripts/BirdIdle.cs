@@ -27,10 +27,10 @@ public class BirdIdle : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("fly"))
+        bool isFlying = _animator.GetCurrentAnimatorStateInfo(0).IsName("fly");
+        if (!isFlying)
         {
             if (transform.position.x < leftBound)
             {
@@ -42,19 +42,18 @@ public class BirdIdle : MonoBehaviour
                 goRight = false;  
                 _spriteRenderer.flipX = true;
             } 
-            if (goRight)
-                transform.position += new Vector3(1,0,0) * speedWalk;
-            else
-                transform.position -= new Vector3(1,0,0)* speedWalk;
+
+            var movement = new Vector3(goRight ? 1 : -1, 0, 0) * speedWalk * Time.deltaTime;
+            transform.position += movement;
         }
-        if (Vector3.Distance(_cat.position, transform.position) < scaryDistance && !_audioSource.isPlaying)
+        if ((_cat.position - transform.position).sqrMagnitude < scaryDistance * scaryDistance && !_audioSource.isPlaying)
         {
             _animator.SetInteger("state", 2);
             _spriteRenderer.flipX = true;
             _audioSource.volume = volume;
             _audioSource.PlayOneShot(flySound);
         }
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("fly")) transform.position += flyVector * speedFly * Time.deltaTime;
+        if (isFlying) transform.position += flyVector * speedFly * Time.deltaTime;
         if (transform.position.y > 6) Destroy(gameObject);
     }
 }

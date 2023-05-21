@@ -25,6 +25,8 @@ public class Hyena : MonoBehaviour, IDamageable
     private Vector3 delta;
     private Animator animator;
 
+    private CatSprite catSprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,58 +39,75 @@ public class Hyena : MonoBehaviour, IDamageable
         animator = GetComponent<Animator>();
         pol.enabled = false;
         cap.enabled = true;
+        catSprite = _cat.GetComponent<CatSprite>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("HyenaDeath"))
+        var currentAnimatorState = animator.GetCurrentAnimatorStateInfo(0);
+        if (!currentAnimatorState.IsName("HyenaDeath"))
+            ProcessMovementAndAttack(currentAnimatorState);
+        else
+            HandleDeathState();
+    }
+
+    private void ProcessMovementAndAttack(AnimatorStateInfo currentAnimatorState)
+    {
+        Vector2 direction = GetMovementDirection();
+        UpdateStateBasedOnHealth();
+        Flip(direction.x);
+        _rb.velocity = direction * speed;
+        animator.SetInteger("state", (int)stateHyena);
+        if (!currentAnimatorState.IsName("HyenaAttack")) Attack();
+    }
+
+    private Vector2 GetMovementDirection()
+    {
+        Vector2 direction = new Vector2(0, 0);
+        if (Vector3.Distance(_cat.transform.position, coordinates) < distanceWalk)
         {
-            Vector2 direction = new Vector2(0, 0);
-            if (Vector3.Distance(_cat.transform.position, coordinates) < distanceWalk)
-            {
-                direction.x = _cat.transform.position.x > transform.position.x ? 1 : -1;
-                stateHyena = MovementState.walk;    
-            }
-            else if (Vector3.Distance(_cat.transform.position, coordinates) >= distanceWalk &&
-                     Vector3.Distance(coordinates, transform.position) > 0.5)
-            {
-                direction = (coordinates - transform.position);
-                stateHyena = MovementState.walk;
-            }
-            else
-                stateHyena = MovementState.stay;
-            Attack();
-            if (damageNow && HP > 0)
-            {
-                stateHyena = MovementState.hurt;
-                damageNow = false;
-            }
-            else if (damageNow && HP <= 0)
-                stateHyena = MovementState.death;
-            Flip(direction.x);
-            _rb.velocity = direction * speed;
-            animator.SetInteger("state", (int)stateHyena);
+            direction.x = _cat.transform.position.x > transform.position.x ? 1 : -1;
+            stateHyena = MovementState.walk;    
+        }
+        else if (Vector3.Distance(_cat.transform.position, coordinates) >= distanceWalk &&
+                 Vector3.Distance(coordinates, transform.position) > 0.5)
+        {
+            direction = (coordinates - transform.position);
+            stateHyena = MovementState.walk;
         }
         else
+            stateHyena = MovementState.stay;
+
+        return direction;
+    }
+
+    private void UpdateStateBasedOnHealth()
+    {
+        if (damageNow && HP > 0)
         {
-            pol.enabled = true;
-            cap.enabled = false;
-            _fill.enabled = false;
-            _bar.enabled = false;
+            stateHyena = MovementState.hurt;
+            damageNow = false;
         }
+        else if (damageNow && HP <= 0)
+            stateHyena = MovementState.death;
+    }
+
+    private void HandleDeathState()
+    {
+        pol.enabled = true;
+        cap.enabled = false;
+        _fill.enabled = false;
+        _bar.enabled = false;
     }
 
     void Attack()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("HyenaAttack"))
-        {
-            var hitCat = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
-            if (hitCat.Length > 0)
-                stateHyena = MovementState.attake;
-            foreach (var cat in hitCat)
-                cat.GetComponent<CatSprite>().TakeDamage(damage);
-        }
+        var hitCat = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
+        if (hitCat.Length > 0)
+            stateHyena = MovementState.attake;
+        foreach (var cat in hitCat)
+            catSprite.TakeDamage(damage);
     }
     
     public void TakeDamage(float damage)

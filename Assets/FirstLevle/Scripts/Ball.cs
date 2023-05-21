@@ -33,27 +33,39 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        var hitCat = Physics2D.OverlapCircleAll(Radius.position, RadiusAttack, catLayer);
-        var player = Physics2D.OverlapCircleAll(DestroyRadius.position, RadiusDestroy, catLayer);
-        var Ground = Physics2D.OverlapCircleAll(DestroyRadius.position, RadiusDestroy, ground);
-        var Enemies = Physics2D.OverlapCircleAll(DestroyRadius.position, RadiusDestroy, enemies);
-        if (CanDamage && player.Length > 0)
+        var hitObjects = Physics2D.OverlapCircleAll(DestroyRadius.position, RadiusDestroy, catLayer | ground | enemies);
+        if (hitObjects.Length > 0)
         {
-            CanDamage = false;
-            foreach (var cat in hitCat)
-                cat.GetComponent<CatSprite>().TakeDamage(damage);
-            ballState = MovementState.fire;
-            _animator.SetInteger("state",(int)ballState);
-            Destroy(gameObject,0.6f);
-        }
-        else if (Ground.Length > 0 || Enemies.Length > 0)
-        {
-            ballState = MovementState.fire;
-            _animator.SetInteger("state",(int)ballState);
-            _audioSource.Play();
-            Destroy(gameObject,0.6f);
+            bool playerHit = false;
+            bool groundOrEnemyHit = false;
+
+            foreach (var hitObject in hitObjects)
+            {
+                if ((catLayer.value & (1 << hitObject.gameObject.layer)) != 0) // hitObject is in catLayer
+                {
+                    if (CanDamage)
+                    {
+                        CanDamage = false;
+                        hitObject.GetComponent<CatSprite>().TakeDamage(damage);
+                        playerHit = true;
+                    }
+                }
+                else if ((ground.value & (1 << hitObject.gameObject.layer)) != 0 || 
+                         (enemies.value & (1 << hitObject.gameObject.layer)) != 0) // hitObject is in ground or enemies
+                    groundOrEnemyHit = true;
+            }
+
+            if (playerHit || groundOrEnemyHit)
+            {
+                ballState = MovementState.fire;
+                _animator.SetInteger("state",(int)ballState);
+                if (!groundOrEnemyHit) // Avoid multiple calls to _audioSource.Play() when both player and ground/enemy are hit
+                    _audioSource.Play();
+                Destroy(gameObject, 0.6f);
+            }
         }
     }
+
     private void OnDrawGizmosSelected()
     {
         if (Radius.position == null)
