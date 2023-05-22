@@ -42,6 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Water
+    uniqueID: 3921188923
+    locked: 0
   - name: BackGround
     uniqueID: 67524445
     locked: 0
@@ -62,4 +65,10 @@ TagManager:
     locked: 0
   - name: GUI
     uniqueID: 860305493
+    locked: 0
+  - name: LightLiteMap
+    uniqueID: 22336185
+    locked: 0
+  - name: fish
+    uniqueID: 641663273
     locked: 0

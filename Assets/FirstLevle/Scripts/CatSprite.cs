@@ -81,6 +81,7 @@ public class CatSprite : MonoBehaviour
     [Range(0, 1f)] public float volumeJump;
     [Range(0, 1f)] public float volumeDamage;
     [Range(0, 1f)] public float volumeFly;
+    [SerializeField] public Light2D[] lights;
 
     public int money = 0;
 
@@ -123,13 +124,16 @@ public class CatSprite : MonoBehaviour
 
     private void Update()
     {
-        var lights = GetComponentsInChildren<Light2D>();
-        if (transform.position.y < -1.7 && !isWater)
-            foreach (var light in lights)
+        foreach (var light in lights)
+        {
+            if (Vector3.Distance(light.transform.position,transform.position) < 5)
                 light.enabled = true;
-        else
-            foreach (var light in lights)
+            else
                 light.enabled = false;
+        }
+            
+        
+
         if (Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, checkpointLayer).Length > 0 &&
             _animator.GetCurrentAnimatorStateInfo(0).IsName("shit"))
             spawn = transform.position;
