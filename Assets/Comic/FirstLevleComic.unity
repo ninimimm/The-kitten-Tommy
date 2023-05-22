@@ -1525,6 +1525,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7fbca4b2d5b01104dbd263ae7c3df644, type: 2}
     - {fileID: 11400000, guid: a0c35e39373149145bf0c78339a94832, type: 2}
     - {fileID: 11400000, guid: 4f9f85195a63357448a2e2c90c2fcc40, type: 2}
+    - {fileID: 11400000, guid: e24ff5c1cd44d7f48a8b65df5fcf722e, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -1657,6 +1658,20 @@ MonoBehaviour:
         - m_Target: {fileID: 744610177}
           m_TargetAssemblyTypeName: CutsceneManager, Assembly-CSharp
           m_MethodName: WriteText9
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1266697097}
+          m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+          m_MethodName: LoadMenu
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
