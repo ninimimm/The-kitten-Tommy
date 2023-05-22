@@ -7,7 +7,14 @@ public class PauseMenu : MonoBehaviour
 {
     public bool pauseGame;
     public GameObject pauseGameMenu;
-
+    [SerializeField] private GameObject[] crates;
+    private Vector3[] _transforms = new Vector3[5];
+    
+    private void Start()
+    {
+        for (var i = 0; i < crates.Length; i++)
+            _transforms[i] = crates[i].transform.position;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -52,5 +59,10 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 1f;
             SceneManager.LoadScene("MainMenu");
         }
+    }
+    public void RespaumCrates()
+    {
+        for (var i = 0; i < crates.Length; i++)
+            crates[i].transform.position = _transforms[i];
     }
 }
