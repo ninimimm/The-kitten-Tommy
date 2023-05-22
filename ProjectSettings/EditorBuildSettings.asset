@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Comic/FirstLevleComic.unity
     guid: 9dbe9ca5eaa0f8142ab862f280c0dcb2
-  - enabled: 0
+  - enabled: 1
     path: Assets/MainMenu/MainMenu.unity
     guid: abc48ec6963475b4f96c0ff6e0328ae4
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Training/Training.unity
+    guid: c4422cda9515b2f45828ce3cbf6c6857
+  - enabled: 1
     path: Assets/FirstLevle/FirstLevle.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
