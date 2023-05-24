@@ -23,7 +23,7 @@ TagManager:
   - Water
   - Ice
   - Fish
-  - 
+  - Balloon
   - 
   - 
   - 
@@ -74,4 +74,7 @@ TagManager:
     locked: 0
   - name: fish
     uniqueID: 641663273
+    locked: 0
+  - name: Balloon
+    uniqueID: 878607071
     locked: 0

@@ -41,8 +41,8 @@ public class CatSprite : MonoBehaviour
     [SerializeField] public KnifeBar _knifeBar;
     [SerializeField] private Text _textMoney;
     [SerializeField] public Text _textHealth;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius;
+    [SerializeField] public Transform groundCheck;
+    [SerializeField] public float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float timeToJump;
     [SerializeField] private AudioSource runSourse;
@@ -73,6 +73,7 @@ public class CatSprite : MonoBehaviour
     private float speedMultiplier = 1f;
     private bool damageNow;
     private AudioListener _audioListener;
+    public bool idBoosDead;
     [SerializeField] public Button shitButton;
     [SerializeField] public Button hitButton;
     private bool pressedAttack;

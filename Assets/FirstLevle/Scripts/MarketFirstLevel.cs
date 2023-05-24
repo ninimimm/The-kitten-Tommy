@@ -34,7 +34,7 @@ public class MarketFirstLevel : MonoBehaviour
     void Update()
     {
         if (Math.Abs(transform.position.x - _catTransform.position.x) < 1 && Math.Abs(transform.position.y - _catTransform.position.y) < 1.5
-            && _catSprite.isWater)
+            && !_catSprite.isWater)
         {
             _spriteRenderer.enabled = true;
             if (Input.GetKeyDown(KeyCode.Alpha1) && _catSprite.money >= 2)

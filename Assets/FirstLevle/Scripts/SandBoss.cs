@@ -33,6 +33,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     private Vector3 delta;
     private Animator animator;
     public bool alive = true;
+    private CatSprite _catSprite;
     
     public GameObject ballPrefab;
     public GameObject MummyPrefab;// префаб шара-спрайта
@@ -55,6 +56,7 @@ public class SandBoss : MonoBehaviour, IDamageable
         animator = GetComponent<Animator>();
         pol.enabled = true;
         cap.enabled = false;
+        _catSprite = _cat.GetComponent<CatSprite>();
     }
 
     // Update is called once per frame
@@ -105,6 +107,7 @@ public class SandBoss : MonoBehaviour, IDamageable
             cap.enabled = true;
             fill.enabled = false;
             bar.enabled = false;
+            _catSprite.idBoosDead = true;
         }
     }
 
