@@ -62,9 +62,12 @@ public class MarketFirstLevel : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 3)
             {
-                _catSprite.money -= 3;
                 grabbingHook.enabled = true;
-                grabbingHook.material = GoldHarpoon;
+                if (grabbingHook.material != GoldHarpoon)
+                {
+                    _catSprite.money -= 3;
+                    grabbingHook.material = GoldHarpoon;
+                }
                 grabbingHook.enabled = false;
             }
         }

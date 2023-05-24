@@ -34,7 +34,7 @@ public class MarketSecondLevel : MonoBehaviour
             && _catTransform.position.y - transform.position.y > 0 && _catSprite.isWater)
         {
             _spriteRenderer.enabled = true;
-            if (Input.GetKeyDown(KeyCode.Alpha1) && _catSprite.money >= 6)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && _catSprite.money >= 6 && _knifeSpriteRenderer.sprite != PoisonKnife)
             {
                 _catSprite.money -= 6;
                 _knifeSpriteRenderer.sprite = PoisonKnife;
@@ -58,9 +58,12 @@ public class MarketSecondLevel : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 6)
             {
-                _catSprite.money -= 6;
                 grabbingHook.enabled = true;
-                grabbingHook.material = ColdHarpoon;
+                if (grabbingHook.material != ColdHarpoon)
+                {
+                    _catSprite.money -= 6;
+                    grabbingHook.material = ColdHarpoon;
+                }
                 grabbingHook.enabled = false;
             }
         }
