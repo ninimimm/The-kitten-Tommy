@@ -59,6 +59,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private LayerMask waterLayer;
     [SerializeField] private float swimSpeed;
     [SerializeField] private float normalGravity;
+    [SerializeField] public Light2D[] lights;
     public bool isWater;
     private Vector2 vectorX;
     [SerializeField] private Vector3 spawn;
@@ -78,11 +79,12 @@ public class CatSprite : MonoBehaviour
     [SerializeField] public Button hitButton;
     private bool pressedAttack;
     private bool pressedShit;
+    public string key;
     [Range(0, 1f)] public float volumeRun;
     [Range(0, 1f)] public float volumeJump;
     [Range(0, 1f)] public float volumeDamage;
     [Range(0, 1f)] public float volumeFly;
-    [SerializeField] public Light2D[] lights;
+    
 
     public int money = 0;
 
