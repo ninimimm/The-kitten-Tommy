@@ -35,8 +35,12 @@ public class WriteText : MonoBehaviour
             text.text = "Для сохранения нажмите CapsLock у таблички";
         else if (_cat.transform.position.x > 7 && _cat.transform.position.x < 8)
             text.text = "Попытайтесь пользуясь крюком перелететь на блок выше";
-        else if (_cat.transform.position.x > 8 && _cat.transform.position.x < 20)
+        else if (_cat.transform.position.x > 8 && _cat.transform.position.x < 14)
             text.text = "Перелетите на платформу, находящуюся на воздухе";
+        else if (_cat.transform.position.x > 14 && _cat.transform.position.x < 16)
+            text.text = "Ударьте сундук с деньгами когтями чтобы открыть и подойдите чтобы собрать монетки";
+        else if (_cat.transform.position.x > 16 && _cat.transform.position.x < 20)
+            text.text = "Нажмите E чтобы открыть сундук с ключом и снова E, чтобы его взять";
         else if (_cat.transform.position.x > 20 && _cat.transform.position.x < 30)
             text.text = "Научитесь перехватываться крюком, чтобы забираться выше на платформы";
         else if (_cat.transform.position.x > 30 && _cat.transform.position.x < 40)
