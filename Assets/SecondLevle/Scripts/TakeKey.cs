@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class TakeKey : MonoBehaviour
 {
     [SerializeField] private GameObject cat;
-    [SerializeField] private Image goldKeyImage;
-    [SerializeField] private Image ironKeyImage;
+    [SerializeField] public Image goldKeyImage;
+    [SerializeField] public Image ironKeyImage;
     [SerializeField] private GameObject goldKeyPrefab;
     [SerializeField] private GameObject ironKeyPrefab;
     [SerializeField] private GameObject goldChest;
@@ -99,6 +99,7 @@ public class TakeKey : MonoBehaviour
                     
                 goldKeyImage.enabled = true;
                 _catSprite.key = "gold";
+
             }
             else if (_ironKey != null && Vector3.Distance(_catSprite.transform.position, _ironKey.transform.position) < 2)
             {
