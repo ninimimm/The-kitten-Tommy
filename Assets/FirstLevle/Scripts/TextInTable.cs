@@ -24,6 +24,6 @@ public class TextInTable : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1))
             broke = true;
         if (broke)
-            text.text = "Кажется, это место давно заброшено";
+            text.text = "Кажется, это место давно заброшено\n41523...";
     }
 }
