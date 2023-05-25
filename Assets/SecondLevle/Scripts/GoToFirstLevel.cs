@@ -10,6 +10,7 @@ public class GoToFirstLevel : MonoBehaviour
     [SerializeField] private Vector3 movingVector;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask balloonLayer;
+    [SerializeField] private GameObject[] coins;
     private CatSprite _catSprite;
     
     void Start()
@@ -25,8 +26,17 @@ public class GoToFirstLevel : MonoBehaviour
             transform.position += movingVector * speed * Time.deltaTime;
             _cat.transform.position += movingVector * speed * Time.deltaTime;
         }
-            
+
         if (transform.position.y > 10)
+        {
+            Save();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
+            
+    }
+    private void Save()
+    {
+        foreach (var coin in coins)
+            coin.GetComponent<Coin>().Save();
     }
 }

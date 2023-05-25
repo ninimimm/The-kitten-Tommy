@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable] 
 public class CoinData : IInitializable<Coin>
 {
-    public static bool start = true;
+    public static HashSet<string> start = new ();
     public Dictionary<string, float[]> positions;
 
     public CoinData() 
