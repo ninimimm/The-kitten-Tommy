@@ -17,12 +17,7 @@ public class Coin : MonoBehaviour
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (CoinData.start)
-        {
-            Save();
-            CoinData.start = false;
-            _spriteRenderer.enabled = true;
-        }
+        _spriteRenderer.enabled = true;
         Load();
         audioSource = _cat.GetComponent<AudioSource>();
         _boxCollider = GetComponent<BoxCollider2D>();
