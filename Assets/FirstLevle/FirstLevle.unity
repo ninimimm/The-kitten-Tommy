@@ -908,7 +908,7 @@ GameObject:
   - component: {fileID: 92341948}
   - component: {fileID: 92341947}
   m_Layer: 11
-  m_Name: Coin
+  m_Name: Coin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7287,7 +7287,7 @@ GameObject:
   - component: {fileID: 710531544}
   - component: {fileID: 710531543}
   m_Layer: 11
-  m_Name: Coin
+  m_Name: Coin3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15446,6 +15446,11 @@ MonoBehaviour:
   balloonLayer:
     serializedVersion: 2
     m_Bits: 131072
+  coins:
+  - {fileID: 1514812802}
+  - {fileID: 92341945}
+  - {fileID: 1451104838}
+  - {fileID: 710531541}
 --- !u!50 &1391273537
 Rigidbody2D:
   serializedVersion: 4
@@ -16170,7 +16175,7 @@ GameObject:
   - component: {fileID: 1451104841}
   - component: {fileID: 1451104840}
   m_Layer: 11
-  m_Name: Coin
+  m_Name: Coin2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17514,6 +17519,11 @@ Transform:
   m_Father: {fileID: 1079260341}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1514812802 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2166180238160518636, guid: a919b231fec07df40a14a38917c30f56, type: 3}
+  m_PrefabInstance: {fileID: 2166180238906886936}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1521518261
 GameObject:
   m_ObjectHideFlags: 0
