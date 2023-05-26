@@ -107,7 +107,7 @@ public class SandBoss : MonoBehaviour, IDamageable
             cap.enabled = true;
             fill.enabled = false;
             bar.enabled = false;
-            _catSprite.idBoosDead = true;
+            _catSprite.isBossDead = true;
         }
     }
 

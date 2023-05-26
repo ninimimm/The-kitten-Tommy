@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -29,8 +30,6 @@ public class CatSprite : MonoBehaviour
 
     private SpriteRenderer Cat;
     private Animator _snakeAnimator;
-    private bool IsSnakeAttack;
-    private bool IsLastSnakeAttack;
     public float HP;
     public Joystick joystick;
     [SerializeField] public float maxHP;
@@ -61,7 +60,6 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private float normalGravity;
     [SerializeField] public Light2D[] lights;
     public bool isWater;
-    private Vector2 vectorX;
     [SerializeField] private Vector3 spawn;
     public int countHealth;
     private AudioSource audioSource;
@@ -74,12 +72,12 @@ public class CatSprite : MonoBehaviour
     private float speedMultiplier = 1f;
     private bool damageNow;
     private AudioListener _audioListener;
-    public bool idBoosDead;
     [SerializeField] public Button shitButton;
     [SerializeField] public Button hitButton;
     private bool pressedAttack;
     private bool pressedShit;
     public string key;
+    public bool isBossDead;
     [Range(0, 1f)] public float volumeRun;
     [Range(0, 1f)] public float volumeJump;
     [Range(0, 1f)] public float volumeDamage;
@@ -87,6 +85,7 @@ public class CatSprite : MonoBehaviour
     
 
     public int money = 0;
+    private CatData data;
 
     public void SetSpeedMultiplier(float multiplier)
     {
@@ -103,15 +102,24 @@ public class CatSprite : MonoBehaviour
         _snakeAnimator = Snake.GetComponent<Animator>();
         _Animation = GetComponent<Animation>();
         transform.Rotate(0f,180f,0f);
-        _healthBar.SetMaxHealth(maxHP);
         _knifeBar.SetMaxHealth(GetComponent<Knife>().attackIntervale);
-        HP = maxHP;
-        countHealth = maxCountHealth;
         timerJump = timeToJump;
         audioSource = GetComponent<AudioSource>();
         _audioListener = GetComponent<AudioListener>();
         _audioListener.enabled = true;
-        _textHealth.text = maxCountHealth.ToString();
+        if (!CatData.start.Contains(gameObject.name))
+        {
+            HP = maxHP;
+            _healthBar.SetMaxHealth(maxHP);
+            countHealth = maxCountHealth;
+            _textHealth.text = maxCountHealth.ToString();
+            Save();
+            CatData.start.Add(gameObject.name);
+        }
+        Load();
+        _healthBar.SetMaxHealth(maxHP);
+        _healthBar.SetHealth(HP);   
+        _textHealth.text = countHealth.ToString();
         #if UNITY_ANDROID
         shitButton.gameObject.SetActive(true);
         hitButton.gameObject.SetActive(true);
@@ -124,6 +132,33 @@ public class CatSprite : MonoBehaviour
         //joystick.gameObject.SetActive(false);
         #endif
     }
+    
+    public void Save()
+    {
+        SavingSystem<CatSprite,CatData>.Save(this, $"{gameObject.name}.data");
+    }
+
+
+    public void Load()
+    {
+        data = SavingSystem<CatSprite, CatData>.Load($"{gameObject.name}.data");
+        HP = data.HP;
+        countHealth = data.countHealth;
+        takeDamage = data.takeDamage;
+        key = data.key;
+        money = data.money;
+        if (SceneManager.GetActiveScene().name == "FirstLevle")
+            transform.position = new Vector3(
+                data.spawnFirstLevel[0], 
+                data.spawnFirstLevel[1], 
+                data.spawnFirstLevel[2]);
+        else
+            transform.position = new Vector3(
+                data.spawnSecondLevel[0], 
+                data.spawnSecondLevel[1], 
+                data.spawnSecondLevel[2]);
+    }
+    
 
     private void Update()
     {

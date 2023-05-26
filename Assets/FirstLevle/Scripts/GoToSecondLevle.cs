@@ -22,7 +22,7 @@ public class GoToSecondLevle : MonoBehaviour
     void Update()
     {
         if (Physics2D.OverlapCircleAll(_catSprite.groundCheck.position, _catSprite.groundCheckRadius, balloonLayer).Length > 0
-            && _catSprite.idBoosDead)
+            && _catSprite.isBossDead)
         {
             transform.position += movingVector * speed * Time.deltaTime;
             _cat.transform.position += movingVector * speed * Time.deltaTime;
@@ -39,5 +39,6 @@ public class GoToSecondLevle : MonoBehaviour
     {
         foreach (var coin in coins)
             coin.GetComponent<Coin>().Save();
+        _cat.GetComponent<CatSprite>().Save();
     }
 }

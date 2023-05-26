@@ -38,5 +38,6 @@ public class GoToFirstLevel : MonoBehaviour
     {
         foreach (var coin in coins)
             coin.GetComponent<Coin>().Save();
+        _cat.GetComponent<CatSprite>().Save();
     }
 }
