@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Coin : MonoBehaviour
 {
@@ -27,6 +29,9 @@ public class Coin : MonoBehaviour
         Load();
         audioSource = _cat.GetComponent<AudioSource>();
         _boxCollider = GetComponent<BoxCollider2D>();
+        if (SceneManager.GetActiveScene().name == "FirstLevle")
+            GoToSecondLevle.coins.Add(gameObject);
+        else GoToFirstLevel.coins.Add(gameObject);
     }
 
     public void Save()
@@ -43,7 +48,8 @@ public class Coin : MonoBehaviour
             data.positions[gameObject.name][1],
             data.positions[gameObject.name][2]);
     }
-    // Update is called once per frame
+    
+    
     void Update()
     {
         if (_spriteRenderer.enabled)

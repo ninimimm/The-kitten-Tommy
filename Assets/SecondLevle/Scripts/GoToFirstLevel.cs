@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GoToFirstLevel : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] private GameObject _cat;
     [SerializeField] private Vector3 movingVector;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask balloonLayer;
-    [SerializeField] private GameObject[] coins;
+    public static List<GameObject> coins = new();
+    [SerializeField] private GameObject[] crates;
     private CatSprite _catSprite;
     
     void Start()
@@ -18,7 +18,6 @@ public class GoToFirstLevel : MonoBehaviour
         _catSprite = _cat.GetComponent<CatSprite>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Physics2D.OverlapCircleAll(_catSprite.groundCheck.position, _catSprite.groundCheckRadius, balloonLayer).Length > 0)
@@ -39,5 +38,7 @@ public class GoToFirstLevel : MonoBehaviour
         foreach (var coin in coins)
             coin.GetComponent<Coin>().Save();
         _cat.GetComponent<CatSprite>().Save();
+        foreach (var crate in crates)
+            crate.GetComponent<Crate>().Save();
     }
 }
