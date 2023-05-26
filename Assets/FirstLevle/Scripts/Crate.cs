@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Crate : MonoBehaviour, IDamageable
 {
@@ -16,7 +17,9 @@ public class Crate : MonoBehaviour, IDamageable
     private BoxCollider2D _boxCollider;
     private bool getHit = false;
     private CrateData data;
-
+    private bool isStart = true;
+    private GameObject coinInstance;
+    private bool newSpawn = true;
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -33,9 +36,22 @@ public class Crate : MonoBehaviour, IDamageable
 
     void Update()
     {
+        if (coinInstance != null && newSpawn)
+        {
+            coinInstance.transform.position = transform.position;
+            newSpawn = false;
+        }
+            
+        if (isStart)
+        {
+            if (SceneManager.GetActiveScene().name == "FirstLevle")
+                GoToSecondLevle.crates.Add(gameObject);
+            else GoToFirstLevel.crates.Add(gameObject);
+            isStart = false;
+        }
         if (transform.position.y < -0.3 && getHit && _spriteRenderer.enabled)
         {
-            var coinInstance = Instantiate(coinPrefab, transform.position, Quaternion.identity);
+            coinInstance = Instantiate(coinPrefab, gameObject.transform.position, Quaternion.identity);
             var coinComponent = coinInstance.GetComponent<Coin>();
             if (coinComponent != null)
             {

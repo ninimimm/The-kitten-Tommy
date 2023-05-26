@@ -9463,7 +9463,7 @@ MonoBehaviour:
   catLayer:
     serializedVersion: 2
     m_Bits: 128
-  distanseAttack: 0.13
+  distanseAttack: 0.3
   _audioSource: {fileID: 1077976478}
 --- !u!1 &924450924
 GameObject:
@@ -10048,7 +10048,7 @@ MonoBehaviour:
   catLayer:
     serializedVersion: 2
     m_Bits: 128
-  distanseAttack: 0.13
+  distanseAttack: 0.3
   _audioSource: {fileID: 1077976478}
 --- !u!1 &1050049635
 GameObject:
@@ -15640,14 +15640,6 @@ MonoBehaviour:
   balloonLayer:
     serializedVersion: 2
     m_Bits: 131072
-  coins:
-  - {fileID: 1514812802}
-  - {fileID: 92341945}
-  - {fileID: 1451104838}
-  - {fileID: 710531541}
-  crates:
-  - {fileID: 1049848886}
-  - {fileID: 912693706}
 --- !u!50 &1391273537
 Rigidbody2D:
   serializedVersion: 4

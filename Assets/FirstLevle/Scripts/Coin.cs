@@ -15,7 +15,7 @@ public class Coin : MonoBehaviour
     private CoinData data;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
-    
+    private bool isStart = true;
 
     private void Start()
     {
@@ -29,9 +29,7 @@ public class Coin : MonoBehaviour
         Load();
         audioSource = _cat.GetComponent<AudioSource>();
         _boxCollider = GetComponent<BoxCollider2D>();
-        if (SceneManager.GetActiveScene().name == "FirstLevle")
-            GoToSecondLevle.coins.Add(gameObject);
-        else GoToFirstLevel.coins.Add(gameObject);
+        
     }
 
     public void Save()
@@ -52,6 +50,14 @@ public class Coin : MonoBehaviour
     
     void Update()
     {
+        if (isStart)
+        {
+            _spriteRenderer.enabled = true;
+            if (SceneManager.GetActiveScene().name == "FirstLevle")
+                GoToSecondLevle.coins.Add(gameObject);
+            else GoToFirstLevel.coins.Add(gameObject);
+            isStart = false;
+        }
         if (_spriteRenderer.enabled)
         {
             var catTouch = Physics2D.OverlapCircleAll(transform.position, distanseAttack, catLayer);

@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cat: {fileID: 0}
-  distanseAttack: 0.14
+  distanseAttack: 0.3
   catLayer:
     serializedVersion: 2
     m_Bits: 128

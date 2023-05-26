@@ -10,8 +10,8 @@ public class GoToSecondLevle : MonoBehaviour
     [SerializeField] private Vector3 movingVector;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask balloonLayer;
-    public static List<GameObject> coins = new();
-    [SerializeField] private GameObject[] crates;
+    public static List<GameObject> coins = new ();
+    public static List<GameObject> crates = new ();
     private CatSprite _catSprite;
     
     void Start()
@@ -39,10 +39,7 @@ public class GoToSecondLevle : MonoBehaviour
     private void Save()
     {
         foreach (var coin in coins)
-        {
-            if (coin != null) coin.GetComponent<Coin>().Save();
-        }
-            
+            coin.GetComponent<Coin>().Save();
         _cat.GetComponent<CatSprite>().Save();
         foreach (var crate in crates)
             crate.GetComponent<Crate>().Save();

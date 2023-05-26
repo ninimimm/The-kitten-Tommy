@@ -9,8 +9,8 @@ public class GoToFirstLevel : MonoBehaviour
     [SerializeField] private Vector3 movingVector;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask balloonLayer;
-    public static List<GameObject> coins = new();
-    [SerializeField] private GameObject[] crates;
+    public static List<GameObject> coins = new ();
+    public static List<GameObject> crates = new ();
     private CatSprite _catSprite;
     
     void Start()
