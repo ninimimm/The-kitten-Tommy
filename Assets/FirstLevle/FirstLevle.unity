@@ -15640,6 +15640,8 @@ MonoBehaviour:
   balloonLayer:
     serializedVersion: 2
     m_Bits: 131072
+  snake: {fileID: 1471491665}
+  _birdIdle: {fileID: 26911541}
 --- !u!50 &1391273537
 Rigidbody2D:
   serializedVersion: 4
@@ -17294,18 +17296,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9605d961b9efc45a74956e1a20bd43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 0
   maxHP: 10
   target: {fileID: 18447}
   _healthBar: {fileID: 470206225}
   _fill: {fileID: 1067388842}
   _bar: {fileID: 2145895771}
   damageClip: {fileID: 8300000, guid: 9b49d646202ad454dac4bef6e2e0adf8, type: 3}
+  _animator: {fileID: 0}
   attack: {fileID: 566849686}
   distanseAttack: 0.2
   catLayer:
     serializedVersion: 2
     m_Bits: 128
   takeDamage: 1
+  poly: {fileID: 0}
+  cap: {fileID: 0}
 --- !u!95 &1471491671
 Animator:
   serializedVersion: 5

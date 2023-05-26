@@ -29,13 +29,11 @@ public class CatSprite : MonoBehaviour
     };
 
     private SpriteRenderer Cat;
-    private Animator _snakeAnimator;
     public float HP;
     public Joystick joystick;
     [SerializeField] public float maxHP;
     [SerializeField] public float speed = 4.0f;
     [SerializeField] public float jumpForce = 7f;
-    [SerializeField] public GameObject Snake;
     [SerializeField] public HealthBar _healthBar;
     [SerializeField] public KnifeBar _knifeBar;
     [SerializeField] private Text _textMoney;
@@ -99,7 +97,6 @@ public class CatSprite : MonoBehaviour
         _poly = GetComponent<PolygonCollider2D>();
         Cat = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        _snakeAnimator = Snake.GetComponent<Animator>();
         _Animation = GetComponent<Animation>();
         transform.Rotate(0f,180f,0f);
         _knifeBar.SetMaxHealth(GetComponent<Knife>().attackIntervale);

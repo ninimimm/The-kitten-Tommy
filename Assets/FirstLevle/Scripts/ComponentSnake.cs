@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ComponentSnake : MonoBehaviour, IDamageable
 {
-    private float HP;
+    public float HP;
     [SerializeField] private float maxHP;
     [SerializeField] private GameObject target;
     [SerializeField] private HealthBar _healthBar;
@@ -14,7 +14,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     [SerializeField] private Image _bar;
     [SerializeField] private AudioClip damageClip;
     private AudioSource _audioSource;
-    public static Animator _animator;
+    public Animator _animator;
     public enum MovementState { stay, Walk, attake, death, hurt };
     public static MovementState _stateSnake;
     private SpriteRenderer _snake;
@@ -27,8 +27,10 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     public int takeDamage = 1;
     private bool rotation = true;
     private bool damageNow = false;
-    private PolygonCollider2D poly;
-    private CapsuleCollider2D cap;
+    public PolygonCollider2D poly;
+    public CapsuleCollider2D cap;
+    private SnakeData data;
+    private bool isStart = true;
 
     void Start()
     {
@@ -42,6 +44,35 @@ public class ComponentSnake : MonoBehaviour, IDamageable
         _healthBar.SetMaxHealth(maxHP);
         HP = maxHP;
         _audioSource = GetComponent<AudioSource>();
+        if (!SnakeData.start.Contains(gameObject.name))
+        {
+            HP = maxHP;
+            _healthBar.SetMaxHealth(maxHP);
+            Save();
+            SnakeData.start.Add(gameObject.name);
+        }
+        Load();
+        _healthBar.SetMaxHealth(maxHP);
+        _healthBar.SetHealth(HP); 
+    }
+    
+    public void Save()
+    {
+        SavingSystem<ComponentSnake,SnakeData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<ComponentSnake, SnakeData>.Load($"{gameObject.name}.data");
+        transform.position = new Vector3(
+            data.position[0],
+            data.position[1],
+            data.position[2]);
+        HP = data.HP;
+        poly.enabled = data.polyEnabled;
+        cap.enabled = data.capEnabled;
+        _animator.SetInteger("state",data.animatorState);
+        Debug.Log($"Load{data.animatorState}");
     }
 
     void Update()
@@ -86,6 +117,12 @@ public class ComponentSnake : MonoBehaviour, IDamageable
             cap.enabled = true;
             _fill.enabled = false;
             _bar.enabled = false;
+        }
+
+        if (isStart)
+        {
+            Load();
+            isStart = false;
         }
     }
 
