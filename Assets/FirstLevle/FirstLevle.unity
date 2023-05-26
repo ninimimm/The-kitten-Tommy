@@ -9103,7 +9103,7 @@ GameObject:
   - component: {fileID: 904374620}
   - component: {fileID: 904374621}
   m_Layer: 0
-  m_Name: birdEating
+  m_Name: birdEating1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15656,6 +15656,10 @@ MonoBehaviour:
   - {fileID: 1580129495}
   - {fileID: 2062886178}
   _hawk: {fileID: 1638578193}
+  _birdStay: {fileID: 560880818}
+  eatingBirds:
+  - {fileID: 904374620}
+  - {fileID: 1524606603}
 --- !u!50 &1391273537
 Rigidbody2D:
   serializedVersion: 4
@@ -17971,7 +17975,7 @@ GameObject:
   - component: {fileID: 1524606603}
   - component: {fileID: 1524606604}
   m_Layer: 0
-  m_Name: birdEating
+  m_Name: birdEating2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
