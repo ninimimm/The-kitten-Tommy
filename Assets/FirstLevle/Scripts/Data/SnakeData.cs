@@ -27,6 +27,5 @@ public class SnakeData : IInitializable<ComponentSnake>
         position[0] = snake.transform.position.x;
         position[1] = snake.transform.position.y;
         position[2] = snake.transform.position.z;
-        Debug.Log(animatorState.ToString());
     } 
 }

@@ -10759,7 +10759,7 @@ MonoBehaviour:
   leftBound: {fileID: 433537608}
   rightBound: {fileID: 840235563}
   maxHP: 3
-  health: 0
+  HP: 0
   speed: 4.5
   damage: 1
   attackRange: 0.1
@@ -10774,6 +10774,9 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  boxCollider: {fileID: 0}
+  polygonCollider: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!50 &1079260346
 Rigidbody2D:
   serializedVersion: 4
@@ -14154,7 +14157,7 @@ MonoBehaviour:
   leftBound: {fileID: 553255175}
   rightBound: {fileID: 856268549}
   maxHP: 3
-  health: 0
+  HP: 0
   speed: 4.5
   damage: 1
   attackRange: 0.1
@@ -14169,6 +14172,9 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  boxCollider: {fileID: 0}
+  polygonCollider: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!50 &1114492084
 Rigidbody2D:
   serializedVersion: 4
@@ -15640,8 +15646,15 @@ MonoBehaviour:
   balloonLayer:
     serializedVersion: 2
     m_Bits: 131072
-  snake: {fileID: 1471491665}
+  snake: {fileID: 1471491670}
   _birdIdle: {fileID: 26911541}
+  scorpios:
+  - {fileID: 1607736543}
+  - {fileID: 1847941147}
+  - {fileID: 1114492083}
+  - {fileID: 1079260345}
+  - {fileID: 1580129495}
+  - {fileID: 2062886178}
 --- !u!50 &1391273537
 Rigidbody2D:
   serializedVersion: 4
@@ -18903,7 +18916,7 @@ MonoBehaviour:
   leftBound: {fileID: 845422747}
   rightBound: {fileID: 1021498061}
   maxHP: 3
-  health: 0
+  HP: 0
   speed: 4.5
   damage: 1
   attackRange: 0.1
@@ -18918,6 +18931,9 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  boxCollider: {fileID: 0}
+  polygonCollider: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!50 &1580129496
 Rigidbody2D:
   serializedVersion: 4
@@ -19509,7 +19525,7 @@ MonoBehaviour:
   leftBound: {fileID: 1037115679}
   rightBound: {fileID: 346857899}
   maxHP: 3
-  health: 0
+  HP: 0
   speed: 4.5
   damage: 1
   attackRange: 0.1
@@ -19524,6 +19540,9 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  boxCollider: {fileID: 0}
+  polygonCollider: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!50 &1607736544
 Rigidbody2D:
   serializedVersion: 4
@@ -21260,7 +21279,7 @@ MonoBehaviour:
   leftBound: {fileID: 382509950}
   rightBound: {fileID: 891974289}
   maxHP: 3
-  health: 0
+  HP: 0
   speed: 4.5
   damage: 1
   attackRange: 0.1
@@ -21275,6 +21294,9 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  boxCollider: {fileID: 0}
+  polygonCollider: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!50 &1847941148
 Rigidbody2D:
   serializedVersion: 4
@@ -23406,7 +23428,7 @@ MonoBehaviour:
   leftBound: {fileID: 1880850023}
   rightBound: {fileID: 361937984}
   maxHP: 3
-  health: 0
+  HP: 0
   speed: 4.5
   damage: 1
   attackRange: 0.1
@@ -23421,6 +23443,9 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  boxCollider: {fileID: 0}
+  polygonCollider: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!50 &2062886179
 Rigidbody2D:
   serializedVersion: 4

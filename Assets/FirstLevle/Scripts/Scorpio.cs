@@ -13,7 +13,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     [SerializeField] private GameObject leftBound;
     [SerializeField] private GameObject rightBound;
     [SerializeField] private float maxHP;
-    [SerializeField] private float health;
+    [SerializeField] public float HP;
     [SerializeField] private float speed;
     [SerializeField] private float damage; 
     [SerializeField] private float attackRange; 
@@ -29,17 +29,19 @@ public class Scorpio : MonoBehaviour, IDamageable
     private AudioSource audioSource;
     private float idleTimer = 0.0f;
     private bool damageNow = false;
-    private BoxCollider2D boxCollider;
-    private PolygonCollider2D polygonCollider;
-    private Animator animator;
+    public BoxCollider2D boxCollider;
+    public PolygonCollider2D polygonCollider;
+    public Animator animator;
     private Rigidbody2D rb;
     private bool isFacingRight = false;
     private MovementState stateScorpio;
     private enum MovementState { idle, walk, attack, death, hurt };
+    private ScorpioData data;
+    private bool isStart = true;
 
     private void Start()
     {
-        health = maxHP;
+        HP = maxHP;
         _healthBar.SetMaxHealth(maxHP);
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -48,8 +50,37 @@ public class Scorpio : MonoBehaviour, IDamageable
         polygonCollider.enabled = false;
         boxCollider.enabled = true;
         audioSource = GetComponent<AudioSource>();
+        if (!ScorpioData.start.Contains(gameObject.name))
+        {
+            HP = maxHP;
+            _healthBar.SetMaxHealth(maxHP);
+            Save();
+            ScorpioData.start.Add(gameObject.name);
+        }
+        Load();
+        _healthBar.SetMaxHealth(maxHP);
+        _healthBar.SetHealth(HP);
     }
 
+    public void Save()
+    {
+        SavingSystem<Scorpio,ScorpioData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<Scorpio, ScorpioData>.Load($"{gameObject.name}.data");
+        transform.position = new Vector3(
+            data.position[0],
+            data.position[1],
+            data.position[2]);
+        HP = data.HP;
+        polygonCollider.enabled = data.polyEnabled;
+        boxCollider.enabled = data.boxEnabled;
+        animator.SetInteger("state",data.animatorState);
+        Debug.Log($"Load{data.animatorState}");
+    }
+    
     private void Update()
     {
         audioSource.volume = Math.Abs(catTransform.position.x-transform.position.x) < distanseRunSourse ?
@@ -69,16 +100,21 @@ public class Scorpio : MonoBehaviour, IDamageable
             _fill.enabled = false;
             _bar.enabled = false;
         }
+        if (isStart)
+        {
+            Load();
+            isStart = false;
+        }
     }
 
     private void TryChangeOnDamageState()
     {
-        if (damageNow && health > 0)
+        if (damageNow && HP > 0)
         {
             stateScorpio = MovementState.hurt;
             damageNow = false;
         }
-        else if (health <= 0)
+        else if (HP <= 0)
             stateScorpio = MovementState.death;
     }
 
@@ -118,8 +154,8 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        _healthBar.SetHealth(health);
+        HP -= damage;
+        _healthBar.SetHealth(HP);
         damageNow = true;
     }
 

@@ -9,6 +9,7 @@ public class GoToFirstLevel : MonoBehaviour
     [SerializeField] private Vector3 movingVector;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask balloonLayer;
+    [SerializeField] private Scorpio[] scorpios;
     public static List<GameObject> coins = new ();
     public static List<GameObject> crates = new ();
     private CatSprite _catSprite;
@@ -40,5 +41,7 @@ public class GoToFirstLevel : MonoBehaviour
         _cat.GetComponent<CatSprite>().Save();
         foreach (var crate in crates)
             crate.GetComponent<Crate>().Save();
+        foreach (var scorpio in scorpios)
+            scorpio.Save();
     }
 }
