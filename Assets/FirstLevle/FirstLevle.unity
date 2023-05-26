@@ -15655,6 +15655,7 @@ MonoBehaviour:
   - {fileID: 1079260345}
   - {fileID: 1580129495}
   - {fileID: 2062886178}
+  _hawk: {fileID: 1638578193}
 --- !u!50 &1391273537
 Rigidbody2D:
   serializedVersion: 4
@@ -20138,6 +20139,8 @@ MonoBehaviour:
   catLayer:
     serializedVersion: 2
     m_Bits: 128
+  caps: []
+  _animator: {fileID: 0}
 --- !u!70 &1638578194
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

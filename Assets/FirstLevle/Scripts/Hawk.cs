@@ -13,7 +13,7 @@ public class Hawk : MonoBehaviour, IDamageable
     [SerializeField] private float maxY = 2.0f;
     [SerializeField] private GameObject Cat;
     [SerializeField] private float maxHP;
-    [SerializeField] private float HP;
+    [SerializeField] public float HP;
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
@@ -21,12 +21,14 @@ public class Hawk : MonoBehaviour, IDamageable
     public Transform attack;
     public LayerMask catLayer;
     private bool damageNow = false;
-    private CapsuleCollider2D[] caps;
+    public CapsuleCollider2D[] caps;
 
     private Rigidbody2D _rigidbody2D;
     private CatSprite _catSprite;
-    private Animator _animator;
+    public Animator _animator;
     private Vector3 catPosition;
+    private HawkData data;
+    private bool isStart = true;
 
     void Start()
     {
@@ -36,6 +38,34 @@ public class Hawk : MonoBehaviour, IDamageable
         _animator = GetComponent<Animator>();
         _catSprite = Cat.GetComponent<CatSprite>();
         caps = GetComponents<CapsuleCollider2D>();
+        if (!HawkData.start.Contains(gameObject.name))
+        {
+            HP = maxHP;
+            _healthBar.SetMaxHealth(maxHP);
+            Save();
+            HawkData.start.Add(gameObject.name);
+        }
+        Load();
+        _healthBar.SetMaxHealth(maxHP);
+        _healthBar.SetHealth(HP);
+    }
+    
+    public void Save()
+    {
+        SavingSystem<Hawk,HawkData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<Hawk, HawkData>.Load($"{gameObject.name}.data");
+        transform.position = new Vector3(
+            data.position[0],
+            data.position[1],
+            data.position[2]);
+        HP = data.HP;
+        caps[0].enabled = data.capsFirstEnabled;
+        caps[1].enabled = data.capsSecondEnabled;
+        _animator.SetInteger("state",data.animatorState);
     }
 
     void Update()
@@ -50,6 +80,11 @@ public class Hawk : MonoBehaviour, IDamageable
             caps[1].enabled = true;
             _fill.enabled = false;
             _bar.enabled = false;
+        }
+        if (isStart)
+        {
+            Load();
+            isStart = false;
         }
     }
 

@@ -262,4 +262,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  damage: 33.999985
+  damage: 3

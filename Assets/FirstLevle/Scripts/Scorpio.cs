@@ -77,8 +77,7 @@ public class Scorpio : MonoBehaviour, IDamageable
         HP = data.HP;
         polygonCollider.enabled = data.polyEnabled;
         boxCollider.enabled = data.boxEnabled;
-        animator.SetInteger("state",data.animatorState);
-        Debug.Log($"Load{data.animatorState}");
+        animator.SetInteger("stateScorpio",data.animatorState);
     }
     
     private void Update()

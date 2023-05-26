@@ -13,9 +13,11 @@ public class GoToSecondLevle : MonoBehaviour
     [SerializeField] private ComponentSnake snake;
     [SerializeField] private BirdIdle _birdIdle;
     [SerializeField] private Scorpio[] scorpios;
+    [SerializeField] private Hawk _hawk;
     public static List<GameObject> coins = new ();
     public static List<GameObject> crates = new ();
     private CatSprite _catSprite;
+    
     
     
     
@@ -52,5 +54,6 @@ public class GoToSecondLevle : MonoBehaviour
         _birdIdle.GetComponent<BirdIdle>().Save();
         foreach (var scorpio in scorpios)
             scorpio.Save();
+        _hawk.Save();
     }
 }
