@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +40,7 @@ public class SpawnBoss : MonoBehaviour
         var _bar = healthBar.GetComponentsInChildren<Image>()[1].GetComponent<Image>();
 
         GameObject boss = Instantiate(Boss, spawnPosition, Quaternion.identity);
+        GoToSecondLevle.boss = boss.GetComponent<SandBoss>();
         var sandBoss = boss.GetComponent<SandBoss>();
         sandBoss._cat = Cat;
         sandBoss.MummyPrefab = Mummy;

@@ -54,8 +54,8 @@ public class Coin : MonoBehaviour
         {
             _spriteRenderer.enabled = true;
             if (SceneManager.GetActiveScene().name == "FirstLevle")
-                GoToSecondLevle.coins.Add(gameObject);
-            else GoToFirstLevel.coins.Add(gameObject);
+                GoToSecondLevle.coins.Add(this);
+            else GoToFirstLevel.coins.Add(this);
             isStart = false;
         }
         if (_spriteRenderer.enabled)

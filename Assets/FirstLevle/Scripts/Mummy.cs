@@ -14,22 +14,24 @@ public class Mummy : MonoBehaviour, IDamageable
     [SerializeField] private float distanseAttack;
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
-    [SerializeField] private float HP;
+    [SerializeField] public float HP;
     public GameObject boss;
     public HealthBar _healthBar;
     public Image __fill;
     public Image __bar;
     private Rigidbody2D rbBoss;
     private Animator _bossAnimator;
-    private PolygonCollider2D pol;
-    private CapsuleCollider2D cap;
+    public PolygonCollider2D pol;
+    public CapsuleCollider2D cap;
     private bool damageNow = false;
     public enum MovementState { stay, walk, attake, hurt, death };
     public MovementState stateMommy;
     private Vector3 coordinates;
     private Rigidbody2D _rb;
     private Vector3 delta;
-    private Animator animator;
+    public Animator animator;
+    private bool isStart = true;
+    private MummyData data;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,34 @@ public class Mummy : MonoBehaviour, IDamageable
         _bossAnimator = Boss.GetComponent<Animator>();
         cap.enabled = true;
         pol.enabled = false;
+        if (!SnakeData.start.Contains(gameObject.name))
+        {
+            HP = maxHP;
+            _healthBar.SetMaxHealth(maxHP);
+            Save();
+            SnakeData.start.Add(gameObject.name);
+        }
+        Load();
+        _healthBar.SetMaxHealth(maxHP);
+        _healthBar.SetHealth(HP); 
+    }
+    
+    public void Save()
+    {
+        SavingSystem<Mummy,MummyData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<Mummy, MummyData>.Load($"{gameObject.name}.data");
+        transform.position = new Vector3(
+            data.position[0],
+            data.position[1],
+            data.position[2]);
+        HP = data.HP;
+        pol.enabled = data.polyEnabled;
+        cap.enabled = data.capEnabled;
+        animator.SetInteger("state",data.animatorState);
     }
 
     // Update is called once per frame
@@ -129,6 +159,11 @@ public class Mummy : MonoBehaviour, IDamageable
                 __fill.enabled = false;
                 __bar.enabled = false;
             }
+        }
+        if (isStart)
+        {
+            Load();
+            isStart = false;
         }
     }
     void Attack()

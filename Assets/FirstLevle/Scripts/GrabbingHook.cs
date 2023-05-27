@@ -71,8 +71,12 @@ public class GrabbingHook : MonoBehaviour
                 _audioSource.PlayOneShot(woosh);
             }
             line.SetPosition(0, transform.position - new Vector3(-0.1f, 0.1f, 0));
-            line.SetPosition(1, _joint2D.connectedBody.transform.position + (Vector3)_joint2D.connectedAnchor);
+            if (_joint2D.connectedBody != null)
+            {
+                line.SetPosition(1, _joint2D.connectedBody.transform.position + (Vector3)_joint2D.connectedAnchor);
+            }
         }
+
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             isHooked = false;

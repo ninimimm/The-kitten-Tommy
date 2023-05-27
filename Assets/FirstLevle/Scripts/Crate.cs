@@ -45,8 +45,8 @@ public class Crate : MonoBehaviour, IDamageable
         if (isStart)
         {
             if (SceneManager.GetActiveScene().name == "FirstLevle")
-                GoToSecondLevle.crates.Add(gameObject);
-            else GoToFirstLevel.crates.Add(gameObject);
+                GoToSecondLevle.crates.Add(this);
+            else GoToFirstLevel.crates.Add(this);
             isStart = false;
         }
         if (transform.position.y < -0.3 && getHit && _spriteRenderer.enabled)

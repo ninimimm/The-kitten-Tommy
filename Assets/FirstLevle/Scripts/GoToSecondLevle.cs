@@ -18,15 +18,13 @@ public class GoToSecondLevle : MonoBehaviour
     [SerializeField] private EatingBird[] eatingBirds;
     [SerializeField] private Chest chest;
     [SerializeField] private Hyena hyena;
+    public static SandBoss boss;
     public static int countCoins;
-    public static List<GameObject> coins = new ();
-    public static List<GameObject> crates = new ();
+    public static List<Coin> coins = new ();
+    public static List<Crate> crates = new ();
+    public static List<GameObject> mummies = new();
     private CatSprite _catSprite;
-    
-    
-    
-    
-    
+
     void Start()
     {
         _catSprite = _cat.GetComponent<CatSprite>();
@@ -52,10 +50,10 @@ public class GoToSecondLevle : MonoBehaviour
     private void Save()
     {
         foreach (var coin in coins)
-            coin.GetComponent<Coin>().Save();
+            if (coin != null) coin.GetComponent<Coin>().Save();
         _cat.GetComponent<CatSprite>().Save();
         foreach (var crate in crates)
-            crate.GetComponent<Crate>().Save();
+            if (crate != null) crate.GetComponent<Crate>().Save();
         snake.Save();
         _birdIdle.GetComponent<BirdIdle>().Save();
         foreach (var scorpio in scorpios)
@@ -66,5 +64,8 @@ public class GoToSecondLevle : MonoBehaviour
             eatingBird.GetComponent<EatingBird>().Save();
         chest.Save();
         hyena.Save();
+        boss.Save();
+        foreach (var mummy in mummies)
+            mummy.GetComponent<Mummy>().Save();
     }
 }
