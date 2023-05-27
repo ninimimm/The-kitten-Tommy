@@ -24,7 +24,9 @@ public class CatSprite : MonoBehaviour
         jumpdown,
         hit,
         damage,
-        shit
+        shit,
+        die,
+        alive
     };
 
     private SpriteRenderer Cat;
@@ -46,6 +48,9 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float timeToJump;
     [SerializeField] private AudioSource runSourse;
+    [SerializeField] private AudioSource dieSourse;
+    [SerializeField] private AudioSource swimSourse;
+    [SerializeField] private AudioSource aliveSourse;
     [SerializeField] private AudioSource jumpSourse;
     [SerializeField] private AudioSource damageSourse;
     [SerializeField] private AudioClip audioFly;
@@ -72,6 +77,7 @@ public class CatSprite : MonoBehaviour
     public int takeDamage = 1;
     private float speedMultiplier = 1f;
     private bool damageNow;
+    private bool dieNow;
     private AudioListener _audioListener;
     [SerializeField] public Button shitButton;
     [SerializeField] public Button hitButton;
@@ -213,6 +219,24 @@ public class CatSprite : MonoBehaviour
                 runSourse.Play();
             }
         }
+
+        if (HP <= 0 && !_animator.GetCurrentAnimatorStateInfo(0).IsName("die"))
+        {
+            if (countHealth <= 1)
+            {
+                countHealth = maxCountHealth;
+                transform.position = new Vector3(1,0,0);
+                SceneManager.LoadScene("FirstLevle");
+            }
+            else
+            {
+                countHealth -= 1;
+                transform.position = spawn;
+            }
+            _textHealth.text = countHealth.ToString();
+            HP = maxHP;
+            _healthBar.SetMaxHealth(maxHP);
+        }
         SwitchAnimation();
     }
     
@@ -275,6 +299,13 @@ public class CatSprite : MonoBehaviour
                 _stateCat = MovementState.damage;
                 damageNow = false;
             }
+
+            if (dieNow)
+            {
+                _stateCat = MovementState.die;
+                dieNow = false;
+            }
+
             _animator.SetInteger("State", (int)_stateCat);
         }
         #elif UNITY_ANDROID
@@ -348,27 +379,17 @@ public class CatSprite : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        damageSourse.volume = volumeDamage;
-        damageSourse.Play();
         HP -= damage;
-        _healthBar.SetHealth(HP);
-        damageNow = true;
         if (HP <= 0)
         {
-            if (countHealth <= 1)
-            {
-                countHealth = maxCountHealth;
-                transform.position = new Vector3(1,0,0);
-                SceneManager.LoadScene("FirstLevle");
-            }
-            else
-            {
-                countHealth -= 1;
-                transform.position = spawn;
-            }
-            _textHealth.text = countHealth.ToString();
-            HP = maxHP;
-            _healthBar.SetMaxHealth(maxHP);
+            if (!dieSourse.isPlaying)
+                dieSourse.Play();
+            dieNow = true;
+            return;
         }
+        damageSourse.volume = volumeDamage;
+        damageSourse.Play();
+        _healthBar.SetHealth(HP);
+        damageNow = true;
     }
 }

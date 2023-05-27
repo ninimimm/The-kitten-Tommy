@@ -10,6 +10,7 @@ public class Hyena : MonoBehaviour, IDamageable
     [SerializeField] private Transform attack;
     [SerializeField] private float distanseAttack;
     [SerializeField] private float damage;
+    [SerializeField] private AudioClip damageClip;
     [SerializeField] private float maxHP;
     [SerializeField] private float HP;
     [SerializeField] private HealthBar _healthBar;
@@ -22,6 +23,7 @@ public class Hyena : MonoBehaviour, IDamageable
     public MovementState stateHyena;
     private Vector3 coordinates;
     private Rigidbody2D _rb;
+    private AudioSource _audioSource;
     private Vector3 delta;
     private Animator animator;
 
@@ -40,6 +42,7 @@ public class Hyena : MonoBehaviour, IDamageable
         pol.enabled = false;
         cap.enabled = true;
         catSprite = _cat.GetComponent<CatSprite>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -112,6 +115,8 @@ public class Hyena : MonoBehaviour, IDamageable
     
     public void TakeDamage(float damage)
     {
+        if (!_audioSource.isPlaying)
+            _audioSource.PlayOneShot(damageClip);
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;

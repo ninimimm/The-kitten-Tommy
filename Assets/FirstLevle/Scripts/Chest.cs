@@ -11,7 +11,8 @@ public class Chest : MonoBehaviour, IDamageable
     [SerializeField] float distanseAttack;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private AudioSource _audioOpenSource;
-    
+    [SerializeField] private AudioSource _audioMoneySource;
+
     private enum MovementState { close, opened, empty};
     private MovementState _stateChest;
     private Animator _animator;
@@ -40,6 +41,7 @@ public class Chest : MonoBehaviour, IDamageable
             {
                 if (isOpened)
                 {
+                    _audioOpenSource.Play();
                     _stateChest = MovementState.opened;
                     _audioOpenSource.Play();
                     isOpened = false;
@@ -51,6 +53,7 @@ public class Chest : MonoBehaviour, IDamageable
             }
             else if (haveMoney)
             {
+                _audioMoneySource.Play();
                 haveMoney = false;
                 _stateChest = MovementState.empty;
                 _animator.SetInteger("state", (int)_stateChest);

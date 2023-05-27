@@ -33,7 +33,9 @@ public class SandBoss : MonoBehaviour, IDamageable
     private Vector3 delta;
     private Animator animator;
     public bool alive = true;
-    
+    public AudioSource _audioSourceBossHurt;
+    public AudioSource _audioSourceMummyHurt;
+    public AudioSource _audioSourceMummyAttack;
     public GameObject ballPrefab;
     public GameObject MummyPrefab;// префаб шара-спрайта
     public float attackInterval = 2.0f;
@@ -139,10 +141,15 @@ public class SandBoss : MonoBehaviour, IDamageable
         Mummy.GetComponent<Mummy>().__fill = _fill;
         Mummy.GetComponent<Mummy>().__bar = _bar;
         Mummy.GetComponent<Mummy>().boss = gameObject;
+        var mummy = Mummy.GetComponent<Mummy>();
+        mummy._audioSourceMummyAttack = _audioSourceMummyAttack;
+        mummy._audioSourceMummyHurt = _audioSourceMummyHurt;
     }
     
     public void TakeDamage(float damage)
     {
+        if (!_audioSourceBossHurt.isPlaying)
+            _audioSourceBossHurt.Play();
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;
