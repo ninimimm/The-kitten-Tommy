@@ -5,15 +5,23 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
+    [SerializeField] private CatSprite catSprite;
     [SerializeField] public float attackIntervale;
     public Transform fireKnife;
     public GameObject knife;
     public float timer;
     private bool nowIsShoot = false;
+    private KnifeData data;
 
 
     private void Start()
     {
+        if (!KnifeData.start.Contains(gameObject.name))
+        {
+            KnifeData.start.Add(gameObject.name);
+            Save();
+        }
+        Load();
         timer = attackIntervale;
     }
 
@@ -29,6 +37,18 @@ public class Knife : MonoBehaviour
             Shoot();
             nowIsShoot = true;
         }
+    }
+    
+    public void Save()
+    {
+        SavingSystem<Knife,KnifeData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<Knife, KnifeData>.Load($"{gameObject.name}.data");
+        attackIntervale = data.attackIntervale;
+        catSprite._knifeBar.SetMaxHealth(attackIntervale);
     }
 
     void Shoot()

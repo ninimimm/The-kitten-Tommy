@@ -15,6 +15,8 @@ public class GoToFirstLevel : MonoBehaviour
     [SerializeField] private TakeKey takeKey;
     [SerializeField] private ManageButtons manageButtons;
     [SerializeField] private Door[] doors;
+    [SerializeField] private Knife knife;
+    [SerializeField] private logicKnife logicKnife;
     public static List<Coin> coins = new ();
     public static List<Crate> crates = new ();
     public static int countCoins;
@@ -56,5 +58,7 @@ public class GoToFirstLevel : MonoBehaviour
         manageButtons.Save();
         foreach (var door in doors)
             door.Save();
+        knife.Save();
+        logicKnife.Save();
     }
 }

@@ -57,6 +57,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private float swimSpeed;
     [SerializeField] private float normalGravity;
     [SerializeField] public Light2D[] lights;
+    [SerializeField] private Knife knife;
     public bool isWater;
     [SerializeField] private Vector3 spawn;
     public int countHealth;
@@ -99,7 +100,7 @@ public class CatSprite : MonoBehaviour
         _animator = GetComponent<Animator>();
         _Animation = GetComponent<Animation>();
         transform.Rotate(0f,180f,0f);
-        _knifeBar.SetMaxHealth(GetComponent<Knife>().attackIntervale);
+        _knifeBar.SetMaxHealth(knife.attackIntervale);
         timerJump = timeToJump;
         audioSource = GetComponent<AudioSource>();
         _audioListener = GetComponent<AudioListener>();
@@ -181,7 +182,7 @@ public class CatSprite : MonoBehaviour
                     : 0;
         }
         else fliesSourse.volume = 0;
-        _knifeBar.SetHealth(GetComponent<Knife>().timer);
+        _knifeBar.SetHealth(knife.timer);
         _textMoney.text = money.ToString();
         var isIce = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, iceLayer).Length > 0;
         isWater = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, waterLayer).Length > 0;

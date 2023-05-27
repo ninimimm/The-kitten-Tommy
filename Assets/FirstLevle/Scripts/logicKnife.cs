@@ -7,12 +7,30 @@ public class logicKnife : MonoBehaviour
     [SerializeField] public float speed = 10f;
     [SerializeField] public float damage = 1;
     private Rigidbody2D _rb;
+    private LogicKnifeData data;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = transform.right * speed;
+        if (!LogicKnifeData.start.Contains(gameObject.name))
+        {
+            LogicKnifeData.start.Add(gameObject.name);
+            Save();
+        }
+        Load();
+    }
+    
+    public void Save()
+    {
+        SavingSystem<logicKnife,LogicKnifeData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<logicKnife, LogicKnifeData>.Load($"{gameObject.name}.data");
+        damage = data.damage;
     }
 
     // FixedUpdate is called at fixed intervals

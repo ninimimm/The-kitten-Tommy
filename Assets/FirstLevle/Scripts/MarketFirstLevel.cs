@@ -16,12 +16,12 @@ public class MarketFirstLevel : MonoBehaviour
     [SerializeField] private Material GoldHarpoon;
     [SerializeField] private GameObject _knifePrefab;
     [SerializeField] private Line line;
+    [SerializeField] private Knife _knife;
     private Transform _catTransform;
     private SpriteRenderer _spriteRenderer;
     private CatSprite _catSprite;
     private logicKnife _logicKnife;
-    private Knife _knife;
-    
+
     void Start()
     {
         _catTransform = cat.GetComponent<Transform>();
@@ -29,7 +29,6 @@ public class MarketFirstLevel : MonoBehaviour
         _spriteRenderer.enabled = false;
         _catSprite = cat.GetComponent<CatSprite>();
         _logicKnife = _knifePrefab.GetComponent<logicKnife>();
-        _knife = cat.GetComponent<Knife>();
     }
     
     void Update()

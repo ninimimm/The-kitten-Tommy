@@ -109,11 +109,11 @@ public class Hawk : MonoBehaviour, IDamageable
 
         if (transform.position.y > maxY)
         {
-            direction.y = -1;
+            direction.y = -0.5f;
         }
         else if (transform.position.y < minY)
         {
-            direction.y = 1;
+            direction.y = 0.5f;
         }
         Attack();
         if (damageNow && HP > 0)

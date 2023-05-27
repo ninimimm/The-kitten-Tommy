@@ -20,6 +20,8 @@ public class GoToSecondLevle : MonoBehaviour
     [SerializeField] private Hyena hyena;
     [SerializeField] private Line grabbingHook;
     [SerializeField] private TakeKey takeKey;
+    [SerializeField] private Knife knife;
+    [SerializeField] private logicKnife logicKnife;
     public static SandBoss boss;
     public static int countCoins;
     public static List<Coin> coins = new ();
@@ -68,8 +70,10 @@ public class GoToSecondLevle : MonoBehaviour
         hyena.Save();
         boss.Save();
         foreach (var mummy in mummies)
-            mummy.GetComponent<Mummy>().Save();
+            if (mummy != null) mummy.GetComponent<Mummy>().Save();
         grabbingHook.Save();
         takeKey.Save();
+        knife.Save();
+        logicKnife.Save();
     }
 }
