@@ -24,6 +24,7 @@ public class GrabbingHook : MonoBehaviour
     private CatSprite _catSprite;
     private Camera _mainCamera;
 
+
     void Start()
     {
         _joint2D = GetComponent<DistanceJoint2D>();

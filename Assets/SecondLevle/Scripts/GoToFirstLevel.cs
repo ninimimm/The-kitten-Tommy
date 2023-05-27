@@ -11,10 +11,12 @@ public class GoToFirstLevel : MonoBehaviour
     [SerializeField] private LayerMask balloonLayer;
     [SerializeField] private Scorpio[] scorpios;
     [SerializeField] private Chest chest;
+    [SerializeField] private Line grabbingHook;
     public static List<Coin> coins = new ();
     public static List<Crate> crates = new ();
     public static int countCoins;
     private CatSprite _catSprite;
+    
     
     void Start()
     {
@@ -46,5 +48,6 @@ public class GoToFirstLevel : MonoBehaviour
         foreach (var scorpio in scorpios)
             scorpio.Save();
         chest.Save();
+        grabbingHook.Save();
     }
 }

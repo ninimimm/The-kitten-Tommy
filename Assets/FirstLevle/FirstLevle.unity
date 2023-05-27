@@ -2547,6 +2547,18 @@ PrefabInstance:
       value: 0.333
       objectReference: {fileID: 0}
     - target: {fileID: 4472698094438656503, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
+      propertyPath: coldHook
+      value: 
+      objectReference: {fileID: 2100000, guid: e53a85a0b9d3695488d1bd27e461d980, type: 2}
+    - target: {fileID: 4472698094438656503, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
+      propertyPath: goldHook
+      value: 
+      objectReference: {fileID: 2100000, guid: 162ce2fc72c28574b8e45492f1ee999f, type: 2}
+    - target: {fileID: 4472698094438656503, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
+      propertyPath: basedHook
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6a68dfa882d024abe741e2c297330b, type: 2}
+    - target: {fileID: 4472698094438656503, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: mask.m_Bits
       value: 7488
       objectReference: {fileID: 0}
@@ -2938,6 +2950,7 @@ MonoBehaviour:
   grabbingHook: {fileID: 274466008}
   GoldHarpoon: {fileID: 2100000, guid: 162ce2fc72c28574b8e45492f1ee999f, type: 2}
   _knifePrefab: {fileID: 1872689174842736164, guid: f5f8febf75e32ed478ec53aa6a7673aa, type: 3}
+  line: {fileID: 274466010}
 --- !u!212 &189087540
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3475,6 +3488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 274466009}
   - component: {fileID: 274466008}
+  - component: {fileID: 274466010}
   m_Layer: 0
   m_Name: line
   m_TagString: Untagged
@@ -3596,6 +3610,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &274466010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274466007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 237a728d7e52e4f4ea7f0f8d69e8b487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  line: {fileID: 274466008}
+  basedHook: {fileID: 2100000, guid: 6e6a68dfa882d024abe741e2c297330b, type: 2}
+  goldHook: {fileID: 2100000, guid: 162ce2fc72c28574b8e45492f1ee999f, type: 2}
+  coldHook: {fileID: 2100000, guid: e53a85a0b9d3695488d1bd27e461d980, type: 2}
+  material: 
 --- !u!1 &293453091
 GameObject:
   m_ObjectHideFlags: 0
@@ -15669,6 +15700,7 @@ MonoBehaviour:
   - {fileID: 1524606603}
   chest: {fileID: 737406431}
   hyena: {fileID: 116538139}
+  grabbingHook: {fileID: 274466010}
 --- !u!50 &1391273537
 Rigidbody2D:
   serializedVersion: 4

@@ -15,6 +15,7 @@ public class MarketSecondLevel : MonoBehaviour
     [SerializeField] private Material ColdHarpoon;
     [SerializeField] private Sprite PoisonKnife;
     [SerializeField] private GameObject _knifePrefab;
+    [SerializeField] private Line line;
     private SpriteRenderer _knifeSpriteRenderer;
     private Transform _catTransform;
     private SpriteRenderer _spriteRenderer;
@@ -63,6 +64,7 @@ public class MarketSecondLevel : MonoBehaviour
                 {
                     _catSprite.money -= 6;
                     grabbingHook.material = ColdHarpoon;
+                    line.material = "cold";
                 }
                 grabbingHook.enabled = false;
             }

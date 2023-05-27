@@ -15,6 +15,7 @@ public class MarketFirstLevel : MonoBehaviour
     [SerializeField] private LineRenderer grabbingHook;
     [SerializeField] private Material GoldHarpoon;
     [SerializeField] private GameObject _knifePrefab;
+    [SerializeField] private Line line;
     private Transform _catTransform;
     private SpriteRenderer _spriteRenderer;
     private CatSprite _catSprite;
@@ -67,6 +68,7 @@ public class MarketFirstLevel : MonoBehaviour
                 {
                     _catSprite.money -= 3;
                     grabbingHook.material = GoldHarpoon;
+                    line.material = "gold";
                 }
                 grabbingHook.enabled = false;
             }
