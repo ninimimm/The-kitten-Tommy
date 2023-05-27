@@ -1862,7 +1862,10 @@ MonoBehaviour:
   _healthBar: {fileID: 4470080}
   _fill: {fileID: 322542882}
   _bar: {fileID: 1089676218}
+  pol: {fileID: 0}
+  cap: {fileID: 0}
   stateHyena: 0
+  animator: {fileID: 0}
 --- !u!70 &116538140
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -15665,6 +15668,7 @@ MonoBehaviour:
   - {fileID: 904374620}
   - {fileID: 1524606603}
   chest: {fileID: 737406431}
+  hyena: {fileID: 116538139}
 --- !u!50 &1391273537
 Rigidbody2D:
   serializedVersion: 4

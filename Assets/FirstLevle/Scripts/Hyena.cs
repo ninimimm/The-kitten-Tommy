@@ -11,21 +11,22 @@ public class Hyena : MonoBehaviour, IDamageable
     [SerializeField] private float distanseAttack;
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
-    [SerializeField] private float HP;
+    [SerializeField] public float HP;
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
-    private PolygonCollider2D pol;
-    private CapsuleCollider2D cap;
+    public PolygonCollider2D pol;
+    public CapsuleCollider2D cap;
     private bool damageNow = false;
     public enum MovementState { stay, walk, attake, death, hurt };
     public MovementState stateHyena;
     private Vector3 coordinates;
     private Rigidbody2D _rb;
     private Vector3 delta;
-    private Animator animator;
-
+    public Animator animator;
+    private HyenaData data;
     private CatSprite catSprite;
+    private bool isStart = true;
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +41,36 @@ public class Hyena : MonoBehaviour, IDamageable
         pol.enabled = false;
         cap.enabled = true;
         catSprite = _cat.GetComponent<CatSprite>();
+        if (!SnakeData.start.Contains(gameObject.name))
+        {
+            HP = maxHP;
+            _healthBar.SetMaxHealth(maxHP);
+            Save();
+            SnakeData.start.Add(gameObject.name);
+        }
+        Load();
+        _healthBar.SetMaxHealth(maxHP);
+        _healthBar.SetHealth(HP);
     }
 
+    public void Save()
+    {
+        SavingSystem<Hyena,HyenaData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<Hyena, HyenaData>.Load($"{gameObject.name}.data");
+        transform.position = new Vector3(
+            data.position[0],
+            data.position[1],
+            data.position[2]);
+        HP = data.HP;
+        pol.enabled = data.polyEnabled;
+        cap.enabled = data.capEnabled;
+        animator.SetInteger("state",data.animatorState);
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -50,6 +79,11 @@ public class Hyena : MonoBehaviour, IDamageable
             ProcessMovementAndAttack(currentAnimatorState);
         else
             HandleDeathState();
+        if (isStart)
+        {
+            Load();
+            isStart = false;
+        }
     }
 
     private void ProcessMovementAndAttack(AnimatorStateInfo currentAnimatorState)
