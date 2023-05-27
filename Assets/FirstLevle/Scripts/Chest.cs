@@ -6,65 +6,72 @@ using UnityEngine.UIElements;
 public class Chest : MonoBehaviour, IDamageable
 {
     private const int MONEY_REWARD = 5;
-    
     [SerializeField] private GameObject _cat;
     [SerializeField] float distanseAttack;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private AudioSource _audioOpenSource;
-    
     private enum MovementState { close, opened, empty};
     private MovementState _stateChest;
-    private Animator _animator;
-    private PolygonCollider2D[] _poly;
-    private bool isOpened = false;
-    private bool haveMoney = true;
+    public Animator _animator;
+    public PolygonCollider2D[] _poly;
+    public bool isOpened = false;
+    public bool haveMoney = true;
     private CatSprite _catSprite;
-    
+    private ChestData _data;
+    private bool isStart = true;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
         _poly = GetComponents<PolygonCollider2D>();
+        _catSprite = _cat.GetComponent<CatSprite>();
         _poly[1].enabled = true;
         _poly[0].enabled = false;
-        _catSprite = _cat.GetComponent<CatSprite>();
+        _animator.SetInteger("state", 0);
+        if (!ChestData.start.Contains(gameObject.name))
+        {
+            ChestData.start.Add(gameObject.name);
+            Save();
+        }
     }
 
     void Update()
     {
-        bool isEmpty = _animator.GetCurrentAnimatorStateInfo(0).IsName("empty");
+        var isEmpty = _animator.GetCurrentAnimatorStateInfo(0).IsName("empty");
         if (!isEmpty)
         {
             var catTouch = Physics2D.OverlapCircleAll(transform.position, distanseAttack, catLayer);
-            bool isOpenedAnim = _animator.GetCurrentAnimatorStateInfo(0).IsName("opened");
-            if (!(catTouch.Length > 0 && isOpenedAnim))
+            if (isOpened)
             {
-                if (isOpened)
+                _animator.SetInteger("state", 1);
+                if (catTouch.Length > 0)
                 {
-                    _stateChest = MovementState.opened;
-                    _audioOpenSource.Play();
-                    isOpened = false;
-                    _poly[0].enabled = true;
-                    _poly[1].enabled = false;
+                    _catSprite.money += MONEY_REWARD;
+                    _animator.SetInteger("state", 2);
                 }
+                _poly[0].enabled = true;
+                _poly[1].enabled = false;
+            }
+        }
 
-                _animator.SetInteger("state", (int)_stateChest);
-            }
-            else if (haveMoney)
-            {
-                haveMoney = false;
-                _stateChest = MovementState.empty;
-                _animator.SetInteger("state", (int)_stateChest);
-                _catSprite.money += MONEY_REWARD;
-            }
+        if (isStart)
+        {
+            Load();
+            isStart = false;
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage) => isOpened = true;
+
+    public void Save()
     {
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("empty"))
-        {
-            _stateChest = MovementState.opened;
-            isOpened = true;
-        }
+        SavingSystem<Chest,ChestData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        _data = SavingSystem<Chest, ChestData>.Load($"{gameObject.name}.data");
+        isOpened = _data.isOpened;
+        _animator.SetInteger("state", _data.animatorState);
     }
 }

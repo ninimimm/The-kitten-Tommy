@@ -10,8 +10,10 @@ public class GoToFirstLevel : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private LayerMask balloonLayer;
     [SerializeField] private Scorpio[] scorpios;
+    [SerializeField] private Chest chest;
     public static List<GameObject> coins = new ();
     public static List<GameObject> crates = new ();
+    public static int countCoins;
     private CatSprite _catSprite;
     
     void Start()
@@ -43,5 +45,6 @@ public class GoToFirstLevel : MonoBehaviour
             crate.GetComponent<Crate>().Save();
         foreach (var scorpio in scorpios)
             scorpio.Save();
+        chest.Save();
     }
 }

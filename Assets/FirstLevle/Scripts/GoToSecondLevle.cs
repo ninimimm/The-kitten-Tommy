@@ -16,6 +16,8 @@ public class GoToSecondLevle : MonoBehaviour
     [SerializeField] private Hawk _hawk;
     [SerializeField] private BirdStay _birdStay;
     [SerializeField] private EatingBird[] eatingBirds;
+    [SerializeField] private Chest chest;
+    public static int countCoins;
     public static List<GameObject> coins = new ();
     public static List<GameObject> crates = new ();
     private CatSprite _catSprite;
@@ -60,5 +62,6 @@ public class GoToSecondLevle : MonoBehaviour
         _birdStay.Save();
         foreach (var eatingBird in eatingBirds)
             eatingBird.GetComponent<EatingBird>().Save();
+        chest.Save();
     }
 }

@@ -72,7 +72,6 @@ public class ComponentSnake : MonoBehaviour, IDamageable
         poly.enabled = data.polyEnabled;
         cap.enabled = data.capEnabled;
         _animator.SetInteger("state",data.animatorState);
-        Debug.Log($"Load{data.animatorState}");
     }
 
     void Update()

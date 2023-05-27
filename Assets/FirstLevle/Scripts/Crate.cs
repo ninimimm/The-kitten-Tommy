@@ -52,6 +52,17 @@ public class Crate : MonoBehaviour, IDamageable
         if (transform.position.y < -0.3 && getHit && _spriteRenderer.enabled)
         {
             coinInstance = Instantiate(coinPrefab, gameObject.transform.position, Quaternion.identity);
+            if (SceneManager.GetActiveScene().name == "FirstLevle")
+            {
+                coinInstance.name += GoToSecondLevle.countCoins.ToString();
+                GoToSecondLevle.countCoins++;
+            }
+            else
+            {
+                coinInstance.name += GoToFirstLevel.countCoins.ToString();
+                GoToSecondLevle.countCoins++;
+            }
+            
             var coinComponent = coinInstance.GetComponent<Coin>();
             if (coinComponent != null)
             {
