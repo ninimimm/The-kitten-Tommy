@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +22,6 @@ public class TextInTable : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1))
             broke = true;
         if (broke)
-            text.text = "Кажется, это место давно заброшено\n41523...";
+            text.text = "Кажется, это место давно заброшено\n4 1 5 2 3 ...";
     }
 }

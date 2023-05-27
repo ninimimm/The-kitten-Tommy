@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -75,7 +73,6 @@ public class TakeKey : MonoBehaviour
         else data.ironIsNull = true;
         isOpenedGoldChest = data.isOpenedGoldChest;
         isOpenedIronChest = data.isOpenedIronChest;
-        Debug.Log("Load"+data.animatorIronChestState);
     }
 
     void Update()

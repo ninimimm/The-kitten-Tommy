@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
-using UnityEngine;
-
 [Serializable]
 
 public class ChestData : IInitializable<Chest>

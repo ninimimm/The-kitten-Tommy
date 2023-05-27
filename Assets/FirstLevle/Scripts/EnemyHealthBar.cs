@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Google.Protobuf.WellKnownTypes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EnemyHealthBar : MonoBehaviour
 {

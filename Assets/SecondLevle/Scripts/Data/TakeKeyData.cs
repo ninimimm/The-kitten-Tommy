@@ -46,6 +46,5 @@ public class TakeKeyData : IInitializable<TakeKey>
         }
         isOpenedGoldChest = key.isOpenedGoldChest;
         isOpenedIronChest = key.isOpenedIronChest;
-        Debug.Log("save");
     } 
 }
