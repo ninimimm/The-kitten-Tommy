@@ -13,6 +13,8 @@ public class GoToFirstLevel : MonoBehaviour
     [SerializeField] private Chest chest;
     [SerializeField] private Line grabbingHook;
     [SerializeField] private TakeKey takeKey;
+    [SerializeField] private ManageButtons manageButtons;
+    [SerializeField] private Door[] doors;
     public static List<Coin> coins = new ();
     public static List<Crate> crates = new ();
     public static int countCoins;
@@ -51,5 +53,8 @@ public class GoToFirstLevel : MonoBehaviour
         chest.Save();
         grabbingHook.Save();
         takeKey.Save();
+        manageButtons.Save();
+        foreach (var door in doors)
+            door.Save();
     }
 }

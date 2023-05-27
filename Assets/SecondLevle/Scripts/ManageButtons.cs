@@ -6,13 +6,23 @@ using UnityEngine;
 
 public class ManageButtons : MonoBehaviour
 {
-    [SerializeField] private GameObject door;
+    [SerializeField] public GameObject door;
     public StringBuilder keys = new ();
     public GameObject[] buttons;
     [SerializeField] private float timeToWait;
     public float timer;
+    private ManageButtonsData _data;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        if (!ManageButtonsData.Start.Contains(gameObject.name))
+        {
+            ManageButtonsData.Start.Add(gameObject.name);
+            Save();
+        }
+        Load();
+    }
+
     void Update()
     {
         if (keys.Length == 5)
@@ -34,5 +44,18 @@ public class ManageButtons : MonoBehaviour
             keys = new StringBuilder("");
         }
         timer -= Time.deltaTime;
+    }
+    
+    public void Save()
+    {
+        SavingSystem<ManageButtons,ManageButtonsData>.Save(this, $"{gameObject.name}.data");
+    }
+
+
+    public void Load()
+    {
+        _data = SavingSystem<ManageButtons, ManageButtonsData>.Load($"{gameObject.name}.data");
+        door.GetComponent<Animator>().SetBool("opened",_data.animatorState);
+        door.GetComponent<BoxCollider2D>().enabled = _data.colliderState;
     }
 }
