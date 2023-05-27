@@ -37,10 +37,10 @@ public class GrabbingHook : MonoBehaviour
     {
         if (_joint2D.distance > 3f)
         {
-            _joint2D.distance -= stopping;
+            _joint2D.distance -= stopping; 
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             target = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             target.z = 0;
@@ -58,7 +58,7 @@ public class GrabbingHook : MonoBehaviour
                 line.SetPosition(1,_raycast.point + new Vector2(distanseIn,distanseIn));
             }
         }
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKey(KeyCode.Mouse1))
         {
             if (isHooked && 
                 Vector3.Distance(line.GetPosition(1), line.GetPosition(0) + new Vector3(-0.1f, 0.1f, 0)) - 
@@ -75,7 +75,7 @@ public class GrabbingHook : MonoBehaviour
             }
         }
 
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             isHooked = false;
             _joint2D.enabled = false;
