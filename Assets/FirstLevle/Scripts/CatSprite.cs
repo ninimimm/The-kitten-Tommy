@@ -101,19 +101,22 @@ public class CatSprite : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         _audioListener = GetComponent<AudioListener>();
         _audioListener.enabled = true;
-        if (!CatData.start.Contains(gameObject.name))
+        if (SceneManager.GetActiveScene().name != "Training")
         {
-            HP = maxHP;
+            if (!CatData.start.Contains(gameObject.name))
+            {
+                HP = maxHP;
+                _healthBar.SetMaxHealth(maxHP);
+                countHealth = maxCountHealth;
+                _textHealth.text = maxCountHealth.ToString();
+                Save();
+                CatData.start.Add(gameObject.name);
+            }
+            Load();
             _healthBar.SetMaxHealth(maxHP);
-            countHealth = maxCountHealth;
-            _textHealth.text = maxCountHealth.ToString();
-            Save();
-            CatData.start.Add(gameObject.name);
+            _healthBar.SetHealth(HP);   
+            _textHealth.text = countHealth.ToString();
         }
-        Load();
-        _healthBar.SetMaxHealth(maxHP);
-        _healthBar.SetHealth(HP);   
-        _textHealth.text = countHealth.ToString();
         #if UNITY_ANDROID
         shitButton.gameObject.SetActive(true);
         hitButton.gameObject.SetActive(true);
@@ -158,8 +161,11 @@ public class CatSprite : MonoBehaviour
     {
         foreach (var light in lights)
         {
-            if (Vector3.Distance(light.transform.position,transform.position) < 5)
+            if (Vector3.Distance(light.transform.position, transform.position) < 7)
+            {
                 light.enabled = true;
+                light.intensity = (7-Vector3.Distance(light.transform.position, transform.position)) / 7;
+            }
             else
                 light.enabled = false;
         }
@@ -387,6 +393,9 @@ public class CatSprite : MonoBehaviour
         damageNow = true;
         if (HP <= 0)
         {
+            GetComponent<GrabbingHook>().line.enabled = false;
+            GetComponent<GrabbingHook>().isHooked = false;
+            GetComponent<GrabbingHook>()._joint2D.enabled = false;
             if (countHealth <= 1)
             {
                 countHealth = maxCountHealth;

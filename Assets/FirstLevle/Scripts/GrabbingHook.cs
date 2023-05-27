@@ -12,7 +12,7 @@ public class GrabbingHook : MonoBehaviour
     public bool isHooked;
     public LineRenderer line;
     public LayerMask mask;
-    private DistanceJoint2D _joint2D;
+    public DistanceJoint2D _joint2D;
 
     private Vector3 target;
 
