@@ -93,7 +93,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("death"))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("death") && data.animatorState != 3)
         {
             attackTimer -= Time.deltaTime;
             spawnTimer -= Time.deltaTime;

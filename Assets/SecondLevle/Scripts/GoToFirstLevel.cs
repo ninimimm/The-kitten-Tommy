@@ -12,6 +12,7 @@ public class GoToFirstLevel : MonoBehaviour
     [SerializeField] private Scorpio[] scorpios;
     [SerializeField] private Chest chest;
     [SerializeField] private Line grabbingHook;
+    [SerializeField] private TakeKey takeKey;
     public static List<Coin> coins = new ();
     public static List<Crate> crates = new ();
     public static int countCoins;
@@ -49,5 +50,6 @@ public class GoToFirstLevel : MonoBehaviour
             scorpio.Save();
         chest.Save();
         grabbingHook.Save();
+        takeKey.Save();
     }
 }

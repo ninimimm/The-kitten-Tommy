@@ -19,6 +19,7 @@ public class GoToSecondLevle : MonoBehaviour
     [SerializeField] private Chest chest;
     [SerializeField] private Hyena hyena;
     [SerializeField] private Line grabbingHook;
+    [SerializeField] private TakeKey takeKey;
     public static SandBoss boss;
     public static int countCoins;
     public static List<Coin> coins = new ();
@@ -69,5 +70,6 @@ public class GoToSecondLevle : MonoBehaviour
         foreach (var mummy in mummies)
             mummy.GetComponent<Mummy>().Save();
         grabbingHook.Save();
+        takeKey.Save();
     }
 }

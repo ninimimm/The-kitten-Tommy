@@ -11,19 +11,21 @@ public class TakeKey : MonoBehaviour
     [SerializeField] public Image ironKeyImage;
     [SerializeField] private GameObject goldKeyPrefab;
     [SerializeField] private GameObject ironKeyPrefab;
-    [SerializeField] private GameObject goldChest;
-    [SerializeField] private GameObject ironChest;
+    [SerializeField] public GameObject goldChest;
+    [SerializeField] public GameObject ironChest;
     
-    private Animator _animatorGoldChest;
-    private Animator _animatorIronChest;
-    private GameObject _goldKey;
-    private GameObject _ironKey;
+    public Animator _animatorGoldChest;
+    public Animator _animatorIronChest;
+    public GameObject _goldKey;
+    public GameObject _ironKey;
     
     private CatSprite _catSprite;
     
     private Transform _catTransform;
-    private bool isOpenedGoldChest;
-    private bool isOpenedIronChest;
+    public bool isOpenedGoldChest;
+    public bool isOpenedIronChest;
+    private TakeKeyData data;
+    private bool isStart = true;
     void Start()
     {
         _catTransform = cat.GetComponent<Transform>();
@@ -32,6 +34,48 @@ public class TakeKey : MonoBehaviour
         _catSprite = cat.GetComponent<CatSprite>();
         goldKeyImage.enabled = false;
         ironKeyImage.enabled = false;
+        if (!TakeKeyData.start.Contains(gameObject.name))
+        {
+            Save();
+            TakeKeyData.start.Add(gameObject.name);
+        }
+        Load();
+    }
+    
+    public void Save()
+    {
+        SavingSystem<TakeKey,TakeKeyData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<TakeKey, TakeKeyData>.Load($"{gameObject.name}.data");
+        goldKeyImage.enabled = data.goldKeyImageEnabled;
+        ironKeyImage.enabled = data.ironKeyImageEnabled;
+        _animatorGoldChest.SetInteger("state",data.animatorGoldChestState);
+        _animatorIronChest.SetInteger("state",data.animatorIronChestState);
+        if (_goldKey != null)
+        {
+            _goldKey.transform.position = new Vector3(
+                data.positionGoldKey[0],
+                data.positionGoldKey[1],
+                data.positionGoldKey[2]);
+            data.goldIsNull = false;
+        }
+        else data.goldIsNull = true;
+
+        if (_ironKey != null)
+        {
+            _ironKey.transform.position = new Vector3(
+                data.positionIronKey[0],
+                data.positionIronKey[1],
+                data.positionIronKey[2]);
+            data.ironIsNull = false;
+        }
+        else data.ironIsNull = true;
+        isOpenedGoldChest = data.isOpenedGoldChest;
+        isOpenedIronChest = data.isOpenedIronChest;
+        Debug.Log("Load"+data.animatorIronChestState);
     }
 
     void Update()
