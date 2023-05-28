@@ -29,6 +29,9 @@ public class SandBoss : MonoBehaviour, IDamageable
     private Vector3 delta;
     public Animator animator;
     public bool alive = true;
+    public AudioSource _audioSourceBossHurt;
+    public AudioSource _audioSourceMummyHurt;
+    public AudioSource _audioSourceMummyAttack;
     private CatSprite _catSprite;
     private BossData data;
     private bool isStart = true;
@@ -178,10 +181,15 @@ public class SandBoss : MonoBehaviour, IDamageable
         MummySrcipt.__bar = _bar;
         MummySrcipt.boss = gameObject;
         GoToSecondLevle.mummies.Add(Mummy);
+        var mummy = Mummy.GetComponent<Mummy>();
+        mummy._audioSourceMummyAttack = _audioSourceMummyAttack;
+        mummy._audioSourceMummyHurt = _audioSourceMummyHurt;
     }
     
     public void TakeDamage(float damage)
     {
+        if (!_audioSourceBossHurt.isPlaying)
+            _audioSourceBossHurt.Play();
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;

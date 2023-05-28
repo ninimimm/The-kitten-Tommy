@@ -7,6 +7,7 @@ public class Chest : MonoBehaviour, IDamageable
     [SerializeField] float distanseAttack;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private AudioSource _audioOpenSource;
+    [SerializeField] private AudioSource _audioMoneySource;
     private enum MovementState { close, opened, empty};
     private MovementState _stateChest;
     public Animator _animator;
@@ -40,9 +41,11 @@ public class Chest : MonoBehaviour, IDamageable
             var catTouch = Physics2D.OverlapCircleAll(transform.position, distanseAttack, catLayer);
             if (isOpened)
             {
+                _audioOpenSource.Play();
                 _animator.SetInteger("state", 1);
                 if (catTouch.Length > 0)
                 {
+                    _audioMoneySource.Play();
                     _catSprite.money += MONEY_REWARD;
                     _animator.SetInteger("state", 2);
                 }

@@ -14,6 +14,7 @@ public class Hawk : MonoBehaviour, IDamageable
     [SerializeField] private GameObject Cat;
     [SerializeField] private float maxHP;
     [SerializeField] public float HP;
+    [SerializeField] private AudioClip damageClip;
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
@@ -27,6 +28,7 @@ public class Hawk : MonoBehaviour, IDamageable
     private CatSprite _catSprite;
     public Animator _animator;
     private Vector3 catPosition;
+    private AudioSource _audioSource;
     private HawkData data;
     private bool isStart = true;
 
@@ -48,6 +50,7 @@ public class Hawk : MonoBehaviour, IDamageable
         Load();
         _healthBar.SetMaxHealth(maxHP);
         _healthBar.SetHealth(HP);
+        _audioSource = GetComponent<AudioSource>();
     }
     
     public void Save()
@@ -158,6 +161,8 @@ public class Hawk : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
+        if (!_audioSource.isPlaying)
+            _audioSource.PlayOneShot(damageClip);
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;

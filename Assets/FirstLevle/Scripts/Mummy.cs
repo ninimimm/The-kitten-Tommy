@@ -30,6 +30,8 @@ public class Mummy : MonoBehaviour, IDamageable
     private Rigidbody2D _rb;
     private Vector3 delta;
     public Animator animator;
+    public AudioSource _audioSourceMummyHurt;
+    public AudioSource _audioSourceMummyAttack;
     private bool isStart = true;
     private MummyData data;
 
@@ -172,7 +174,12 @@ public class Mummy : MonoBehaviour, IDamageable
         {
             var hitCat = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
             if (hitCat.Length > 0)
+            {
                 stateMommy = MovementState.attake;
+                if (!_audioSourceMummyAttack.isPlaying)
+                    _audioSourceMummyAttack.Play();
+            }
+
             foreach (var cat in hitCat)
                 cat.GetComponent<CatSprite>().TakeDamage(damage);
         }
@@ -180,6 +187,8 @@ public class Mummy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (!_audioSourceMummyHurt.isPlaying)
+            _audioSourceMummyHurt.Play();
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;

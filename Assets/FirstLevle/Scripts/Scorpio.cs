@@ -16,6 +16,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     [SerializeField] private float damage; 
     [SerializeField] private float attackRange; 
     [SerializeField] private LayerMask catLayer;
+    [SerializeField] private AudioClip damageClip;
     [SerializeField] private Transform attackCircle;
     [SerializeField] private float idleTime;
     [SerializeField] private HealthBar _healthBar;
@@ -151,6 +152,8 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("ScorpioHurt"))
+            audioSource.PlayOneShot(damageClip);
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;

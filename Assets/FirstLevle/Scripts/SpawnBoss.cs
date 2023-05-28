@@ -13,6 +13,9 @@ public class SpawnBoss : MonoBehaviour
     [SerializeField] private float valueBoss;
     [SerializeField] private float valueMummy;
     [SerializeField] private AudioSource _audioBall;
+    [SerializeField] private AudioSource _audioSourceBossHurt;
+    [SerializeField] private AudioSource _audioSourceMummyHurt;
+    [SerializeField] private AudioSource _audioSourceMummyAttack;
 
     private Animator snakeAnim;
     private bool canSpawn = true;
@@ -49,6 +52,9 @@ public class SpawnBoss : MonoBehaviour
         sandBoss._canvasMummy = canvasMummy;
         sandBoss._valueMummy = valueMummy;
         sandBoss._audioBall = _audioBall;
+        sandBoss._audioSourceBossHurt = _audioSourceBossHurt;
+        sandBoss._audioSourceMummyAttack = _audioSourceMummyAttack;
+        sandBoss._audioSourceMummyHurt = _audioSourceMummyHurt;
 
         healthBar.GetComponent<EnemyHealthBar>()._target = boss.transform;
         healthBar.GetComponent<EnemyHealthBar>()._value = valueBoss;
