@@ -13,7 +13,7 @@ public class CatSprite : MonoBehaviour
     private bool rotation = true;
     public Animator _animator;
 
-    public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage, shit };
+    public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage, shit, death, revival };
     
     public float HP;
     [SerializeField] public float maxHP;
@@ -42,6 +42,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] public Light2D[] lights;
     [SerializeField] private Knife knife;
     [SerializeField] private Vector3 spawn;
+    [SerializeField] private Vector3 spawnRevile;
     [SerializeField] private float distanseLight;
     [SerializeField] private Sprite knifeSprite;
     [SerializeField] private logicKnife _logicKnife;
@@ -69,6 +70,8 @@ public class CatSprite : MonoBehaviour
     private Collider2D[] hitEnemies;
     private float moveInWater;
     private AnimatorStateInfo stateInfo;
+    private bool isDeath;
+    private bool isRevive;
     [Range(0, 1f)] public float volumeRun;
     [Range(0, 1f)] public float volumeJump;
     [Range(0, 1f)] public float volumeDamage;
@@ -241,49 +244,60 @@ public class CatSprite : MonoBehaviour
 
     private void SwitchAnimation()
     {
-        if (Input.GetKeyDown(KeyCode.CapsLock) && !_grabbingHook.isHooked && 
-            stateInfo.IsName("Stay"))
+        if (!isDeath && !isRevive)
         {
-            _stateCat = MovementState.shit;
-            _animator.SetInteger("State", (int)_stateCat);
-        }
-        else
-        {
-            if (move > 0)
+            if (Input.GetKeyDown(KeyCode.CapsLock) && !_grabbingHook.isHooked && 
+                stateInfo.IsName("Stay"))
             {
-                _stateCat = MovementState.Run;
-                if (rotation)
-                {
-                    transform.Rotate(0f,180f,0f);
-                    rotation = false;
-                }
-            }
-            else if (move < 0)
-            {
-                _stateCat = MovementState.Run;
-                if (!rotation)
-                {
-                    transform.Rotate(0f,180f,0f);
-                    rotation = true;
-                }
+                _stateCat = MovementState.shit;
+                _animator.SetInteger("State", (int)_stateCat);
             }
             else
-                _stateCat = MovementState.Stay;
-
-            if (_rb.velocity.y > 1f) _stateCat = MovementState.jumpup;
-            else if (_rb.velocity.y < - 1f) _stateCat = MovementState.jumpdown;
-        
-            if (Input.GetKeyDown(KeyCode.Q))
-                Attake();
-
-            if (damageNow)
             {
-                _stateCat = MovementState.damage;
-                damageNow = false;
+                if (move > 0)
+                {
+                    _stateCat = MovementState.Run;
+                    if (rotation)
+                    {
+                        transform.Rotate(0f,180f,0f);
+                        rotation = false;
+                    }
+                }
+                else if (move < 0)
+                {
+                    _stateCat = MovementState.Run;
+                    if (!rotation)
+                    {
+                        transform.Rotate(0f,180f,0f);
+                        rotation = true;
+                    }
+                }
+                else
+                    _stateCat = MovementState.Stay;
+
+                if (_rb.velocity.y > 1f) _stateCat = MovementState.jumpup;
+                else if (_rb.velocity.y < - 1f) _stateCat = MovementState.jumpdown;
+        
+                if (Input.GetKeyDown(KeyCode.Q))
+                    Attake();
+
+                if (damageNow)
+                {
+                    _stateCat = MovementState.damage;
+                    damageNow = false;
+                }
+                _animator.SetInteger("State", (int)_stateCat);
             }
-            _animator.SetInteger("State", (int)_stateCat);
+        }
+        else if (isDeath)
+        {
+            _stateCat = MovementState.death;
+            _animator.SetInteger("State", (int)MovementState.death);
         }
     }
+
+    public void Revive() => transform.position = spawnRevile;
+    public void ReloadScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     void Attake()
     {
@@ -300,8 +314,6 @@ public class CatSprite : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (smallAttack.position == null)
-            return;
         Gizmos.DrawWireSphere(smallAttack.position,distanseSmallAttack);
         Gizmos.DrawWireSphere(groundCheck.position,groundCheckRadius);
     }
@@ -311,18 +323,14 @@ public class CatSprite : MonoBehaviour
         damageSourse.Play();
         HP -= damage;
         _healthBar.SetHealth(HP);
-        damageNow = true;
+        
         if (HP <= 0)
         {
             _grabbingHook.line.enabled = false;
             _grabbingHook.isHooked = false;
             _grabbingHook._joint2D.enabled = false;
             if (countHealth <= 1)
-            {
-                countHealth = maxCountHealth;
-                transform.position = new Vector3(1,0,0);
-                SceneManager.LoadScene("FirstLevle");
-            }
+                isDeath = true;
             else
             {
                 countHealth -= 1;
@@ -332,5 +340,6 @@ public class CatSprite : MonoBehaviour
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
         }
+        else damageNow = true;
     }
 }
