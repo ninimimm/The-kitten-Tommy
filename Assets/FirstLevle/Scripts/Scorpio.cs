@@ -26,6 +26,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     [SerializeField] private float distanseRunSourse;
     [SerializeField] private Transform catTransform;
     [SerializeField] private CatSprite _catSprite;
+    [SerializeField] private float damageVolume;
     private AudioSource audioSource;
     private float idleTimer;
     private bool damageNow;
@@ -85,8 +86,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     private void Update()
     {
         _stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        audioSource.volume = Math.Abs(catTransform.position.x-transform.position.x) < distanseRunSourse ?
-            Math.Abs(catTransform.position.x-transform.position.x)/distanseRunSourse + 0.2f : 0;
+        audioSource.volume = damageVolume;
         if (!_stateInfo.IsName("ScorpioDeath"))
         {
             TryMove();

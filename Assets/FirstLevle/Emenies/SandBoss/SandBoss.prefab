@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1301735017
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 3
   m_Sprite: {fileID: -997431176, guid: b2eb5f6b8ae650c4da279f670d7b22f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -210,13 +210,21 @@ MonoBehaviour:
   damage: 2
   maxHP: 50
   HP: 0
+  damageVolume: 0
+  _audioBall: {fileID: 0}
   _valueMummy: 0
   _canvasMummy: {fileID: 0}
   fill: {fileID: 0}
   bar: {fileID: 0}
   _healthBar: {fileID: 0}
+  pol: {fileID: 0}
+  cap: {fileID: 0}
   stateBoss: 0
+  animator: {fileID: 0}
   alive: 1
+  _audioSourceBossHurt: {fileID: 0}
+  _audioSourceMummyHurt: {fileID: 0}
+  _audioSourceMummyAttack: {fileID: 0}
   ballPrefab: {fileID: 5745300302654022367, guid: da2e20d3b1b8c3f43b1ed24de2d6e33a, type: 3}
   MummyPrefab: {fileID: 2737841178826078145, guid: cf47c0075c843454c95f92367b25e42c, type: 3}
   attackInterval: 1

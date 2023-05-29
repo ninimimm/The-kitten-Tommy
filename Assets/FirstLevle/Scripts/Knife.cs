@@ -18,6 +18,7 @@ public class Knife : MonoBehaviour
     
     private void Start()
     {
+        
         mainCamera = Camera.main;
         if (!KnifeData.start.Contains(gameObject.name))
         {

@@ -18,6 +18,7 @@ public class Hawk : MonoBehaviour, IDamageable
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
+    [SerializeField] private float damageVolume;
     public float distanseAttack = 0.2f;
     public Transform attack;
     public LayerMask catLayer;
@@ -36,6 +37,8 @@ public class Hawk : MonoBehaviour, IDamageable
 
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.volume = damageVolume;
         _catSprite = Cat.GetComponent<CatSprite>();
         HP = maxHP;
         _healthBar.SetMaxHealth(maxHP);

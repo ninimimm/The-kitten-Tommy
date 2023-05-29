@@ -13,6 +13,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     [SerializeField] private float damage;
     [SerializeField] private float maxHP;
     [SerializeField] public float HP;
+    [SerializeField] private float damageVolume;
     public AudioSource _audioBall;
     public float _valueMummy;
     public Canvas _canvasMummy;
