@@ -44,6 +44,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private Vector3 spawn;
     [SerializeField] private float distanseLight;
     [SerializeField] private Sprite knifeSprite;
+    [SerializeField] private logicKnife _logicKnife;
     
     public bool isWater;
     public int countHealth;
@@ -110,6 +111,7 @@ public class CatSprite : MonoBehaviour
     private void Start()
     {
         knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
+        _logicKnife.damage = 3;
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         transform.Rotate(0f,180f,0f);

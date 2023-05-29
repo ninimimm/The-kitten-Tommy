@@ -134,7 +134,7 @@ public class TakeKey : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            if (_goldKey is not null && Vector3.Distance(_catSprite.transform.position, _goldKey.transform.position) < 2)
+            if (_goldKey != null && Vector3.Distance(_catSprite.transform.position, _goldKey.transform.position) < 2)
             {
                 Destroy(_goldKey);
                 if (_catSprite.key == "iron")

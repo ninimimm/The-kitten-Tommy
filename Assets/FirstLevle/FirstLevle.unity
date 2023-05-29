@@ -24617,6 +24617,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1942267104}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: _logicKnife
+      value: 
+      objectReference: {fileID: -3831758798518872617, guid: f5f8febf75e32ed478ec53aa6a7673aa, type: 3}
+    - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: _textHealth
       value: 
       objectReference: {fileID: 783574704}
