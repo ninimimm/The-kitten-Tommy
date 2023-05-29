@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GoToSecondLevle : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private GameObject _cat;
+    [SerializeField] private CatSprite _cat;
     [SerializeField] private Vector3 movingVector;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask balloonLayer;
@@ -25,7 +25,7 @@ public class GoToSecondLevle : MonoBehaviour
     public static int countCoins;
     public static List<Coin> coins = new ();
     public static List<Crate> crates = new ();
-    public static List<GameObject> mummies = new();
+    public static List<Mummy> mummies = new();
     private CatSprite _catSprite;
 
     void Start()
@@ -36,11 +36,11 @@ public class GoToSecondLevle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics2D.OverlapCircleAll(_catSprite.groundCheck.position, _catSprite.groundCheckRadius, balloonLayer).Length > 0
-            && _catSprite.isBossDead)
+        if (_catSprite.isBossDead && 
+            Physics2D.OverlapCircle(_catSprite.groundCheck.position, _catSprite.groundCheckRadius, balloonLayer))
         {
-            transform.position += movingVector * speed * Time.deltaTime;
-            _cat.transform.position += movingVector * speed * Time.deltaTime;
+            transform.position += speed * Time.deltaTime * movingVector ;
+            _cat.transform.position += speed * Time.deltaTime * movingVector ;
         }
 
         if (transform.position.y > 5)
@@ -53,23 +53,23 @@ public class GoToSecondLevle : MonoBehaviour
     private void Save()
     {
         foreach (var coin in coins)
-            if (coin != null) coin.GetComponent<Coin>().Save();
-        _cat.GetComponent<CatSprite>().Save();
+            if (coin is not null) coin.Save();
+        _cat.Save();
         foreach (var crate in crates)
-            if (crate != null) crate.GetComponent<Crate>().Save();
+            if (crate is not null) crate.Save();
         snake.Save();
-        _birdIdle.GetComponent<BirdIdle>().Save();
+        _birdIdle.Save();
         foreach (var scorpio in scorpios)
             scorpio.Save();
         _hawk.Save();
         _birdStay.Save();
         foreach (var eatingBird in eatingBirds)
-            eatingBird.GetComponent<EatingBird>().Save();
+            eatingBird.Save();
         chest.Save();
         hyena.Save();
         boss.Save();
         foreach (var mummy in mummies)
-            if (mummy != null) mummy.GetComponent<Mummy>().Save();
+            if (mummy is not null) mummy.Save();
         grabbingHook.Save();
         takeKey.Save();
         knife.Save();

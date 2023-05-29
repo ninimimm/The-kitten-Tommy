@@ -23,7 +23,8 @@ public class TakeKey : MonoBehaviour
     public bool isOpenedGoldChest;
     public bool isOpenedIronChest;
     private TakeKeyData data;
-    private bool isStart = true;
+    private AnimatorStateInfo goldCheStateInfo;
+    private AnimatorStateInfo ironCheStateInfo;
     void Start()
     {
         _catTransform = cat.GetComponent<Transform>();
@@ -77,17 +78,21 @@ public class TakeKey : MonoBehaviour
 
     void Update()
     {
-        if (!_animatorGoldChest.GetCurrentAnimatorStateInfo(0).IsName("emptygold") ||
-            !_animatorIronChest.GetCurrentAnimatorStateInfo(0).IsName("empty"))
+        goldCheStateInfo = _animatorGoldChest.GetCurrentAnimatorStateInfo(0);
+        ironCheStateInfo = _animatorIronChest.GetCurrentAnimatorStateInfo(0);
+        if (!goldCheStateInfo.IsName("emptygold") ||
+            !ironCheStateInfo.IsName("empty"))
         {
-            if (!_animatorGoldChest.GetCurrentAnimatorStateInfo(0).IsName("emptygold"))
+            if (!goldCheStateInfo.IsName("emptygold"))
             {
-                if (Math.Abs(goldChest.transform.position.x - _catTransform.position.x) < 0.5 && Input.GetKeyDown(KeyCode.E) && !isOpenedGoldChest)
+                if (Input.GetKeyDown(KeyCode.E) && !isOpenedGoldChest &&
+                    Math.Abs(goldChest.transform.position.x - _catTransform.position.x) < 0.5)
                 {
                     _animatorGoldChest.SetInteger("state", 1);
                     isOpenedGoldChest = true;
                 }
-                else if (Math.Abs(goldChest.transform.position.x - _catTransform.position.x) < 0.5 && Input.GetKeyDown(KeyCode.E) && isOpenedGoldChest)
+                else if (Input.GetKeyDown(KeyCode.E) && isOpenedGoldChest &&
+                         Math.Abs(goldChest.transform.position.x - _catTransform.position.x) < 0.5)
                 {
                     _animatorGoldChest.SetInteger("state", 2);
                     _catSprite.key = "gold";
@@ -102,14 +107,16 @@ public class TakeKey : MonoBehaviour
                 }
             }
             
-            if (!_animatorIronChest.GetCurrentAnimatorStateInfo(0).IsName("empty"))
+            if (!ironCheStateInfo.IsName("empty"))
             {
-                if (Math.Abs(ironChest.transform.position.x - _catTransform.position.x) < 0.5 && Input.GetKeyDown(KeyCode.E) && !isOpenedIronChest)
+                if (Input.GetKeyDown(KeyCode.E) && !isOpenedIronChest &&
+                    Math.Abs(ironChest.transform.position.x - _catTransform.position.x) < 0.5)
                 {
                     _animatorIronChest.SetInteger("state", 1);
                     isOpenedIronChest = true;
                 }
-                else if (Math.Abs(ironChest.transform.position.x - _catTransform.position.x) < 0.5 && Input.GetKeyDown(KeyCode.E) && isOpenedIronChest)
+                else if (Input.GetKeyDown(KeyCode.E) && isOpenedIronChest &&
+                         Math.Abs(ironChest.transform.position.x - _catTransform.position.x) < 0.5)
                 {
                     _animatorIronChest.SetInteger("state", 2);
                     _catSprite.key = "iron";
@@ -127,7 +134,7 @@ public class TakeKey : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            if (_goldKey != null && Vector3.Distance(_catSprite.transform.position, _goldKey.transform.position) < 2)
+            if (_goldKey is not null && Vector3.Distance(_catSprite.transform.position, _goldKey.transform.position) < 2)
             {
                 Destroy(_goldKey);
                 if (_catSprite.key == "iron")
@@ -142,7 +149,7 @@ public class TakeKey : MonoBehaviour
                 _catSprite.key = "gold";
 
             }
-            else if (_ironKey != null && Vector3.Distance(_catSprite.transform.position, _ironKey.transform.position) < 2)
+            else if (_ironKey is not null && Vector3.Distance(_catSprite.transform.position, _ironKey.transform.position) < 2)
             {
                 Destroy(_ironKey);
                 if (_catSprite.key == "gold")

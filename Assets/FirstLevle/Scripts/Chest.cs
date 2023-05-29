@@ -8,12 +8,9 @@ public class Chest : MonoBehaviour, IDamageable
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private AudioSource _audioOpenSource;
     [SerializeField] private AudioSource _audioMoneySource;
-    private enum MovementState { close, opened, empty};
-    private MovementState _stateChest;
     public Animator _animator;
     public PolygonCollider2D[] _poly;
-    public bool isOpened = false;
-    public bool haveMoney = true;
+    public bool isOpened;
     private CatSprite _catSprite;
     private ChestData _data;
     private bool isStart = true;
@@ -35,15 +32,13 @@ public class Chest : MonoBehaviour, IDamageable
 
     void Update()
     {
-        var isEmpty = _animator.GetCurrentAnimatorStateInfo(0).IsName("empty");
-        if (!isEmpty)
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("empty"))
         {
-            var catTouch = Physics2D.OverlapCircleAll(transform.position, distanseAttack, catLayer);
             if (isOpened)
             {
                 _audioOpenSource.Play();
                 _animator.SetInteger("state", 1);
-                if (catTouch.Length > 0)
+                if (Physics2D.OverlapCircle(transform.position, distanseAttack, catLayer))
                 {
                     _audioMoneySource.Play();
                     _catSprite.money += MONEY_REWARD;
@@ -53,7 +48,6 @@ public class Chest : MonoBehaviour, IDamageable
                 _poly[1].enabled = false;
             }
         }
-
         if (isStart)
         {
             Load();

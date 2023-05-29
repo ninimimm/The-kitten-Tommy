@@ -21,10 +21,9 @@ public class SandBoss : MonoBehaviour, IDamageable
     public HealthBar _healthBar;
     public PolygonCollider2D pol;
     public CapsuleCollider2D cap;
-    private bool damageNow = false;
+    private bool damageNow;
     public enum MovementState { stay, walk, attake, death, hurt};
     public MovementState stateBoss;
-    private Vector3 coordinates;
     private Rigidbody2D _rb;
     private Vector3 delta;
     public Animator animator;
@@ -43,6 +42,9 @@ public class SandBoss : MonoBehaviour, IDamageable
     private float attackTimer;
     private float spawnTimer;// таймер для атаки
     private int countMummy;
+    private Vector2 direction;
+    private Vector3 spawnPosition;
+    private Vector3 spawnPositionMummy;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +53,6 @@ public class SandBoss : MonoBehaviour, IDamageable
         spawnTimer = spawnInterval;
         HP = maxHP;
         _healthBar.SetMaxHealth(maxHP);
-        coordinates = transform.position;
         _rb = GetComponent<Rigidbody2D>();
         pol = GetComponent<PolygonCollider2D>();
         cap = GetComponent<CapsuleCollider2D>();
@@ -96,7 +97,7 @@ public class SandBoss : MonoBehaviour, IDamageable
         {
             attackTimer -= Time.deltaTime;
             spawnTimer -= Time.deltaTime;
-            Vector2 direction = new Vector2(0, 0);
+            direction = new Vector2(0, 0);
             if (Vector3.Distance(_cat.transform.position, transform.position) > distanceWalk && 
                 Vector3.Distance(_cat.transform.position, transform.position) < distanseStay)
             {
@@ -148,30 +149,32 @@ public class SandBoss : MonoBehaviour, IDamageable
 
     void Attack()
     {
-        Vector3 spawnPosition = transform.position;
+        spawnPosition = transform.position;
         spawnPosition.y += 5.0f;
-        spawnPosition.x = (_cat.transform.position.x<transform.position.x)?Random.Range(-distanseAttack+transform.position.x, transform.position.x-1):Random.Range(transform.position.x+1, transform.position.x+distanseAttack);
-        if (ballPrefab == null)
+        spawnPosition.x = _cat.transform.position.x<transform.position.x?
+            Random.Range(-distanseAttack+transform.position.x, transform.position.x-1):
+            Random.Range(transform.position.x+1, transform.position.x+distanseAttack);
+        if (ballPrefab is null)
             return;
-        GameObject ball = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
+        var ball = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
         ball.GetComponent<Ball>()._audioSource = _audioBall;
     }
     void Spawn()
     {
-        Vector3 spawnPosition = transform.position;
-        spawnPosition.x += (transform.position.x > _cat.transform.position.x) ? -1 : 1;
-        if (MummyPrefab == null)
+        spawnPositionMummy = transform.position;
+        spawnPositionMummy.x += (transform.position.x > _cat.transform.position.x) ? -1 : 1;
+        if (MummyPrefab is null)
             return;
-        GameObject Mummy = Instantiate(MummyPrefab, new Vector3(spawnPosition.x,spawnPosition.y-1,
-            spawnPosition.y), Quaternion.identity);
+        var Mummy = Instantiate(MummyPrefab, new Vector3(spawnPositionMummy.x,spawnPositionMummy.y-1,
+            spawnPositionMummy.y), Quaternion.identity);
         Mummy.name += countMummy.ToString();
         countMummy++;
         var MummySrcipt = Mummy.GetComponent<Mummy>();
         MummySrcipt._cat = _cat;
         MummySrcipt.Boss = gameObject;
-        var newCanvas = Instantiate(_canvasMummy,
-            new Vector3(spawnPosition.x, spawnPosition.y + _valueMummy, spawnPosition.z), Quaternion.identity);
-        var healthBar = newCanvas.GetComponentInChildren<HealthBar>();
+        var newCanvasMummy = Instantiate(_canvasMummy,
+            new Vector3(spawnPositionMummy.x, spawnPositionMummy.y + _valueMummy, spawnPositionMummy.z), Quaternion.identity);
+        var healthBar = newCanvasMummy.GetComponentInChildren<HealthBar>();
         var _fill = healthBar.GetComponentsInChildren<Image>()[0].GetComponent<Image>();
         var _bar = healthBar.GetComponentsInChildren<Image>()[1].GetComponent<Image>();
         healthBar.GetComponent<EnemyHealthBar>()._target = Mummy.transform;
@@ -180,10 +183,9 @@ public class SandBoss : MonoBehaviour, IDamageable
         MummySrcipt.__fill = _fill;
         MummySrcipt.__bar = _bar;
         MummySrcipt.boss = gameObject;
-        GoToSecondLevle.mummies.Add(Mummy);
-        var mummy = Mummy.GetComponent<Mummy>();
-        mummy._audioSourceMummyAttack = _audioSourceMummyAttack;
-        mummy._audioSourceMummyHurt = _audioSourceMummyHurt;
+        GoToSecondLevle.mummies.Add(MummySrcipt);
+        MummySrcipt._audioSourceMummyAttack = _audioSourceMummyAttack;
+        MummySrcipt._audioSourceMummyHurt = _audioSourceMummyHurt;
     }
     
     public void TakeDamage(float damage)
@@ -197,12 +199,8 @@ public class SandBoss : MonoBehaviour, IDamageable
     private void Flip(float horizontalDirection)
     {
         if (horizontalDirection > 0)
-        {
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
         else if (horizontalDirection < 0)
-        {
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
     }
 }

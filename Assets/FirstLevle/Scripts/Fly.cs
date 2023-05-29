@@ -41,8 +41,8 @@ public class Fly : MonoBehaviour
                 _spriteRenderer.flipX = false;
             }
 
-            if (goRight) transform.position += moveVector1 * speedFly1 * Time.deltaTime;
-            else transform.position -= moveVector1 * speedFly1 * Time.deltaTime;
+            if (goRight) transform.position += speedFly1 * Time.deltaTime * moveVector1 ;
+            else transform.position -= speedFly1 * Time.deltaTime * moveVector1 ;
 
             if (Vector3.Distance(_cat.position, transform.position) < scaryDistance)
             {

@@ -11,25 +11,13 @@ public class Snake : Agent
     [SerializeField] private float secondDistanceFromTarget = 2f;
     [SerializeField] private float thirdDistanceFromTarget = 3f;
     private Rigidbody2D _rb;
-    private Vector3 startPosition = new (1,0,0);
-    
+    private Vector3 vectorForce;
+    private float distance;
+
     public override void Initialize()
     {
         _rb = GetComponent<Rigidbody2D>();
         transform.rotation = Quaternion.Euler(0, 0, 0);
-        startPosition = transform.localPosition;
-        
-    }
-
-    public override void OnEpisodeBegin()
-    {
-        //var random = Random.Range(3, 9);
-        //var index = Random.Range(0, 2);
-        //transform.position = new Vector3(random,-0.5f,0);
-        //if (index == 0)
-        //    target.transform.position = new Vector3(Random.Range(1,random),-0.5f,0);
-        //else
-        //    target.transform.position = new Vector3(Random.Range(random,9),-0.5f,0);
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -44,12 +32,12 @@ public class Snake : Agent
     public override void OnActionReceived(ActionBuffers actions)
     {
         transform.LookAt(target.transform);
-        var vectorForce = new Vector3();
+        vectorForce = new Vector3();
         vectorForce.x = actions.ContinuousActions[0];
         vectorForce.y = actions.ContinuousActions[1];
         _rb.AddForce(vectorForce * speed);
         
-        var distance = Vector3.Distance(transform.localPosition, target.transform.localPosition);
+        distance = Vector3.Distance(transform.localPosition, target.transform.localPosition);
         if (distance < firstDistanceFromTarget)
         {
             SetReward(1.0f);

@@ -2721,6 +2721,10 @@ PrefabInstance:
       value: 0.333
       objectReference: {fileID: 0}
     - target: {fileID: 4472698094438656503, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
+      propertyPath: _joint2D
+      value: 
+      objectReference: {fileID: 133319762}
+    - target: {fileID: 4472698094438656503, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
       propertyPath: coldHook
       value: 
       objectReference: {fileID: 2100000, guid: e53a85a0b9d3695488d1bd27e461d980, type: 2}
@@ -2795,6 +2799,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4472698094438656501, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
+--- !u!232 &133319762 stripped
+DistanceJoint2D:
+  m_CorrespondingSourceObject: {fileID: 4472698094438656502, guid: e998ba68708bc664b8acad2988d8857d, type: 3}
+  m_PrefabInstance: {fileID: 133319761}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &170119741
 GameObject:
   m_ObjectHideFlags: 0
@@ -5713,7 +5722,7 @@ MonoBehaviour:
   startY: 1
   defaulResolution: {x: 1080, y: 1980}
   widthOrHeight: 0.4
-  _camera: {fileID: 0}
+  camera: {fileID: 0}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8128,7 +8137,6 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _poly: []
   isOpened: 0
-  haveMoney: 1
 --- !u!95 &737406432
 Animator:
   serializedVersion: 5
@@ -10731,6 +10739,7 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  _catSprite: {fileID: 18478}
   boxCollider: {fileID: 0}
   polygonCollider: {fileID: 0}
   animator: {fileID: 0}
@@ -14172,6 +14181,7 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  _catSprite: {fileID: 18478}
   boxCollider: {fileID: 0}
   polygonCollider: {fileID: 0}
   animator: {fileID: 0}
@@ -16512,7 +16522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37da7cff3ff84d04f87f517fb02c283b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cat: {fileID: 18447}
+  _cat: {fileID: 18478}
   movingVector: {x: 0, y: 5, z: 0}
   speed: 1
   balloonLayer:
@@ -18145,11 +18155,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 0
   maxHP: 10
-  target: {fileID: 18447}
   _healthBar: {fileID: 470206225}
   _fill: {fileID: 1067388842}
   _bar: {fileID: 2145895771}
   damageClip: {fileID: 8300000, guid: 9b49d646202ad454dac4bef6e2e0adf8, type: 3}
+  _catSprite: {fileID: 18478}
   _animator: {fileID: 0}
   attack: {fileID: 566849686}
   distanseAttack: 0.2
@@ -19712,6 +19722,7 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  _catSprite: {fileID: 18478}
   boxCollider: {fileID: 0}
   polygonCollider: {fileID: 0}
   animator: {fileID: 0}
@@ -20325,6 +20336,7 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  _catSprite: {fileID: 18478}
   boxCollider: {fileID: 0}
   polygonCollider: {fileID: 0}
   animator: {fileID: 0}
@@ -22587,6 +22599,7 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  _catSprite: {fileID: 18478}
   boxCollider: {fileID: 0}
   polygonCollider: {fileID: 0}
   animator: {fileID: 0}
@@ -25014,6 +25027,7 @@ MonoBehaviour:
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
   distanseRunSourse: 2
   catTransform: {fileID: 18456}
+  _catSprite: {fileID: 18478}
   boxCollider: {fileID: 0}
   polygonCollider: {fileID: 0}
   animator: {fileID: 0}

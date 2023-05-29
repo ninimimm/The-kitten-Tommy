@@ -6,6 +6,7 @@ public class logicKnife : MonoBehaviour
     [SerializeField] public float damage = 1;
     private Rigidbody2D _rb;
     private LogicKnifeData data;
+    private float angle;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class logicKnife : MonoBehaviour
     void FixedUpdate()
     {
         // Calculate the rotation angle based on the velocity
-        float angle = Mathf.Atan2(_rb.velocity.y, _rb.velocity.x) * Mathf.Rad2Deg;
+        angle = Mathf.Atan2(_rb.velocity.y, _rb.velocity.x) * Mathf.Rad2Deg;
 
         // Set the knife's rotation
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle+30));
@@ -43,11 +44,7 @@ public class logicKnife : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        var enemy = hitInfo.GetComponent<IDamageable>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(damage);
-        }
+        hitInfo.GetComponent<IDamageable>()?.TakeDamage(damage);
         Destroy(gameObject);
     }
 }

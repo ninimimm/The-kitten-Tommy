@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -11,28 +12,16 @@ public class CatSprite : MonoBehaviour
     public static MovementState _stateCat;
     private bool rotation = true;
     public Animator _animator;
-    public static Animation _Animation;
 
-    public enum MovementState
-    {
-        Stay,
-        Run,
-        jumpup,
-        jumpdown,
-        hit,
-        damage,
-        shit
-    };
-
-    private SpriteRenderer Cat;
+    public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage, shit };
+    
     public float HP;
-    public Joystick joystick;
     [SerializeField] public float maxHP;
     [SerializeField] public float speed = 4.0f;
     [SerializeField] public float jumpForce = 7f;
     [SerializeField] public HealthBar _healthBar;
     [SerializeField] public KnifeBar _knifeBar;
-    [SerializeField] private Text _textMoney;
+    [SerializeField] public Text _textMoney;
     [SerializeField] public Text _textHealth;
     [SerializeField] public Transform groundCheck;
     [SerializeField] public float groundCheckRadius;
@@ -41,8 +30,6 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private AudioSource runSourse;
     [SerializeField] private AudioSource jumpSourse;
     [SerializeField] private AudioSource damageSourse;
-    [SerializeField] private AudioClip audioFly;
-    [SerializeField] private AudioClip runClip;
     [SerializeField] private AudioSource fliesSourse;
     [SerializeField] private GameObject Fly1;
     [SerializeField] private int maxCountHealth;
@@ -54,12 +41,11 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private float normalGravity;
     [SerializeField] public Light2D[] lights;
     [SerializeField] private Knife knife;
-    public bool isWater;
     [SerializeField] private Vector3 spawn;
+    [SerializeField] private float distanseLight;
+    public bool isWater;
     public int countHealth;
-    private AudioSource audioSource;
     private float timerJump;
-    private PolygonCollider2D _poly;
     public Transform smallAttack;
     public float distanseSmallAttack = 0.2f;
     public LayerMask enemyLayers;
@@ -67,19 +53,24 @@ public class CatSprite : MonoBehaviour
     private float speedMultiplier = 1f;
     private bool damageNow;
     private AudioListener _audioListener;
-    [SerializeField] public Button shitButton;
-    [SerializeField] public Button hitButton;
     private bool pressedAttack;
     private bool pressedShit;
     public string key;
     public bool isBossDead;
+    private GrabbingHook _grabbingHook;
+    private string currentScene;
+    private bool isIce;
+    private bool isNowShit;
+    private bool isGround;
+    private bool isCheckpoint;
+    private Collider2D[] hitEnemies;
+    private float moveInWater;
+    private AnimatorStateInfo stateInfo;
     [Range(0, 1f)] public float volumeRun;
     [Range(0, 1f)] public float volumeJump;
     [Range(0, 1f)] public float volumeDamage;
-    [Range(0, 1f)] public float volumeFly;
     
-
-    public int money = 0;
+    public int money;
     private CatData data;
 
     public void SetSpeedMultiplier(float multiplier)
@@ -87,48 +78,6 @@ public class CatSprite : MonoBehaviour
         speedMultiplier = multiplier;
     }
 
-
-    private void Start()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-        _poly = GetComponent<PolygonCollider2D>();
-        Cat = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();
-        _Animation = GetComponent<Animation>();
-        transform.Rotate(0f,180f,0f);
-        _knifeBar.SetMaxHealth(knife.attackIntervale);
-        timerJump = timeToJump;
-        audioSource = GetComponent<AudioSource>();
-        _audioListener = GetComponent<AudioListener>();
-        _audioListener.enabled = true;
-        if (SceneManager.GetActiveScene().name != "Training")
-        {
-            if (!CatData.start.Contains(gameObject.name))
-            {
-                HP = maxHP;
-                _healthBar.SetMaxHealth(maxHP);
-                countHealth = maxCountHealth;
-                _textHealth.text = maxCountHealth.ToString();
-                Save();
-                CatData.start.Add(gameObject.name);
-            }
-            Load();
-            _healthBar.SetMaxHealth(maxHP);
-            _healthBar.SetHealth(HP);   
-            _textHealth.text = countHealth.ToString();
-        }
-        #if UNITY_ANDROID
-        shitButton.gameObject.SetActive(true);
-        hitButton.gameObject.SetActive(true);
-        shitButton.onClick.AddListener(DoShit);
-        hitButton.onClick.AddListener(DoHit);
-        joystick.gameObject.SetActive(true);
-        //#else
-        //shitButton.gameObject.SetActive(false);
-        //hitButton.gameObject.SetActive(false);
-        //joystick.gameObject.SetActive(false);
-        #endif
-    }
     
     public void Save()
     {
@@ -155,26 +104,70 @@ public class CatSprite : MonoBehaviour
                 data.spawnSecondLevel[1], 
                 data.spawnSecondLevel[2]);
     }
-    
 
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        transform.Rotate(0f,180f,0f);
+        _knifeBar.SetMaxHealth(knife.attackIntervale);
+        timerJump = timeToJump;
+        _audioListener = GetComponent<AudioListener>();
+        _audioListener.enabled = true;
+        _grabbingHook = GetComponent<GrabbingHook>();
+        currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene != "Training")
+        {
+            if (!CatData.start.Contains(gameObject.name))
+            {
+                HP = maxHP;
+                _healthBar.SetMaxHealth(maxHP);
+                countHealth = maxCountHealth;
+                _textHealth.text = maxCountHealth.ToString();
+                Save();
+                CatData.start.Add(gameObject.name);
+            }
+            Load();
+            _healthBar.SetMaxHealth(maxHP);
+            _healthBar.SetHealth(HP);   
+            _textHealth.text = countHealth.ToString();
+        }
+    }
+    
     private void Update()
     {
-        foreach (var light in lights)
-        {
-            if (Vector3.Distance(light.transform.position, transform.position) < 7)
-            {
-                light.enabled = true;
-                light.intensity = (7-Vector3.Distance(light.transform.position, transform.position)) / 7;
-            }
-            else
-                light.enabled = false;
-        }
-            
-        
+        stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("shit")) isNowShit = true;
+        else isNowShit = false;
+        isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isCheckpoint = Physics2D.OverlapCircle(smallAttack.position, distanseSmallAttack, checkpointLayer);
+        _knifeBar.SetHealth(knife.timer);
+        UpdateLight();
+        UpdateFly();
+        UpdateCheckpoint();
+        UpdateGround();
+        UpdateJump();
+        SwitchAnimation();
+    }
 
-        if (Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, checkpointLayer).Length > 0 &&
-            _animator.GetCurrentAnimatorStateInfo(0).IsName("shit"))
-            spawn = transform.position;
+    private void UpdateLight()
+    {
+        if (currentScene == "SecondLevle")
+        {
+            foreach (var light in lights)
+            {
+                if ((light.transform.position - transform.position).sqrMagnitude < distanseLight * distanseLight)
+                {
+                    light.enabled = true;
+                    light.intensity = (distanseLight-Vector3.Distance(light.transform.position, transform.position)) / distanseLight;
+                }
+                else light.enabled = false;
+            }
+        } 
+    }
+
+    private void UpdateFly()
+    {
         if (Fly1 != null)
         {
             if (Fly1.transform.position.x > 20 && fliesSourse.volume > 0) fliesSourse.volume -= 0.005f;
@@ -184,66 +177,35 @@ public class CatSprite : MonoBehaviour
                     : 0;
         }
         else fliesSourse.volume = 0;
-        _knifeBar.SetHealth(knife.timer);
-        _textMoney.text = money.ToString();
-        var isIce = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, iceLayer).Length > 0;
-        isWater = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, waterLayer).Length > 0;
-        // замените эту строку
-        move = _animator.GetCurrentAnimatorStateInfo(0).IsName("shit") ? 0 :
-        #if UNITY_ANDROID
-            joystick.Horizontal;
-        #elif UNITY_STANDALONE
-            Input.GetAxisRaw("Horizontal");
-        #endif
+    }
+
+    private void UpdateCheckpoint()
+    {
+        if (isNowShit && isCheckpoint) spawn = transform.position;
+    }
+
+    private void UpdateGround()
+    {
+        move = isNowShit ? 0 : Input.GetAxisRaw("Horizontal");
+        moveInWater = isNowShit ? 0 : Input.GetAxis("Horizontal");
+        isIce = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, iceLayer);
+        isWater = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
         if (!isIce && !isWater)
         {
             _rb.gravityScale = normalGravity;
-            transform.position += new Vector3(move, 0, 0) * speed * speedMultiplier * Time.deltaTime;
+            transform.position += speed * speedMultiplier * Time.deltaTime * new Vector3(move, 0, 0) ;
         }
         else if (isWater)
         {
             _rb.gravityScale = 0.1f;
-            // замените эту строку
-            #if UNITY_ANDROID
-                _rb.AddForce(new Vector2(joystick.Horizontal * swimSpeed * 10,joystick.Vertical * swimSpeed * 10), ForceMode2D.Force);
-            #elif UNITY_STANDALONE
-                _rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * swimSpeed/2.5f,Input.GetAxis("Vertical") * swimSpeed), ForceMode2D.Force);
-            #endif
+            _rb.AddForce(new Vector2(moveInWater * swimSpeed/2.5f,Input.GetAxis("Vertical") * swimSpeed), ForceMode2D.Force);
         }
         else
         {
             _rb.gravityScale = normalGravity;
-            // замените эту строку
-            #if UNITY_ANDROID
-                _rb.AddForce(new Vector2(joystick.Horizontal * slide,0), ForceMode2D.Impulse);
-            #elif UNITY_STANDALONE
-                _rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * slide,0), ForceMode2D.Impulse);
-            #endif
+            _rb.AddForce(new Vector2(moveInWater * slide,0), ForceMode2D.Impulse);
         }
-        // замените эту строку
-        #if UNITY_ANDROID
-            if (joystick.Vertical > 0.5)
-        #elif UNITY_STANDALONE
-            if (Input.GetButtonDown("Jump"))
-        #endif
-            timerJump = timeToJump; 
-
-        if (timerJump > 0) timerJump -= Time.deltaTime;
-        if (timerJump > 0)
-        {
-            if (Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer).Length > 0)
-            {
-                jumpSourse.volume = volumeJump;
-                jumpSourse.Play();
-                if (!isIce)
-                    _rb.velocity = Vector2.zero;
-                if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("shit") && !isWater)
-                    _rb.AddForce(new Vector2(_rb.velocity.x/10, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
-                timerJump = 0;
-            }
-        }
-
-        if (move != 0 && Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer).Length > 0)
+        if (move != 0 && isGround)
         {
             if (!runSourse.isPlaying)
             {
@@ -251,30 +213,31 @@ public class CatSprite : MonoBehaviour
                 runSourse.Play();
             }
         }
-        SwitchAnimation();
     }
-    
-    void DoShit() 
+
+    private void UpdateJump()
     {
-        pressedShit = true;
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Stay") && !GetComponent<GrabbingHook>().isHooked)
+        if (Input.GetButtonDown("Jump")) timerJump = timeToJump;
+        if (timerJump > 0) timerJump -= Time.deltaTime;
+        if (timerJump > 0)
         {
-            _stateCat = MovementState.shit;
-            _animator.SetInteger("State", (int)_stateCat);
+            if (isGround)
+            {
+                jumpSourse.volume = volumeJump;
+                jumpSourse.Play();
+                if (!isIce)
+                    _rb.velocity = Vector2.zero;
+                if (!isNowShit && !isWater)
+                    _rb.AddForce(new Vector2(_rb.velocity.x/10, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
+                timerJump = 0;
+            }
         }
     }
-    
-    void DoHit()
-    {
-        pressedAttack = true;
-        Attake();
-    }
-    
+
     private void SwitchAnimation()
     {
-        #if UNITY_STANDALONE
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Stay") && Input.GetKeyDown(KeyCode.CapsLock)
-            && !GetComponent<GrabbingHook>().isHooked)
+        if (Input.GetKeyDown(KeyCode.CapsLock) && !_grabbingHook.isHooked && 
+            stateInfo.IsName("Stay"))
         {
             _stateCat = MovementState.shit;
             _animator.SetInteger("State", (int)_stateCat);
@@ -315,64 +278,17 @@ public class CatSprite : MonoBehaviour
             }
             _animator.SetInteger("State", (int)_stateCat);
         }
-        #elif UNITY_ANDROID
-        if (move > 0)
-        {
-            _stateCat = MovementState.Run;
-            if (rotation)
-            {
-                transform.Rotate(0f,180f,0f);
-                rotation = false;
-            }
-        }
-        else if (move < 0)
-        {
-            _stateCat = MovementState.Run;
-            if (!rotation)
-            {
-                transform.Rotate(0f,180f,0f);
-                rotation = true;
-            }
-        }
-        else
-            _stateCat = MovementState.Stay;
-
-        if (_rb.velocity.y > 1f) _stateCat = MovementState.jumpup;
-        else if (_rb.velocity.y < - 1f) _stateCat = MovementState.jumpdown;
-        if (pressedAttack)
-        {
-            _stateCat = MovementState.hit;
-            pressedAttack = false;
-        }
-        if (damageNow)
-        {
-            _stateCat = MovementState.damage;
-            damageNow = false;
-        }
-        if (pressedShit)
-        {
-            _stateCat = MovementState.shit;
-            pressedShit = false;
-        }
-        _animator.SetInteger("State", (int)_stateCat);
-        #endif
     }
 
     void Attake()
     {
         if (_stateCat == MovementState.damage) return;
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("hit"))
+        if (!stateInfo.IsName("hit"))
         {
             _stateCat = MovementState.hit;
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, enemyLayers);
+            hitEnemies = Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, enemyLayers);
             foreach (var enemy in hitEnemies)
-            {
-                IDamageable damageable = enemy.GetComponent<IDamageable>();
-                if (damageable != null)
-                {
-                    damageable.TakeDamage(takeDamage);
-                }
-            }
+                enemy.GetComponent<IDamageable>()?.TakeDamage(takeDamage);
         }
     }
 
@@ -393,9 +309,9 @@ public class CatSprite : MonoBehaviour
         damageNow = true;
         if (HP <= 0)
         {
-            GetComponent<GrabbingHook>().line.enabled = false;
-            GetComponent<GrabbingHook>().isHooked = false;
-            GetComponent<GrabbingHook>()._joint2D.enabled = false;
+            _grabbingHook.line.enabled = false;
+            _grabbingHook.isHooked = false;
+            _grabbingHook._joint2D.enabled = false;
             if (countHealth <= 1)
             {
                 countHealth = maxCountHealth;

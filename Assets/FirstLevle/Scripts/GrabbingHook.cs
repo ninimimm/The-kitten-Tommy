@@ -45,7 +45,7 @@ public class GrabbingHook : MonoBehaviour
             target = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             target.z = 0;
             _raycast = Physics2D.Raycast(transform.position, target - transform.position, distanse, mask);
-            if (_raycast.collider != null)
+            if (_raycast.collider is not null)
             {
                 isHooked = true;
                 _joint2D.enabled = true;
@@ -69,7 +69,7 @@ public class GrabbingHook : MonoBehaviour
                 _audioSource.PlayOneShot(woosh);
             }
             line.SetPosition(0, transform.position - new Vector3(-0.1f, 0.1f, 0));
-            if (_joint2D.connectedBody != null)
+            if (_joint2D.connectedBody is not null)
             {
                 line.SetPosition(1, _joint2D.connectedBody.transform.position + (Vector3)_joint2D.connectedAnchor);
             }

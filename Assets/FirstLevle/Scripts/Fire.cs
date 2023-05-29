@@ -10,8 +10,8 @@ public class Fire : MonoBehaviour
     [SerializeField] private float distanseRunSourse;
     [SerializeField] private float damageInterval = 0.01f;
     private Collider2D fireCollider;
-    private CatSprite playerInFire = null;
-    private Coroutine damageCoroutine = null;
+    private CatSprite playerInFire;
+    private Coroutine damageCoroutine;
 
     private void Update()
     {
@@ -27,9 +27,7 @@ public class Fire : MonoBehaviour
         {
             playerInFire = other.GetComponent<CatSprite>();
             if (playerInFire != null)
-            {
                 damageCoroutine = StartCoroutine(DealDamage());
-            }
         }
     }
 
@@ -48,7 +46,7 @@ public class Fire : MonoBehaviour
 
     private IEnumerator DealDamage()
     {
-        while (playerInFire != null)
+        while (!(playerInFire is null))
         {
             yield return new WaitForSeconds(damageInterval);
             playerInFire.TakeDamage(fireDamage);

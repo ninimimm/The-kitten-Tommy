@@ -5,15 +5,11 @@ public class SpiderRunToTreeAndFall : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float goCoordinates;
     private Animator _animator;
-    private BoxCollider2D _boxCollider;
-    private Rigidbody2D _rigidbody2D;
     private bool isRunning;
     // Start is called before the first frame update
     void Start()
     {
         _animator = GetComponent<Animator>();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _boxCollider = GetComponent<BoxCollider2D>();
         _animator.SetInteger("state",0);
     }
 
@@ -28,7 +24,7 @@ public class SpiderRunToTreeAndFall : MonoBehaviour
                 isRunning = true;
             }
             if (isRunning && transform.position.x > goCoordinates)
-                transform.position -= new Vector3(1, 0, 0) * speed * Time.deltaTime;
+                transform.position -= speed * Time.deltaTime * new Vector3(1, 0, 0) ;
             if (transform.position.x <= goCoordinates)
                 _animator.SetInteger("state", 3);
         }

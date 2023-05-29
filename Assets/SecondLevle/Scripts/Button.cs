@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    [SerializeField] private GameObject _cat;
     [SerializeField] private Transform _pressedTransform;
     [SerializeField] private float distancePressed;
     [SerializeField] private LayerMask catLayer;
@@ -11,25 +10,26 @@ public class Button : MonoBehaviour
     public enum MovementState { Stay, Pressed};
     public MovementState state;
     private Animator _animator;
+    private ManageButtons _manageButtons;
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _manageButtons = manager.GetComponent<ManageButtons>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Physics2D.OverlapCircleAll(_pressedTransform.position, distancePressed, catLayer).Length > 0 && state == MovementState.Stay
-            && manager.GetComponent<ManageButtons>().timer < 0)
+        if (state == MovementState.Stay && _manageButtons.timer < 0 && 
+            Physics2D.OverlapCircle(_pressedTransform.position, distancePressed, catLayer))
         {
             state = MovementState.Pressed;
-            manager.GetComponent<ManageButtons>().keys.Append(key);
+            _manageButtons.keys.Append(key);
         }
         _animator.SetInteger("state", (int)state);
     }
     private void OnDrawGizmosSelected()
     {
-        if (_pressedTransform.position == null) return;
         Gizmos.DrawWireSphere(_pressedTransform.position,distancePressed);
     }
 }

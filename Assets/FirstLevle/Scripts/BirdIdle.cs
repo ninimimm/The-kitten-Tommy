@@ -17,6 +17,7 @@ public class BirdIdle : MonoBehaviour
     private bool goRight;
     private BirdIdleData _data;
     private SpriteRenderer _spriteRenderer;
+    private bool isFlying;
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -36,7 +37,7 @@ public class BirdIdle : MonoBehaviour
     {
         if (_spriteRenderer.enabled)
         {
-            bool isFlying = _animator.GetCurrentAnimatorStateInfo(0).IsName("fly");
+            isFlying = _animator.GetCurrentAnimatorStateInfo(0).IsName("fly");
             if (!isFlying)
             {
                 if (transform.position.x < leftBound)
@@ -50,7 +51,7 @@ public class BirdIdle : MonoBehaviour
                     _spriteRenderer.flipX = true;
                 } 
 
-                var movement = new Vector3(goRight ? 1 : -1, 0, 0) * speedWalk * Time.deltaTime;
+                var movement =speedWalk * Time.deltaTime * new Vector3(goRight ? 1 : -1, 0, 0) ;
                 transform.position += movement;
             }
             if ((_cat.position - transform.position).sqrMagnitude < scaryDistance * scaryDistance && !_audioSource.isPlaying)
@@ -60,7 +61,7 @@ public class BirdIdle : MonoBehaviour
                 _audioSource.volume = volume;
                 _audioSource.PlayOneShot(flySound);
             }
-            if (isFlying) transform.position += flyVector * speedFly * Time.deltaTime;
+            if (isFlying) transform.position += speedFly * Time.deltaTime * flyVector ;
             if (transform.position.y > 6)
             {
                 _spriteRenderer.enabled = false;

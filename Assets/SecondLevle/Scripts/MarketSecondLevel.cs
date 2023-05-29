@@ -34,24 +34,24 @@ public class MarketSecondLevel : MonoBehaviour
                 _catSprite.money -= 6;
                 _knifeSpriteRenderer.sprite = PoisonKnife;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2) && _catSprite.money >= 4)
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && _catSprite.money >= 4)
             {
                 _catSprite.money -= 4;
                 _catSprite.countHealth += 1;
                 _catSprite._textHealth.text = _catSprite.countHealth.ToString();
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3) && _catSprite.money >= 3)
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && _catSprite.money >= 3)
             {
                 _catSprite.money -= 3;
                 _catSprite.HP = _catSprite.maxHP;
                 _catSprite._healthBar.SetMaxHealth(_catSprite.maxHP);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha4) && _catSprite.money >= 3)
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && _catSprite.money >= 3)
             {
                 _catSprite.money -= 3;
                 _catSprite.takeDamage += clawsDamageUpgrade;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 6)
+            else if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 6)
             {
                 grabbingHook.enabled = true;
                 if (grabbingHook.material != ColdHarpoon)
@@ -62,10 +62,9 @@ public class MarketSecondLevel : MonoBehaviour
                 }
                 grabbingHook.enabled = false;
             }
+            _catSprite._textMoney.text = _catSprite.money.ToString();
         }
         else
-        {
             _spriteRenderer.enabled = false;
-        }
     }
 }

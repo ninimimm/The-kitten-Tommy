@@ -18,13 +18,11 @@ public class Ball : MonoBehaviour
     }
     private MovementState ballState = MovementState.fall;
     private Animator _animator;
-    private Rigidbody2D _rb;
     private bool CanDamage = true;
 
     void Start()
     {
         _animator = GetComponent<Animator>();
-        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()

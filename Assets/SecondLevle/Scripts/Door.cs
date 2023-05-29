@@ -27,7 +27,7 @@ public class Door : MonoBehaviour
     
     void Update()
     {
-        if (Math.Abs(transform.position.x - cat.transform.position.x) < 1 && _catSprite.key == key && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && Math.Abs(transform.position.x - cat.transform.position.x) < 1 && _catSprite.key == key)
         {
             animator.SetInteger("state", 1);
             _catSprite.key = "";

@@ -33,20 +33,21 @@ public class BirdStay : MonoBehaviour
     {
         if (_spriteRenderer.enabled)
         {
-            if (transform.position.y > 1.3 && _spriteRenderer.sortingLayerName != "GUI")
-            {
-                _spriteRenderer.sortingLayerName = "GUI";
-                _spriteRenderer.sortingOrder = 5;
-            }
-            else if ((_cat.position - transform.position).sqrMagnitude < scaryDistance * scaryDistance && !_audioSource.isPlaying)
+            
+            if ((_cat.position - transform.position).sqrMagnitude < scaryDistance * scaryDistance && !_audioSource.isPlaying)
             {
                 _animator.SetInteger("state", 2);
                 _spriteRenderer.flipX = false;
                 _audioSource.volume = volume;
                 _audioSource.PlayOneShot(flySound);
             }
+            else if (transform.position.y > 1.3 && _spriteRenderer.sortingLayerName != "GUI")
+            {
+                _spriteRenderer.sortingLayerName = "GUI";
+                _spriteRenderer.sortingOrder = 5;
+            }
         
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("fly")) transform.position += movingVector * speed * Time.deltaTime;
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("fly")) transform.position += speed * Time.deltaTime * movingVector;
             if (transform.position.y > 6) _spriteRenderer.enabled = false;
         }
     }

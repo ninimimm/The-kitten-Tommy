@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GoToFirstLevel : MonoBehaviour
 {
-    [SerializeField] private GameObject _cat;
+    [SerializeField] private CatSprite _cat;
     [SerializeField] private Vector3 movingVector;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask balloonLayer;
@@ -29,10 +29,10 @@ public class GoToFirstLevel : MonoBehaviour
 
     void Update()
     {
-        if (Physics2D.OverlapCircleAll(_catSprite.groundCheck.position, _catSprite.groundCheckRadius, balloonLayer).Length > 0)
+        if (Physics2D.OverlapCircle(_catSprite.groundCheck.position, _catSprite.groundCheckRadius, balloonLayer))
         {
-            transform.position += movingVector * speed * Time.deltaTime;
-            _cat.transform.position += movingVector * speed * Time.deltaTime;
+            transform.position += speed * Time.deltaTime * movingVector ;
+            _cat.transform.position += speed * Time.deltaTime * movingVector ;
         }
 
         if (transform.position.y > 10)
@@ -45,10 +45,10 @@ public class GoToFirstLevel : MonoBehaviour
     private void Save()
     {
         foreach (var coin in coins)
-            if (coin != null) coin.GetComponent<Coin>().Save();
-        _cat.GetComponent<CatSprite>().Save();
+            if (coin is not null) coin.Save();
+        _cat.Save();
         foreach (var crate in crates)
-            if (crate != null) crate.GetComponent<Crate>().Save();
+            if (crate is not null) crate.Save();
         foreach (var scorpio in scorpios)
             scorpio.Save();
         chest.Save();

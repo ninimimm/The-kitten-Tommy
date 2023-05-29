@@ -10,11 +10,12 @@ public class Crate : MonoBehaviour, IDamageable
     [SerializeField] private AudioSource _audioSource;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
-    private bool getHit = false;
+    private bool getHit;
     private CrateData data;
     private bool isStart = true;
     private GameObject coinInstance;
     private bool newSpawn = true;
+    private Coin coinScript;
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -31,7 +32,9 @@ public class Crate : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (coinInstance != null && newSpawn)
+        if (coinScript is null && coinInstance is not null)
+            coinScript = coinInstance.GetComponent<Coin>();
+        if (coinInstance is not null && newSpawn)
         {
             coinInstance.transform.position = transform.position;
             newSpawn = false;
@@ -47,6 +50,7 @@ public class Crate : MonoBehaviour, IDamageable
         if (transform.position.y < -0.3 && getHit && _spriteRenderer.enabled)
         {
             coinInstance = Instantiate(coinPrefab, gameObject.transform.position, Quaternion.identity);
+            coinScript = coinInstance.GetComponent<Coin>();
             if (SceneManager.GetActiveScene().name == "FirstLevle")
             {
                 coinInstance.name += GoToSecondLevle.countCoins.ToString();
@@ -58,14 +62,13 @@ public class Crate : MonoBehaviour, IDamageable
                 GoToSecondLevle.countCoins++;
             }
             
-            var coinComponent = coinInstance.GetComponent<Coin>();
-            if (coinComponent != null)
+            if (coinScript is not null)
             {
-                coinComponent._cat = Cat;
-                coinComponent.distanseAttack = distanseAttack;
-                coinComponent.catLayer = catLayer;
+                coinScript._cat = Cat;
+                coinScript.distanseAttack = distanseAttack;
+                coinScript.catLayer = catLayer;
             }
-            if (_audioSource != null)
+            if (_audioSource is not null)
             {
                 _audioSource.Play();
             }

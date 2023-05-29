@@ -5,37 +5,32 @@ public class ComponentSnake : MonoBehaviour, IDamageable
 {
     public float HP;
     [SerializeField] private float maxHP;
-    [SerializeField] private GameObject target;
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
     [SerializeField] private AudioClip damageClip;
+    [SerializeField] private CatSprite _catSprite;
     private AudioSource _audioSource;
     public Animator _animator;
     public enum MovementState { stay, Walk, attake, death, hurt };
     public static MovementState _stateSnake;
-    private SpriteRenderer _snake;
-    private PolygonCollider2D _col;
-    private Animator targetAnimation;
     private Rigidbody2D _rb;
     public Transform attack;
     public float distanseAttack = 0.2f;
     public LayerMask catLayer;
     public int takeDamage = 1;
     private bool rotation = true;
-    private bool damageNow = false;
+    private bool damageNow;
     public PolygonCollider2D poly;
     public CapsuleCollider2D cap;
     private SnakeData data;
     private bool isStart = true;
+    private AnimatorStateInfo _stateInfo;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _snake = GetComponent<SpriteRenderer>();
-        _col = GetComponent<PolygonCollider2D>();
-        targetAnimation = target.GetComponent<Animator>();
         poly = GetComponent<PolygonCollider2D>();
         cap = GetComponent<CapsuleCollider2D>();
         _healthBar.SetMaxHealth(maxHP);
@@ -73,9 +68,10 @@ public class ComponentSnake : MonoBehaviour, IDamageable
 
     void Update()
     {
+        _stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         if (transform.position.x > 12.7)
             transform.position = new Vector3(12.67f, transform.position.y, transform.position.z);
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("death"))
+        if (!_stateInfo.IsName("death"))
         {
             if (_rb.velocity.x > 0.5)
             {
@@ -124,16 +120,14 @@ public class ComponentSnake : MonoBehaviour, IDamageable
 
     void Attake()
     {
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("attake"))
+        if (!_stateInfo.IsName("attake"))
         {
-            var hitCat = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
-            if (hitCat.Length > 0)
+            if (Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer))
             {
                 _stateSnake = MovementState.attake;
                 _animator.SetInteger("state", (int)_stateSnake);
+                _catSprite.TakeDamage(takeDamage);
             }
-            foreach (var cat in hitCat)
-                cat.GetComponent<CatSprite>().TakeDamage(takeDamage);
         }
     }
     public void TakeDamage(float damage)
@@ -146,8 +140,6 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     }
     private void OnDrawGizmosSelected()
     {
-        if (attack.position == null)
-            return;
         Gizmos.DrawWireSphere(attack.position,distanseAttack);
     }
 }

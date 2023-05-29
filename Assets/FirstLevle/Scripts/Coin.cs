@@ -12,9 +12,11 @@ public class Coin : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
     private bool isStart = true;
+    private CatSprite _catSprite;
 
     private void Start()
     {
+        _catSprite = _cat.GetComponent<CatSprite>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         if (!CoinData.start.Contains(gameObject.name))
         {
@@ -54,16 +56,13 @@ public class Coin : MonoBehaviour
             else GoToFirstLevel.coins.Add(this);
             isStart = false;
         }
-        if (_spriteRenderer.enabled)
+        if (_spriteRenderer.enabled && Physics2D.OverlapCircle(transform.position, distanseAttack, catLayer))
         {
-            var catTouch = Physics2D.OverlapCircleAll(transform.position, distanseAttack, catLayer);
-            if (catTouch.Length > 0)
-            {
-                _cat.GetComponent<CatSprite>().money += 1;
-                audioSource.PlayOneShot(audioCoin);
-                _spriteRenderer.enabled = false;
-                _boxCollider.enabled = false;
-            }
+            _catSprite.money += 1;
+            _catSprite._textMoney.text = _catSprite.money.ToString();
+            audioSource.PlayOneShot(audioCoin);
+            _spriteRenderer.enabled = false;
+            _boxCollider.enabled = false;
         }
     }
 }

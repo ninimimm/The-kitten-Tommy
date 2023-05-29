@@ -6,7 +6,9 @@ public class Label : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
 
     private Animator _animator;
-    private bool isIdleLabel = false;
+    private bool isIdleLabel;
+    private AnimatorStateInfo stateInfo;
+    private bool isIdleLabelState;
 
     private void Start()
     {
@@ -16,8 +18,8 @@ public class Label : MonoBehaviour
 
     private void Update()
     {
-        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-        bool isIdleLabelState = stateInfo.IsName("IdleLabel");
+        stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        isIdleLabelState = stateInfo.IsName("IdleLabel");
 
         if (_cat.position.x > 9.1f && Input.GetKeyDown(KeyCode.Mouse1) && !isIdleLabelState)
         {
@@ -26,9 +28,7 @@ public class Label : MonoBehaviour
             isIdleLabel = false;
         }
         else
-        {
             isIdleLabel = isIdleLabelState;
-        }
     }
 
     private void OnTriggerEnter(Collider other)

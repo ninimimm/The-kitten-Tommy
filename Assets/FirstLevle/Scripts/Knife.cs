@@ -7,12 +7,18 @@ public class Knife : MonoBehaviour
     public Transform fireKnife;
     public GameObject knife;
     public float timer;
-    private bool nowIsShoot = false;
+    private bool nowIsShoot;
     private KnifeData data;
+    private GameObject newKnife;
+    private Vector3 mouseWorldPosition;
+    private Vector2 direction;
+    private Camera mainCamera;
+    private float angle;
 
 
     private void Start()
     {
+        mainCamera = Camera.main;
         if (!KnifeData.start.Contains(gameObject.name))
         {
             KnifeData.start.Add(gameObject.name);
@@ -50,11 +56,11 @@ public class Knife : MonoBehaviour
 
     void Shoot()
     {
-        GameObject newKnife = Instantiate(knife, fireKnife.position, fireKnife.rotation);
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
-        Vector2 direction = (new Vector2(mouseWorldPosition.x, mouseWorldPosition.y) - (Vector2)fireKnife.position).normalized;
+        newKnife = Instantiate(knife, fireKnife.position, fireKnife.rotation);
+        mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCamera.nearClipPlane));
+        direction = (new Vector2(mouseWorldPosition.x, mouseWorldPosition.y) - (Vector2)fireKnife.position).normalized;
         newKnife.GetComponent<Rigidbody2D>().velocity = direction;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         newKnife.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }

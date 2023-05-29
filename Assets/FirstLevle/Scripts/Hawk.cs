@@ -25,20 +25,22 @@ public class Hawk : MonoBehaviour, IDamageable
     public CapsuleCollider2D[] caps;
 
     private Rigidbody2D _rigidbody2D;
-    private CatSprite _catSprite;
     public Animator _animator;
     private Vector3 catPosition;
     private AudioSource _audioSource;
     private HawkData data;
     private bool isStart = true;
+    private Vector2 direction;
+    private CatSprite _catSprite;
+    private AnimatorStateInfo _stateInfo;
 
     void Start()
     {
+        _catSprite = Cat.GetComponent<CatSprite>();
         HP = maxHP;
         _healthBar.SetMaxHealth(maxHP);
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _catSprite = Cat.GetComponent<CatSprite>();
         caps = GetComponents<CapsuleCollider2D>();
         if (!HawkData.start.Contains(gameObject.name))
         {
@@ -73,9 +75,10 @@ public class Hawk : MonoBehaviour, IDamageable
 
     void Update()
     {
+        _stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         catPosition = Cat.transform.position; // Store the cat position
 
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_death"))
+        if (!_stateInfo.IsName("hawk_death"))
             Move();
         else
         {
@@ -93,7 +96,7 @@ public class Hawk : MonoBehaviour, IDamageable
 
     private void Move()
     {
-        Vector2 direction = new Vector2(0, 0);
+        direction = new Vector2(0, 0);
 
         if (Mathf.Abs(transform.position.y - Cat.transform.position.y) < maxY &&
             Mathf.Abs(transform.position.x - Cat.transform.position.x) < followRange)
@@ -106,18 +109,12 @@ public class Hawk : MonoBehaviour, IDamageable
             _stateHawk = MovementState.fly;
         }
         else if (Math.Abs(direction.y) < 0.2 )
-        {
             _stateHawk = MovementState.stay;
-        }
 
         if (transform.position.y > maxY)
-        {
             direction.y = -0.5f;
-        }
         else if (transform.position.y < minY)
-        {
             direction.y = 0.5f;
-        }
         Attack();
         if (damageNow && HP > 0)
         {
@@ -134,16 +131,14 @@ public class Hawk : MonoBehaviour, IDamageable
 
     private void Attack()
     {
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_attack"))
+        if (!_stateInfo.IsName("hawk_attack"))
         {
-            var hitCat = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
-            if (hitCat.Length > 0)
+            if (Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer))
             {
                 _stateHawk = MovementState.attack;
                 _animator.SetInteger("state", (int)_stateHawk);
+                _catSprite.TakeDamage(damage);;
             }
-            foreach (var cat in hitCat)
-                cat.GetComponent<CatSprite>().TakeDamage(damage);;
         }
     }
     
@@ -169,8 +164,6 @@ public class Hawk : MonoBehaviour, IDamageable
     }
     private void OnDrawGizmosSelected()
     {
-        if (attack.position == null)
-            return;
         Gizmos.DrawWireSphere(attack.position,distanseAttack);
     }
 }

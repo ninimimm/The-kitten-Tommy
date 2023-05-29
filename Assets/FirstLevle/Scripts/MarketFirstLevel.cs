@@ -37,24 +37,24 @@ public class MarketFirstLevel : MonoBehaviour
                 _knife.attackIntervale *= knifeIntervalUpgrade;
                 _catSprite._knifeBar.SetMaxHealth(_knife.attackIntervale);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2) && _catSprite.money >= 3)
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && _catSprite.money >= 3)
             {
                 _catSprite.money -= 3;
                 _catSprite.countHealth += 1;
                 _catSprite._textHealth.text = _catSprite.countHealth.ToString();
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3) && _catSprite.money >= 2)
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && _catSprite.money >= 2)
             {
                 _catSprite.money -= 2;
                 _catSprite.HP = _catSprite.maxHP;
                 _catSprite._healthBar.SetMaxHealth(_catSprite.maxHP);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha4) && _catSprite.money >= 1)
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && _catSprite.money >= 1)
             {
                 _catSprite.money -= 1;
                 _logicKnife.damage += knifeDamageUpgrade;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 3)
+            else if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 3)
             {
                 grabbingHook.enabled = true;
                 if (grabbingHook.material != GoldHarpoon)
@@ -65,10 +65,9 @@ public class MarketFirstLevel : MonoBehaviour
                 }
                 grabbingHook.enabled = false;
             }
+            _catSprite._textMoney.text = _catSprite.money.ToString();
         }
         else
-        {
             _spriteRenderer.enabled = false;
-        }
     }
 }

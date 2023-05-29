@@ -5,13 +5,17 @@ public class ManageButtons : MonoBehaviour
 {
     [SerializeField] public GameObject door;
     public StringBuilder keys = new ();
-    public GameObject[] buttons;
+    public Button[] buttons;
     [SerializeField] private float timeToWait;
     public float timer;
     private ManageButtonsData _data;
+    private Animator _doorAnimator;
+    private BoxCollider2D _doorBoxCollider2D;
 
     private void Start()
     {
+        _doorAnimator = door.GetComponent<Animator>();
+        _doorBoxCollider2D = door.GetComponent<BoxCollider2D>();
         if (!ManageButtonsData.Start.Contains(gameObject.name))
         {
             ManageButtonsData.Start.Add(gameObject.name);
@@ -26,8 +30,8 @@ public class ManageButtons : MonoBehaviour
         {
             if (keys.ToString() == "41523")
             {
-                door.GetComponent<Animator>().SetBool("opened",true);
-                door.GetComponent<BoxCollider2D>().enabled = false;
+                _doorAnimator.SetBool("opened",true);
+                _doorBoxCollider2D.enabled = false;
             }
                 
             else if (timer < -0.4)
@@ -37,7 +41,7 @@ public class ManageButtons : MonoBehaviour
         if (timer < 0 && timer > -0.2)
         {
             foreach (var button in buttons)
-                button.GetComponent<Button>().state = Button.MovementState.Stay;
+                button.state = Button.MovementState.Stay;
             keys = new StringBuilder("");
         }
         timer -= Time.deltaTime;
@@ -52,7 +56,7 @@ public class ManageButtons : MonoBehaviour
     public void Load()
     {
         _data = SavingSystem<ManageButtons, ManageButtonsData>.Load($"{gameObject.name}.data");
-        door.GetComponent<Animator>().SetBool("opened",_data.animatorState);
-        door.GetComponent<BoxCollider2D>().enabled = _data.colliderState;
+        _doorAnimator.SetBool("opened",_data.animatorState);
+        _doorBoxCollider2D.enabled = _data.colliderState;
     }
 }

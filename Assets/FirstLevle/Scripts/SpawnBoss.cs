@@ -41,7 +41,7 @@ public class SpawnBoss : MonoBehaviour
         var _fill = healthBar.GetComponentsInChildren<Image>()[0].GetComponent<Image>();
         var _bar = healthBar.GetComponentsInChildren<Image>()[1].GetComponent<Image>();
 
-        GameObject boss = Instantiate(Boss, spawnPosition, Quaternion.identity);
+        var boss = Instantiate(Boss, spawnPosition, Quaternion.identity);
         GoToSecondLevle.boss = boss.GetComponent<SandBoss>();
         var sandBoss = boss.GetComponent<SandBoss>();
         sandBoss._cat = Cat;

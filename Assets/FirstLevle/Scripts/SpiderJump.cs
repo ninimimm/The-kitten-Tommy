@@ -6,7 +6,6 @@ public class SpiderJump : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float goCoordinates;
     private Animator _animator;
-    private BoxCollider2D _boxCollider;
     private Rigidbody2D _rigidbody2D;
     private bool isRunning;
     private bool isJump;
@@ -15,7 +14,6 @@ public class SpiderJump : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _boxCollider = GetComponent<BoxCollider2D>();
         _animator.SetInteger("state",0);
     }
 
@@ -29,7 +27,7 @@ public class SpiderJump : MonoBehaviour
         }
 
         if (isRunning && transform.position.x < goCoordinates)
-            transform.position += new Vector3(1, 0, 0) * speed * Time.deltaTime;
+            transform.position += speed * Time.deltaTime * new Vector3(1, 0, 0) ;
         else if (isRunning && transform.position.x >= goCoordinates && isJump == false)
         {
             _animator.SetInteger("state",2);
@@ -37,7 +35,7 @@ public class SpiderJump : MonoBehaviour
             isJump = true;
         }
         else if (isJump)
-            transform.position += new Vector3(1, 0, 0) * speed * Time.deltaTime;
+            transform.position += speed * Time.deltaTime * new Vector3(1, 0, 0) ;
         if (transform.position.y < -1.5f)
             Destroy(gameObject);
     }

@@ -14,8 +14,10 @@ public class Spider : MonoBehaviour
     private float timer = -0.1f;
     private float timerWait;
     private SpriteRenderer _spriteRenderer;
+    private CatSprite _catSprite;
     void Start()
     {
+        _catSprite = cat.GetComponent<CatSprite>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
     }
@@ -30,13 +32,9 @@ public class Spider : MonoBehaviour
         else
         {
             _animator.enabled = true;
-            var hit = new Collider2D[0];
-            if (_spriteRenderer.sprite.name == "Spiders_8")
-            {
-                hit = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
-                if (hit.Length > 0)
-                    timer = timeToPoison;
-            }
+            if (_spriteRenderer.sprite.name == "Spiders_8" &&
+                Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer))
+                timer = timeToPoison;
 
             if (timer >= 0)
             {
@@ -44,7 +42,7 @@ public class Spider : MonoBehaviour
                 timerWait -= Time.deltaTime;
                 if (timerWait < 0)
                 {
-                    cat.GetComponent<CatSprite>().TakeDamage(damage);
+                    _catSprite.TakeDamage(damage);
                     timerWait = timeToWait;
                 }
             }

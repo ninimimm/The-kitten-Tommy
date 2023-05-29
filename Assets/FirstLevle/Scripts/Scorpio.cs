@@ -25,18 +25,21 @@ public class Scorpio : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip runClip;
     [SerializeField] private float distanseRunSourse;
     [SerializeField] private Transform catTransform;
+    [SerializeField] private CatSprite _catSprite;
     private AudioSource audioSource;
-    private float idleTimer = 0.0f;
-    private bool damageNow = false;
+    private float idleTimer;
+    private bool damageNow;
     public BoxCollider2D boxCollider;
     public PolygonCollider2D polygonCollider;
     public Animator animator;
     private Rigidbody2D rb;
-    private bool isFacingRight = false;
+    private bool isFacingRight;
     private MovementState stateScorpio;
     private enum MovementState { idle, walk, attack, death, hurt };
     private ScorpioData data;
     private bool isStart = true;
+    
+    private AnimatorStateInfo _stateInfo;
 
     private void Start()
     {
@@ -81,9 +84,10 @@ public class Scorpio : MonoBehaviour, IDamageable
     
     private void Update()
     {
+        _stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         audioSource.volume = Math.Abs(catTransform.position.x-transform.position.x) < distanseRunSourse ?
             Math.Abs(catTransform.position.x-transform.position.x)/distanseRunSourse + 0.2f : 0;
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ScorpioDeath"))
+        if (!_stateInfo.IsName("ScorpioDeath"))
         {
             TryMove();
             TryIdle();
@@ -121,10 +125,7 @@ public class Scorpio : MonoBehaviour, IDamageable
         if (!audioSource.isPlaying)
             audioSource.PlayOneShot(runClip);
         stateScorpio = MovementState.walk;
-        if (isFacingRight)
-            rb.velocity = new Vector2(speed, 0);
-        else
-            rb.velocity = new Vector2(-speed, 0);
+        rb.velocity = isFacingRight ? new Vector2(speed, 0) : new Vector2(-speed, 0);
     }
     private bool IsInLeftBound()
     {
@@ -152,7 +153,7 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("ScorpioHurt"))
+        if(!_stateInfo.IsName("ScorpioHurt"))
             audioSource.PlayOneShot(damageClip);
         HP -= damage;
         _healthBar.SetHealth(HP);
@@ -161,17 +162,11 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     private void TryAttack()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ScorpioAttack")) 
+        if (!_stateInfo.IsName("ScorpioAttack") && Physics2D.OverlapCircle(attackCircle.position, attackRange, catLayer)) 
         {
-            var hitCat = Physics2D.OverlapCircleAll(attackCircle.position, attackRange, catLayer);
-            if (hitCat.Length > 0)
-            {
-                stateScorpio = MovementState.attack;
-                animator.SetInteger("stateScorpio", (int)stateScorpio);
-            }
-                
-            foreach (var cat in hitCat)
-                cat.GetComponent<CatSprite>().TakeDamage(damage);
+            stateScorpio = MovementState.attack;
+            animator.SetInteger("stateScorpio", (int)stateScorpio);
+            _catSprite.TakeDamage(damage);
         }
     }
 
@@ -183,8 +178,6 @@ public class Scorpio : MonoBehaviour, IDamageable
     
     private void OnDrawGizmosSelected()
     {
-        if (attackCircle.position == null)
-            return;
         Gizmos.DrawWireSphere(attackCircle.position, attackRange);
     }
 }

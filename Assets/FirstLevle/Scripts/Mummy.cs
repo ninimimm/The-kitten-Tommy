@@ -19,11 +19,10 @@ public class Mummy : MonoBehaviour, IDamageable
     public HealthBar _healthBar;
     public Image __fill;
     public Image __bar;
-    private Rigidbody2D rbBoss;
     private Animator _bossAnimator;
     public PolygonCollider2D pol;
     public CapsuleCollider2D cap;
-    private bool damageNow = false;
+    private bool damageNow;
     public enum MovementState { stay, walk, attake, hurt, death };
     public MovementState stateMommy;
     private Vector3 coordinates;
@@ -34,10 +33,15 @@ public class Mummy : MonoBehaviour, IDamageable
     public AudioSource _audioSourceMummyAttack;
     private bool isStart = true;
     private MummyData data;
+    private SandBoss _sandBoss;
+    private AnimatorStateInfo _stateInfo;
+    private CatSprite _catSprite;
 
     // Start is called before the first frame update
     void Start()
     {
+        _catSprite = _cat.GetComponent<CatSprite>();
+        _sandBoss = boss.GetComponent<SandBoss>();
         HP = maxHP;
         _healthBar.SetMaxHealth(maxHP);
         coordinates = transform.position;
@@ -45,7 +49,6 @@ public class Mummy : MonoBehaviour, IDamageable
         pol = GetComponent<PolygonCollider2D>();
         cap = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
-        rbBoss = GetComponent<Rigidbody2D>();
         _bossAnimator = Boss.GetComponent<Animator>();
         cap.enabled = true;
         pol.enabled = false;
@@ -82,11 +85,12 @@ public class Mummy : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        if (boss.GetComponent<SandBoss>().alive)
+        _stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (_sandBoss.alive)
         {
             coordinates.x = Boss.transform.position.x;
             coordinates.y = 0;
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MummyDeath"))
+            if (!_stateInfo.IsName("MummyDeath"))
             {
                 Vector2 direction = new Vector2(0, 0);
                 if (Vector3.Distance(_cat.transform.position, coordinates) < distanceWalk)
@@ -132,7 +136,7 @@ public class Mummy : MonoBehaviour, IDamageable
         }
         else
         {
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MummyDeath"))
+            if (!_stateInfo.IsName("MummyDeath"))
             {
                 Vector2 direction = new Vector2(0, 0);
                 if (Vector3.Distance(_cat.transform.position, coordinates) < distanceWalk)
@@ -170,18 +174,12 @@ public class Mummy : MonoBehaviour, IDamageable
     }
     void Attack()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MummyAttack"))
+        if (!_stateInfo.IsName("MummyAttack") && Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer))
         {
-            var hitCat = Physics2D.OverlapCircleAll(attack.position, distanseAttack, catLayer);
-            if (hitCat.Length > 0)
-            {
-                stateMommy = MovementState.attake;
-                if (!_audioSourceMummyAttack.isPlaying)
-                    _audioSourceMummyAttack.Play();
-            }
-
-            foreach (var cat in hitCat)
-                cat.GetComponent<CatSprite>().TakeDamage(damage);
+            stateMommy = MovementState.attake;
+            if (!_audioSourceMummyAttack.isPlaying)
+                _audioSourceMummyAttack.Play();
+            _catSprite.TakeDamage(damage);
         }
     }
 
@@ -206,8 +204,6 @@ public class Mummy : MonoBehaviour, IDamageable
     }
     private void OnDrawGizmosSelected()
     {
-        if (attack.position == null)
-            return;
         Gizmos.DrawWireSphere(attack.position, distanseAttack);
     }
 }
