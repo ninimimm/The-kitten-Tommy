@@ -1,16 +1,20 @@
-using UnityEngine;
+    using UnityEngine;
 
 public class logicKnife : MonoBehaviour
 {
     [SerializeField] public float speed = 10f;
     [SerializeField] public float damage = 1;
+    public PoisonKnife _poisonKnife;
+    private SpriteRenderer _knifeSpriteRenderer;
     private Rigidbody2D _rb;
     private LogicKnifeData data;
     private float angle;
+    private IDamageable enemy;
 
     // Start is called before the first frame update
     void Start()
     {
+        _knifeSpriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = transform.right * speed;
         if (!LogicKnifeData.start.Contains(gameObject.name))
@@ -44,7 +48,16 @@ public class logicKnife : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        hitInfo.GetComponent<IDamageable>()?.TakeDamage(damage);
+        var enemy = hitInfo.GetComponent<IDamageable>();
+        if (enemy != null)
+        {
+            if (_knifeSpriteRenderer.sprite.name == "PoisonKnife")
+            {
+                _poisonKnife.target = enemy;
+                _poisonKnife._timer = _poisonKnife.timeToPoison;
+            }
+            else enemy.TakeDamage(damage);
+        }
         Destroy(gameObject);
     }
 }
