@@ -54,7 +54,7 @@ public class GrabbingHook : MonoBehaviour
                     _raycast.collider.transform.position.y);
                 _joint2D.distance = Vector2.Distance(transform.position, _raycast.point);
                 line.enabled = true;
-                line.SetPosition(0,transform.position-new Vector3(-0.1f,0.1f,0));
+                line.SetPosition(0,transform.position);
                 line.SetPosition(1,_raycast.point + new Vector2(distanseIn,distanseIn));
             }
         }
@@ -68,7 +68,7 @@ public class GrabbingHook : MonoBehaviour
                 _audioSource.volume = volume;
                 _audioSource.PlayOneShot(woosh);
             }
-            line.SetPosition(0, transform.position - new Vector3(-0.1f, 0.1f, 0));
+            line.SetPosition(0, transform.position - new Vector3(0, 0.5f, 0));
             if (_joint2D.connectedBody is not null)
             {
                 line.SetPosition(1, _joint2D.connectedBody.transform.position + (Vector3)_joint2D.connectedAnchor);
