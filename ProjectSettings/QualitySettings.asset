@@ -236,6 +236,7 @@ QualitySettings:
     excludedTargetPlatforms:
     - Server
     - Windows Store Apps
+    - Standalone
   m_PerPlatformDefaultQuality:
     Android: 2
     GameCoreScarlett: 5
@@ -246,7 +247,7 @@ QualitySettings:
     PS5: 5
     Server: 0
     Stadia: 5
-    Standalone: 5
+    Standalone: 0
     WebGL: 3
     Windows Store Apps: 0
     XboxOne: 5

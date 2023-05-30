@@ -174,7 +174,9 @@ public class Mummy : MonoBehaviour, IDamageable
     }
     void Attack()
     {
-        if (!_stateInfo.IsName("MummyAttack") && Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer))
+        if (!_stateInfo.IsName("MummyAttack") && 
+            !_stateInfo.IsName("MummyHurt") && 
+            Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer))
         {
             stateMommy = MovementState.attake;
             if (!_audioSourceMummyAttack.isPlaying)

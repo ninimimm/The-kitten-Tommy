@@ -51,7 +51,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     void Start()
     {
         attackTimer = attackInterval;
-        spawnTimer = spawnInterval;
+        spawnTimer = -0.1f;
         HP = maxHP;
         _healthBar.SetMaxHealth(maxHP);
         _rb = GetComponent<Rigidbody2D>();

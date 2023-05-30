@@ -7,6 +7,7 @@ public class GrabbingHook : MonoBehaviour
     [SerializeField] public float stopping = 0.2f;
     [SerializeField] private float distanseIn;
     [SerializeField] private AudioClip woosh;
+    [SerializeField] private float forge;
     [Range(0, 1f)] public float volume;
     private AudioSource _audioSource;
     public bool isHooked;
@@ -20,6 +21,7 @@ public class GrabbingHook : MonoBehaviour
     
     private CatSprite _catSprite;
     private Camera _mainCamera;
+    
 
 
     void Start()
@@ -35,9 +37,13 @@ public class GrabbingHook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_joint2D.distance > 3f)
+        if (isHooked && Input.GetKey(KeyCode.A))
         {
-            _joint2D.distance -= stopping; 
+            _catSprite._rb.AddForce(new Vector2(-forge, forge)); // Приложить силу влево
+        }
+        else if (isHooked && Input.GetKey(KeyCode.D))
+        {
+            _catSprite._rb.AddForce(new Vector2(forge, forge)); // Приложить силу вправо
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -54,7 +60,7 @@ public class GrabbingHook : MonoBehaviour
                     _raycast.collider.transform.position.y);
                 _joint2D.distance = Vector2.Distance(transform.position, _raycast.point);
                 line.enabled = true;
-                line.SetPosition(0,transform.position);
+                line.SetPosition(0,transform.position - new Vector3(0, 0.55f, 0));
                 line.SetPosition(1,_raycast.point + new Vector2(distanseIn,distanseIn));
             }
         }
@@ -68,7 +74,7 @@ public class GrabbingHook : MonoBehaviour
                 _audioSource.volume = volume;
                 _audioSource.PlayOneShot(woosh);
             }
-            line.SetPosition(0, transform.position - new Vector3(0, 0.5f, 0));
+            line.SetPosition(0, transform.position - new Vector3(0, 0.55f, 0));
             if (_joint2D.connectedBody is not null)
             {
                 line.SetPosition(1, _joint2D.connectedBody.transform.position + (Vector3)_joint2D.connectedAnchor);

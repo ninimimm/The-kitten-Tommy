@@ -94,8 +94,8 @@ public class Hyena : MonoBehaviour, IDamageable
         UpdateStateBasedOnHealth();
         Flip(direction.x);
         _rb.velocity = direction * speed;
-        animator.SetInteger("state", (int)stateHyena);
         if (!currentAnimatorState.IsName("HyenaAttack")) Attack();
+        animator.SetInteger("state", (int)stateHyena);
     }
 
     private void GetMovementDirection()
@@ -137,7 +137,8 @@ public class Hyena : MonoBehaviour, IDamageable
 
     void Attack()
     {
-        if (Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer))
+        if (Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer) &&
+            !currentAnimatorState.IsName("HyenaAttack"))
         {
             stateHyena = MovementState.attake;
             catSprite.TakeDamage(damage);
