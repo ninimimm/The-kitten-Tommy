@@ -24766,7 +24766,7 @@ PrefabInstance:
       objectReference: {fileID: 1251476027}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: jumpForce
-      value: 13
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: _healthBar
