@@ -10,8 +10,9 @@ public class PauseMenu : MonoBehaviour
     
     private void Start()
     {
-        for (var i = 0; i < crates.Length; i++)
-            _transforms[i] = crates[i].transform.position;
+        if(crates.Length > 0)
+            for (var i = 0; i < crates.Length; i++)
+                _transforms[i] = crates[i].transform.position;
     }
     // Update is called once per frame
     void Update()

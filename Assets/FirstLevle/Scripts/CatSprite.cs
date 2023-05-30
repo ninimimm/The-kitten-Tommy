@@ -113,6 +113,11 @@ public class CatSprite : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "ThirdLevle")
+        {
+            normalGravity = 0.4f;
+            _rb.gravityScale = 0.4f;
+        }
         knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
         _logicKnife.damage = 3;
         _rb = GetComponent<Rigidbody2D>();
