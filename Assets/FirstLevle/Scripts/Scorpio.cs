@@ -153,7 +153,7 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        if(!_stateInfo.IsName("ScorpioHurt"))
+        if(!_stateInfo.IsName("ScorpioHurt") && !_stateInfo.IsName("ScorpioDeath"))
             audioSource.PlayOneShot(damageClip);
         HP -= damage;
         _healthBar.SetHealth(HP);

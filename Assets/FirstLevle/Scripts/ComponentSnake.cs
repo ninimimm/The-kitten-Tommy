@@ -132,7 +132,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
-        if (!_audioSource.isPlaying)
+        if (!_audioSource.isPlaying && !_animator.GetCurrentAnimatorStateInfo(0).IsName("death"))
             _audioSource.PlayOneShot(damageClip);
         damageNow = true;
         HP -= damage;

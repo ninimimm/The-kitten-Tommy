@@ -30,6 +30,11 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private AudioSource runSourse;
     [SerializeField] private AudioSource jumpSourse;
     [SerializeField] private AudioSource damageSourse;
+    [SerializeField] private AudioSource dieSourse;
+    [SerializeField] private AudioSource revivalSourse;
+    [SerializeField] private AudioSource swimSourse;
+    [SerializeField] private AudioSource toWaterSourse;
+    [SerializeField] private AudioSource fromWaterSourse;
     [SerializeField] private AudioSource fliesSourse;
     [SerializeField] private GameObject Fly1;
     [SerializeField] private int maxCountHealth;
@@ -160,7 +165,30 @@ public class CatSprite : MonoBehaviour
         UpdateCheckpoint();
         UpdateGround();
         UpdateJump();
+        UpdateWaterSounds();
+        if (stateInfo.IsName("revival"))
+            revivalSourse.Play();
         SwitchAnimation();
+    }
+
+    private void UpdateWaterSounds()
+    {
+        var yCoord = transform.position.y;
+        var isOnTop = yCoord > -1.4 && transform.position.x < 30;
+        if (!isOnTop)
+            isOnTop = yCoord > 0.6 && transform.position.x > 30;
+        var isOnBound = transform.position.x < 27.6 && yCoord < -1.3 && yCoord > -1.6;
+        if (!isOnBound)
+            isOnBound = transform.position.x > 31.53 && yCoord < 0.6 && yCoord > 0.36;
+        var isCollidingToWater = (bool)Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
+        if (!isCollidingToWater)
+            return;
+        if (!fromWaterSourse.isPlaying && Input.GetAxis("Vertical") > 0 && isOnBound && !isOnTop) 
+            fromWaterSourse.Play();
+        else if (!toWaterSourse.isPlaying && Input.GetAxis("Vertical") <= 0 && isOnBound && !isOnTop)
+            toWaterSourse.Play();
+        else if (!swimSourse.isPlaying && (Math.Abs(moveInWater) > 0.3 || Math.Abs(Input.GetAxis("Vertical")) > 0.3) && !isOnTop)
+            swimSourse.Play();
     }
 
     private void UpdateLight()
@@ -335,7 +363,10 @@ public class CatSprite : MonoBehaviour
             _grabbingHook.isHooked = false;
             _grabbingHook._joint2D.enabled = false;
             if (countHealth <= 1)
+            {
                 isDeath = true;
+                dieSourse.Play();
+            }
             else
             {
                 countHealth -= 1;

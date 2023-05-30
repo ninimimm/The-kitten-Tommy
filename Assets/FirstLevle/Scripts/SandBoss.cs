@@ -191,7 +191,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     
     public void TakeDamage(float damage)
     {
-        if (!_audioSourceBossHurt.isPlaying)
+        if (!_audioSourceBossHurt.isPlaying && !animator.GetCurrentAnimatorStateInfo(0).IsName("death"))
             _audioSourceBossHurt.Play();
         HP -= damage;
         _healthBar.SetHealth(HP);

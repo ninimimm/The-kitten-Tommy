@@ -187,7 +187,7 @@ public class Mummy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        if (!_audioSourceMummyHurt.isPlaying)
+        if (!_audioSourceMummyHurt.isPlaying && !animator.GetCurrentAnimatorStateInfo(0).IsName("MummyDeath"))
             _audioSourceMummyHurt.Play();
         HP -= damage;
         _healthBar.SetHealth(HP);

@@ -159,7 +159,7 @@ public class Hawk : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
-        if (!_audioSource.isPlaying)
+        if (!_audioSource.isPlaying && !_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_death"))
             _audioSource.PlayOneShot(damageClip);
         HP -= damage;
         _healthBar.SetHealth(HP);
