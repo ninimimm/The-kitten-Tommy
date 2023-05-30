@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, IDamageable
 {
+    [SerializeField] private float maxHP;
+    [SerializeField] public float HP;
+    [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private Image _fill;
+    [SerializeField] private Image _bar;
     [SerializeField] private CatSprite _cat;
     [SerializeField] private float timeFire;
     [SerializeField] private float timeWait;
     [SerializeField] private GameObject[] fires;
-
     [SerializeField] private GameObject logPrefab;
     [SerializeField] private float damageLog;
     [SerializeField] private float logForce;
@@ -16,9 +21,12 @@ public class Boss : MonoBehaviour
     [SerializeField] private float maxTimeLog;
     [SerializeField] private float minTimeStone;
     [SerializeField] private float maxTimeStone;
-    [SerializeField] private float minSpawnX;
-    [SerializeField] private float maxSpawnX;
-    [SerializeField] private float destroyX;
+    [SerializeField] private float minSpawnXRight;
+    [SerializeField] private float maxSpawnXRight;
+    [SerializeField] private float minSpawnXLeft;
+    [SerializeField] private float maxSpawnXLeft;
+    [SerializeField] private float destroyXLeft;
+    [SerializeField] private float destroyXRight;
     [SerializeField] private Stone[] stones;
     [SerializeField] private float timeRain;
     [SerializeField] private float timeMiddle;
@@ -44,6 +52,8 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
+        HP = maxHP;
+        _healthBar.SetMaxHealth(maxHP);
         foreach (var stone in stones)
             _stoneBodies.Add(stone.GetComponent<Rigidbody2D>());
         _spriteRenderers = new SpriteRenderer[fires.Length];
@@ -61,20 +71,32 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
-        for (var i = logs.Count - 1; i >= 0; i--)
+        if (HP <= 0)
         {
-            if (logs[i].gameObject.transform.position.x <= destroyX)
-            {
-                Log logToDestroy = logs[i];
-                logs.RemoveAt(i);
-                Destroy(logToDestroy.gameObject);
-            }
+            StopCoroutine(FireRoutine());
+            StopCoroutine(LogRoutine());
+            StopCoroutine(NewStoneAttack());
+            _fill.enabled = false;
+            _bar.enabled = false;
         }
-        if (_isRain) StoneRain();
-        if (_isMiddle) MiddleAfterOther();
-        if (_isHole) HoledRain();
-        if (_isStairs) StairsRain();
-        if (_isCentre) ToCentreRain();
+        else
+        {
+            for (var i = logs.Count - 1; i >= 0; i--)
+            {
+                if (logs[i].gameObject.transform.position.x <= destroyXLeft ||
+                    logs[i].gameObject.transform.position.x >= destroyXRight)
+                {
+                    Log logToDestroy = logs[i];
+                    logs.RemoveAt(i);
+                    Destroy(logToDestroy.gameObject);
+                }
+            }
+            if (_isRain) StoneRain();
+            if (_isMiddle) MiddleAfterOther();
+            if (_isHole) HoledRain();
+            if (_isStairs) StairsRain();
+            if (_isCentre) ToCentreRain();
+        }
     }
 
     public void LogDestroyed(Log log)
@@ -99,15 +121,23 @@ public class Boss : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minTimeLog, maxTimeLog));
-
-            var newLogObj = Instantiate(logPrefab, new Vector3(Random.Range(minSpawnX, maxSpawnX),
+            var side = Random.Range(0, 2);
+            float spawnPos;
+            if (side == 1)
+                spawnPos = Random.Range(minSpawnXRight, maxSpawnXRight);
+            else
+                spawnPos = Random.Range(minSpawnXLeft, maxSpawnXLeft);
+            var newLogObj = Instantiate(logPrefab, new Vector3(spawnPos,
                 logPrefab.transform.position.y, logPrefab.transform.position.z), Quaternion.identity);
             var newLog = newLogObj.GetComponent<Log>();
             newLog._cat = _cat;
             newLog._boss = gameObject;
             newLog.damage = damageLog;
             var rb = newLogObj.GetComponent<Rigidbody2D>();
-            rb.AddForce(new Vector2(-logForce, 0));
+            if (side == 1)
+                rb.AddForce(new Vector2(-logForce, 0));
+            else
+                rb.AddForce(new Vector2(logForce, 0));
             logs.Add(newLog);
         }
     }
@@ -271,5 +301,10 @@ public class Boss : MonoBehaviour
             }
             _centreTimer = timeCentre;
         }
+    }
+    public void TakeDamage(float damage)
+    {
+        HP -= damage;
+        _healthBar.SetHealth(HP);
     }
 }

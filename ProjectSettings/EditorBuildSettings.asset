@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SecondLevle/SecondLevle.unity
     guid: 4ac5d41e97474534eb1c54e4cae75dbd
+  - enabled: 1
+    path: Assets/ThirdLevle/ThirdLevle.unity
+    guid: ffc0386051223d3439f1f708622c246a
   m_configObjects: {}

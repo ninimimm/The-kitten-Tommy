@@ -118,6 +118,7 @@ public class CatSprite : MonoBehaviour
 
     private void Start()
     {
+        transform.position = spawnRevile;
         if (SceneManager.GetActiveScene().name == "ThirdLevle")
         {
             normalGravity = 0.4f;
@@ -154,6 +155,8 @@ public class CatSprite : MonoBehaviour
     
     private void Update()
     {
+        if (transform.position.x > 50)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("shit")) isNowShit = true;
         else isNowShit = false;
