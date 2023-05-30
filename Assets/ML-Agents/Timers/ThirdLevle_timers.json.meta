@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 4fc33405df2bb4642852e6c4a8993009
+=======
+guid: 68ea791329f923146af1f489c6f74795
+>>>>>>> 2b66c59 (Stone attack)
 TextScriptImporter:
   externalObjects: {}
   userData: 

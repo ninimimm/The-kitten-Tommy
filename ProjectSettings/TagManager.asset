@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Cloud
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,8 @@ TagManager:
   - Fish
   - Balloon
   - Fire
-  - 
-  - 
+  - Stones
+  - Log
   - 
   - 
   - 

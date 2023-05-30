@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4941517241016446634}
   - component: {fileID: 4941517241016446635}
   - component: {fileID: 735457779706621411}
-  m_Layer: 6
+  m_Layer: 20
   m_Name: log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,4 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cat: {fileID: 0}
+  _boss: {fileID: 0}
   damage: 2
