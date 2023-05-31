@@ -37,14 +37,7 @@ public class GrabbingHook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isHooked && Input.GetKey(KeyCode.A))
-        {
-            _catSprite._rb.AddForce(new Vector2(-forge, forge)); // Приложить силу влево
-        }
-        else if (isHooked && Input.GetKey(KeyCode.D))
-        {
-            _catSprite._rb.AddForce(new Vector2(forge, forge)); // Приложить силу вправо
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -77,6 +70,10 @@ public class GrabbingHook : MonoBehaviour
             line.SetPosition(0, transform.position - new Vector3(0, 0.55f, 0));
             if (_joint2D.connectedBody is not null)
             {
+                if (isHooked && Input.GetKey(KeyCode.A))
+                    _catSprite._rb.AddForce(new Vector2(-forge, forge)); // Приложить силу влево
+                else if (isHooked && Input.GetKey(KeyCode.D))
+                    _catSprite._rb.AddForce(new Vector2(forge, forge)); // Приложить силу вправо
                 line.SetPosition(1, _joint2D.connectedBody.transform.position + (Vector3)_joint2D.connectedAnchor);
             }
         }
