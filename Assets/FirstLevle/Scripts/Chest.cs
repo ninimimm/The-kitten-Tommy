@@ -42,6 +42,7 @@ public class Chest : MonoBehaviour, IDamageable
                 {
                     _audioMoneySource.Play();
                     _catSprite.money += MONEY_REWARD;
+                    _catSprite._textMoney.text = _catSprite.money.ToString();
                     _animator.SetInteger("state", 2);
                 }
                 _poly[0].enabled = true;

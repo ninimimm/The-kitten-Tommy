@@ -155,7 +155,7 @@ public class CatSprite : MonoBehaviour
     
     private void Update()
     {
-        if (transform.position.x > 50)
+        if (transform.position.x > 55)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("shit")) isNowShit = true;
