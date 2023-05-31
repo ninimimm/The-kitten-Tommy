@@ -29,13 +29,11 @@ public class WriteText : MonoBehaviour
             text.text = "Попытайтесь перелететь через яму с помощью крюка";
         else if (_cat.transform.position.x > -5 && _cat.transform.position.x < -1)
             text.text = "Чтобы ударить змею нажмите W или киньте кинжал нажав ЛКМ и указав мышью направление";
-        else if (_cat.transform.position.x > -1 && _cat.transform.position.x < 6)
+        else if (_cat.transform.position.x > -1 && _cat.transform.position.x < 5)
             text.text = "Попытайтесь пользуясь крюком перелететь на блок выше";
-        else if (_cat.transform.position.x > 6 && _cat.transform.position.x < 7)
-            text.text = "Для сохранения нажмите Shift у таблички";
-        else if (_cat.transform.position.x > 7 && _cat.transform.position.x < 10)
-            text.text = "Попытайтесь пользуясь крюком перелететь на блок выше";
-        else if (_cat.transform.position.x > 10 && _cat.transform.position.x < 14)
+        else if (_cat.transform.position.x > 5 && _cat.transform.position.x < 9)
+            text.text = "Для сохранения нажмите Shift находясь около таблички";
+        else if (_cat.transform.position.x > 9 && _cat.transform.position.x < 14)
             text.text = "Перелетите на платформу, находящуюся на воздухе";
         else if (_cat.transform.position.x > 14 && _cat.transform.position.x < 16)
             text.text = "Нажмите E чтобы открыть сундук с деньгами и подойдите чтобы собрать монетки";

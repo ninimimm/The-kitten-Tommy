@@ -32,7 +32,7 @@ public class Chest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && Vector3.Distance(_cat.transform.position, transform.position) < 1)
+        if (Input.GetKeyDown(KeyCode.E) && Vector3.Distance(_cat.transform.position, transform.position) < 1.2)
             isOpened = true;
             
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("empty"))
@@ -41,7 +41,7 @@ public class Chest : MonoBehaviour
             {
                 _audioOpenSource.Play();
                 _animator.SetInteger("state", 1);
-                if (Physics2D.OverlapCircle(transform.position, distanseAttack, catLayer))
+                if (Vector3.Distance(_cat.transform.position, transform.position) < 0.85)
                 {
                     _audioMoneySource.Play();
                     _catSprite.money += MONEY_REWARD;

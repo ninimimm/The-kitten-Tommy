@@ -8,6 +8,7 @@ public class Crate : MonoBehaviour, IDamageable
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private float distanseAttack;
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip destroyClip;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
     private bool getHit;
@@ -70,7 +71,7 @@ public class Crate : MonoBehaviour, IDamageable
             }
             if (_audioSource is not null)
             {
-                _audioSource.Play();
+                _audioSource.PlayOneShot(destroyClip);
             }
             _spriteRenderer.enabled = false;
             _boxCollider.enabled = false;
