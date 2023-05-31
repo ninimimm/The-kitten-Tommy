@@ -30,8 +30,8 @@ public class Ball : MonoBehaviour
         var hitObjects = Physics2D.OverlapCircleAll(DestroyRadius.position, RadiusDestroy, catLayer | ground | enemies);
         if (hitObjects.Length > 0)
         {
-            bool playerHit = false;
-            bool groundOrEnemyHit = false;
+            var playerHit = false;
+            var groundOrEnemyHit = false;
 
             foreach (var hitObject in hitObjects)
             {

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 337790698049406144}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: DestroyRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5745300302438610007}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 5745300302654022362}
   - component: {fileID: 5745300302654022361}
   - component: {fileID: 5745300302654022360}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Fall_Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1301735017
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 552c462af32824743bf7aaaddb85f59a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -250,10 +250,9 @@ MonoBehaviour:
     m_Bits: 128
   ground:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 7232
   enemies:
     serializedVersion: 2
     m_Bits: 256
-  _audioSource: {fileID: 8475665058626463116, guid: ba808e96938011e4ea066d29642bee25, type: 3}
-  volume: 1
   damage: 3
+  _audioSource: {fileID: 8475665058626463116, guid: ba808e96938011e4ea066d29642bee25, type: 3}
