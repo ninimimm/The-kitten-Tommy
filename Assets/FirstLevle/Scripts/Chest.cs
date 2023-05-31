@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Chest : MonoBehaviour, IDamageable
+public class Chest : MonoBehaviour
 {
     private const int MONEY_REWARD = 5;
     [SerializeField] private GameObject _cat;
@@ -32,6 +32,9 @@ public class Chest : MonoBehaviour, IDamageable
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E) && Vector3.Distance(_cat.transform.position, transform.position) < 1)
+            isOpened = true;
+            
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("empty"))
         {
             if (isOpened)
@@ -55,8 +58,6 @@ public class Chest : MonoBehaviour, IDamageable
             isStart = false;
         }
     }
-
-    public void TakeDamage(float damage) => isOpened = true;
 
     public void Save()
     {

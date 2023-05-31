@@ -6,6 +6,8 @@ public class SpiderRunToTreeAndFall : MonoBehaviour
     [SerializeField] private float goCoordinates;
     private Animator _animator;
     private bool isRunning;
+
+    public bool inputE;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,7 @@ public class SpiderRunToTreeAndFall : MonoBehaviour
     {
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("fall"))
         {
-            if (Input.GetKey(KeyCode.Mouse1))
+            if (inputE)
             {
                 _animator.SetInteger("state",1);
                 isRunning = true;

@@ -22,23 +22,23 @@ public class WriteText : MonoBehaviour
         else if (_cat.transform.position.x > -21 && _cat.transform.position.x < -16)
             text.text = "Для прыжка нажмите пробел";
         else if (_cat.transform.position.x > -16 && _cat.transform.position.x < -13)
-            text.text = "Чтобы выпустить крюк, наведитесь мышкой на место и нажмите Shift";
+            text.text = "Чтобы выпустить крюк, наведитесь мышкой на место и нажмите ПКМ";
         else if (_cat.transform.position.x > -13 && _cat.transform.position.x < -11)
             text.text = "Крюк имеет область действия, почувствуйте ее\n"+"Чтобы повиснуть на расстоянии над землей, выпустите крюк в прыжке";
         else if (_cat.transform.position.x > -11 && _cat.transform.position.x < -5)
             text.text = "Попытайтесь перелететь через яму с помощью крюка";
         else if (_cat.transform.position.x > -5 && _cat.transform.position.x < -1)
-            text.text = "Чтобы ударить змею нажмите Q или киньте кинжал нажав лкм и указав мышью направление";
+            text.text = "Чтобы ударить змею нажмите W или киньте кинжал нажав ЛКМ и указав мышью направление";
         else if (_cat.transform.position.x > -1 && _cat.transform.position.x < 6)
             text.text = "Попытайтесь пользуясь крюком перелететь на блок выше";
         else if (_cat.transform.position.x > 6 && _cat.transform.position.x < 7)
-            text.text = "Для сохранения нажмите CapsLock у таблички";
-        else if (_cat.transform.position.x > 7 && _cat.transform.position.x < 8)
+            text.text = "Для сохранения нажмите Shift у таблички";
+        else if (_cat.transform.position.x > 7 && _cat.transform.position.x < 10)
             text.text = "Попытайтесь пользуясь крюком перелететь на блок выше";
-        else if (_cat.transform.position.x > 8 && _cat.transform.position.x < 14)
+        else if (_cat.transform.position.x > 10 && _cat.transform.position.x < 14)
             text.text = "Перелетите на платформу, находящуюся на воздухе";
         else if (_cat.transform.position.x > 14 && _cat.transform.position.x < 16)
-            text.text = "Ударьте сундук с деньгами когтями чтобы открыть и подойдите чтобы собрать монетки";
+            text.text = "Нажмите E чтобы открыть сундук с деньгами и подойдите чтобы собрать монетки";
         else if (_cat.transform.position.x > 16 && _cat.transform.position.x < 20)
             text.text = "Нажмите E чтобы открыть сундук с ключом и снова E, чтобы его взять";
         else if (_cat.transform.position.x > 20 && _cat.transform.position.x < 30)

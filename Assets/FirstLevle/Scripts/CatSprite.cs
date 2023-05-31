@@ -26,6 +26,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] public Transform groundCheck;
     [SerializeField] public float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform checkpointCheck;
     [SerializeField] private float timeToJump;
     [SerializeField] private AudioSource runSourse;
     [SerializeField] private AudioSource jumpSourse;
@@ -51,6 +52,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private float distanseLight;
     [SerializeField] private Sprite knifeSprite;
     [SerializeField] private logicKnife _logicKnife;
+    [SerializeField] private float distanseCheckpoint;
     
     public bool isWater;
     public int countHealth;
@@ -161,7 +163,7 @@ public class CatSprite : MonoBehaviour
         if (stateInfo.IsName("shit")) isNowShit = true;
         else isNowShit = false;
         isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        isCheckpoint = Physics2D.OverlapCircle(smallAttack.position, distanseSmallAttack, checkpointLayer);
+        isCheckpoint = Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer);
         _knifeBar.SetHealth(knife.timer);
         UpdateLight();
         UpdateFly();
@@ -282,7 +284,7 @@ public class CatSprite : MonoBehaviour
     {
         if (!isDeath && !isRevive)
         {
-            if (Input.GetKeyDown(KeyCode.CapsLock) && !_grabbingHook.isHooked && 
+            if (Input.GetKeyDown(KeyCode.LeftShift) && !_grabbingHook.isHooked && 
                 stateInfo.IsName("Stay"))
             {
                 _stateCat = MovementState.shit;
@@ -314,7 +316,7 @@ public class CatSprite : MonoBehaviour
                 if (_rb.velocity.y > 1f) _stateCat = MovementState.jumpup;
                 else if (_rb.velocity.y < - 1f) _stateCat = MovementState.jumpdown;
         
-                if (Input.GetKeyDown(KeyCode.Q))
+                if (Input.GetKeyDown(KeyCode.W))
                     Attake();
 
                 if (damageNow)
@@ -352,6 +354,7 @@ public class CatSprite : MonoBehaviour
     {
         Gizmos.DrawWireSphere(smallAttack.position,distanseSmallAttack);
         Gizmos.DrawWireSphere(groundCheck.position,groundCheckRadius);
+        Gizmos.DrawWireSphere(checkpointCheck.position,distanseCheckpoint);
     }
     public void TakeDamage(float damage)
     {

@@ -9,6 +9,7 @@ public class SpiderJump : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private bool isRunning;
     private bool isJump;
+    public bool inputE;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class SpiderJump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (inputE)
         {
             _animator.SetInteger("state",1);
             isRunning = true;

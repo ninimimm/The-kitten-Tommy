@@ -5643,8 +5643,16 @@ PrefabInstance:
       value: -3.2
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: checkpointCheck
+      value: 
+      objectReference: {fileID: 1015253470}
+    - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: groundCheckRadius
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: distanseCheckpoint
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872397, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: line
@@ -5676,6 +5684,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+--- !u!4 &1015253470 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8792474989578157231, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+  m_PrefabInstance: {fileID: 1015253469}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1019167190
 GameObject:
   m_ObjectHideFlags: 0

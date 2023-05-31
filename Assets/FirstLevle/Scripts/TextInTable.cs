@@ -5,7 +5,7 @@ public class TextInTable : MonoBehaviour
 {
     [SerializeField] private GameObject _cat;
     private Text text;
-    private bool broke;
+    public bool inputE;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +18,8 @@ public class TextInTable : MonoBehaviour
     void Update()
     {
         if (_cat.transform.position.x > 9.1)
-            text.text = "Хотите заглянуть?\nНажмите пкм";
-        if (Input.GetKey(KeyCode.Mouse1))
-            broke = true;
-        if (broke)
+            text.text = "Хотите заглянуть?\nНажмите E";
+        if (inputE)
             text.text = "Кажется, это место давно заброшено\n4 1 5 2 3 ...";
     }
 }
