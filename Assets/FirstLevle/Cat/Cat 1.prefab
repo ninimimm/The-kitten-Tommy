@@ -202,6 +202,11 @@ MonoBehaviour:
   runSourse: {fileID: 8160257155271918742}
   jumpSourse: {fileID: 8160257154411254188}
   damageSourse: {fileID: 8160257155914855543}
+  dieSourse: {fileID: 0}
+  revivalSourse: {fileID: 0}
+  swimSourse: {fileID: 0}
+  toWaterSourse: {fileID: 0}
+  fromWaterSourse: {fileID: 0}
   fliesSourse: {fileID: 8160257155898957641}
   Fly1: {fileID: 0}
   maxCountHealth: 3
@@ -220,7 +225,10 @@ MonoBehaviour:
   lights: []
   knife: {fileID: 0}
   spawn: {x: 1, y: 0, z: 0}
+  spawnRevile: {x: 0, y: 0, z: 0}
   distanseLight: 0
+  knifeSprite: {fileID: 0}
+  _logicKnife: {fileID: 0}
   isWater: 0
   countHealth: 0
   smallAttack: {fileID: 5705279651581221962}
@@ -252,7 +260,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.1, y: 0.07}
+    oldSize: {x: 0.1, y: 0.16}
     newSize: {x: 0.2, y: 0.14}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -340,6 +348,7 @@ MonoBehaviour:
   stopping: 0.2
   distanseIn: 0.15
   woosh: {fileID: 8300000, guid: 8e1eee37a4996c34fbaca9cf119a6699, type: 3}
+  forge: 0
   volume: 0.333
   isHooked: 0
   line: {fileID: 0}
