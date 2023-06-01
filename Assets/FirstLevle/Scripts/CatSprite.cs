@@ -55,6 +55,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private float distanseCheckpoint;
     [SerializeField] private AudioSource checkpointSource;
     [SerializeField] private AudioSource shitSource;
+    [SerializeField] private AudioSource hitSource;
     
     public bool isWater;
     public int countHealth;
@@ -349,6 +350,7 @@ public class CatSprite : MonoBehaviour
         if (_stateCat == MovementState.damage) return;
         if (!stateInfo.IsName("hit"))
         {
+            hitSource.Play();
             _stateCat = MovementState.hit;
             hitEnemies = Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, enemyLayers);
             foreach (var enemy in hitEnemies)
