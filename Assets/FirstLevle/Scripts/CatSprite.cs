@@ -175,8 +175,10 @@ public class CatSprite : MonoBehaviour
     
     private void Update()
     {
-        if (transform.position.x > 55)
+        if (Input.GetKeyDown(KeyCode.N))
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (Input.GetKeyDown(KeyCode.B))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("shit")) isNowShit = true;
         else isNowShit = false;
