@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Portal : MonoBehaviour
 {
     [SerializeField] private Transform cat;
+    [SerializeField] private AudioSource _audioSource;
     private Animator _animator;
     // Start is called before the first frame update
     void Start()
@@ -20,8 +21,8 @@ public class Portal : MonoBehaviour
         {
             cat.GetComponent<SpriteRenderer>().enabled = false;
             _animator.SetInteger("state",1);
+            _audioSource.Play();
         }
-            
     }
 
     public void LoadBoss() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
