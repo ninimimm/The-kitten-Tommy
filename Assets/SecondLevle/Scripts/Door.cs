@@ -4,6 +4,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField] private GameObject cat;
+    [SerializeField] public AudioSource DoorSource;
     [SerializeField] private string key;
     [SerializeField] private GameObject logicKeys;
     private TakeKey _takeKey;
@@ -30,6 +31,7 @@ public class Door : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && Math.Abs(transform.position.x - cat.transform.position.x) < 1 && _catSprite.key == key)
         {
             animator.SetInteger("state", 1);
+            DoorSource.Play();
             _catSprite.key = "";
             boxCollider2D.enabled = false;
             if (key == "iron") _takeKey.ironKeyImage.enabled = false;

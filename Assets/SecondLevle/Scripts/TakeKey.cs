@@ -11,7 +11,7 @@ public class TakeKey : MonoBehaviour
     [SerializeField] private GameObject ironKeyPrefab;
     [SerializeField] public GameObject goldChest;
     [SerializeField] public GameObject ironChest;
-    
+
     public Animator _animatorGoldChest;
     public Animator _animatorIronChest;
     public GameObject _goldKey;
@@ -78,6 +78,7 @@ public class TakeKey : MonoBehaviour
 
     void Update()
     {
+
         goldCheStateInfo = _animatorGoldChest.GetCurrentAnimatorStateInfo(0);
         ironCheStateInfo = _animatorIronChest.GetCurrentAnimatorStateInfo(0);
         if (!goldCheStateInfo.IsName("emptygold") ||
@@ -147,11 +148,9 @@ public class TakeKey : MonoBehaviour
                     
                 goldKeyImage.enabled = true;
                 _catSprite.key = "gold";
-
             }
             else if (_ironKey is not null && Vector3.Distance(_catSprite.transform.position, _ironKey.transform.position) < 2)
             {
-                Destroy(_ironKey);
                 if (_catSprite.key == "gold")
                 {
                     goldKeyImage.enabled = false;

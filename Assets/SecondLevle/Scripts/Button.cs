@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
+    [SerializeField] private AudioSource PressSource;
+    [SerializeField] private AudioSource UnpressSource;
     [SerializeField] private Transform _pressedTransform;
     [SerializeField] private float distancePressed;
     [SerializeField] private LayerMask catLayer;
@@ -11,6 +13,8 @@ public class Button : MonoBehaviour
     public MovementState state;
     private Animator _animator;
     private ManageButtons _manageButtons;
+    public bool isUnpressSoundPlayed = true;
+    public bool isKeyWasPressed;
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -24,10 +28,20 @@ public class Button : MonoBehaviour
             Physics2D.OverlapCircle(_pressedTransform.position, distancePressed, catLayer))
         {
             state = MovementState.Pressed;
+            isKeyWasPressed = true;
+            PressSource.Play();
             _manageButtons.keys.Append(key);
         }
         _animator.SetInteger("state", (int)state);
+        if (!Physics2D.OverlapCircle(_pressedTransform.position, distancePressed, catLayer) 
+            && _animator.GetCurrentAnimatorStateInfo(0).IsName("stay") 
+            && !isUnpressSoundPlayed && !UnpressSource.isPlaying && isKeyWasPressed)
+        {
+            isUnpressSoundPlayed = true;
+            UnpressSource.Play();
+        }
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(_pressedTransform.position,distancePressed);
