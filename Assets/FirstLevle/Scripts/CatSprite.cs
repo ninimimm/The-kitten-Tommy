@@ -56,6 +56,8 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private AudioSource checkpointSource;
     [SerializeField] private AudioSource shitSource;
     [SerializeField] private AudioSource hitSource;
+    [SerializeField] private AudioSource phoneSource;
+    [SerializeField] private AudioSource caveSource;
     
     public bool isWater;
     public int countHealth;
@@ -173,33 +175,37 @@ public class CatSprite : MonoBehaviour
         UpdateCheckpoint();
         UpdateGround();
         UpdateJump();
-        UpdateWaterSounds();
         if (stateInfo.IsName("revival"))
             revivalSourse.Play();
         SwitchAnimation();
     }
 
-    private void UpdateWaterSounds()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        var yCoord = transform.position.y;
-        var isOnTop = yCoord > -1.4 && transform.position.x < 30;
-        if (!isOnTop)
-            isOnTop = yCoord > 0.6 && transform.position.x > 30;
-        var isOnBound = transform.position.x < 27.6 && yCoord < -1.3 && yCoord > -1.6;
-        if (!isOnBound)
-            isOnBound = transform.position.x > 31.53 && yCoord < 0.6 && yCoord > 0.36;
-        var isCollidingToWater = (bool)Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
-        if (!isCollidingToWater)
-            return;
-        if (!fromWaterSourse.isPlaying && Input.GetAxis("Vertical") > 0 && isOnBound && !isOnTop)
+        if (collision.gameObject.layer == 14)
+        {
+            toWaterSourse.Play();
+            swimSourse.Play();
+        }
+
+        if (collision.gameObject.layer == 24)
+        {
+            phoneSource.Stop();
+            caveSource.Play();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 14)
         {
             fromWaterSourse.Play();
             swimSourse.Stop();
         }
-        else if (!toWaterSourse.isPlaying && Input.GetAxis("Vertical") <= 0 && isOnBound && !isOnTop)
+        if (collision.gameObject.layer == 24)
         {
-            toWaterSourse.Play();
-            swimSourse.Play();
+            phoneSource.Play();
+            caveSource.Stop();
         }
     }
 
@@ -328,7 +334,7 @@ public class CatSprite : MonoBehaviour
                 if (_rb.velocity.y > 1f) _stateCat = MovementState.jumpup;
                 else if (_rb.velocity.y < - 1f) _stateCat = MovementState.jumpdown;
         
-                if (Input.GetKeyDown(KeyCode.W))
+                if (Input.GetKeyDown(KeyCode.W) && !isWater)
                     Attake();
 
                 if (damageNow)

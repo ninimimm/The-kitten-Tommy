@@ -33,11 +33,14 @@ public class ManageButtons : MonoBehaviour
                 _doorAnimator.SetBool("opened",true);
                 _doorBoxCollider2D.enabled = false;
             }
-                
             else if (timer < -0.4)
+            {
                 timer = timeToWait;
+                foreach (var button in buttons)
+                    button.isUnpressSoundPlayed = false;
             }
-
+        }
+        
         if (timer < 0 && timer > -0.2)
         {
             foreach (var button in buttons)

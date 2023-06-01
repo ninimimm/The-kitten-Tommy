@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class Spider : MonoBehaviour
 {
+    [SerializeField] private Transform catTransform;
+    [SerializeField] private float distanseRun;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject cat;
     [SerializeField] private Transform attack;
     [SerializeField] private float distanseAttack;
@@ -24,6 +28,7 @@ public class Spider : MonoBehaviour
 
     void Update()
     {
+        UpdateSound();
         if (timeToStay > 0)
         {
             timeToStay -= Time.deltaTime;
@@ -47,5 +52,18 @@ public class Spider : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void UpdateSound()
+    {
+        var catVector = catTransform.position;
+        var vector = transform.position;
+        var dy = catVector.y - vector.y;
+        var dx = catVector.x - vector.x;
+        var distance = Math.Sqrt(dx * dx + dy * dy);
+        audioSource.volume = 0.4f;
+        audioSource.volume -= (float)(distance < distanseRun ? 0.4f - (distanseRun - distance) / (2.5 * distanseRun): 0.4f);
+        if (!audioSource.isPlaying) 
+            audioSource.Play();
     }
 }

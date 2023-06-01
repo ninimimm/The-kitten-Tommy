@@ -6,6 +6,7 @@ public class Door : MonoBehaviour
     [SerializeField] private GameObject cat;
     [SerializeField] private string key;
     [SerializeField] private GameObject logicKeys;
+    [SerializeField] public AudioSource openDoor;
     private TakeKey _takeKey;
     public BoxCollider2D boxCollider2D;
     public Animator animator;
@@ -29,6 +30,7 @@ public class Door : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && Math.Abs(transform.position.x - cat.transform.position.x) < 1 && _catSprite.key == key)
         {
+            openDoor.Play();
             animator.SetInteger("state", 1);
             _catSprite.key = "";
             boxCollider2D.enabled = false;
