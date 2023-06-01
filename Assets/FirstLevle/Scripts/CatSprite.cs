@@ -191,12 +191,16 @@ public class CatSprite : MonoBehaviour
         var isCollidingToWater = (bool)Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
         if (!isCollidingToWater)
             return;
-        if (!fromWaterSourse.isPlaying && Input.GetAxis("Vertical") > 0 && isOnBound && !isOnTop) 
+        if (!fromWaterSourse.isPlaying && Input.GetAxis("Vertical") > 0 && isOnBound && !isOnTop)
+        {
             fromWaterSourse.Play();
+            swimSourse.Stop();
+        }
         else if (!toWaterSourse.isPlaying && Input.GetAxis("Vertical") <= 0 && isOnBound && !isOnTop)
+        {
             toWaterSourse.Play();
-        else if (!swimSourse.isPlaying && (Math.Abs(moveInWater) > 0.3 || Math.Abs(Input.GetAxis("Vertical")) > 0.3) && !isOnTop)
             swimSourse.Play();
+        }
     }
 
     private void UpdateLight()
