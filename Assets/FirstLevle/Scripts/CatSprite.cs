@@ -53,6 +53,8 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private Sprite knifeSprite;
     [SerializeField] private logicKnife _logicKnife;
     [SerializeField] private float distanseCheckpoint;
+    [SerializeField] private AudioSource checkpointSource;
+    [SerializeField] private AudioSource shitSource;
     
     public bool isWater;
     public int countHealth;
@@ -227,7 +229,11 @@ public class CatSprite : MonoBehaviour
 
     private void UpdateCheckpoint()
     {
-        if (isNowShit && isCheckpoint) spawn = transform.position;
+        if (isNowShit && isCheckpoint)
+        {
+            spawn = transform.position;
+            checkpointSource.Play();
+        }
     }
 
     private void UpdateGround()
@@ -286,7 +292,8 @@ public class CatSprite : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftShift) && !_grabbingHook.isHooked && 
                 stateInfo.IsName("Stay"))
-            {
+            {   
+                shitSource.Play();
                 _stateCat = MovementState.shit;
                 _animator.SetInteger("State", (int)_stateCat);
             }
