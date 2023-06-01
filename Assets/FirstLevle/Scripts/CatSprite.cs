@@ -176,7 +176,7 @@ public class CatSprite : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%5 + 1);
         if (Input.GetKeyDown(KeyCode.B))
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         stateInfo = _animator.GetCurrentAnimatorStateInfo(0);

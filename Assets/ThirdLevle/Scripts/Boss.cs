@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Boss : MonoBehaviour, IDamageable
@@ -37,6 +38,9 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private float timeStairs;
     [SerializeField] private float timeCentre;
     [SerializeField] private SpikeBall[] spikeBalls;
+    [SerializeField] private Move clowd;
+    [SerializeField] private AudioSource winSource;
+    [SerializeField] private AudioSource phoneSource;
     private bool isFireOn = true;
     public List<Log> logs = new List<Log>();
     private int _position;
@@ -53,9 +57,12 @@ public class Boss : MonoBehaviour, IDamageable
     private bool _isStairs;
     private bool _isCentre;
     private List<Rigidbody2D> _stoneBodies = new ();
+    private SpriteRenderer _spriteRenderer;
+    
 
     void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         HP = maxHP;
         _healthBar.SetMaxHealth(maxHP);
         foreach (var stone in stones)
@@ -75,8 +82,15 @@ public class Boss : MonoBehaviour, IDamageable
 
     void FixedUpdate()
     {
+        if (clowd.transform.position.x > 25)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%5 + 1);
         if (HP <= 0)
         {
+            phoneSource.Stop();
+            if (!winSource.isPlaying)
+                winSource.Play();
+            clowd.ParallaxEffectMultiplier = 2;
+            _spriteRenderer.enabled = false;
             foreach (var stone in stones)
             {
                 stone.transform.position = stone.startPosition;
