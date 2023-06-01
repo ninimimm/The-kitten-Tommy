@@ -63,7 +63,8 @@ public class Chest : MonoBehaviour
 
     public void Save()
     {
-        SavingSystem<Chest,ChestData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<Chest,ChestData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

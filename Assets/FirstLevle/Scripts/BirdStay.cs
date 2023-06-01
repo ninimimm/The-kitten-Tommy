@@ -54,7 +54,8 @@ public class BirdStay : MonoBehaviour
     
     public void Save()
     {
-        SavingSystem<BirdStay,BirdStayData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<BirdStay,BirdStayData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

@@ -57,7 +57,8 @@ public class Hyena : MonoBehaviour, IDamageable
 
     public void Save()
     {
-        SavingSystem<Hyena,HyenaData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<Hyena,HyenaData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

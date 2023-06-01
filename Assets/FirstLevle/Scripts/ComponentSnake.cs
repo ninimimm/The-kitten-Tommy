@@ -50,7 +50,8 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     
     public void Save()
     {
-        SavingSystem<ComponentSnake,SnakeData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<ComponentSnake,SnakeData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

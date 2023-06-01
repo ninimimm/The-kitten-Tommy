@@ -45,7 +45,8 @@ public class TakeKey : MonoBehaviour
     
     public void Save()
     {
-        SavingSystem<TakeKey,TakeKeyData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<TakeKey,TakeKeyData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

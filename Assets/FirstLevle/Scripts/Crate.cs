@@ -104,7 +104,8 @@ public class Crate : MonoBehaviour, IDamageable
 
     public void Save()
     {
-        SavingSystem<Crate,CrateData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<Crate,CrateData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

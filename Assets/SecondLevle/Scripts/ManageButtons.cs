@@ -52,7 +52,8 @@ public class ManageButtons : MonoBehaviour
     
     public void Save()
     {
-        SavingSystem<ManageButtons,ManageButtonsData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<ManageButtons,ManageButtonsData>.Save(this, $"{gameObject.name}.data");
     }
 
 

@@ -67,7 +67,8 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     public void Save()
     {
-        SavingSystem<Scorpio,ScorpioData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<Scorpio,ScorpioData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

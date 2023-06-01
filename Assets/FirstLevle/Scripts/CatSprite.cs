@@ -101,7 +101,8 @@ public class CatSprite : MonoBehaviour
     
     public void Save()
     {
-        SavingSystem<CatSprite,CatData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<CatSprite,CatData>.Save(this, $"{gameObject.name}.data");
     }
 
 
@@ -164,6 +165,7 @@ public class CatSprite : MonoBehaviour
                 CatData.start.Add(gameObject.name);
             }
             Load();
+            _textMoney.text = money.ToString();
             knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
             _healthBar.SetMaxHealth(maxHP);
             _healthBar.SetHealth(HP);   

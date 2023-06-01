@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,7 +33,8 @@ public class Coin : MonoBehaviour
 
     public void Save()
     {
-        SavingSystem<Coin,CoinData>.Save(this, $"{gameObject.name}.data");
+        if (this != null)
+            SavingSystem<Coin,CoinData>.Save(this, $"{gameObject.name}.data");
     }
 
 

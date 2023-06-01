@@ -66,7 +66,8 @@ public class Mummy : MonoBehaviour, IDamageable
     
     public void Save()
     {
-        SavingSystem<Mummy,MummyData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<Mummy,MummyData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

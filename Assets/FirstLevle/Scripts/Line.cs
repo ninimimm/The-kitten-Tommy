@@ -24,7 +24,8 @@ public class Line : MonoBehaviour
     }
     public void Save()
     {
-        SavingSystem<Line,LineData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<Line,LineData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

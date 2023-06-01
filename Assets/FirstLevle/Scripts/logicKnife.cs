@@ -30,7 +30,8 @@ public class logicKnife : MonoBehaviour
     
     public void Save()
     {
-        SavingSystem<logicKnife,LogicKnifeData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<logicKnife,LogicKnifeData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

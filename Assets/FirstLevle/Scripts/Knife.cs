@@ -46,7 +46,8 @@ public class Knife : MonoBehaviour
     
     public void Save()
     {
-        SavingSystem<Knife,KnifeData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<Knife,KnifeData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

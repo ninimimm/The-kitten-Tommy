@@ -71,7 +71,8 @@ public class BirdIdle : MonoBehaviour
     
     public void Save()
     {
-        SavingSystem<BirdIdle,BirdIdleData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<BirdIdle,BirdIdleData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

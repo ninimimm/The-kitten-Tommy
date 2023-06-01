@@ -75,7 +75,8 @@ public class SandBoss : MonoBehaviour, IDamageable
     
     public void Save()
     {
-        SavingSystem<SandBoss,BossData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<SandBoss,BossData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

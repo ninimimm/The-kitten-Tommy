@@ -48,7 +48,8 @@ public class EatingBird : MonoBehaviour
     
     public void Save()
     {
-        SavingSystem<EatingBird,EatingBirdData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<EatingBird,EatingBirdData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()

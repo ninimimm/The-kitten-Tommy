@@ -60,7 +60,8 @@ public class Hawk : MonoBehaviour, IDamageable
     
     public void Save()
     {
-        SavingSystem<Hawk,HawkData>.Save(this, $"{gameObject.name}.data");
+        if (this != null) 
+            SavingSystem<Hawk,HawkData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()
