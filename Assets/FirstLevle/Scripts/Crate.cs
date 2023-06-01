@@ -9,6 +9,12 @@ public class Crate : MonoBehaviour, IDamageable
     [SerializeField] private float distanseAttack;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip destroyClip;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask waterLayer;
+    [SerializeField] private AudioSource groundFallSource;
+    [SerializeField] private AudioSource waterFallSource;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
     private bool getHit;
@@ -17,6 +23,7 @@ public class Crate : MonoBehaviour, IDamageable
     private GameObject coinInstance;
     private bool newSpawn = true;
     private Coin coinScript;
+    private bool canFall = true;
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -48,6 +55,22 @@ public class Crate : MonoBehaviour, IDamageable
             else GoToFirstLevel.crates.Add(this);
             isStart = false;
         }
+
+        if (transform.position.y < 0 && _spriteRenderer.enabled && canFall)
+        {
+            if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer))
+            {
+                canFall = false;
+                groundFallSource.Play();
+            }
+                
+            else if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer))
+            {
+                canFall = false;
+                waterFallSource.Play();
+            }
+        }   
+        if (transform.position.y > 1) canFall = true;
         if (transform.position.y < -0.3 && getHit && _spriteRenderer.enabled)
         {
             coinInstance = Instantiate(coinPrefab, gameObject.transform.position, Quaternion.identity);
@@ -91,5 +114,9 @@ public class Crate : MonoBehaviour, IDamageable
             data.positions[gameObject.name][0],
             data.positions[gameObject.name][1],
             data.positions[gameObject.name][2]);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position,groundCheckRadius);
     }
 }
