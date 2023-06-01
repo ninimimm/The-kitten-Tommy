@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,8 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private float maxTimeLog;
     [SerializeField] private float minTimeStone;
     [SerializeField] private float maxTimeStone;
+    [SerializeField] private float minTimeSpikes;
+    [SerializeField] private float maxTimeSpikes;
     [SerializeField] private float minSpawnXRight;
     [SerializeField] private float maxSpawnXRight;
     [SerializeField] private float minSpawnXLeft;
@@ -33,6 +36,7 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private float timeHole;
     [SerializeField] private float timeStairs;
     [SerializeField] private float timeCentre;
+    [SerializeField] private SpikeBall[] spikeBalls;
     private bool isFireOn = true;
     public List<Log> logs = new List<Log>();
     private int _position;
@@ -63,19 +67,40 @@ public class Boss : MonoBehaviour, IDamageable
             _polygonColliders[i] = fires[i].GetComponent<PolygonCollider2D>();
             _spriteRenderers[i] = fires[i].GetComponent<SpriteRenderer>();
         }
-
         StartCoroutine(FireRoutine());
         StartCoroutine(LogRoutine());
         StartCoroutine(NewStoneAttack());
+        StartCoroutine(SpikesAttack());
     }
 
     void FixedUpdate()
     {
         if (HP <= 0)
         {
-            StopCoroutine(FireRoutine());
-            StopCoroutine(LogRoutine());
-            StopCoroutine(NewStoneAttack());
+            foreach (var stone in stones)
+            {
+                stone.transform.position = stone.startPosition;
+                stone.rigidbody2D.bodyType = RigidbodyType2D.Static;
+            }
+            for (var i = 0; i < fires.Length; i++)
+            {
+                _polygonColliders[i].enabled = false;
+                fires[i].layer = 0;
+                _spriteRenderers[i].enabled = false;
+            }
+            foreach (var log in logs)
+            {
+                log.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                log.transform.position = stones[0].startPosition;
+            }
+            foreach (var spikeBall in spikeBalls)
+            {
+                spikeBall.rigidbody2D.bodyType = RigidbodyType2D.Static;
+                spikeBall.transform.position = stones[0].startPosition;
+                spikeBall.spriteRenderer.enabled = false;
+                spikeBall.polygonCollider2D.enabled = false;
+            }
+            foreach (var fire in fires) fire.GetComponent<Fire>().audioSource.enabled = false;
             _fill.enabled = false;
             _bar.enabled = false;
         }
@@ -108,7 +133,7 @@ public class Boss : MonoBehaviour, IDamageable
     
     IEnumerator FireRoutine()
     {
-        while (true)
+        while (HP > 0)
         {
             yield return new WaitForSeconds(isFireOn ? timeFire : timeWait);
             isFireOn = !isFireOn;
@@ -118,7 +143,7 @@ public class Boss : MonoBehaviour, IDamageable
 
     IEnumerator LogRoutine()
     {
-        while (true)
+        while (HP > 0)
         {
             yield return new WaitForSeconds(Random.Range(minTimeLog, maxTimeLog));
             var side = Random.Range(0, 2);
@@ -144,7 +169,7 @@ public class Boss : MonoBehaviour, IDamageable
     
     IEnumerator NewStoneAttack()
     {
-        while (true)
+        while (HP > 0)
         {
             yield return new WaitForSeconds(Random.Range(minTimeStone, maxTimeStone));
             switch (Random.Range(0, 5))
@@ -167,6 +192,21 @@ public class Boss : MonoBehaviour, IDamageable
             }
         }
     }
+
+    IEnumerator SpikesAttack()
+    {
+        while (HP > 0)
+        {
+            yield return new WaitForSeconds(Random.Range(minTimeSpikes, maxTimeSpikes));
+            foreach (var spikeBall in spikeBalls)
+            {
+                spikeBall.polygonCollider2D.enabled = true;
+                spikeBall.spriteRenderer.enabled = true;
+                spikeBall.rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+                spikeBall.rigidbody2D.AddForce(new Vector2(Random.Range(-150,150), Random.Range(100, 400)));
+            }
+        }
+    }
     
     void ToggleFire(bool fireState)
     {
@@ -174,6 +214,8 @@ public class Boss : MonoBehaviour, IDamageable
         {
             _polygonColliders[i].enabled = fireState;
             fires[i].layer = fireState ? 18 : 0;
+            if (!fireState) fires[i].GetComponent<Fire>().audioSource.enabled = false;
+            else fires[i].GetComponent<Fire>().audioSource.enabled = true;
             _spriteRenderers[i].enabled = fireState;
         }
     }

@@ -6,7 +6,7 @@ public class Fire : MonoBehaviour
 {
     [SerializeField] private int fireDamage = 5;
     [SerializeField] private Transform catTransform;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] public AudioSource audioSource;
     [SerializeField] private float distanseRunSourse;
     [SerializeField] private float damageInterval = 0.01f;
     private Collider2D fireCollider;
@@ -15,10 +15,14 @@ public class Fire : MonoBehaviour
 
     private void Update()
     {
-        audioSource.volume = Math.Abs(catTransform.position.x-transform.position.x) < distanseRunSourse ?
-            (distanseRunSourse - Math.Abs(catTransform.position.x-transform.position.x)) / distanseRunSourse + 0.5f : 0;
-        if (!audioSource.isPlaying) 
-            audioSource.Play();
+        if (audioSource.enabled)
+        {
+            audioSource.volume = Math.Abs(catTransform.position.x-transform.position.x) < distanseRunSourse ?
+                (distanseRunSourse - Math.Abs(catTransform.position.x-transform.position.x)) / distanseRunSourse + 0.5f : 0;
+            if (!audioSource.isPlaying) 
+                audioSource.Play();
+            
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
