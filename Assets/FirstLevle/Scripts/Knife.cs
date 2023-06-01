@@ -5,6 +5,8 @@ public class Knife : MonoBehaviour
     [SerializeField] private CatSprite catSprite;
     [SerializeField] public float attackIntervale;
     [SerializeField] private PoisonKnife _poisonKnife;
+    [SerializeField] private AudioSource flySource;
+    [SerializeField] private AudioSource hitSource;
     public Transform fireKnife;
     public GameObject knife;
     public float timer;
@@ -18,7 +20,6 @@ public class Knife : MonoBehaviour
     
     private void Start()
     {
-        
         mainCamera = Camera.main;
         if (!KnifeData.start.Contains(gameObject.name))
         {
@@ -59,6 +60,8 @@ public class Knife : MonoBehaviour
     {
         newKnife = Instantiate(knife, fireKnife.position, fireKnife.rotation);
         newKnife.GetComponent<logicKnife>()._poisonKnife = _poisonKnife;
+        newKnife.GetComponent<logicKnife>().flySource = flySource;
+        newKnife.GetComponent<logicKnife>().hitSource = hitSource;
         mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCamera.nearClipPlane));
         direction = (new Vector2(mouseWorldPosition.x, mouseWorldPosition.y) - (Vector2)fireKnife.position).normalized;
         newKnife.GetComponent<Rigidbody2D>().velocity = direction;

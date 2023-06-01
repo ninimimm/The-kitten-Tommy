@@ -4,6 +4,8 @@ public class logicKnife : MonoBehaviour
 {
     [SerializeField] public float speed = 10f;
     [SerializeField] public float damage = 1;
+    public AudioSource flySource;
+    public AudioSource hitSource;
     public PoisonKnife _poisonKnife;
     private SpriteRenderer _knifeSpriteRenderer;
     private Rigidbody2D _rb;
@@ -12,8 +14,9 @@ public class logicKnife : MonoBehaviour
     private IDamageable enemy;
 
     // Start is called before the first frame update
-    void Start()
+    void Start()    
     {
+        flySource.Play();
         _knifeSpriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = transform.right * speed;
@@ -53,10 +56,15 @@ public class logicKnife : MonoBehaviour
         {
             if (_knifeSpriteRenderer.sprite.name == "PoisonKnife")
             {
+                hitSource.Play();
                 _poisonKnife.target = enemy;
                 _poisonKnife._timer = _poisonKnife.timeToPoison;
             }
-            else enemy.TakeDamage(damage);
+            else
+            {
+                hitSource.Play();
+                enemy.TakeDamage(damage);
+            }
         }
         Destroy(gameObject);
     }
