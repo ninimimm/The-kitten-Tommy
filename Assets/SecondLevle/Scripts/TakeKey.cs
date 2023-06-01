@@ -11,6 +11,8 @@ public class TakeKey : MonoBehaviour
     [SerializeField] private GameObject ironKeyPrefab;
     [SerializeField] public GameObject goldChest;
     [SerializeField] public GameObject ironChest;
+    [SerializeField] private AudioSource openSource;
+    [SerializeField] private AudioSource takeKeySource;
     
     public Animator _animatorGoldChest;
     public Animator _animatorIronChest;
@@ -88,12 +90,14 @@ public class TakeKey : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E) && !isOpenedGoldChest &&
                     Math.Abs(goldChest.transform.position.x - _catTransform.position.x) < 0.5)
                 {
+                    openSource.Play();
                     _animatorGoldChest.SetInteger("state", 1);
                     isOpenedGoldChest = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.E) && isOpenedGoldChest &&
                          Math.Abs(goldChest.transform.position.x - _catTransform.position.x) < 0.5)
                 {
+                    takeKeySource.Play();
                     _animatorGoldChest.SetInteger("state", 2);
                     _catSprite.key = "gold";
                     goldKeyImage.enabled = true;
@@ -112,12 +116,14 @@ public class TakeKey : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E) && !isOpenedIronChest &&
                     Math.Abs(ironChest.transform.position.x - _catTransform.position.x) < 0.5)
                 {
+                    openSource.Play();
                     _animatorIronChest.SetInteger("state", 1);
                     isOpenedIronChest = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.E) && isOpenedIronChest &&
                          Math.Abs(ironChest.transform.position.x - _catTransform.position.x) < 0.5)
                 {
+                    takeKeySource.Play();
                     _animatorIronChest.SetInteger("state", 2);
                     _catSprite.key = "iron";
                     ironKeyImage.enabled = true;
@@ -136,6 +142,7 @@ public class TakeKey : MonoBehaviour
         {
             if (_goldKey != null && Vector3.Distance(_catSprite.transform.position, _goldKey.transform.position) < 2)
             {
+                takeKeySource.Play();
                 Destroy(_goldKey);
                 if (_catSprite.key == "iron")
                 {
@@ -151,6 +158,7 @@ public class TakeKey : MonoBehaviour
             }
             else if (_ironKey is not null && Vector3.Distance(_catSprite.transform.position, _ironKey.transform.position) < 2)
             {
+                takeKeySource.Play();
                 Destroy(_ironKey);
                 if (_catSprite.key == "gold")
                 {
