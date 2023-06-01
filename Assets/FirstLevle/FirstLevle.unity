@@ -20800,7 +20800,7 @@ MonoBehaviour:
   minY: -0.6
   maxY: 2
   Cat: {fileID: 4472698094485988821}
-  maxHP: 10
+  maxHP: 4
   HP: 0
   damageClip: {fileID: 8300000, guid: aef0a31d39e6c45529edf25a411a34ae, type: 3}
   _healthBar: {fileID: 1668875379}
