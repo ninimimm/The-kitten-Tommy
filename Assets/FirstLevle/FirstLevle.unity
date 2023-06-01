@@ -25818,6 +25818,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 1c2356b04dda8d04596f65fb91f656e3, type: 3}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: poisonSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c06d3764f0823484fbfefad732771dcc, type: 3}
+    - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: revivalSourse
       value: 
       objectReference: {fileID: 1674371506}

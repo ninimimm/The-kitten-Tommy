@@ -24,6 +24,4 @@ public class Portal : MonoBehaviour
             _audioSource.Play();
         }
     }
-
-    public void LoadBoss() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 }

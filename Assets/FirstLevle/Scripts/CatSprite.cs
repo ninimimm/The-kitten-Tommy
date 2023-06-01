@@ -46,11 +46,12 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private float swimSpeed;
     [SerializeField] private float normalGravity;
     [SerializeField] public Light2D[] lights;
-    [SerializeField] private Knife knife;
+    [SerializeField] public Knife knife;
     [SerializeField] private Vector3 spawn;
     [SerializeField] private Vector3 spawnRevile;
     [SerializeField] private float distanseLight;
-    [SerializeField] private Sprite knifeSprite;
+    [SerializeField] public Sprite knifeSprite;
+    [SerializeField] public Sprite poisonSprite;
     [SerializeField] private logicKnife _logicKnife;
     [SerializeField] private float distanseCheckpoint;
     [SerializeField] private AudioSource checkpointSource;
@@ -84,6 +85,7 @@ public class CatSprite : MonoBehaviour
     private AnimatorStateInfo stateInfo;
     private bool isDeath;
     private bool isRevive;
+    public bool isPoison;
     [Range(0, 1f)] public float volumeRun;
     [Range(0, 1f)] public float volumeJump;
     [Range(0, 1f)] public float volumeDamage;
@@ -106,6 +108,8 @@ public class CatSprite : MonoBehaviour
     public void Load()
     {
         data = SavingSystem<CatSprite, CatData>.Load($"{gameObject.name}.data");
+        isPoison = data.isPoison;
+        if (isPoison) knifeSprite = poisonSprite;
         HP = data.HP;
         countHealth = data.countHealth;
         takeDamage = data.takeDamage;
@@ -116,11 +120,18 @@ public class CatSprite : MonoBehaviour
                 data.spawnFirstLevel[0], 
                 data.spawnFirstLevel[1], 
                 data.spawnFirstLevel[2]);
-        else
+        else if (SceneManager.GetActiveScene().name == "SecondLevle")
             transform.position = new Vector3(
                 data.spawnSecondLevel[0], 
                 data.spawnSecondLevel[1], 
                 data.spawnSecondLevel[2]);
+        else
+        {
+            transform.position = new Vector3(
+                data.spawnThirdLevel[0], 
+                data.spawnThirdLevel[1], 
+                data.spawnThirdLevel[2]);
+        }
     }
 
     private void Start()
@@ -131,7 +142,6 @@ public class CatSprite : MonoBehaviour
             normalGravity = 0.4f;
             _rb.gravityScale = 0.4f;
         }
-        knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
         _logicKnife.damage = 3;
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -154,6 +164,7 @@ public class CatSprite : MonoBehaviour
                 CatData.start.Add(gameObject.name);
             }
             Load();
+            knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
             _healthBar.SetMaxHealth(maxHP);
             _healthBar.SetHealth(HP);   
             _textHealth.text = countHealth.ToString();

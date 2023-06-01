@@ -8,17 +8,14 @@ public class MarketSecondLevel : MonoBehaviour
     [SerializeField] private LineRenderer grabbingHook;
     [SerializeField] private Material ColdHarpoon;
     [SerializeField] private Sprite PoisonKnife;
-    [SerializeField] private GameObject _knifePrefab;
     [SerializeField] private Line line;
     [SerializeField] private AudioSource buyingSourse;
-    private SpriteRenderer _knifeSpriteRenderer;
     private Transform _catTransform;
     private SpriteRenderer _spriteRenderer;
     private CatSprite _catSprite;
     void Start()
     {
         _catTransform = cat.GetComponent<Transform>();
-        _knifeSpriteRenderer = _knifePrefab.GetComponent<SpriteRenderer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
         _catSprite = cat.GetComponent<CatSprite>();
@@ -30,10 +27,11 @@ public class MarketSecondLevel : MonoBehaviour
             && _catTransform.position.y - transform.position.y > 0 && _catSprite.isWater)
         {
             _spriteRenderer.enabled = true;
-            if (Input.GetKeyDown(KeyCode.Alpha1) && _catSprite.money >= 6 && _knifeSpriteRenderer.sprite != PoisonKnife)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && _catSprite.money >= 6)
             {
                 _catSprite.money -= 6;
-                _knifeSpriteRenderer.sprite = PoisonKnife;
+                _catSprite.knife.knife.GetComponent<SpriteRenderer>().sprite = PoisonKnife;
+                _catSprite.isPoison = true;
                 buyingSourse.Play();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2) && _catSprite.money >= 4)

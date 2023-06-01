@@ -6018,11 +6018,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872387, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.74
+      value: -0.27
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872387, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.12
+      value: -3.14
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872387, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6090,7 +6090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: spawn.y
-      value: -3.2
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: _animator
@@ -6141,6 +6141,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 1c2356b04dda8d04596f65fb91f656e3, type: 3}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: poisonSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c06d3764f0823484fbfefad732771dcc, type: 3}
+    - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: revivalSourse
       value: 
       objectReference: {fileID: 614355826}
@@ -6150,7 +6154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: spawnRevile.y
-      value: -3.2
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: checkpointCheck
