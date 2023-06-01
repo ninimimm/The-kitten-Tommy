@@ -348,8 +348,7 @@ public class CatSprite : MonoBehaviour
                 enemy.GetComponent<IDamageable>()?.TakeDamage(takeDamage);
         }
     }
-
-
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(smallAttack.position,distanseSmallAttack);
