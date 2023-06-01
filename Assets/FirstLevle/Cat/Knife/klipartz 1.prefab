@@ -262,5 +262,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  damage: 6.2000003
+  damage: 3
   _poisonKnife: {fileID: 0}

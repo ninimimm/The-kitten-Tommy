@@ -53,8 +53,8 @@ public class Ball : MonoBehaviour
             {
                 ballState = MovementState.fire;
                 _animator.SetInteger("state",(int)ballState);
-                if (!groundOrEnemyHit) // Avoid multiple calls to _audioSource.Play() when both player and ground/enemy are hit
-                    _audioSource.Play();
+                //if (!groundOrEnemyHit) // Avoid multiple calls to _audioSource.Play() when both player and ground/enemy are hit
+                _audioSource.Play();
                 Destroy(gameObject, 0.6f);
             }
         }

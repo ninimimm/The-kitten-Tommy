@@ -10,6 +10,7 @@ public class MarketSecondLevel : MonoBehaviour
     [SerializeField] private Sprite PoisonKnife;
     [SerializeField] private GameObject _knifePrefab;
     [SerializeField] private Line line;
+    [SerializeField] private AudioSource buyingSourse;
     private SpriteRenderer _knifeSpriteRenderer;
     private Transform _catTransform;
     private SpriteRenderer _spriteRenderer;
@@ -33,23 +34,27 @@ public class MarketSecondLevel : MonoBehaviour
             {
                 _catSprite.money -= 6;
                 _knifeSpriteRenderer.sprite = PoisonKnife;
+                buyingSourse.Play();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2) && _catSprite.money >= 4)
             {
                 _catSprite.money -= 4;
                 _catSprite.countHealth += 1;
                 _catSprite._textHealth.text = _catSprite.countHealth.ToString();
+                buyingSourse.Play();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3) && _catSprite.money >= 3)
             {
                 _catSprite.money -= 3;
                 _catSprite.HP = _catSprite.maxHP;
                 _catSprite._healthBar.SetMaxHealth(_catSprite.maxHP);
+                buyingSourse.Play();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4) && _catSprite.money >= 3)
             {
                 _catSprite.money -= 3;
                 _catSprite.takeDamage += clawsDamageUpgrade;
+                buyingSourse.Play();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 6)
             {
@@ -61,6 +66,7 @@ public class MarketSecondLevel : MonoBehaviour
                     line.material = "cold";
                 }
                 grabbingHook.enabled = false;
+                buyingSourse.Play();
             }
             _catSprite._textMoney.text = _catSprite.money.ToString();
         }

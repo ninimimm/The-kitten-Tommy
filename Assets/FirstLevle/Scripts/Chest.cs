@@ -32,14 +32,16 @@ public class Chest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && Vector3.Distance(_cat.transform.position, transform.position) < 1.2)
+        if (Input.GetKeyDown(KeyCode.E) && Vector3.Distance(_cat.transform.position, transform.position) < 1.2 && !isOpened)
+        {
+            _audioOpenSource.Play();
             isOpened = true;
-            
+        }
+
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("empty"))
         {
             if (isOpened)
             {
-                _audioOpenSource.Play();
                 _animator.SetInteger("state", 1);
                 if (Vector3.Distance(_cat.transform.position, transform.position) < 0.85)
                 {

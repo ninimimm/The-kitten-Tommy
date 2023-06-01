@@ -11,6 +11,7 @@ public class MarketFirstLevel : MonoBehaviour
     [SerializeField] private GameObject _knifePrefab;
     [SerializeField] private Line line;
     [SerializeField] private Knife _knife;
+    [SerializeField] private AudioSource buyingSource;
     private Transform _catTransform;
     private SpriteRenderer _spriteRenderer;
     private CatSprite _catSprite;
@@ -33,29 +34,34 @@ public class MarketFirstLevel : MonoBehaviour
             _spriteRenderer.enabled = true;
             if (Input.GetKeyDown(KeyCode.Alpha1) && _catSprite.money >= 2)
             {
+                buyingSource.Play();
                 _catSprite.money -= 2;
                 _knife.attackIntervale *= knifeIntervalUpgrade;
                 _catSprite._knifeBar.SetMaxHealth(_knife.attackIntervale);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2) && _catSprite.money >= 3)
             {
+                buyingSource.Play();
                 _catSprite.money -= 3;
                 _catSprite.countHealth += 1;
                 _catSprite._textHealth.text = _catSprite.countHealth.ToString();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3) && _catSprite.money >= 2)
             {
+                buyingSource.Play();
                 _catSprite.money -= 2;
                 _catSprite.HP = _catSprite.maxHP;
                 _catSprite._healthBar.SetMaxHealth(_catSprite.maxHP);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4) && _catSprite.money >= 1)
             {
+                buyingSource.Play();
                 _catSprite.money -= 1;
                 _logicKnife.damage += knifeDamageUpgrade;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 3)
             {
+                buyingSource.Play();
                 grabbingHook.enabled = true;
                 if (grabbingHook.material != GoldHarpoon)
                 {

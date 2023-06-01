@@ -234,7 +234,7 @@ MonoBehaviour:
   Boss: {fileID: 7940281430885853015, guid: 875e27c2e25bc2648ab3d82b018631d0, type: 3}
   distanseAttack: 0.2
   damage: 0.2
-  maxHP: 20
+  maxHP: 9
   HP: 0
   boss: {fileID: 0}
   _healthBar: {fileID: 0}
