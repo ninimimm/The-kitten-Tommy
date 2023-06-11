@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Chest : MonoBehaviour
@@ -8,6 +9,8 @@ public class Chest : MonoBehaviour
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private AudioSource _audioOpenSource;
     [SerializeField] private AudioSource _audioMoneySource;
+    [SerializeField] private SpriteRenderer icon;
+    [SerializeField] private TextMeshProUGUI textIcon;
     public Animator _animator;
     public PolygonCollider2D[] _poly;
     public bool isOpened;
@@ -17,6 +20,8 @@ public class Chest : MonoBehaviour
 
     void Start()
     {
+        icon.enabled = false;
+        textIcon.enabled = false;
         _animator = GetComponent<Animator>();
         _poly = GetComponents<PolygonCollider2D>();
         _catSprite = _cat.GetComponent<CatSprite>();
@@ -32,16 +37,29 @@ public class Chest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && Vector3.Distance(_cat.transform.position, transform.position) < 1.2 && !isOpened)
+        if (Vector3.Distance(_cat.transform.position, transform.position) < 1.2 && !isOpened)
         {
-            _audioOpenSource.Play();
-            isOpened = true;
+            icon.enabled = true;
+            textIcon.enabled = true;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                _audioOpenSource.Play();
+                isOpened = true;
+            }
         }
+        else
+        {
+            icon.enabled = false;
+            textIcon.enabled = false;
+        }
+        
 
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("empty"))
         {
             if (isOpened)
             {
+                icon.enabled = false;
+                textIcon.enabled = false;
                 _animator.SetInteger("state", 1);
                 if (Vector3.Distance(_cat.transform.position, transform.position) < 0.85)
                 {

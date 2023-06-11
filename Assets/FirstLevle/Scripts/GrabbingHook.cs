@@ -10,10 +10,14 @@ public class GrabbingHook : MonoBehaviour
     [SerializeField] private float forge;
     [Range(0, 1f)] public float volume;
     private AudioSource _audioSource;
-    public bool isHooked;
+    public bool isHookedStatic;
+    public bool isHookedDynamic;
     public LineRenderer line;
-    public LayerMask mask;
-    public DistanceJoint2D _joint2D;
+    public LayerMask maskStatic;
+    public LayerMask maskDynamic;
+    public SpringJoint2D _joint2DStatic;
+    public DistanceJoint2D _joint2DDynamic;
+    
 
     private Vector3 target;
 
@@ -21,13 +25,16 @@ public class GrabbingHook : MonoBehaviour
     
     private CatSprite _catSprite;
     private Camera _mainCamera;
+    private float hookLength;
     
 
 
     void Start()
     {
-        _joint2D = GetComponent<DistanceJoint2D>();
-        _joint2D.enabled = false;
+        _joint2DStatic = GetComponent<SpringJoint2D>();
+        _joint2DStatic.enabled = false;
+        _joint2DDynamic = GetComponent<DistanceJoint2D>();
+        _joint2DDynamic.enabled = false;
         line.enabled = false;
         _audioSource = GetComponent<AudioSource>();
         _catSprite = GetComponent<CatSprite>();
@@ -37,21 +44,27 @@ public class GrabbingHook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isHookedDynamic)
+            GroundHook();
+        if (!isHookedStatic)
+            CrateCoinHook();
+    }
 
+    private void CrateCoinHook()
+    {
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             target = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             target.z = 0;
-            _raycast = Physics2D.Raycast(transform.position, target - transform.position, distanse, mask);
+            _raycast = Physics2D.Raycast(transform.position, target - transform.position, distanse, maskDynamic);
             if (_raycast.collider is not null)
             {
-                isHooked = true;
-                _joint2D.enabled = true;
-                _joint2D.connectedBody = _raycast.collider.gameObject.GetComponent<Rigidbody2D>();
-                _joint2D.connectedAnchor = _raycast.point - new Vector2(_raycast.collider.transform.position.x,
+                isHookedDynamic = true;
+                _joint2DDynamic.enabled = true;
+                _joint2DDynamic.connectedBody = _raycast.collider.gameObject.GetComponent<Rigidbody2D>();
+                _joint2DDynamic.connectedAnchor = _raycast.point - new Vector2(_raycast.collider.transform.position.x,
                     _raycast.collider.transform.position.y);
-                _joint2D.distance = Vector2.Distance(transform.position, _raycast.point);
+                _joint2DDynamic.distance = Vector2.Distance(transform.position, _raycast.point);
                 line.enabled = true;
                 line.SetPosition(0,transform.position - new Vector3(0, 0.55f, 0));
                 line.SetPosition(1,_raycast.point + new Vector2(distanseIn,distanseIn));
@@ -59,7 +72,7 @@ public class GrabbingHook : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Mouse1))
         {
-            if (isHooked && 
+            if (isHookedDynamic && 
                 Vector3.Distance(line.GetPosition(1), line.GetPosition(0) + new Vector3(-0.1f, 0.1f, 0)) - 
                 (line.GetPosition(1).y - _catSprite.transform.position.y) < 0.47
                 && !_audioSource.isPlaying && Math.Abs(_catSprite._rb.velocity.x) > 1.5)
@@ -68,21 +81,88 @@ public class GrabbingHook : MonoBehaviour
                 _audioSource.PlayOneShot(woosh);
             }
             line.SetPosition(0, transform.position - new Vector3(0, 0.55f, 0));
-            if (_joint2D.connectedBody is not null)
+            if (_joint2DDynamic.connectedBody is not null)
             {
-                if (isHooked && Input.GetKey(KeyCode.A))
+                if (isHookedDynamic && Input.GetKey(KeyCode.A))
                     _catSprite._rb.AddForce(new Vector2(-forge, forge)); // Приложить силу влево
-                else if (isHooked && Input.GetKey(KeyCode.D))
+                else if (isHookedDynamic && Input.GetKey(KeyCode.D))
                     _catSprite._rb.AddForce(new Vector2(forge, forge)); // Приложить силу вправо
-                line.SetPosition(1, _joint2D.connectedBody.transform.position + (Vector3)_joint2D.connectedAnchor);
+                line.SetPosition(1, _joint2DDynamic.connectedBody.transform.position + (Vector3)_joint2DDynamic.connectedAnchor);
             }
         }
+        if (Input.GetKeyUp(KeyCode.Mouse1) || (_joint2DDynamic.connectedBody is not null && !_joint2DDynamic.connectedBody.gameObject.GetComponent<SpriteRenderer>().enabled))
+        {
+            isHookedDynamic = false;
+            _joint2DDynamic.enabled = false;
+            line.enabled = false;
+        }
+        if (isHookedDynamic && _joint2DDynamic.enabled)
+        {
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            _joint2DDynamic.distance -= scroll*1.5f;
+        }
+    }
 
+    private void GroundHook()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            target = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            target.z = 0;
+            _raycast = Physics2D.Raycast(transform.position, target - transform.position, distanse, maskStatic);
+            if (_raycast.collider is not null && (_raycast.point + new Vector2(distanseIn,distanseIn)).y > _catSprite.transform.position.y)
+            {
+                isHookedStatic = true;
+                _joint2DStatic.enabled = true;
+                _joint2DStatic.connectedBody = _raycast.collider.gameObject.GetComponent<Rigidbody2D>();
+                _joint2DStatic.connectedAnchor = _raycast.point - new Vector2(_raycast.collider.transform.position.x,
+                    _raycast.collider.transform.position.y);
+                _joint2DStatic.distance = Vector2.Distance(transform.position, _raycast.point);
+                line.enabled = true;
+                line.SetPosition(0,transform.position - new Vector3(0, 0.55f, 0));
+                line.SetPosition(1,_raycast.point + new Vector2(distanseIn,distanseIn));
+            }
+        }
+        else if (Input.GetKey(KeyCode.Mouse1))
+        {
+            if (isHookedStatic && 
+                Vector3.Distance(line.GetPosition(1), line.GetPosition(0) + new Vector3(-0.1f, 0.1f, 0)) - 
+                (line.GetPosition(1).y - _catSprite.transform.position.y) < 0.47
+                && !_audioSource.isPlaying && Math.Abs(_catSprite._rb.velocity.x) > 1.5)
+            {
+                _audioSource.volume = volume;
+                _audioSource.PlayOneShot(woosh);
+            }
+            line.SetPosition(0, transform.position - new Vector3(0, 0.55f, 0));
+            if (_joint2DStatic.connectedBody is not null)
+            {
+                if (isHookedStatic)
+                {
+                    Vector2 currentDirection = _raycast.point - new Vector2(transform.position.x, transform.position.y);
+                    float angle = Vector2.Angle(Vector2.up, currentDirection);
+                    if (angle < 110 && !_catSprite.isGround)
+                    {
+                        if (Input.GetKey(KeyCode.A))
+                            _catSprite._rb.AddForce(new Vector2(-forge, 0));
+                        else if (Input.GetKey(KeyCode.D))
+                            _catSprite._rb.AddForce(new Vector2(forge, 0));
+                    }
+                    if (!_catSprite.isGround && angle > 50 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -2));
+                    if (!_catSprite.isGround && angle > 90 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -4));
+                }
+                line.SetPosition(1, _joint2DStatic.connectedBody.transform.position + (Vector3)_joint2DStatic.connectedAnchor);
+            }
+        }
         else if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            isHooked = false;
-            _joint2D.enabled = false;
+            isHookedStatic = false;
+            _joint2DStatic.enabled = false;
             line.enabled = false;
+        }
+        if (isHookedStatic && _joint2DStatic.enabled)
+        {
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            _joint2DStatic.distance -= scroll*1.5f;
         }
     }
 }

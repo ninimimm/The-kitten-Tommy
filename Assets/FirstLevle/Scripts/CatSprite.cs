@@ -78,7 +78,7 @@ public class CatSprite : MonoBehaviour
     private string currentScene;
     private bool isIce;
     private bool isNowShit;
-    private bool isGround;
+    public bool isGround;
     private bool isCheckpoint;
     private Collider2D[] hitEnemies;
     private float moveInWater;
@@ -264,7 +264,7 @@ public class CatSprite : MonoBehaviour
 
     private void UpdateGround()
     {
-        move = isNowShit ? 0 : Input.GetAxisRaw("Horizontal");
+        move = isNowShit || _grabbingHook.isHookedStatic ? 0 : Input.GetAxisRaw("Horizontal");
         moveInWater = isNowShit ? 0 : Input.GetAxis("Horizontal");
         isIce = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, iceLayer);
         isWater = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
@@ -316,7 +316,7 @@ public class CatSprite : MonoBehaviour
     {
         if (!isDeath && !isRevive)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && !_grabbingHook.isHooked && 
+            if (Input.GetKeyDown(KeyCode.LeftShift) && !_grabbingHook.isHookedStatic && !_grabbingHook.isHookedDynamic && 
                 stateInfo.IsName("Stay"))
             {   
                 shitSource.Play();
@@ -399,8 +399,8 @@ public class CatSprite : MonoBehaviour
         if (HP <= 0)
         {
             _grabbingHook.line.enabled = false;
-            _grabbingHook.isHooked = false;
-            _grabbingHook._joint2D.enabled = false;
+            _grabbingHook.isHookedStatic = false;
+            _grabbingHook.isHookedDynamic = false;
             if (countHealth <= 1)
             {
                 isDeath = true;
