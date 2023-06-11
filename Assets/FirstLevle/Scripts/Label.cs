@@ -26,18 +26,33 @@ public class Label : MonoBehaviour
         stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         isIdleLabelState = stateInfo.IsName("IdleLabel");
 
-        if (Vector3.Distance(_cat.transform.position,transform.position) < 1 && Input.GetKeyDown(KeyCode.E) && !isIdleLabelState)
+        if (Vector3.Distance(_cat.transform.position, transform.position) < 1 && _animator.GetBool("Broken"))
         {
-            _audioSource.Play();
-            _animator.SetBool("Broken", false);
-            isIdleLabel = false;
-            _textInTable.inputE = true;
-            _spiderJump.inputE = true;
-            _spiderRunToTree.inputE = true;
-            _spiderRunToTreeAndFall.inputE = true;
+            _textInTable.icon.enabled = true;
+            _textInTable.textIcon.enabled = true;
+            if (Input.GetKeyDown(KeyCode.E) && !isIdleLabelState)
+            {
+                _textInTable.icon.enabled = false;
+                _textInTable.textIcon.enabled = false;
+                _audioSource.Play();
+                _animator.SetBool("Broken", false);
+                isIdleLabel = false;
+                _textInTable.inputE = true;
+                _spiderJump.inputE = true;
+                _spiderRunToTree.inputE = true;
+                _spiderRunToTreeAndFall.inputE = true;
+            }
+            else
+            {
+                isIdleLabel = isIdleLabelState;
+            }
+                
         }
         else
-            isIdleLabel = isIdleLabelState;
+        {
+            _textInTable.icon.enabled = false;
+            _textInTable.textIcon.enabled = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
