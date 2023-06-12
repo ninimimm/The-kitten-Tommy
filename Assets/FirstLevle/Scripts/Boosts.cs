@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Boosts : MonoBehaviour
 {
     [SerializeField] private Image energy;
-    [SerializeField] private Image[] bostsLite;
+    [SerializeField] private Image[] boostsLite;
+    [SerializeField] private TextMeshProUGUI[] boostsText;
     [SerializeField] private Image bottle;
     [SerializeField] private GameObject fish;
 
@@ -32,9 +34,11 @@ public class Boosts : MonoBehaviour
             timer += Time.deltaTime;
         if (Input.GetKeyUp(KeyCode.Q) && timer < timeToSwitch)
         {
-            bostsLite[state].enabled = false;
+            boostsLite[state].enabled = false;
+            boostsText[state].enabled = false;
             state = (state+1)%3;
-            bostsLite[state].enabled = true;
+            boostsLite[state].enabled = true;
+            boostsText[state].enabled = true;
             timer = 0;
         }
         if (countLite < 4 && timer >= timeToSwitch)
@@ -43,12 +47,16 @@ public class Boosts : MonoBehaviour
             {
                 timerChose -= Time.deltaTime;
                 if (timerChose < timeLite / 2)
-                    bostsLite[state].enabled = true;
+                {
+                    boostsLite[state].enabled = true;
+                    boostsText[state].enabled = true;
+                }
             }
             else
             {
                 countLite++;
-                bostsLite[state].enabled = false;
+                boostsLite[state].enabled = false;
+                boostsText[state].enabled = false;
                 timerChose = timeLite;
             }
         }
@@ -56,7 +64,8 @@ public class Boosts : MonoBehaviour
         {
             countLite = 0;
             timer = 0;
-            bostsLite[state].enabled = true;
+            boostsLite[state].enabled = true;
+            boostsText[state].enabled = true;
         }
     }
 }
