@@ -99,7 +99,7 @@ public class GrabbingHook : MonoBehaviour
         if (isHookedDynamic && _joint2DDynamic.enabled)
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-            _joint2DDynamic.distance -= scroll*1.5f;
+            _joint2DDynamic.distance -= scroll;
         }
     }
 
@@ -162,7 +162,7 @@ public class GrabbingHook : MonoBehaviour
         if (isHookedStatic && _joint2DStatic.enabled)
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-            _joint2DStatic.distance -= scroll*1.5f;
+            _joint2DStatic.distance -= scroll;
         }
     }
 }
