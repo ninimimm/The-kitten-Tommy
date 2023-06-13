@@ -22,6 +22,7 @@ public class Crate : MonoBehaviour, IDamageable
     [SerializeField] private AudioSource groundFallSource;
     [SerializeField] private AudioSource waterFallSource;
     [SerializeField] private Boosts boosts;
+    [SerializeField] private int countSpawnItems;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
     private bool getHit;
@@ -90,43 +91,47 @@ public class Crate : MonoBehaviour, IDamageable
         if (transform.position.y > 1) canFall = true;
         if (transform.position.y < -0.3 && getHit && _spriteRenderer.enabled)
         {
-            Random rnd = new Random();
-            var number = rnd.Next(1, 100);
-            if (number < chanse[0])
-            {
-                coinInstance = Instantiate(coinPrefab, gameObject.transform.position, Quaternion.identity);
-                coinScript = coinInstance.GetComponent<Coin>();
-                if (SceneManager.GetActiveScene().name == "FirstLevle")
-                {
-                    coinInstance.name += GoToSecondLevle.countCoins.ToString();
-                    GoToSecondLevle.countCoins++;
-                }
-                else
-                {
-                    coinInstance.name += GoToFirstLevel.countCoins.ToString();
-                    GoToSecondLevle.countCoins++;
-                }
-            }
-            else if (chanse[0] < number && number < chanse[0] + chanse[1])
-                energyInstance = Instantiate(energyPrefab, gameObject.transform.position, Quaternion.identity);
-            else if (chanse[0] + chanse[1] < number && number < chanse[0] + chanse[1] + chanse[2])
-                fishInstance = Instantiate(fishPrefab, gameObject.transform.position, Quaternion.identity);
-            else if (chanse[0] + chanse[1] + chanse[2] < number &&
-                     number < chanse[0] + chanse[1] + chanse[2] + chanse[3])
-                waterInstance = Instantiate(waterPrefab, gameObject.transform.position, Quaternion.identity); ;
-
-            if (coinScript is not null)
-            {
-                coinScript._cat = Cat;
-                coinScript.distanseAttack = distanseAttack;
-                coinScript.catLayer = catLayer;
-            }
             if (_audioSource is not null)
             {
                 _audioSource.PlayOneShot(destroyClip);
             }
-            _spriteRenderer.enabled = false;
-            _boxCollider.enabled = false;
+            for (int i = 0; i < countSpawnItems; i++)
+            {
+                Random rnd = new Random();
+                var number = rnd.Next(1, 100);
+                if (number < chanse[0])
+                {
+                    coinInstance = Instantiate(coinPrefab, gameObject.transform.position, Quaternion.identity);
+                    coinScript = coinInstance.GetComponent<Coin>();
+                    if (SceneManager.GetActiveScene().name == "FirstLevle")
+                    {
+                        coinInstance.name += GoToSecondLevle.countCoins.ToString();
+                        GoToSecondLevle.countCoins++;
+                    }
+                    else
+                    {
+                        coinInstance.name += GoToFirstLevel.countCoins.ToString();
+                        GoToSecondLevle.countCoins++;
+                    }
+                }
+                else if (chanse[0] < number && number < chanse[0] + chanse[1])
+                    energyInstance = Instantiate(energyPrefab, gameObject.transform.position, Quaternion.identity);
+                else if (chanse[0] + chanse[1] < number && number < chanse[0] + chanse[1] + chanse[2])
+                    fishInstance = Instantiate(fishPrefab, gameObject.transform.position, Quaternion.identity);
+                else if (chanse[0] + chanse[1] + chanse[2] < number &&
+                         number < chanse[0] + chanse[1] + chanse[2] + chanse[3])
+                    waterInstance = Instantiate(waterPrefab, gameObject.transform.position, Quaternion.identity); ;
+
+                if (coinScript is not null)
+                {
+                    coinScript._cat = Cat;
+                    coinScript.distanseAttack = distanseAttack;
+                    coinScript.catLayer = catLayer;
+                }
+                
+                _spriteRenderer.enabled = false;
+                _boxCollider.enabled = false;
+            }
         }
     }
     public void TakeDamage(float damage) => getHit = true;
