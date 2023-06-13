@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,11 @@ public class TakeKey : MonoBehaviour
     [SerializeField] public GameObject ironChest;
     [SerializeField] private AudioSource openSource;
     [SerializeField] private AudioSource takeKeySource;
-    
+    [SerializeField] private SpriteRenderer goldE;
+    [SerializeField] private SpriteRenderer ironE;
+    [SerializeField] private TextMeshProUGUI textGoldE;
+    [SerializeField] private TextMeshProUGUI textIronE;
+
     public Animator _animatorGoldChest;
     public Animator _animatorIronChest;
     public GameObject _goldKey;
@@ -88,16 +93,29 @@ public class TakeKey : MonoBehaviour
         {
             if (!goldCheStateInfo.IsName("emptygold"))
             {
+                if (Vector3.Distance(goldChest.transform.position,_catTransform.position) < 1)
+                {
+                    goldE.enabled = true;
+                    textGoldE.enabled = true;
+                }
+                else
+                {
+                    goldE.enabled = false;
+                    textGoldE.enabled = false;
+                }
+                
                 if (Input.GetKeyDown(KeyCode.E) && !isOpenedGoldChest &&
-                    Math.Abs(goldChest.transform.position.x - _catTransform.position.x) < 0.5)
+                    Vector3.Distance(goldChest.transform.position,_catTransform.position) < 1)
                 {
                     openSource.Play();
                     _animatorGoldChest.SetInteger("state", 1);
                     isOpenedGoldChest = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.E) && isOpenedGoldChest &&
-                         Math.Abs(goldChest.transform.position.x - _catTransform.position.x) < 0.5)
+                         Vector3.Distance(goldChest.transform.position,_catTransform.position) < 1)
                 {
+                    goldE.enabled = false;
+                    textGoldE.enabled = false;
                     takeKeySource.Play();
                     _animatorGoldChest.SetInteger("state", 2);
                     _catSprite.key = "gold";
@@ -111,18 +129,28 @@ public class TakeKey : MonoBehaviour
                     }
                 }
             }
-            
+
             if (!ironCheStateInfo.IsName("empty"))
             {
+                if (Vector3.Distance(ironChest.transform.position,_catTransform.position) < 1)
+                {
+                    ironE.enabled = true;
+                    textIronE.enabled = true;
+                }
+                else
+                {
+                    ironE.enabled = false;
+                    textIronE.enabled = false;
+                }
                 if (Input.GetKeyDown(KeyCode.E) && !isOpenedIronChest &&
-                    Math.Abs(ironChest.transform.position.x - _catTransform.position.x) < 0.5)
+                    Vector3.Distance(ironChest.transform.position,_catTransform.position) < 1)
                 {
                     openSource.Play();
                     _animatorIronChest.SetInteger("state", 1);
                     isOpenedIronChest = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.E) && isOpenedIronChest &&
-                         Math.Abs(ironChest.transform.position.x - _catTransform.position.x) < 0.5)
+                         Vector3.Distance(ironChest.transform.position,_catTransform.position) < 1)
                 {
                     takeKeySource.Play();
                     _animatorIronChest.SetInteger("state", 2);
@@ -136,6 +164,8 @@ public class TakeKey : MonoBehaviour
                             Quaternion.identity);
                         goldKeyImage.enabled = false;
                     }
+                    ironE.enabled = false;
+                    textIronE.enabled = false;
                 }
             }
         }
