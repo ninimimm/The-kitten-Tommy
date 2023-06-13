@@ -52,21 +52,24 @@ public class logicKnife : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        var enemy = hitInfo.GetComponent<IDamageable>();
-        if (enemy != null)
+        if (hitInfo.gameObject.layer != 24)
         {
-            if (_knifeSpriteRenderer.sprite.name == "PoisonKnife")
+            var enemy = hitInfo.GetComponent<IDamageable>();
+            if (enemy != null)
             {
-                hitSource.Play();
-                _poisonKnife.target = enemy;
-                _poisonKnife._timer = _poisonKnife.timeToPoison;
+                if (_knifeSpriteRenderer.sprite.name == "PoisonKnife")
+                {
+                    hitSource.Play();
+                    _poisonKnife.target = enemy;
+                    _poisonKnife._timer = _poisonKnife.timeToPoison;
+                }
+                else
+                {
+                    hitSource.Play();
+                    enemy.TakeDamage(damage);
+                }
             }
-            else
-            {
-                hitSource.Play();
-                enemy.TakeDamage(damage);
-            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }
