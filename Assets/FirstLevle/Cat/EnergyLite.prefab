@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 162304600629491325}
   - component: {fileID: 5359469978460654388}
   - component: {fileID: 4376331946330086915}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: EnergyLite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,5 +143,5 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0

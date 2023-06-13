@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,9 +34,9 @@ public class Crate : MonoBehaviour, IDamageable
     private bool newSpawn = true;
     private Coin coinScript;
     private bool canFall = true;
-    private GameObject energyInstance;
-    private GameObject fishInstance;
-    private GameObject waterInstance;
+    private List<GameObject> energyInstance = new ();
+    private List<GameObject> fishInstance = new ();
+    private List<GameObject> waterInstance = new ();
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -115,12 +117,12 @@ public class Crate : MonoBehaviour, IDamageable
                     }
                 }
                 else if (chanse[0] < number && number < chanse[0] + chanse[1])
-                    energyInstance = Instantiate(energyPrefab, gameObject.transform.position, Quaternion.identity);
+                    energyInstance.Add(Instantiate(energyPrefab, gameObject.transform.position+new Vector3(0.05f,0,0), Quaternion.identity));
                 else if (chanse[0] + chanse[1] < number && number < chanse[0] + chanse[1] + chanse[2])
-                    fishInstance = Instantiate(fishPrefab, gameObject.transform.position, Quaternion.identity);
+                    fishInstance.Add(Instantiate(fishPrefab, gameObject.transform.position+new Vector3(-0.05f,0,0), Quaternion.identity));
                 else if (chanse[0] + chanse[1] + chanse[2] < number &&
                          number < chanse[0] + chanse[1] + chanse[2] + chanse[3])
-                    waterInstance = Instantiate(waterPrefab, gameObject.transform.position, Quaternion.identity); ;
+                    waterInstance.Add(Instantiate(waterPrefab, gameObject.transform.position+new Vector3(0f,0.1f,0), Quaternion.identity)); ;
 
                 if (coinScript is not null)
                 {
@@ -153,24 +155,48 @@ public class Crate : MonoBehaviour, IDamageable
 
     private void CheckDistanse()
     {
-        if (energyInstance != null && Vector3.Distance(energyInstance.transform.position, Cat.transform.position) < 1)
+        if (energyInstance != null)
         {
-            boosts.energyCount++;
-            boosts.boostsText[0].text = "x" + boosts.energyCount;
-            Destroy(energyInstance);
+            foreach (var energy in energyInstance)
+            {
+                if (energy != null && Vector3.Distance(energy.transform.position, Cat.transform.position) < 1.1)
+                {
+                    boosts.energyCount++;
+                    boosts.boostsText[0].text = "x" + boosts.energyCount;
+                    Destroy(energy);
+                }
+            }
         }
-        if (fishInstance != null && Vector3.Distance(fishInstance.transform.position, Cat.transform.position) < 1)
+        
+        
+        if (fishInstance != null)
         {
-            boosts.fishCount++;
-            boosts.boostsText[1].text = "x" + boosts.fishCount;
-            Destroy(fishInstance);
+            foreach (var fish in fishInstance)
+            {
+                if (fish != null && fish != null && Vector3.Distance(fish.transform.position, Cat.transform.position) < 1.1)
+                {
+                    boosts.fishCount++;
+                    boosts.boostsText[1].text = "x" + boosts.fishCount;
+                    Destroy(fish);
+                }
+            }
         }
-        if (waterInstance != null && Vector3.Distance(waterInstance.transform.position, Cat.transform.position) < 1)
+        
+        
+        if (waterInstance != null)
         {
-            boosts.waterCount++;
-            boosts.boostsText[2].text = "x" + boosts.waterCount;
-            Destroy(waterInstance);
+            foreach (var water in waterInstance)
+            {
+                if (water != null && water != null && Vector3.Distance(water.transform.position, Cat.transform.position) < 1.1)
+                {
+                    boosts.waterCount++;
+                    boosts.boostsText[2].text = "x" + boosts.waterCount;
+                    Destroy(water);
+                }
+            }
         }
+        
+        
     }
     private void OnDrawGizmosSelected()
     {
