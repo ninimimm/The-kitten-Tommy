@@ -20,6 +20,7 @@ public class Boosts : MonoBehaviour
     [SerializeField] private float timeToShield;
     [SerializeField] private CatSprite cat;
     [SerializeField] private Shield shield;
+    [SerializeField] private WriteText writeText;
     private BoostsData data;
     public int state;
 
@@ -93,6 +94,9 @@ public class Boosts : MonoBehaviour
         {
             if (!_cdNow)
             {
+                writeText.text.enabled = false;
+                writeText.learning.enabled = false;
+                writeText.firstTime = false;
                 if (state == 0)
                 {
                     cat.speed = 6f;

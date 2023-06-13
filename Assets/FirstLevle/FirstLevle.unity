@@ -4501,6 +4501,7 @@ MonoBehaviour:
   waterFallSource: {fileID: 2026106934}
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
+  _writeText: {fileID: 1511402566}
 --- !u!50 &347951060
 Rigidbody2D:
   serializedVersion: 4
@@ -4984,6 +4985,7 @@ MonoBehaviour:
   waterFallSource: {fileID: 2026106934}
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
+  _writeText: {fileID: 1511402566}
 --- !u!50 &401594533
 Rigidbody2D:
   serializedVersion: 4
@@ -10892,6 +10894,7 @@ MonoBehaviour:
   waterFallSource: {fileID: 2026106934}
   boosts: {fileID: 1523339527}
   countSpawnItems: 3
+  _writeText: {fileID: 1511402566}
 --- !u!1 &922895232
 GameObject:
   m_ObjectHideFlags: 0
@@ -11662,6 +11665,7 @@ MonoBehaviour:
   waterFallSource: {fileID: 2026106934}
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
+  _writeText: {fileID: 1511402566}
 --- !u!1 &1050049635
 GameObject:
   m_ObjectHideFlags: 0
@@ -17407,6 +17411,7 @@ MonoBehaviour:
   waterFallSource: {fileID: 2026106934}
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
+  _writeText: {fileID: 1511402566}
 --- !u!50 &1173141446
 Rigidbody2D:
   serializedVersion: 4
@@ -18946,6 +18951,7 @@ MonoBehaviour:
   waterFallSource: {fileID: 2026106934}
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
+  _writeText: {fileID: 1511402566}
 --- !u!50 &1321315446
 Rigidbody2D:
   serializedVersion: 4
@@ -22368,7 +22374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1511402567}
+  learning: {fileID: 1384061338}
   _cat: {fileID: 4472698094485988821}
+  firstTime: 1
 --- !u!114 &1511402567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22769,6 +22777,7 @@ MonoBehaviour:
   timeToShield: 15
   cat: {fileID: 4472698094485988768}
   shield: {fileID: 986894957}
+  writeText: {fileID: 1511402566}
   state: 0
   energyCount: 0
   waterCount: 0

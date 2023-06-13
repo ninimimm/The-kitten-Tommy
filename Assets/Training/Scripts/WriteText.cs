@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WriteText : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] public TextMeshProUGUI text;
+    [SerializeField] public Image learning;
 
     [SerializeField] private GameObject _cat;
     private GrabbingHook _grabbingHook;
@@ -14,6 +16,8 @@ public class WriteText : MonoBehaviour
     private bool isJump;
     private bool isHook;
     private bool isAttack;
+    public bool isBreake;
+    public bool firstTime = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +50,10 @@ public class WriteText : MonoBehaviour
                 isHook = true;
                 text.text = "Крюк имеет область действия\n"+"Чтобы повиснуть на расстоянии над землей, выпустите крюк в прыжке";
             }
+        }
+        else if (!isBreake)
+        {
+            text.text = "Вы можете сломать коробку, выпустив в нее кинжал и скинув на землю";
         }
     }
 }
