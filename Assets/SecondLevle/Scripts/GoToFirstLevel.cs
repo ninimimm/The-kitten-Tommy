@@ -50,7 +50,7 @@ public class GoToFirstLevel : MonoBehaviour
         foreach (var crate in crates)
             if (crate is not null) crate.Save();
         foreach (var scorpio in scorpios)
-            scorpio.Save();
+            if (scorpio is not null) scorpio.Save();
         chest.Save();
         grabbingHook.Save();
         takeKey.Save();

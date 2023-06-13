@@ -46,6 +46,11 @@ public class Crate : MonoBehaviour, IDamageable
         Load();
         _audioSource = Cat.GetComponent<AudioSource>();
         _audioSource.volume = 0.2f;
+        if (transform.position.y < 0)
+        {
+            groundFallSource.volume = 0;
+            waterFallSource.volume = 0;
+        }
         _boxCollider = GetComponent<BoxCollider2D>();
     }
 
