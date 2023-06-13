@@ -19826,6 +19826,7 @@ MonoBehaviour:
   takeKey: {fileID: 108856826}
   knife: {fileID: 64953839}
   logicKnife: {fileID: -3831758798518872617, guid: f5f8febf75e32ed478ec53aa6a7673aa, type: 3}
+  boosts: {fileID: 1523339527}
 --- !u!50 &1391273537
 Rigidbody2D:
   serializedVersion: 4

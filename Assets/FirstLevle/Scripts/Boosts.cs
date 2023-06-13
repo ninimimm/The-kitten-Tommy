@@ -20,6 +20,7 @@ public class Boosts : MonoBehaviour
     [SerializeField] private float timeToShield;
     [SerializeField] private CatSprite cat;
     [SerializeField] private Shield shield;
+    private BoostsData data;
     public int state;
 
     private float timer;
@@ -39,6 +40,28 @@ public class Boosts : MonoBehaviour
     {
         currentJump = cat.jumpForce;
         timerChose = timeLite;
+        if (!BoostsData.start.Contains(gameObject.name))
+        {
+            Save();
+            BoostsData.start.Add(gameObject.name);
+        }
+        Load();
+        boostsText[0].text = $"x{energyCount}";
+        boostsText[1].text = $"x{fishCount}";
+        boostsText[2].text = $"x{waterCount}";
+    }
+    public void Save()
+    {
+        SavingSystem<Boosts,BoostsData>.Save(this, $"{gameObject.name}.data");
+    }
+
+
+    public void Load()
+    {
+        data = SavingSystem<Boosts, BoostsData>.Load($"{gameObject.name}.data");
+        energyCount = data.energyCount;
+        fishCount = data.fishCount;
+        waterCount = data.waterCount;
     }
 
     // Update is called once per frame

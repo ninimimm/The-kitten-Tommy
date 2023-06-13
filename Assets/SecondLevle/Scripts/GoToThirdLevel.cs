@@ -9,6 +9,7 @@ public class GoToThirdLevel : MonoBehaviour
     [SerializeField] private CatSprite _cat;
     [SerializeField] private Knife knife;
     [SerializeField] private logicKnife logicKnife;
+    [SerializeField] private Boosts boosts;
     private Animator _animator;
 
     private void Start()
@@ -25,6 +26,7 @@ public class GoToThirdLevel : MonoBehaviour
         _cat.Save();
         knife.Save();
         logicKnife.Save();
+        boosts.Save();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

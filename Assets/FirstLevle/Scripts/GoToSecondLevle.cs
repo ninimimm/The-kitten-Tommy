@@ -21,6 +21,7 @@ public class GoToSecondLevle : MonoBehaviour
     [SerializeField] private TakeKey takeKey;
     [SerializeField] private Knife knife;
     [SerializeField] private logicKnife logicKnife;
+    [SerializeField] private Boosts boosts;
     public static SandBoss boss;
     public static int countCoins;
     public static List<Coin> coins = new ();
@@ -74,5 +75,6 @@ public class GoToSecondLevle : MonoBehaviour
         takeKey.Save();
         knife.Save();
         logicKnife.Save();
+        boosts.Save();
     }
 }

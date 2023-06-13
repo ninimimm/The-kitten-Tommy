@@ -178,23 +178,26 @@ public class CatSprite : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%5 + 1);
-        if (Input.GetKeyDown(KeyCode.B))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-        if (stateInfo.IsName("shit")) isNowShit = true;
-        else isNowShit = false;
-        isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        isCheckpoint = Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer);
-        _knifeBar.SetHealth(knife.timer);
-        UpdateLight();
-        UpdateFly();
-        UpdateCheckpoint();
-        UpdateGround();
-        UpdateJump();
         if (stateInfo.IsName("revival"))
             revivalSourse.Play();
+        else if (!isDeath)
+        {
+            if (Input.GetKeyDown(KeyCode.N))
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%5 + 1);
+            if (Input.GetKeyDown(KeyCode.B))
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("shit")) isNowShit = true;
+            else isNowShit = false;
+            isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            isCheckpoint = Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer);
+            _knifeBar.SetHealth(knife.timer);
+            UpdateLight();
+            UpdateFly();
+            UpdateCheckpoint();
+            UpdateGround();
+            UpdateJump();
+        }
         SwitchAnimation();
     }
 
@@ -409,8 +412,8 @@ public class CatSprite : MonoBehaviour
                 _grabbingHook._joint2DDynamic.enabled = false;
                 if (countHealth <= 1)
                 {
+                    if (!isDeath) dieSourse.Play();
                     isDeath = true;
-                    dieSourse.Play();
                 }
                 else
                 {
