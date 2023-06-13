@@ -244,7 +244,7 @@ MonoBehaviour:
   Radius: {fileID: 5745300302438610007}
   DestroyRadius: {fileID: 337790698049406144}
   RadiusAttack: 1
-  RadiusDestroy: 0.18
+  RadiusDestroy: 0.2
   catLayer:
     serializedVersion: 2
     m_Bits: 128
