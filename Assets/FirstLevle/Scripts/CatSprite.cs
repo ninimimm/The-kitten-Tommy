@@ -59,6 +59,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private AudioSource hitSource;
     [SerializeField] private AudioSource phoneSource;
     [SerializeField] private AudioSource caveSource;
+    [SerializeField] private LayerMask crateLayer;
     
     public bool isWater;
     public int countHealth;
@@ -92,6 +93,7 @@ public class CatSprite : MonoBehaviour
     
     public int money;
     private CatData data;
+    public bool canTakeDamage;
 
     public void SetSpeedMultiplier(float multiplier)
     {
@@ -153,6 +155,7 @@ public class CatSprite : MonoBehaviour
         _audioListener.enabled = true;
         _grabbingHook = GetComponent<GrabbingHook>();
         currentScene = SceneManager.GetActiveScene().name;
+        canTakeDamage = true;
         if (currentScene != "Training")
         {
             if (!CatData.start.Contains(gameObject.name))
@@ -299,7 +302,7 @@ public class CatSprite : MonoBehaviour
         if (timerJump > 0) timerJump -= Time.deltaTime;
         if (timerJump > 0)
         {
-            if (isGround)
+            if (isGround && !(_grabbingHook.isHookedDynamic && Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, crateLayer)))
             {
                 jumpSourse.volume = volumeJump;
                 jumpSourse.Play();
@@ -391,30 +394,34 @@ public class CatSprite : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        damageSourse.volume = volumeDamage;
-        damageSourse.Play();
-        HP -= damage;
-        _healthBar.SetHealth(HP);
-        
-        if (HP <= 0)
+        if (canTakeDamage)
         {
-            _grabbingHook.line.enabled = false;
-            _grabbingHook.isHookedStatic = false;
-            _grabbingHook.isHookedDynamic = false;
-            if (countHealth <= 1)
+            damageSourse.volume = volumeDamage;
+            damageSourse.Play();
+            HP -= damage;
+            _healthBar.SetHealth(HP);
+        
+            if (HP <= 0)
             {
-                isDeath = true;
-                dieSourse.Play();
+                _grabbingHook.line.enabled = false;
+                _grabbingHook.isHookedStatic = false;
+                _grabbingHook.isHookedDynamic = false;
+                _grabbingHook._joint2DDynamic.enabled = false;
+                if (countHealth <= 1)
+                {
+                    isDeath = true;
+                    dieSourse.Play();
+                }
+                else
+                {
+                    countHealth -= 1;
+                    transform.position = spawn;
+                }
+                _textHealth.text = countHealth.ToString();
+                HP = maxHP;
+                _healthBar.SetMaxHealth(maxHP);
             }
-            else
-            {
-                countHealth -= 1;
-                transform.position = spawn;
-            }
-            _textHealth.text = countHealth.ToString();
-            HP = maxHP;
-            _healthBar.SetMaxHealth(maxHP);
+            else damageNow = true;
         }
-        else damageNow = true;
     }
 }

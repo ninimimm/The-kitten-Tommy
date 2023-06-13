@@ -44,10 +44,10 @@ public class GrabbingHook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isHookedDynamic)
-            GroundHook();
         if (!isHookedStatic)
             CrateCoinHook();
+        if (!isHookedDynamic)
+            GroundHook();
     }
 
     private void CrateCoinHook()
@@ -57,7 +57,9 @@ public class GrabbingHook : MonoBehaviour
             target = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             target.z = 0;
             _raycast = Physics2D.Raycast(transform.position, target - transform.position, distanse, maskDynamic);
-            if (_raycast.collider is not null)
+            var difRaycast = Physics2D.Raycast(transform.position, target - transform.position, distanse, maskStatic);
+            if (_raycast.collider is not null &&
+                Vector2.Distance(_raycast.point, transform.position)<Vector2.Distance(difRaycast.point, transform.position))
             {
                 isHookedDynamic = true;
                 _joint2DDynamic.enabled = true;
@@ -110,7 +112,10 @@ public class GrabbingHook : MonoBehaviour
             target = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             target.z = 0;
             _raycast = Physics2D.Raycast(transform.position, target - transform.position, distanse, maskStatic);
-            if (_raycast.collider is not null && (_raycast.point + new Vector2(distanseIn,distanseIn)).y > _catSprite.transform.position.y)
+            var difRaycast = Physics2D.Raycast(transform.position, target - transform.position, distanse, maskDynamic);
+            if (_raycast.collider is not null &&
+                (_raycast.point + new Vector2(distanseIn,distanseIn)).y > _catSprite.transform.position.y &&
+                Vector2.Distance(_raycast.point, transform.position)<Vector2.Distance(difRaycast.point, transform.position))
             {
                 isHookedStatic = true;
                 _joint2DStatic.enabled = true;

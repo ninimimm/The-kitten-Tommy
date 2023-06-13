@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Boosts : MonoBehaviour
@@ -16,7 +17,9 @@ public class Boosts : MonoBehaviour
     [SerializeField] private float timeLite;
     [SerializeField] private float timeToRun;
     [SerializeField] private float timeToJump;
+    [SerializeField] private float timeToShield;
     [SerializeField] private CatSprite cat;
+    [SerializeField] private Shield shield;
     public int state;
 
     private float timer;
@@ -30,9 +33,11 @@ public class Boosts : MonoBehaviour
     public int fishCount;
     private bool _canUse;
     private bool _cdNow;
+    private float currentJump;
     // Start is called before the first frame update
     void Start()
     {
+        currentJump = cat.jumpForce;
         timerChose = timeLite;
     }
 
@@ -42,7 +47,7 @@ public class Boosts : MonoBehaviour
         if (_runTimer >= 0) _runTimer -= Time.deltaTime;
         else cat.speed = 4f;
         if (_jumpTimer >= 0) _jumpTimer -= Time.deltaTime;
-        else cat.jumpForce = 9f;
+        else cat.jumpForce = currentJump;
         if (Input.GetKey(KeyCode.Q) && !_cdNow)
             timer += Time.deltaTime;
         if (!_cdNow)
@@ -74,10 +79,17 @@ public class Boosts : MonoBehaviour
                 }
                 if (state == 2)
                 {
-                    cat.jumpForce = 14f;
+                    if (SceneManager.GetActiveScene().name == "ThirdLevle") cat.jumpForce *= 1.1f;
+                    else cat.jumpForce *= 1.55f;
                     _jumpTimer = timeToJump;
                     waterCount--;
                     boostsText[state].text = "x" + waterCount;
+                }
+                if (state == 1)
+                {
+                    shield.timer = timeToShield;
+                    fishCount--;
+                    boostsText[state].text = "x" + fishCount;
                 }
                 _cdNow = true;
             }
