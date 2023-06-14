@@ -107,7 +107,7 @@ public class Crate : MonoBehaviour, IDamageable
             for (int i = 0; i < countSpawnItems; i++)
             {
                 Random rnd = new Random();
-                var number = rnd.Next(1, 100);
+                var number = rnd.Next(0, 100);
                 if (number < chanse[0])
                 {
                     coinInstance = Instantiate(coinPrefab, gameObject.transform.position, Quaternion.identity);
@@ -123,7 +123,7 @@ public class Crate : MonoBehaviour, IDamageable
                         GoToSecondLevle.countCoins++;
                     }
                 }
-                else if (chanse[0] < number && number < chanse[0] + chanse[1])
+                else if (chanse[0] <= number && number < chanse[0] + chanse[1])
                 {
                     if (_writeText.firstTime)
                     {
@@ -133,7 +133,7 @@ public class Crate : MonoBehaviour, IDamageable
                     }
                     energyInstance.Add(Instantiate(energyPrefab, gameObject.transform.position+new Vector3(0.05f,0,0), Quaternion.identity));
                 }
-                else if (chanse[0] + chanse[1] < number && number < chanse[0] + chanse[1] + chanse[2])
+                else if (chanse[0] + chanse[1] <= number && number < chanse[0] + chanse[1] + chanse[2])
                 {
                     if (_writeText.firstTime)
                     {
@@ -144,7 +144,7 @@ public class Crate : MonoBehaviour, IDamageable
                     fishInstance.Add(Instantiate(fishPrefab, gameObject.transform.position+new Vector3(-0.05f,0,0), Quaternion.identity));
                 }
                     
-                else if (chanse[0] + chanse[1] + chanse[2] < number && number < chanse[0] + chanse[1] + chanse[2] + chanse[3])
+                else if (chanse[0] + chanse[1] + chanse[2] <= number && number < chanse[0] + chanse[1] + chanse[2] + chanse[3])
                 {
                     if (_writeText.firstTime)
                     {
