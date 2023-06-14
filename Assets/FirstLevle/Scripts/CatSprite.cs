@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -60,6 +61,10 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private AudioSource phoneSource;
     [SerializeField] private AudioSource caveSource;
     [SerializeField] private LayerMask crateLayer;
+    [SerializeField] private SpriteRenderer spriteShiftSand;
+    [SerializeField] private TextMeshProUGUI textShiftSand;
+    [SerializeField] private SpriteRenderer spriteShiftBoss;
+    [SerializeField] private TextMeshProUGUI textShiftBoss;
     
     public bool isWater;
     public int countHealth;
@@ -191,6 +196,20 @@ public class CatSprite : MonoBehaviour
             else isNowShit = false;
             isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
             isCheckpoint = Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer);
+            if (isCheckpoint)
+            {
+                spriteShiftSand.enabled = true;
+                textShiftSand.enabled = true;
+                spriteShiftBoss.enabled = true;
+                textShiftBoss.enabled = true;
+            }
+            else
+            {
+                spriteShiftSand.enabled = false;
+                textShiftSand.enabled = false;
+                spriteShiftBoss.enabled = false;
+                textShiftBoss.enabled = false;
+            }
             _knifeBar.SetHealth(knife.timer);
             UpdateLight();
             UpdateFly();
