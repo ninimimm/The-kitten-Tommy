@@ -130,6 +130,10 @@ public class GrabbingHook : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Mouse1))
         {
+            if (Input.GetAxisRaw("Horizontal") < 0)
+                transform.rotation = new Quaternion(0,180f,0,0);
+            else
+                transform.rotation = new Quaternion(0,0,0,0);
             if (isHookedStatic && 
                 Vector3.Distance(line.GetPosition(1), line.GetPosition(0) + new Vector3(-0.1f, 0.1f, 0)) - 
                 (line.GetPosition(1).y - _catSprite.transform.position.y) < 0.47

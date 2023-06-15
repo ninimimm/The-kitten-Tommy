@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class CatSprite : MonoBehaviour
 {
     public Rigidbody2D _rb;
-    private float move;
+    public float move;
     public static MovementState _stateCat;
     private bool rotation = true;
     public Animator _animator;
