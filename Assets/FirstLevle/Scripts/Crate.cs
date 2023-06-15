@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
@@ -59,6 +60,17 @@ public class Crate : MonoBehaviour, IDamageable
         }
         _boxCollider = GetComponent<BoxCollider2D>();
     }
+
+    private void FixedUpdate()
+    {
+        if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius/8, waterLayer))
+            _rb.AddForce(new Vector2(0,0.24f), ForceMode2D.Impulse);
+        if (_rb.velocity.x > 0)
+            _rb.velocity -= new Vector2(0.001f,0);
+        else
+            _rb.velocity += new Vector2(0.001f,0);
+    }
+
     void Update()
     {
         CheckDistanse();
@@ -90,6 +102,7 @@ public class Crate : MonoBehaviour, IDamageable
             {
                 canFall = false;
                 waterFallSource.Play();
+                _rb.AddForce(new Vector2(0,0.18f), ForceMode2D.Impulse);
             }
         }   
         if (transform.position.y > 1) canFall = true;
