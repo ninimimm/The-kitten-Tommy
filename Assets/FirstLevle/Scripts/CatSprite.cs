@@ -180,7 +180,12 @@ public class CatSprite : MonoBehaviour
             _textHealth.text = countHealth.ToString();
         }
     }
-    
+
+    private void FixedUpdate()
+    {
+        UpdateGround();
+    }
+
     private void Update()
     {
         if (stateInfo.IsName("revival"))
@@ -214,7 +219,6 @@ public class CatSprite : MonoBehaviour
             UpdateLight();
             UpdateFly();
             UpdateCheckpoint();
-            UpdateGround();
             UpdateJump();
         }
         SwitchAnimation();
