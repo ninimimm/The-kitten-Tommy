@@ -11,7 +11,6 @@ public class CatSprite : MonoBehaviour
     public Rigidbody2D _rb;
     public float move;
     public static MovementState _stateCat;
-    private bool rotation = true;
     public Animator _animator;
 
     public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage, shit, death, revival };
@@ -357,20 +356,12 @@ public class CatSprite : MonoBehaviour
                 if (move > 0)
                 {
                     _stateCat = MovementState.Run;
-                    if (rotation)
-                    {
-                        transform.Rotate(0f,180f,0f);
-                        rotation = false;
-                    }
+                    transform.rotation = new Quaternion(0,0,0,0);
                 }
                 else if (move < 0)
                 {
                     _stateCat = MovementState.Run;
-                    if (!rotation)
-                    {
-                        transform.Rotate(0f,180f,0f);
-                        rotation = true;
-                    }
+                    transform.rotation = new Quaternion(0,180,0,0);
                 }
                 else
                     _stateCat = MovementState.Stay;

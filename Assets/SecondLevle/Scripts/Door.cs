@@ -42,7 +42,8 @@ public class Door : MonoBehaviour
             spriteE.enabled = false;
             textE.enabled = false;
         }
-        if (Input.GetKeyDown(KeyCode.E) && Math.Abs(transform.position.x - cat.transform.position.x) < 1 && _catSprite.key == key)
+        if (Input.GetKeyDown(KeyCode.E) && Math.Abs(transform.position.x - cat.transform.position.x) < 1 && _catSprite.key == key
+            && animator.GetInteger("state") == 0)
         {
             openDoor.Play();
             animator.SetInteger("state", 1);
@@ -51,7 +52,10 @@ public class Door : MonoBehaviour
             if (key == "iron") _takeKey.ironKeyImage.enabled = false;
             else _takeKey.goldKeyImage.enabled = false;
         }
-        else if (Input.GetKeyDown(KeyCode.E) && Math.Abs(transform.position.x - cat.transform.position.x) < 1 && !knock.isPlaying)
+        else if (Input.GetKeyDown(KeyCode.E) && 
+                 Math.Abs(transform.position.x - cat.transform.position.x) < 1 && 
+                 !knock.isPlaying &&
+                 animator.GetInteger("state") == 0)
             knock.Play();
     }
     
