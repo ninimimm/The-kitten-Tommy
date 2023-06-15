@@ -18,6 +18,7 @@ public class WriteText : MonoBehaviour
     private bool isAttack;
     public bool isBreake;
     public bool firstTime = true;
+    public bool isWeel;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,14 +47,16 @@ public class WriteText : MonoBehaviour
         {
             text.text = "Чтобы выпустить крюк, наведитесь мышкой на землю, коробку или платформу и нажмите ПКМ";
             if (_grabbingHook.isHookedDynamic || _grabbingHook.isHookedStatic)
-            {
                 isHook = true;
-                text.text = "Крюк имеет область действия\n"+"Чтобы повиснуть на расстоянии над землей, выпустите крюк в прыжке";
-            }
+        }
+        else if (!isWeel)
+        {
+            text.text = "Чтобы подниматься или попускаться на крюке, ипользуйте колесико мыши";
+            if (Input.GetAxis("Mouse ScrollWheel") > 0) isWeel = true;
         }
         else if (!isBreake)
         {
-            text.text = "Вы можете сломать коробку, выпустив в нее кинжал и скинув на землю";
+            text.text = "Вы можете сломать коробку и получить бонус, выпустив в нее кинжал и скинув на землю";
         }
     }
 }

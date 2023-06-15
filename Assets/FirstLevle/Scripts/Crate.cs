@@ -28,6 +28,7 @@ public class Crate : MonoBehaviour, IDamageable
     [SerializeField] private WriteText _writeText;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
+    private Rigidbody2D _rb;
     private bool getHit;
     private CrateData data;
     private bool isStart = true;
@@ -40,6 +41,7 @@ public class Crate : MonoBehaviour, IDamageable
     private List<GameObject> waterInstance = new ();
     private void Start()
     {
+        _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         if (!CrateData.start.Contains(gameObject.name))
         {
@@ -50,14 +52,13 @@ public class Crate : MonoBehaviour, IDamageable
         Load();
         _audioSource = Cat.GetComponent<AudioSource>();
         _audioSource.volume = 0.2f;
-        if (transform.position.y < 0)
+        if (transform.position.y < -0.1f)
         {
             groundFallSource.volume = 0;
             waterFallSource.volume = 0;
         }
         _boxCollider = GetComponent<BoxCollider2D>();
     }
-
     void Update()
     {
         CheckDistanse();
@@ -94,7 +95,7 @@ public class Crate : MonoBehaviour, IDamageable
         if (transform.position.y > 1) canFall = true;
         if (transform.position.y < -0.3 && getHit && _spriteRenderer.enabled)
         {
-            if (!_writeText.isBreake)
+            if (_writeText != null && !_writeText.isBreake)
             {
                 _writeText.isBreake = true;
                 _writeText.text.enabled = false;
@@ -125,7 +126,7 @@ public class Crate : MonoBehaviour, IDamageable
                 }
                 else if (chanse[0] <= number && number < chanse[0] + chanse[1])
                 {
-                    if (_writeText.firstTime)
+                    if (_writeText != null && _writeText.firstTime)
                     {
                         _writeText.text.enabled = true;
                         _writeText.text.text = "Для переключения между бустами, используйте Q, а чтобы использовать выбранный буст, удержите Q";
@@ -135,7 +136,7 @@ public class Crate : MonoBehaviour, IDamageable
                 }
                 else if (chanse[0] + chanse[1] <= number && number < chanse[0] + chanse[1] + chanse[2])
                 {
-                    if (_writeText.firstTime)
+                    if (_writeText != null && _writeText.firstTime)
                     {
                         _writeText.text.enabled = true;
                         _writeText.text.text = "Для переключения между бустами, используйте Q, а чтобы использовать выбранный буст, удержите Q";
@@ -146,7 +147,7 @@ public class Crate : MonoBehaviour, IDamageable
                     
                 else if (chanse[0] + chanse[1] + chanse[2] <= number && number < chanse[0] + chanse[1] + chanse[2] + chanse[3])
                 {
-                    if (_writeText.firstTime)
+                    if (_writeText != null && _writeText.firstTime)
                     {
                         _writeText.text.enabled = true;
                         _writeText.text.text = "Для переключения между бустами, используйте Q, а чтобы использовать выбранный буст, удержите Q";

@@ -94,9 +94,12 @@ public class Boosts : MonoBehaviour
         {
             if (!_cdNow)
             {
-                writeText.text.enabled = false;
-                writeText.learning.enabled = false;
-                writeText.firstTime = false;
+                if (writeText != null)
+                {
+                    writeText.text.enabled = false;
+                    writeText.learning.enabled = false;
+                    writeText.firstTime = false;
+                }
                 if (state == 0)
                 {
                     cat.speed = 6f;
