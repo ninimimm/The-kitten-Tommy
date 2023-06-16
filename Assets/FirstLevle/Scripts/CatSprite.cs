@@ -64,6 +64,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textShiftSand;
     [SerializeField] private SpriteRenderer spriteShiftBoss;
     [SerializeField] private TextMeshProUGUI textShiftBoss;
+    [SerializeField] private LayerMask wallLayer;
     
     public bool isWater;
     public int countHealth;
@@ -91,6 +92,7 @@ public class CatSprite : MonoBehaviour
     private bool isDeath;
     private bool isRevive;
     public bool isPoison;
+    public bool isOnWall;
     [Range(0, 1f)] public float volumeRun;
     [Range(0, 1f)] public float volumeJump;
     [Range(0, 1f)] public float volumeDamage;
@@ -98,6 +100,8 @@ public class CatSprite : MonoBehaviour
     public int money;
     private CatData data;
     public bool canTakeDamage;
+    private bool rotation;
+    private bool isJumpOnWall;
 
     public void SetSpeedMultiplier(float multiplier)
     {
@@ -199,6 +203,7 @@ public class CatSprite : MonoBehaviour
             if (stateInfo.IsName("shit")) isNowShit = true;
             else isNowShit = false;
             isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            if (isGround) isJumpOnWall = false;
             isCheckpoint = Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer);
             if (isCheckpoint)
             {
@@ -218,11 +223,11 @@ public class CatSprite : MonoBehaviour
             UpdateLight();
             UpdateFly();
             UpdateCheckpoint();
+            UpdateWall();
             UpdateJump();
         }
         SwitchAnimation();
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 14)
@@ -252,6 +257,32 @@ public class CatSprite : MonoBehaviour
         }
     }
 
+    private void UpdateWall()
+    {
+        if (!isOnWall &&Physics2D.OverlapCircle(smallAttack.position, distanseSmallAttack*1.1f, wallLayer))
+        {
+            if (transform.rotation.y == 0)
+                transform.Rotate(0,0,90);
+            else
+                transform.Rotate(0,0,90);
+            isOnWall = true;
+            _rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        }
+
+        if (isOnWall &&
+            !Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, wallLayer) &&
+            !isJumpOnWall)
+        {
+            isOnWall = false;
+            rotation = false;
+            _rb.constraints = RigidbodyConstraints2D.None;
+            _rb.freezeRotation = true;
+            if (transform.rotation.y == 0)
+                transform.Rotate(0,-180,-90);
+            else transform.Rotate(0,0,90);
+        }
+    }
+    
     private void UpdateLight()
     {
         if (currentScene == "SecondLevle")
@@ -292,11 +323,11 @@ public class CatSprite : MonoBehaviour
 
     private void UpdateGround()
     {
-        move = isNowShit || _grabbingHook.isHookedStatic ? 0 : Input.GetAxisRaw("Horizontal");
+        move = isNowShit || _grabbingHook.isHookedStatic ? 0 : isOnWall ? Input.GetAxisRaw("Vertical") : Input.GetAxisRaw("Horizontal");
         moveInWater = isNowShit ? 0 : Input.GetAxis("Horizontal");
         isIce = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, iceLayer);
         isWater = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
-        if (!isIce && !isWater)
+        if (!isIce && !isWater && !isOnWall)
         {
             _rb.gravityScale = normalGravity;
             transform.position += speed * speedMultiplier * Time.deltaTime * new Vector3(move, 0, 0) ;
@@ -306,10 +337,14 @@ public class CatSprite : MonoBehaviour
             _rb.gravityScale = 0.1f;
             _rb.AddForce(new Vector2(moveInWater * swimSpeed/2.5f,Input.GetAxis("Vertical") * swimSpeed), ForceMode2D.Force);
         }
-        else
+        else if (isIce)
         {
             _rb.gravityScale = normalGravity;
             _rb.AddForce(new Vector2(moveInWater * slide,0), ForceMode2D.Impulse);
+        }
+        else if (isOnWall)
+        {
+            transform.position += speed * speedMultiplier * Time.deltaTime * new Vector3(0, move, 0) ;
         }
         if (move != 0 && isGround)
         {
@@ -323,19 +358,37 @@ public class CatSprite : MonoBehaviour
 
     private void UpdateJump()
     {
-        if (Input.GetButtonDown("Jump")) timerJump = timeToJump;
-        if (timerJump > 0) timerJump -= Time.deltaTime;
-        if (timerJump > 0)
+        if (isOnWall && Input.GetButtonDown("Jump"))
         {
-            if (isGround && !(_grabbingHook.isHookedDynamic && Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, crateLayer)))
+            _rb.constraints = RigidbodyConstraints2D.None;
+            _rb.freezeRotation = true;
+            if (transform.rotation.y == 0)
+                _rb.AddForce(new Vector2(-jumpForce/3,jumpForce), ForceMode2D.Impulse);
+            else
+                _rb.AddForce(new Vector2(-jumpForce/3,0), ForceMode2D.Impulse);
+            isJumpOnWall = true;
+            rotation = false;
+            if (transform.rotation.y == 0)
+                transform.Rotate(180,0,-90);
+            else transform.Rotate(0,0,90);
+            isOnWall = false;
+        }
+        else
+        {
+            if (Input.GetButtonDown("Jump")) timerJump = timeToJump;
+            if (timerJump > 0) timerJump -= Time.deltaTime;
+            if (timerJump > 0)
             {
-                jumpSourse.volume = volumeJump;
-                jumpSourse.Play();
-                if (!isIce)
-                    _rb.velocity = Vector2.zero;
-                if (!isNowShit && !isWater)
-                    _rb.AddForce(new Vector2(_rb.velocity.x/10, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
-                timerJump = 0;
+                if (isGround && !(_grabbingHook.isHookedDynamic && Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, crateLayer)))
+                {
+                    jumpSourse.volume = volumeJump;
+                    jumpSourse.Play();
+                    if (!isIce)
+                        _rb.velocity = Vector2.zero;
+                    if (!isNowShit && !isWater)
+                        _rb.AddForce(new Vector2(_rb.velocity.x/10, jumpForce - speedMultiplier*2), ForceMode2D.Impulse);
+                    timerJump = 0;
+                }
             }
         }
     }
@@ -356,12 +409,31 @@ public class CatSprite : MonoBehaviour
                 if (move > 0)
                 {
                     _stateCat = MovementState.Run;
-                    transform.rotation = new Quaternion(0,0,0,0);
+                    if (isOnWall)
+                    {
+                        if (rotation)
+                        {
+                            rotation = false;
+                            transform.Rotate(0,180,0); 
+                        }
+                    }
+                    else
+                        transform.rotation = new Quaternion(0,0,0,0);
+
                 }
                 else if (move < 0)
                 {
                     _stateCat = MovementState.Run;
-                    transform.rotation = new Quaternion(0,180,0,0);
+                    if (isOnWall)
+                    {
+                        if (!rotation)
+                        {
+                            rotation = true;
+                            transform.Rotate(0,180,0); 
+                        }
+                    }
+                    else
+                        transform.rotation = new Quaternion(0,180,0,0);
                 }
                 else
                     _stateCat = MovementState.Stay;
@@ -369,7 +441,7 @@ public class CatSprite : MonoBehaviour
                 if (_rb.velocity.y > 1f) _stateCat = MovementState.jumpup;
                 else if (_rb.velocity.y < - 1f) _stateCat = MovementState.jumpdown;
         
-                if (Input.GetKeyDown(KeyCode.W) && !isWater)
+                if (Input.GetKeyDown(KeyCode.W) && !isWater && !isOnWall)
                     Attake();
 
                 if (damageNow)

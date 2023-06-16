@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class Tree : MonoBehaviour
 {
     [SerializeField] private TilemapRenderer insideTree;
+    [SerializeField] private TilemapRenderer wall;
     private TilemapRenderer _tilemapRenderer;
     
 
@@ -19,10 +20,12 @@ public class Tree : MonoBehaviour
     {
         _tilemapRenderer.enabled = true;
         insideTree.enabled = true;
+        wall.enabled = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         _tilemapRenderer.enabled = false;
         insideTree.enabled = false;
+        wall.enabled = false;
     }
 }
