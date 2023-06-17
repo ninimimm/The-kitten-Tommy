@@ -61,8 +61,10 @@ public class Spider : MonoBehaviour
         var dy = catVector.y - vector.y;
         var dx = catVector.x - vector.x;
         var distance = Math.Sqrt(dx * dx + dy * dy);
-        audioSource.volume = 0.4f;
-        audioSource.volume -= (float)(distance < distanseRun ? 0.4f - (distanseRun - distance) / (2.5 * distanseRun): 0.4f);
+        if (_catSprite.isWater)
+            audioSource.volume = 0;
+        else
+            audioSource.volume -= (float)(distance < distanseRun ? 0.4f - (distanseRun - distance) / (2.5 * distanseRun): 0.4f);
         if (!audioSource.isPlaying) 
             audioSource.Play();
     }

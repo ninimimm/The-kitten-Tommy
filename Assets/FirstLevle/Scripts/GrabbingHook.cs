@@ -159,7 +159,7 @@ public class GrabbingHook : MonoBehaviour
                     if (!_catSprite.isGround && angle > 50 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -2));
                     if (!_catSprite.isGround && angle > 90 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -4));
                 }
-                line.SetPosition(1, _joint2DStatic.connectedBody.transform.position + (Vector3)_joint2DStatic.connectedAnchor);
+                line.SetPosition(1, _joint2DStatic.connectedBody.transform.position + (Vector3)_joint2DStatic.connectedAnchor + new Vector3(0,0.1f,0));
             }
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1))
@@ -171,7 +171,12 @@ public class GrabbingHook : MonoBehaviour
         if (isHookedStatic && _joint2DStatic.enabled)
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-            _joint2DStatic.distance -= scroll;
+            if (scroll > 0 && 
+                !Physics2D.OverlapCircle(_catSprite.checkpointCheck.position+new Vector3(0,0.3f,0), _catSprite.distanseCheckpoint, _catSprite.groundLayer))
+                _joint2DStatic.distance -= scroll;
+            else if (scroll < 0 &&
+                     !Physics2D.OverlapCircle(_catSprite.groundCheck.position, _catSprite.groundCheckRadius*1.8f, _catSprite.groundLayer))
+                _joint2DStatic.distance -= scroll;
         }
     }
 }

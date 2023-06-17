@@ -51,7 +51,7 @@ public class WriteText : MonoBehaviour
         }
         else if (!isWeel)
         {
-            text.text = "Чтобы подниматься или попускаться на крюке, ипользуйте колесико мыши";
+            text.text = "Чтобы подниматься или опускаться на крюке, используйте колесико мыши";
             if (Input.GetAxis("Mouse ScrollWheel") > 0) isWeel = true;
         }
         else if (!isBreake)

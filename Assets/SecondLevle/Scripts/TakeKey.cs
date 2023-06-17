@@ -93,7 +93,7 @@ public class TakeKey : MonoBehaviour
         {
             if (!goldCheStateInfo.IsName("emptygold"))
             {
-                if (Vector3.Distance(goldChest.transform.position,_catTransform.position) < 1)
+                if (Vector3.Distance(goldChest.transform.position,_catTransform.position-new Vector3(0,0.4f,0)) < 1)
                 {
                     goldE.enabled = true;
                     textGoldE.enabled = true;
@@ -105,14 +105,14 @@ public class TakeKey : MonoBehaviour
                 }
                 
                 if (Input.GetKeyDown(KeyCode.E) && !isOpenedGoldChest &&
-                    Vector3.Distance(goldChest.transform.position,_catTransform.position) < 1)
+                    Vector3.Distance(goldChest.transform.position,_catTransform.position-new Vector3(0,0.4f,0)) < 1)
                 {
                     openSource.Play();
                     _animatorGoldChest.SetInteger("state", 1);
                     isOpenedGoldChest = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.E) && isOpenedGoldChest &&
-                         Vector3.Distance(goldChest.transform.position,_catTransform.position) < 1)
+                         Vector3.Distance(goldChest.transform.position,_catTransform.position-new Vector3(0,0.4f,0)) < 1)
                 {
                     goldE.enabled = false;
                     textGoldE.enabled = false;
@@ -132,7 +132,7 @@ public class TakeKey : MonoBehaviour
 
             if (!ironCheStateInfo.IsName("empty"))
             {
-                if (Vector3.Distance(ironChest.transform.position,_catTransform.position) < 1)
+                if (Vector3.Distance(ironChest.transform.position,_catTransform.position-new Vector3(0,0.4f,0)) < 1)
                 {
                     ironE.enabled = true;
                     textIronE.enabled = true;
@@ -143,14 +143,14 @@ public class TakeKey : MonoBehaviour
                     textIronE.enabled = false;
                 }
                 if (Input.GetKeyDown(KeyCode.E) && !isOpenedIronChest &&
-                    Vector3.Distance(ironChest.transform.position,_catTransform.position) < 1)
+                    Vector3.Distance(ironChest.transform.position,_catTransform.position-new Vector3(0,0.4f,0)) < 1)
                 {
                     openSource.Play();
                     _animatorIronChest.SetInteger("state", 1);
                     isOpenedIronChest = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.E) && isOpenedIronChest &&
-                         Vector3.Distance(ironChest.transform.position,_catTransform.position) < 1)
+                         Vector3.Distance(ironChest.transform.position,_catTransform.position-new Vector3(0,0.4f,0)) < 1)
                 {
                     takeKeySource.Play();
                     _animatorIronChest.SetInteger("state", 2);

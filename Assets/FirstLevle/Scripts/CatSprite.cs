@@ -25,8 +25,8 @@ public class CatSprite : MonoBehaviour
     [SerializeField] public Text _textHealth;
     [SerializeField] public Transform groundCheck;
     [SerializeField] public float groundCheckRadius;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Transform checkpointCheck;
+    [SerializeField] public LayerMask groundLayer;
+    [SerializeField] public Transform checkpointCheck;
     [SerializeField] private float timeToJump;
     [SerializeField] private AudioSource runSourse;
     [SerializeField] private AudioSource jumpSourse;
@@ -39,7 +39,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private AudioSource fliesSourse;
     [SerializeField] private GameObject Fly1;
     [SerializeField] private int maxCountHealth;
-    [SerializeField] private LayerMask checkpointLayer;
+    [SerializeField] public LayerMask checkpointLayer;
     [SerializeField] private LayerMask iceLayer;
     [SerializeField] private float slide;
     [SerializeField] private LayerMask waterLayer;
@@ -53,7 +53,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] public Sprite knifeSprite;
     [SerializeField] public Sprite poisonSprite;
     [SerializeField] private logicKnife _logicKnife;
-    [SerializeField] private float distanseCheckpoint;
+    [SerializeField] public float distanseCheckpoint;
     [SerializeField] private AudioSource checkpointSource;
     [SerializeField] private AudioSource shitSource;
     [SerializeField] private AudioSource hitSource;
@@ -102,6 +102,9 @@ public class CatSprite : MonoBehaviour
     public bool canTakeDamage;
     private bool rotation;
     private bool isJumpOnWall;
+    public bool isOnRight;
+    public bool isOnLeft;
+    public bool isInCave;
 
     public void SetSpeedMultiplier(float multiplier)
     {
@@ -240,6 +243,7 @@ public class CatSprite : MonoBehaviour
         {
             phoneSource.Stop();
             caveSource.Play();
+            isInCave = true;
         }
     }
 
@@ -254,19 +258,33 @@ public class CatSprite : MonoBehaviour
         {
             phoneSource.Play();
             caveSource.Stop();
+            isInCave = false;
         }
     }
 
     private void UpdateWall()
     {
+        if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, wallLayer) && !isJumpOnWall)
+            _rb.bodyType = RigidbodyType2D.Static;
+        else
+        {
+            _rb.bodyType = RigidbodyType2D.Dynamic;
+            isOnWall = false;
+        }
+            
         if (!isOnWall &&Physics2D.OverlapCircle(smallAttack.position, distanseSmallAttack*1.1f, wallLayer))
         {
             if (transform.rotation.y == 0)
+            {
+                isOnRight = true;
                 transform.Rotate(0,0,90);
+            }
             else
+            {
+                isOnLeft = true;
                 transform.Rotate(0,0,90);
+            }
             isOnWall = true;
-            _rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         }
 
         if (isOnWall &&
@@ -275,17 +293,26 @@ public class CatSprite : MonoBehaviour
         {
             isOnWall = false;
             rotation = false;
-            _rb.constraints = RigidbodyConstraints2D.None;
-            _rb.freezeRotation = true;
-            if (transform.rotation.y == 0)
-                transform.Rotate(0,-180,-90);
-            else transform.Rotate(0,0,90);
+            if (isOnRight)
+            {
+                if (transform.rotation.y == 0)
+                    transform.Rotate(180,0,-90);
+                else transform.Rotate(0,0,90);
+                isOnRight = false;
+            }
+            else if (isOnLeft)
+            {
+                if (transform.rotation.y == 0)
+                    transform.Rotate(0,0,90);
+                else transform.Rotate(0,0,90);
+                isOnLeft = false;
+            }
         }
     }
     
     private void UpdateLight()
     {
-        if (currentScene == "SecondLevle")
+        if (currentScene == "SecondLevle" && isInCave)
         {
             foreach (var light in lights)
             {
@@ -360,17 +387,37 @@ public class CatSprite : MonoBehaviour
     {
         if (isOnWall && Input.GetButtonDown("Jump"))
         {
-            _rb.constraints = RigidbodyConstraints2D.None;
-            _rb.freezeRotation = true;
-            if (transform.rotation.y == 0)
-                _rb.AddForce(new Vector2(-jumpForce/3,jumpForce), ForceMode2D.Impulse);
-            else
-                _rb.AddForce(new Vector2(-jumpForce/3,0), ForceMode2D.Impulse);
+            _rb.bodyType = RigidbodyType2D.Dynamic;
+            if (isOnRight)
+            {
+                if (transform.rotation.y == 0)
+                    _rb.AddForce(new Vector2(-jumpForce/3,jumpForce), ForceMode2D.Impulse);
+                else
+                    _rb.AddForce(new Vector2(-jumpForce/3,0), ForceMode2D.Impulse);
+                isOnRight = false;
+            }
+            else if (isOnLeft)
+            {
+                if (transform.rotation.y == 0)
+                    _rb.AddForce(new Vector2(jumpForce/3,jumpForce), ForceMode2D.Impulse);
+                else
+                    _rb.AddForce(new Vector2(jumpForce/3,0), ForceMode2D.Impulse);
+                isOnRight = false;
+            }
             isJumpOnWall = true;
             rotation = false;
-            if (transform.rotation.y == 0)
-                transform.Rotate(180,0,-90);
-            else transform.Rotate(0,0,90);
+            if (isOnRight)
+            {
+                if (transform.rotation.y == 0)
+                    transform.Rotate(180,0,-90);
+                else transform.Rotate(0,0,-90);
+            }
+            else if (isOnLeft)
+            {
+                if (transform.rotation.y == 0)
+                    transform.Rotate(0,0,90);
+                else transform.Rotate(0,0,90);
+            }
             isOnWall = false;
         }
         else

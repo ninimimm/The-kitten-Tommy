@@ -5,25 +5,25 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    private Resolution[] _resolutions;
-    public Dropdown resolutionDropdown;
+    private Resolution[] _resolutions; 
+    //public Dropdown resolutionDropdown;
     private void Start()
     {
         _resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
-        var options = new List<string>();
-        var currentResolutionIndex = 0;
-        for (var i = 0; i < _resolutions.Length; i++)
-        {
-            options.Add($"{_resolutions[i].width} x {_resolutions[i].height}");
-            if (_resolutions[i].width == Screen.currentResolution.width &&
-                _resolutions[i].height == Screen.currentResolution.height)
-                currentResolutionIndex = i;
-        }
+        //resolutionDropdown.ClearOptions();
+        //var options = new List<string>();
+        //var currentResolutionIndex = 0;
+        //for (var i = 0; i < _resolutions.Length; i++)
+        //{
+        //    options.Add($"{_resolutions[i].width} x {_resolutions[i].height}");
+        //    if (_resolutions[i].width == Screen.currentResolution.width &&
+        //        _resolutions[i].height == Screen.currentResolution.height)
+        //        currentResolutionIndex = i;
+        //}
             
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+        //resolutionDropdown.AddOptions(options);
+        //resolutionDropdown.value = currentResolutionIndex;
+        //resolutionDropdown.RefreshShownValue();
     }
 
     public AudioMixer audioMixer;
