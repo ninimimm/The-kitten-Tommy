@@ -5,8 +5,10 @@ public class PauseMenu : MonoBehaviour
 {
     public bool pauseGame;
     public GameObject pauseGameMenu;
+    public GameObject helpGameMenu;
     [SerializeField] private GameObject[] crates;
     private Vector3[] _transforms = new Vector3[5];
+    private int i;
     
     private void Start()
     {
@@ -35,6 +37,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseGameMenu.SetActive(false);
+        helpGameMenu.SetActive(false);
         Time.timeScale = 1f;
         pauseGame = false;
     }
@@ -44,6 +47,21 @@ public class PauseMenu : MonoBehaviour
         pauseGameMenu.SetActive(true);
         Time.timeScale = 0f;
         pauseGame = true;
+    }
+
+    public void Help()
+    {
+        if (i % 2 == 0)
+        {
+            helpGameMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            helpGameMenu.SetActive(false);
+            Time.timeScale = 1f;
+        }
+        i++;
     }
 
     public void LoadMenu()

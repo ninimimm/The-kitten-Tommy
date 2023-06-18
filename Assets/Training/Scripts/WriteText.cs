@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WriteText : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class WriteText : MonoBehaviour
     [SerializeField] public SpriteRenderer mouseWheelUp;
     [SerializeField] public SpriteRenderer mouseWheelDown;
     [SerializeField] public SpriteRenderer LKM2;
+    [SerializeField] public Image Q;
+    [SerializeField] public Image arrow;
 
 
     [SerializeField] private GameObject _cat;
@@ -50,6 +53,11 @@ public class WriteText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Q.enabled = false;
+            arrow.enabled = false;
+        }
         LKM.transform.position = scorpoi3.transform.position-new Vector3(0,0.5f,0);
         snakeTarget.transform.Rotate(0,0,0.5f);
         scorpioTarget.transform.Rotate(0,0,0.5f);

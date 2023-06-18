@@ -208,19 +208,22 @@ public class CatSprite : MonoBehaviour
             isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
             if (isGround) isJumpOnWall = false;
             isCheckpoint = Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer);
-            if (isCheckpoint)
+            if (spriteShiftSand != null)
             {
-                spriteShiftSand.enabled = true;
-                textShiftSand.enabled = true;
-                spriteShiftBoss.enabled = true;
-                textShiftBoss.enabled = true;
-            }
-            else
-            {
-                spriteShiftSand.enabled = false;
-                textShiftSand.enabled = false;
-                spriteShiftBoss.enabled = false;
-                textShiftBoss.enabled = false;
+                if (isCheckpoint)
+                {
+                    spriteShiftSand.enabled = true;
+                    textShiftSand.enabled = true;
+                    spriteShiftBoss.enabled = true;
+                    textShiftBoss.enabled = true;
+                }
+                else
+                {
+                    spriteShiftSand.enabled = false;
+                    textShiftSand.enabled = false;
+                    spriteShiftBoss.enabled = false;
+                    textShiftBoss.enabled = false;
+                }
             }
             _knifeBar.SetHealth(knife.timer);
             UpdateLight();
