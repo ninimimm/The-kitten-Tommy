@@ -27,6 +27,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     [SerializeField] private Transform catTransform;
     [SerializeField] private CatSprite _catSprite;
     [SerializeField] private float damageVolume;
+    [SerializeField] private WriteText _writeText;
     private AudioSource audioSource;
     private float idleTimer;
     private bool damageNow;
@@ -154,6 +155,8 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        _writeText.LKM.GetComponent<SpriteRenderer>().enabled = false;
+        _writeText.scorpioTarget.GetComponent<SpriteRenderer>().enabled = false;
         if(!_stateInfo.IsName("ScorpioHurt") && !_stateInfo.IsName("ScorpioDeath"))
             audioSource.PlayOneShot(damageClip);
         HP -= damage;

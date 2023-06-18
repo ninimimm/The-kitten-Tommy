@@ -1,13 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WriteText : MonoBehaviour
 {
-    [SerializeField] public TextMeshProUGUI text;
-    [SerializeField] public Image learning;
+    [SerializeField] private SpriteRenderer A;
+    [SerializeField] private SpriteRenderer D;
+    [SerializeField] private SpriteRenderer Spase;
+    [SerializeField] public GameObject snakeTarget;
+    [SerializeField] public GameObject scorpioTarget;
+    [SerializeField] public GameObject LKM;
+    [SerializeField] public SpriteRenderer W;
+    [SerializeField] public GameObject scorpoi3;
+    [SerializeField] public SpriteRenderer platformTarget;
+    [SerializeField] private SpriteRenderer PKM1;
+    [SerializeField] private GrabbingHook _grabbing;
+    [SerializeField] public GameObject crateTarget;
+    [SerializeField] public SpriteRenderer PKM2;
+    [SerializeField] public SpriteRenderer Spase2;
+    [SerializeField] public SpriteRenderer plus;
+    [SerializeField] public SpriteRenderer A2;
+    [SerializeField] public SpriteRenderer D2;
+    [SerializeField] public SpriteRenderer mouseWheelUp;
+    [SerializeField] public SpriteRenderer mouseWheelDown;
+    [SerializeField] public SpriteRenderer LKM2;
+
 
     [SerializeField] private GameObject _cat;
     private GrabbingHook _grabbingHook;
@@ -17,46 +33,99 @@ public class WriteText : MonoBehaviour
     private bool isHook;
     private bool isAttack;
     public bool isBreake;
-    public bool firstTime = true;
+    public bool firstTime1 = true;
+    public bool firstTime2 = true;
+    public bool firstTime3 = true;
+    public bool firstTime4 = true;
+    public bool final;
     public bool isWeel;
     // Start is called before the first frame update
     void Start()
     {
+        crateTarget.GetComponent<SpriteRenderer>().enabled = false;
+        PKM2.enabled = false;
         _grabbingHook = _cat.GetComponent<GrabbingHook>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isMove)
+        LKM.transform.position = scorpoi3.transform.position-new Vector3(0,0.5f,0);
+        snakeTarget.transform.Rotate(0,0,0.5f);
+        scorpioTarget.transform.Rotate(0,0,0.5f);
+        platformTarget.transform.Rotate(0,0,0.5f);
+        platformTarget.transform.Rotate(0,0,0.5f);
+        LKM2.transform.position = new Vector3(crateTarget.transform.position.x, LKM2.transform.position.y, LKM2.transform.position.z);
+        if (Input.GetKeyDown(KeyCode.A))
+            A.enabled = false;
+        if (Input.GetKeyDown(KeyCode.D))
+            D.enabled = false;
+        if (!A.enabled && !D.enabled) isMove = true;
+        
+        
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            text.text = "Для движения используйте AD или стрелочки";
-            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) isMove = true;
+            Spase.enabled = false;
+            isJump = true;
         }
-        else if (!isJump)
+        
+        if (_grabbing.isHookedStatic && firstTime1 && !_cat.GetComponent<CatSprite>().isGround && !final)
         {
-            text.text = "Для прыжка нажмите пробел";
-            if (Input.GetKeyDown(KeyCode.Space)) isJump = true;
+            firstTime1 = false;
+            PKM1.enabled = false;
+            platformTarget.GetComponent<SpriteRenderer>().enabled = false;
+            Spase2.enabled = false;
+            plus.enabled = false;
+            PKM2.enabled = true;
+            A2.enabled = true;
+            D2.enabled = true;
+            crateTarget.GetComponent<SpriteRenderer>().enabled = true;
         }
-        else if (!isAttack)
+
+        if (!firstTime1)
         {
-            text.text = "Чтобы ударить врага когтями нажмите W или киньте кинжал нажав ЛКМ, указав мышью направление";
-            if (Input.GetKeyDown(KeyCode.Mouse0)) isAttack = true;
+            if (Input.GetKeyDown(KeyCode.A))
+                A2.enabled = false;
+            else if (Input.GetKeyDown(KeyCode.D))
+                D2.enabled = false;
+            if (!Spase2.enabled && !A2.enabled && !D2.enabled && firstTime3)
+            {
+                firstTime3 = false;
+                mouseWheelUp.enabled = true;
+            }
+            if (!firstTime3 && !mouseWheelUp.enabled && !Spase2.enabled && !A2.enabled && !D2.enabled && firstTime4)
+            {
+                firstTime4 = false;
+                mouseWheelDown.enabled = true;
+            }
+            if (!_grabbing.isHookedStatic)
+            {
+                firstTime1 = true;
+                A2.enabled = false;
+                D2.enabled = false;
+                mouseWheelUp.enabled = false;
+                mouseWheelDown.enabled = false;
+                PKM1.enabled = true;
+                platformTarget.GetComponent<SpriteRenderer>().enabled = true;
+                Spase2.enabled = true;
+                plus.enabled = true;
+                firstTime3 = true;
+                firstTime4 = true;
+            }
         }
-        else if (!isHook)
+        
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !PKM2.enabled)
         {
-            text.text = "Чтобы выпустить крюк, наведитесь мышкой на землю, коробку или платформу и нажмите ПКМ";
-            if (_grabbingHook.isHookedDynamic || _grabbingHook.isHookedStatic)
-                isHook = true;
+            LKM2.enabled = false;
+            crateTarget.GetComponent<SpriteRenderer>().enabled = false;
         }
-        else if (!isWeel)
+
+        if (final)
         {
-            text.text = "Чтобы подниматься или опускаться на крюке, используйте колесико мыши";
-            if (Input.GetAxis("Mouse ScrollWheel") > 0) isWeel = true;
-        }
-        else if (!isBreake)
-        {
-            text.text = "Вы можете сломать коробку и получить бонус, выпустив в нее кинжал и скинув на землю";
+            PKM1.enabled = false;
+            Spase2.enabled = false;
+            plus.enabled = false;
+            platformTarget.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }

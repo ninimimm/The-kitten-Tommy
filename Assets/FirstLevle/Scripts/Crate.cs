@@ -108,12 +108,6 @@ public class Crate : MonoBehaviour, IDamageable
         if (transform.position.y > 1) canFall = true;
         if (transform.position.y < -0.3 && getHit && _spriteRenderer.enabled)
         {
-            if (_writeText != null && !_writeText.isBreake)
-            {
-                _writeText.isBreake = true;
-                _writeText.text.enabled = false;
-                _writeText.learning.enabled = false;
-            }
             if (_audioSource is not null)
             {
                 _audioSource.PlayOneShot(destroyClip);
@@ -138,37 +132,11 @@ public class Crate : MonoBehaviour, IDamageable
                     }
                 }
                 else if (chanse[0] <= number && number < chanse[0] + chanse[1])
-                {
-                    if (_writeText != null && _writeText.firstTime)
-                    {
-                        _writeText.text.enabled = true;
-                        _writeText.text.text = "Для переключения между бустами, используйте Q, а чтобы использовать выбранный буст, удержите Q";
-                        _writeText.learning.enabled = true;
-                    }
                     energyInstance.Add(Instantiate(energyPrefab, gameObject.transform.position+new Vector3(0.05f,0,0), Quaternion.identity));
-                }
                 else if (chanse[0] + chanse[1] <= number && number < chanse[0] + chanse[1] + chanse[2])
-                {
-                    if (_writeText != null && _writeText.firstTime)
-                    {
-                        _writeText.text.enabled = true;
-                        _writeText.text.text = "Для переключения между бустами, используйте Q, а чтобы использовать выбранный буст, удержите Q";
-                        _writeText.learning.enabled = true;
-                    }
                     fishInstance.Add(Instantiate(fishPrefab, gameObject.transform.position+new Vector3(-0.05f,0,0), Quaternion.identity));
-                }
-                    
                 else if (chanse[0] + chanse[1] + chanse[2] <= number && number < chanse[0] + chanse[1] + chanse[2] + chanse[3])
-                {
-                    if (_writeText != null && _writeText.firstTime)
-                    {
-                        _writeText.text.enabled = true;
-                        _writeText.text.text = "Для переключения между бустами, используйте Q, а чтобы использовать выбранный буст, удержите Q";
-                        _writeText.learning.enabled = true;
-                    }
                     waterInstance.Add(Instantiate(waterPrefab, gameObject.transform.position+new Vector3(0f,0.1f,0), Quaternion.identity));
-                }
-                    
 
                 if (coinScript is not null)
                 {
@@ -178,6 +146,11 @@ public class Crate : MonoBehaviour, IDamageable
                 }
                 _spriteRenderer.enabled = false;
                 _boxCollider.enabled = false;
+                if (_writeText != null)
+                {
+                    _writeText.PKM2.enabled = false;
+                    _writeText.crateTarget.GetComponent<SpriteRenderer>().enabled = false;
+                }
             }
         }
     }

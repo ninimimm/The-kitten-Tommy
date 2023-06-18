@@ -65,7 +65,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteShiftBoss;
     [SerializeField] private TextMeshProUGUI textShiftBoss;
     [SerializeField] private LayerMask wallLayer;
-    
+
     public bool isWater;
     public int countHealth;
     private float timerJump;

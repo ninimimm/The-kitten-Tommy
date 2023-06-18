@@ -4,10 +4,10 @@ using UnityEngine;
 public class GrabbingHook : MonoBehaviour
 {
     [SerializeField] public float distanse = 10f;
-    [SerializeField] public float stopping = 0.2f;
     [SerializeField] private float distanseIn;
     [SerializeField] private AudioClip woosh;
     [SerializeField] private float forge;
+    [SerializeField] private WriteText writeText;
     [Range(0, 1f)] public float volume;
     private AudioSource _audioSource;
     public bool isHookedStatic;
@@ -61,6 +61,12 @@ public class GrabbingHook : MonoBehaviour
             if (_raycast.collider is not null &&
                 Vector2.Distance(_raycast.point, transform.position)<Vector2.Distance(difRaycast.point, transform.position))
             {
+                if (writeText != null && _raycast.collider.gameObject.layer == 12 && writeText.firstTime2)
+                {
+                    writeText.LKM2.enabled = true;
+                    writeText.PKM2.enabled = false;
+                    writeText.firstTime2 = false;
+                }
                 isHookedDynamic = true;
                 _joint2DDynamic.enabled = true;
                 _joint2DDynamic.connectedBody = _raycast.collider.gameObject.GetComponent<Rigidbody2D>();
@@ -171,12 +177,26 @@ public class GrabbingHook : MonoBehaviour
         if (isHookedStatic && _joint2DStatic.enabled)
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-            if (scroll > 0 && 
-                !Physics2D.OverlapCircle(_catSprite.checkpointCheck.position+new Vector3(0,0.3f,0), _catSprite.distanseCheckpoint, _catSprite.groundLayer))
+            if (scroll > 0 &&
+                !Physics2D.OverlapCircle(_catSprite.checkpointCheck.position + new Vector3(0, 0.3f, 0),
+                    _catSprite.distanseCheckpoint, _catSprite.groundLayer))
+            {
                 _joint2DStatic.distance -= scroll;
+                if (writeText != null)
+                    writeText.mouseWheelUp.enabled = false;
+            }
+            
             else if (scroll < 0 &&
-                     !Physics2D.OverlapCircle(_catSprite.groundCheck.position, _catSprite.groundCheckRadius*1.8f, _catSprite.groundLayer))
+                     !Physics2D.OverlapCircle(_catSprite.groundCheck.position, _catSprite.groundCheckRadius * 1.8f,
+                         _catSprite.groundLayer))
+            {
+                if (writeText != null)
+                {
+                    writeText.final = true;
+                    writeText.mouseWheelDown.enabled = false;
+                }
                 _joint2DStatic.distance -= scroll;
+            }
         }
     }
 }

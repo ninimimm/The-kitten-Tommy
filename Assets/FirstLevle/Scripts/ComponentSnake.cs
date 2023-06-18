@@ -10,6 +10,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     [SerializeField] private Image _bar;
     [SerializeField] private AudioClip damageClip;
     [SerializeField] private CatSprite _catSprite;
+    [SerializeField] private WriteText _writeText;
     private AudioSource _audioSource;
     public Animator _animator;
     public enum MovementState { stay, Walk, attake, death, hurt };
@@ -26,6 +27,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     private SnakeData data;
     private bool isStart = true;
     private AnimatorStateInfo _stateInfo;
+    public bool isHit;
 
     void Start()
     {
@@ -133,6 +135,9 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
+        _writeText.snakeTarget.GetComponent<SpriteRenderer>().enabled = false;
+        _writeText.W.enabled = false;
+        isHit = true;
         if (!_audioSource.isPlaying && !_animator.GetCurrentAnimatorStateInfo(0).IsName("death"))
             _audioSource.PlayOneShot(damageClip);
         damageNow = true;
