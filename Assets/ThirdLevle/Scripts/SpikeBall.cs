@@ -9,14 +9,14 @@ public class SpikeBall : MonoBehaviour
     [SerializeField] private float bossDamage;
     [SerializeField] private Boss boss;
     public PolygonCollider2D polygonCollider2D;
-    public Rigidbody2D rigidbody2D;
+    public Rigidbody2D rb;
     public SpriteRenderer spriteRenderer;
     private Vector3 _startPosition;
     private float _angle;
     void Start()
     {
         _startPosition = transform.position;
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         polygonCollider2D.enabled = false;
@@ -26,7 +26,7 @@ public class SpikeBall : MonoBehaviour
     {
         if (collision.gameObject.tag == "Cloud")
         {
-            rigidbody2D.bodyType = RigidbodyType2D.Static;
+            rb.bodyType = RigidbodyType2D.Static;
             transform.position = _startPosition;
             spriteRenderer.enabled = false;
             polygonCollider2D.enabled = false;
@@ -35,7 +35,7 @@ public class SpikeBall : MonoBehaviour
         {
             if (spriteRenderer.sprite.name == "PinkSpikesBall") boss.TakeDamage(bossDamage);
             else cat.TakeDamage(catDamage);
-            rigidbody2D.bodyType = RigidbodyType2D.Static;
+            rb.bodyType = RigidbodyType2D.Static;
             transform.position = _startPosition;
             spriteRenderer.enabled = false;
             polygonCollider2D.enabled = false;

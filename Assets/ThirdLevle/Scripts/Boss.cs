@@ -83,7 +83,7 @@ public class Boss : MonoBehaviour, IDamageable
     void FixedUpdate()
     {
         if (clowd.transform.position.x > 25)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%5 + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%4 + 1);
         if (HP <= 0)
         {
             phoneSource.Stop();
@@ -109,7 +109,7 @@ public class Boss : MonoBehaviour, IDamageable
             }
             foreach (var spikeBall in spikeBalls)
             {
-                spikeBall.rigidbody2D.bodyType = RigidbodyType2D.Static;
+                spikeBall.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                 spikeBall.transform.position = stones[0].startPosition;
                 spikeBall.spriteRenderer.enabled = false;
                 spikeBall.polygonCollider2D.enabled = false;
@@ -216,8 +216,8 @@ public class Boss : MonoBehaviour, IDamageable
             {
                 spikeBall.polygonCollider2D.enabled = true;
                 spikeBall.spriteRenderer.enabled = true;
-                spikeBall.rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
-                spikeBall.rigidbody2D.AddForce(new Vector2(Random.Range(-150,150), Random.Range(100, 400)));
+                spikeBall.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                spikeBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-150,150), Random.Range(100, 400)));
             }
         }
     }
