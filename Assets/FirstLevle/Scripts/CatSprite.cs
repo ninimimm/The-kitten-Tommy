@@ -65,7 +65,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteShiftBoss;
     [SerializeField] private TextMeshProUGUI textShiftBoss;
     [SerializeField] private LayerMask wallLayer;
-
+    
     public bool isWater;
     public int countHealth;
     private float timerJump;
@@ -100,11 +100,11 @@ public class CatSprite : MonoBehaviour
     public int money;
     private CatData data;
     public bool canTakeDamage;
-    private bool rotation;
     private bool isJumpOnWall;
     public bool isOnRight;
     public bool isOnLeft;
     public bool isInCave;
+    private float currentY;
 
     public void SetSpeedMultiplier(float multiplier)
     {
@@ -208,28 +208,26 @@ public class CatSprite : MonoBehaviour
             isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
             if (isGround) isJumpOnWall = false;
             isCheckpoint = Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer);
-            if (spriteShiftSand != null)
+            if (isCheckpoint)
             {
-                if (isCheckpoint)
-                {
-                    spriteShiftSand.enabled = true;
-                    textShiftSand.enabled = true;
-                    spriteShiftBoss.enabled = true;
-                    textShiftBoss.enabled = true;
-                }
-                else
-                {
-                    spriteShiftSand.enabled = false;
-                    textShiftSand.enabled = false;
-                    spriteShiftBoss.enabled = false;
-                    textShiftBoss.enabled = false;
-                }
+                spriteShiftSand.enabled = true;
+                textShiftSand.enabled = true;
+                spriteShiftBoss.enabled = true;
+                textShiftBoss.enabled = true;
+            }
+            else
+            {
+                spriteShiftSand.enabled = false;
+                textShiftSand.enabled = false;
+                spriteShiftBoss.enabled = false;
+                textShiftBoss.enabled = false;
             }
             _knifeBar.SetHealth(knife.timer);
             UpdateLight();
             UpdateFly();
             UpdateCheckpoint();
             UpdateWall();
+            FreezeY();
             UpdateJump();
         }
         SwitchAnimation();
@@ -268,47 +266,78 @@ public class CatSprite : MonoBehaviour
     private void UpdateWall()
     {
         if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, wallLayer) && !isJumpOnWall)
-            _rb.bodyType = RigidbodyType2D.Static;
+        {
+            _rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        }
         else
         {
-            _rb.bodyType = RigidbodyType2D.Dynamic;
+            _rb.constraints = RigidbodyConstraints2D.None;
+            _rb.freezeRotation = true;
             isOnWall = false;
         }
             
-        if (!isOnWall &&Physics2D.OverlapCircle(smallAttack.position, distanseSmallAttack*1.1f, wallLayer))
+        if (!isOnWall &&Physics2D.OverlapCircle(smallAttack.position, distanseSmallAttack*1.5f, wallLayer))
         {
+            currentY = (transform.position - new Vector3(0, 0.2f, 0)).y;
             if (transform.rotation.y == 0)
             {
                 isOnRight = true;
-                transform.Rotate(0,0,90);
+                transform.eulerAngles = new Vector3(0,0,90);
             }
             else
             {
                 isOnLeft = true;
-                transform.Rotate(0,0,90);
+                transform.eulerAngles = new Vector3(180,0,-90);
             }
             isOnWall = true;
+            isJumpOnWall = false;
         }
 
         if (isOnWall &&
             !Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, wallLayer) &&
             !isJumpOnWall)
         {
+            _rb.constraints = RigidbodyConstraints2D.None;
+            _rb.freezeRotation = true;
             isOnWall = false;
-            rotation = false;
+            currentY = 10000;
             if (isOnRight)
             {
-                if (transform.rotation.y == 0)
-                    transform.Rotate(180,0,-90);
-                else transform.Rotate(0,0,90);
+                transform.eulerAngles = new Vector3(0, 180, 0);
                 isOnRight = false;
             }
             else if (isOnLeft)
             {
-                if (transform.rotation.y == 0)
-                    transform.Rotate(0,0,90);
-                else transform.Rotate(0,0,90);
+                transform.eulerAngles = new Vector3(0, 0, 0);
                 isOnLeft = false;
+            }
+        }
+    }
+
+    private void FreezeY()
+    {
+        if (isOnWall)
+        {
+            if (currentY < 1.7)
+            {
+                if (transform.position.y > 1.7)
+                    transform.position = new Vector3(transform.position.x, 1.7f, transform.position.z);
+                else if (transform.position.y < 0.3f)
+                    transform.position = new Vector3(transform.position.x, 0.3f, transform.position.z);
+            }
+            else if (currentY >= 1.8 && currentY < 3.8)
+            {
+                if (transform.position.y > 3.6f)
+                    transform.position = new Vector3(transform.position.x, 3.6f, transform.position.z);
+                else if (transform.position.y < 2.3)
+                    transform.position = new Vector3(transform.position.x, 2.3f, transform.position.z);
+            }
+            else if (currentY >= 4.3 && currentY < 6.3)
+            {
+                if (transform.position.y > 5.7)
+                    transform.position = new Vector3(transform.position.x, 5.7f, transform.position.z);
+                else if (transform.position.y < 4.3f)
+                    transform.position = new Vector3(transform.position.x, 4.3f, transform.position.z);
             }
         }
     }
@@ -353,7 +382,7 @@ public class CatSprite : MonoBehaviour
 
     private void UpdateGround()
     {
-        move = isNowShit || _grabbingHook.isHookedStatic ? 0 : isOnWall ? Input.GetAxisRaw("Vertical") : Input.GetAxisRaw("Horizontal");
+        move = isNowShit || _grabbingHook.isHookedStatic || isJumpOnWall ? 0 : isOnWall? Input.GetAxisRaw("Vertical") : Input.GetAxisRaw("Horizontal");
         moveInWater = isNowShit ? 0 : Input.GetAxis("Horizontal");
         isIce = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, iceLayer);
         isWater = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
@@ -390,38 +419,28 @@ public class CatSprite : MonoBehaviour
     {
         if (isOnWall && Input.GetButtonDown("Jump"))
         {
-            _rb.bodyType = RigidbodyType2D.Dynamic;
+            move = 0;
+            _rb.constraints = RigidbodyConstraints2D.None;
+            _rb.freezeRotation = true;
             if (isOnRight)
             {
                 if (transform.rotation.y == 0)
                     _rb.AddForce(new Vector2(-jumpForce/3,jumpForce), ForceMode2D.Impulse);
                 else
-                    _rb.AddForce(new Vector2(-jumpForce/3,0), ForceMode2D.Impulse);
+                    _rb.AddForce(new Vector2(-jumpForce/1.5f,0), ForceMode2D.Impulse);
+                transform.eulerAngles = new Vector3(0, 180, 0);
                 isOnRight = false;
             }
             else if (isOnLeft)
             {
                 if (transform.rotation.y == 0)
-                    _rb.AddForce(new Vector2(jumpForce/3,jumpForce), ForceMode2D.Impulse);
+                    _rb.AddForce(new Vector2(jumpForce/1.5f,0), ForceMode2D.Impulse);
                 else
-                    _rb.AddForce(new Vector2(jumpForce/3,0), ForceMode2D.Impulse);
-                isOnRight = false;
+                    _rb.AddForce(new Vector2(jumpForce/3,jumpForce), ForceMode2D.Impulse);
+                transform.eulerAngles = new Vector3(0,0,0);
+                isOnLeft = false;
             }
             isJumpOnWall = true;
-            rotation = false;
-            if (isOnRight)
-            {
-                if (transform.rotation.y == 0)
-                    transform.Rotate(180,0,-90);
-                else transform.Rotate(0,0,-90);
-            }
-            else if (isOnLeft)
-            {
-                if (transform.rotation.y == 0)
-                    transform.Rotate(0,0,90);
-                else transform.Rotate(0,0,90);
-            }
-            isOnWall = false;
         }
         else
         {
@@ -459,31 +478,23 @@ public class CatSprite : MonoBehaviour
                 if (move > 0)
                 {
                     _stateCat = MovementState.Run;
-                    if (isOnWall)
-                    {
-                        if (rotation)
-                        {
-                            rotation = false;
-                            transform.Rotate(0,180,0); 
-                        }
-                    }
+                    if (isOnRight)
+                        transform.eulerAngles = new Vector3(0,0,90);
+                    else if (isOnLeft)
+                        transform.eulerAngles = new Vector3(0,180,90);
                     else
-                        transform.rotation = new Quaternion(0,0,0,0);
+                        transform.eulerAngles = new Vector3(0,0,0);
 
                 }
                 else if (move < 0)
                 {
                     _stateCat = MovementState.Run;
-                    if (isOnWall)
-                    {
-                        if (!rotation)
-                        {
-                            rotation = true;
-                            transform.Rotate(0,180,0); 
-                        }
-                    }
+                    if (isOnRight)
+                        transform.eulerAngles = new Vector3(0,180,-90);
+                    else if (isOnLeft)
+                        transform.eulerAngles = new Vector3(0, 0, -90);
                     else
-                        transform.rotation = new Quaternion(0,180,0,0);
+                        transform.eulerAngles = new Vector3(0,-180,0);
                 }
                 else
                     _stateCat = MovementState.Stay;

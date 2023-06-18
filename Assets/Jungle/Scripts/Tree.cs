@@ -8,6 +8,7 @@ public class Tree : MonoBehaviour
 {
     [SerializeField] private TilemapRenderer insideTree;
     [SerializeField] private TilemapRenderer wall;
+    [SerializeField] private CatSprite cat;
     private TilemapRenderer _tilemapRenderer;
     
 
@@ -24,8 +25,11 @@ public class Tree : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _tilemapRenderer.enabled = false;
-        insideTree.enabled = false;
-        wall.enabled = false;
+        if (!cat.isOnWall)
+        {
+            _tilemapRenderer.enabled = false;
+            insideTree.enabled = false;
+            wall.enabled = false;
+        }
     }
 }
