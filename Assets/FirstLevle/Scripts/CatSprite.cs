@@ -302,15 +302,9 @@ public class CatSprite : MonoBehaviour
             isOnWall = false;
             currentY = 10000;
             if (isOnRight)
-            {
-                transform.eulerAngles = new Vector3(0, 180, 0);
                 isOnRight = false;
-            }
             else if (isOnLeft)
-            {
-                transform.eulerAngles = new Vector3(0, 0, 0);
                 isOnLeft = false;
-            }
         }
     }
 
@@ -483,7 +477,11 @@ public class CatSprite : MonoBehaviour
                     else if (isOnLeft)
                         transform.eulerAngles = new Vector3(0,180,90);
                     else
-                        transform.eulerAngles = new Vector3(0,0,0);
+                    {
+                        _rb.freezeRotation = false;
+                        transform.eulerAngles = new Vector3(0, 0, 0);
+                        _rb.freezeRotation = true;
+                    }
 
                 }
                 else if (move < 0)
@@ -494,7 +492,11 @@ public class CatSprite : MonoBehaviour
                     else if (isOnLeft)
                         transform.eulerAngles = new Vector3(0, 0, -90);
                     else
-                        transform.eulerAngles = new Vector3(0,-180,0);
+                    {
+                        _rb.freezeRotation = false;
+                        transform.eulerAngles = new Vector3(0, -180, 0);
+                        _rb.freezeRotation = true; 
+                    }
                 }
                 else
                     _stateCat = MovementState.Stay;
@@ -553,6 +555,9 @@ public class CatSprite : MonoBehaviour
         
             if (HP <= 0)
             {
+                isOnWall = false;
+                isOnRight = false;
+                isOnLeft = false;
                 _grabbingHook.line.enabled = false;
                 _grabbingHook.isHookedStatic = false;
                 _grabbingHook.isHookedDynamic = false;

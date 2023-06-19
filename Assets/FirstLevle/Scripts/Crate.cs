@@ -40,6 +40,7 @@ public class Crate : MonoBehaviour, IDamageable
     private List<GameObject> energyInstance = new ();
     private List<GameObject> fishInstance = new ();
     private List<GameObject> waterInstance = new ();
+    public bool isUse;
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -48,7 +49,6 @@ public class Crate : MonoBehaviour, IDamageable
         {
             CrateData.start.Add(gameObject.name);
             Save();
-            _spriteRenderer.enabled = true;
         }
         Load();
         _audioSource = Cat.GetComponent<AudioSource>();
@@ -108,6 +108,7 @@ public class Crate : MonoBehaviour, IDamageable
         if (transform.position.y > 1) canFall = true;
         if (transform.position.y < -0.3 && getHit && _spriteRenderer.enabled)
         {
+            isUse = true;
             if (_audioSource is not null)
             {
                 _audioSource.PlayOneShot(destroyClip);
