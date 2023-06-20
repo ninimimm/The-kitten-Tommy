@@ -24,6 +24,7 @@ public class Spider : MonoBehaviour
         _catSprite = cat.GetComponent<CatSprite>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        audioSource.volume = 0;
     }
 
     void Update()

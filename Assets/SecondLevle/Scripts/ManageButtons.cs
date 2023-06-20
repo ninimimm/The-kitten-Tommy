@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ManageButtons : MonoBehaviour
 {
+    [SerializeField] private int countButtons;
+    [SerializeField] private string code;
     [SerializeField] public GameObject door;
     public StringBuilder keys = new ();
     public Button[] buttons;
@@ -26,9 +28,9 @@ public class ManageButtons : MonoBehaviour
 
     void Update()
     {
-        if (keys.Length == 5)
+        if (keys.Length == countButtons)
         {
-            if (keys.ToString() == "41523")
+            if (keys.ToString() == code)
             {
                 _doorAnimator.SetBool("opened",true);
                 _doorBoxCollider2D.enabled = false;
