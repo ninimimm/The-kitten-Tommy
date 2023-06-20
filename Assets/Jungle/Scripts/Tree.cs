@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class Tree : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer secondTree;
     [SerializeField] private SpriteRenderer[] crates;
     [SerializeField] private Canvas[] peoplesCanvas;
     [SerializeField] private SpriteRenderer[] peoples;
@@ -37,6 +38,7 @@ public class Tree : MonoBehaviour
             foreach (var crate in crates)
                 if (!crate.gameObject.GetComponent<Crate>().isUse)
                     crate.enabled = true;
+            secondTree.enabled = false;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -55,6 +57,7 @@ public class Tree : MonoBehaviour
             foreach (var crate in crates)
                 if (!crate.gameObject.GetComponent<Crate>().isUse)
                     crate.enabled = false;
+            secondTree.enabled = true;
         }
     }
 }

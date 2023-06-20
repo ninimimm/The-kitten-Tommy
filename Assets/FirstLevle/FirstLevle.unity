@@ -5126,6 +5126,7 @@ MonoBehaviour:
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
   _writeText: {fileID: 0}
+  isUse: 0
 --- !u!50 &347951060
 Rigidbody2D:
   serializedVersion: 4
@@ -5610,6 +5611,7 @@ MonoBehaviour:
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
   _writeText: {fileID: 0}
+  isUse: 0
 --- !u!50 &401594533
 Rigidbody2D:
   serializedVersion: 4
@@ -12870,6 +12872,7 @@ MonoBehaviour:
   boosts: {fileID: 1523339527}
   countSpawnItems: 3
   _writeText: {fileID: 0}
+  isUse: 0
 --- !u!1 &913761063
 GameObject:
   m_ObjectHideFlags: 0
@@ -13479,6 +13482,7 @@ MonoBehaviour:
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
   _writeText: {fileID: 0}
+  isUse: 0
 --- !u!50 &997820239
 Rigidbody2D:
   serializedVersion: 4
@@ -13945,6 +13949,7 @@ MonoBehaviour:
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
   _writeText: {fileID: 0}
+  isUse: 0
 --- !u!1 &1050049635
 GameObject:
   m_ObjectHideFlags: 0
@@ -19694,6 +19699,7 @@ MonoBehaviour:
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
   _writeText: {fileID: 0}
+  isUse: 0
 --- !u!50 &1173141446
 Rigidbody2D:
   serializedVersion: 4
@@ -21312,6 +21318,7 @@ MonoBehaviour:
   boosts: {fileID: 1523339527}
   countSpawnItems: 1
   _writeText: {fileID: 1523339528}
+  isUse: 0
 --- !u!50 &1321315446
 Rigidbody2D:
   serializedVersion: 4

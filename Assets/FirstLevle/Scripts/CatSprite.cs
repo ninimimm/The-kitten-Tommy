@@ -228,7 +228,9 @@ public class CatSprite : MonoBehaviour
             UpdateCheckpoint();
             UpdateWall();
             if (isInCave)
-                FreezeY();
+                FreezeYInTree();
+            else
+                FreezeYPutTree();
             UpdateJump();
         }
         SwitchAnimation();
@@ -311,7 +313,7 @@ public class CatSprite : MonoBehaviour
         }
     }
 
-    private void FreezeY()
+    private void FreezeYInTree()
     {
         if (isOnWall)
         {
@@ -335,6 +337,40 @@ public class CatSprite : MonoBehaviour
                     transform.position = new Vector3(transform.position.x, 5.7f, transform.position.z);
                 else if (transform.position.y < 4.3f)
                     transform.position = new Vector3(transform.position.x, 4.3f, transform.position.z);
+            }
+        }
+    }
+
+    private void FreezeYPutTree()
+    {
+        if (isOnWall)
+        {
+            if (transform.position.x < 35)
+            {
+                if (currentY < 13.6)
+                {
+                    if (transform.position.y > 13.6)
+                        transform.position = new Vector3(transform.position.x, 13.6f, transform.position.z);
+                    else if (transform.position.y < -3.3f)
+                        transform.position = new Vector3(transform.position.x, -3.3f, transform.position.z);
+                }
+            }
+            else if (transform.position.x > 35)
+            {
+                if (currentY < -0.4)
+                {
+                    if (transform.position.y > -0.4)
+                        transform.position = new Vector3(transform.position.x, -0.4f, transform.position.z);
+                    else if (transform.position.y < -3.3f)
+                        transform.position = new Vector3(transform.position.x, -3.3f, transform.position.z);
+                }
+                else if (currentY < 13.6)
+                {
+                    if (transform.position.y > 13.6)
+                        transform.position = new Vector3(transform.position.x, 13.6f, transform.position.z);
+                    else if (transform.position.y < 1.4f)
+                        transform.position = new Vector3(transform.position.x, 1.4f, transform.position.z);
+                }
             }
         }
     }
