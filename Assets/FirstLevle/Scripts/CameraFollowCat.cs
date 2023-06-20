@@ -25,13 +25,16 @@ public class CameraFollowCat : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var constantWidthSize = initialSize * (targetAspect / camera.aspect);
-        camera.orthographicSize = Mathf.Lerp(constantWidthSize, initialSize, widthOrHeight);
-        if (target.position.x <= -20) value = -20f;
-        else if (target.position.x >= 48f) value = 48f;
-        else value = target.position.x;
-        desiredPosition = new Vector3(value + offset.x, maintainY ? transform.position.y+startY : target.position.y + offset.y+startY, transform.position.z);
-        smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = smoothedPosition;
+        if (!Input.GetKey(KeyCode.Tab))
+        {
+            var constantWidthSize = initialSize * (targetAspect / camera.aspect);
+            camera.orthographicSize = Mathf.Lerp(constantWidthSize, initialSize, widthOrHeight);
+            if (target.position.x <= -20) value = -20f;
+            else if (target.position.x >= 48f) value = 48f;
+            else value = target.position.x;
+            desiredPosition = new Vector3(value + offset.x, maintainY ? transform.position.y+startY : target.position.y + offset.y+startY, transform.position.z);
+            smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+            transform.position = smoothedPosition;
+        }
     }
 }

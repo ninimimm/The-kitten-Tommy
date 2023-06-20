@@ -227,7 +227,8 @@ public class CatSprite : MonoBehaviour
             UpdateFly();
             UpdateCheckpoint();
             UpdateWall();
-            FreezeY();
+            if (isInCave)
+                FreezeY();
             UpdateJump();
         }
         SwitchAnimation();
@@ -274,6 +275,8 @@ public class CatSprite : MonoBehaviour
             _rb.constraints = RigidbodyConstraints2D.None;
             _rb.freezeRotation = true;
             isOnWall = false;
+            isOnRight = false;
+            isOnLeft = false;
         }
             
         if (!isOnWall &&Physics2D.OverlapCircle(smallAttack.position, distanseSmallAttack*1.5f, wallLayer))
@@ -435,6 +438,8 @@ public class CatSprite : MonoBehaviour
                 isOnLeft = false;
             }
             isJumpOnWall = true;
+            isOnRight = false;
+            isOnLeft = false;
         }
         else
         {
