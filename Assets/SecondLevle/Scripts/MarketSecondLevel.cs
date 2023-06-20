@@ -64,12 +64,12 @@ public class MarketSecondLevel : MonoBehaviour
                     _catSprite.takeDamage += clawsDamageUpgrade;
                     buyingSourse.Play();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 6)
+                else if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 2)
                 {
                     grabbingHook.enabled = true;
                     if (grabbingHook.material != ColdHarpoon)
                     {
-                        _catSprite.money -= 6;
+                        _catSprite.money -= 2;
                         grabbingHook.material = ColdHarpoon;
                         line.material = "cold";
                     }

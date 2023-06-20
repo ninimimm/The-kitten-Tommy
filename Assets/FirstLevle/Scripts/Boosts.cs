@@ -15,8 +15,8 @@ public class Boosts : MonoBehaviour
     [SerializeField] private float timeToSwitch;
     [SerializeField] private float timeToUse;
     [SerializeField] private float timeLite;
-    [SerializeField] private float timeToRun;
-    [SerializeField] private float timeToJump;
+    [SerializeField] public float timeToRun;
+    [SerializeField] public float timeToJump;
     [SerializeField] private float timeToShield;
     [SerializeField] private CatSprite cat;
     [SerializeField] private Shield shield;
@@ -62,6 +62,8 @@ public class Boosts : MonoBehaviour
         energyCount = data.energyCount;
         fishCount = data.fishCount;
         waterCount = data.waterCount;
+        timeToJump = data.timeToJump;
+        timeToRun = data.timeToRun;
     }
 
     // Update is called once per frame

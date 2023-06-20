@@ -1,40 +1,37 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class MarketFirstLevel : MonoBehaviour
+public class MarketThirdLevel : MonoBehaviour
 {
     [SerializeField] private GameObject cat;
-    [SerializeField] private float knifeIntervalUpgrade;
-    [SerializeField] private float knifeDamageUpgrade;
     [SerializeField] private LineRenderer grabbingHook;
-    [SerializeField] private Material GoldHarpoon;
-    [SerializeField] private GameObject _knifePrefab;
+    [SerializeField] private Material treeHarpoon;
     [SerializeField] private Line line;
-    [SerializeField] private Knife _knife;
-    [SerializeField] private AudioSource buyingSource;
+    [SerializeField] private AudioSource buyingSourse;
     [SerializeField] public SpriteRenderer icon;
     [SerializeField] public TextMeshProUGUI textIcon;
+    [SerializeField] private Boosts boosts;
     private Transform _catTransform;
     private SpriteRenderer _spriteRenderer;
     private CatSprite _catSprite;
-    private logicKnife _logicKnife;
-
     void Start()
     {
         _catTransform = cat.GetComponent<Transform>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
         _catSprite = cat.GetComponent<CatSprite>();
-        _logicKnife = _knifePrefab.GetComponent<logicKnife>();
         icon.enabled = false;
         textIcon.enabled = false;
     }
     
     void Update()
     {
-        if (Math.Abs(transform.position.x - _catTransform.position.x) < 1 && Math.Abs(transform.position.y - _catTransform.position.y) < 1.5
-                                                                          && !_catSprite.isWater)
+        if (Math.Abs(transform.position.x - _catTransform.position.x) < 1 && _catTransform.position.y - transform.position.y < 2
+            && _catTransform.position.y - transform.position.y > 0)
         {
             icon.enabled = true;
             textIcon.enabled = true;
@@ -44,42 +41,41 @@ public class MarketFirstLevel : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Alpha1) && _catSprite.money >= 2)
                 {
-                    buyingSource.Play();
                     _catSprite.money -= 2;
-                    _knife.attackIntervale *= knifeIntervalUpgrade;
-                    _catSprite._knifeBar.SetMaxHealth(_knife.attackIntervale);
+                    boosts.timeToRun += 0.5f;
+                    buyingSourse.Play();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha2) && _catSprite.money >= 3)
+                else if (Input.GetKeyDown(KeyCode.Alpha2) && _catSprite.money >= 5)
                 {
-                    buyingSource.Play();
-                    _catSprite.money -= 3;
+                    _catSprite.money -= 5;
                     _catSprite.countHealth += 1;
                     _catSprite._textHealth.text = _catSprite.countHealth.ToString();
+                    buyingSourse.Play();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha3) && _catSprite.money >= 2)
+                else if (Input.GetKeyDown(KeyCode.Alpha3) && _catSprite.money >= 4)
                 {
-                    buyingSource.Play();
-                    _catSprite.money -= 2;
+                    _catSprite.money -= 4;
                     _catSprite.HP = _catSprite.maxHP;
                     _catSprite._healthBar.SetMaxHealth(_catSprite.maxHP);
+                    buyingSourse.Play();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha4) && _catSprite.money >= 1)
+                else if (Input.GetKeyDown(KeyCode.Alpha4) && _catSprite.money >= 2)
                 {
-                    buyingSource.Play();
-                    _catSprite.money -= 1;
-                    _logicKnife.damage += knifeDamageUpgrade;
+                    _catSprite.money -= 2;
+                    boosts.timeToJump += 0.5f;
+                    buyingSourse.Play();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 1)
+                else if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 4)
                 {
-                    buyingSource.Play();
                     grabbingHook.enabled = true;
-                    if (grabbingHook.material != GoldHarpoon)
+                    if (grabbingHook.material != treeHarpoon)
                     {
-                        _catSprite.money -= 1;
-                        grabbingHook.material = GoldHarpoon;
-                        line.material = "gold";
+                        _catSprite.money -= 4;
+                        grabbingHook.material = treeHarpoon;
+                        line.material = "tree";
                     }
                     grabbingHook.enabled = false;
+                    buyingSourse.Play();
                 }
                 _catSprite._textMoney.text = _catSprite.money.ToString();
             }
@@ -90,6 +86,5 @@ public class MarketFirstLevel : MonoBehaviour
             textIcon.enabled = false;
             _spriteRenderer.enabled = false;
         }
-            
     }
 }

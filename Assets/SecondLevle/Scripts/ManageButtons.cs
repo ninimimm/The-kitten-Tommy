@@ -30,7 +30,7 @@ public class ManageButtons : MonoBehaviour
     {
         if (keys.Length == countButtons)
         {
-            if (keys.ToString() == code)
+            if (code.Contains(keys.ToString()))
             {
                 _doorAnimator.SetBool("opened",true);
                 _doorBoxCollider2D.enabled = false;
