@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraSwitcher : MonoBehaviour
 {
+    [SerializeField] private Image stoneImage;
     [SerializeField] private SpriteRenderer background;
     [SerializeField] private SpriteRenderer middleground;
     [SerializeField] private GameObject cat;
@@ -36,6 +38,7 @@ public class CameraSwitcher : MonoBehaviour
         {
             background.enabled = false;
             middleground.enabled = false;
+            stoneImage.enabled = false;
         }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -44,6 +47,7 @@ public class CameraSwitcher : MonoBehaviour
                 timer = 0.1f;
                 background.enabled = true;
                 middleground.enabled = true;
+                stoneImage.enabled = true;
                 camera2 = !camera2;
             }
             else camera2 = false;

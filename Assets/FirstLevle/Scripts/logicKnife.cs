@@ -61,7 +61,8 @@ public class logicKnife : MonoBehaviour
                 {
                     hitSource.Play();
                     _poisonKnife.target = enemy;
-                    _poisonKnife._timer = _poisonKnife.timeToPoison;
+                    _poisonKnife._timers[_poisonKnife.number] = _poisonKnife.timeToPoison;
+                    _poisonKnife.number++;
                 }
                 else
                 {

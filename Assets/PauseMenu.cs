@@ -7,7 +7,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseGameMenu;
     public GameObject helpGameMenu;
     [SerializeField] private GameObject[] crates;
+    [SerializeField] private GameObject[] stones;
     private Vector3[] _transforms = new Vector3[5];
+    private Vector3[] _transformsStones = new Vector3[3];
     private int i;
     
     private void Start()
@@ -15,6 +17,9 @@ public class PauseMenu : MonoBehaviour
         if(crates.Length > 0)
             for (var i = 0; i < crates.Length; i++)
                 _transforms[i] = crates[i].transform.position;
+        if (stones.Length > 0)
+            for (var i = 0; i < stones.Length; i++)
+                _transformsStones[i] = stones[i].transform.position;
     }
     // Update is called once per frame
     void Update()
@@ -81,5 +86,10 @@ public class PauseMenu : MonoBehaviour
     {
         for (var i = 0; i < crates.Length; i++)
             crates[i].transform.position = _transforms[i];
+    }
+    public void RespaumStones()
+    {
+        for (var i = 0; i < stones.Length; i++)
+            stones[i].transform.position = _transformsStones[i];
     }
 }

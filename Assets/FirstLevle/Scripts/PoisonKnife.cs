@@ -8,26 +8,33 @@ public class PoisonKnife : MonoBehaviour
     [SerializeField] private float timeToWait;
     [SerializeField] private GameObject knifePrefab;
     private logicKnife _logicKnife;
-    public float _timer = -0.1f;
+    public float[] _timers;
     private float _timerWait;
     public IDamageable target;
+    public int number;
     // Start is called before the first frame update
     void Start()
     {
         _logicKnife = knifePrefab.GetComponent<logicKnife>();
+        _timers = new float[100000];
+        for (var i = 0; i < _timers.Length; i++)
+            _timers[i] = -0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_timer >= 0)
+        for (var i = 0; i < _timers.Length; i++)
         {
-            _timer -= Time.deltaTime;
-            _timerWait -= Time.deltaTime;
-            if (_timerWait < 0)
+            if (_timers[i] >= 0) 
             {
-                target.TakeDamage(_logicKnife.damage);
-                _timerWait = timeToWait;
+                _timers[i] -= Time.deltaTime;
+                _timerWait -= Time.deltaTime;
+                if (_timerWait < 0)
+                {
+                    target.TakeDamage(_logicKnife.damage);
+                    _timerWait = timeToWait;
+                }
             }
         }
     }

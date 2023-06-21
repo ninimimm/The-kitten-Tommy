@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class Door : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         _catSprite = cat.GetComponent<CatSprite>();
         animator = GetComponent<Animator>();
+        if (SceneManager.GetActiveScene().name == "Jungle")
+            Save();
         if (!DoorData.Start.Contains(gameObject.name))
         {
             DoorData.Start.Add(gameObject.name);
