@@ -90,13 +90,7 @@ public class GrabbingHook : MonoBehaviour
             }
             line.SetPosition(0, transform.position - new Vector3(0, 0.55f, 0));
             if (_joint2DDynamic.connectedBody is not null)
-            {
-                if (isHookedDynamic && Input.GetKey(KeyCode.A))
-                    _catSprite._rb.AddForce(new Vector2(-forge, forge)); // Приложить силу влево
-                else if (isHookedDynamic && Input.GetKey(KeyCode.D))
-                    _catSprite._rb.AddForce(new Vector2(forge, forge)); // Приложить силу вправо
                 line.SetPosition(1, _joint2DDynamic.connectedBody.transform.position + (Vector3)_joint2DDynamic.connectedAnchor);
-            }
         }
         if (Input.GetKeyUp(KeyCode.Mouse1) || (_joint2DDynamic.connectedBody is not null && !_joint2DDynamic.connectedBody.gameObject.GetComponent<SpriteRenderer>().enabled))
         {
@@ -158,9 +152,9 @@ public class GrabbingHook : MonoBehaviour
                     if (angle < 110 && !_catSprite.isGround)
                     {
                         if (Input.GetKey(KeyCode.A))
-                            _catSprite._rb.AddForce(new Vector2(-forge, 0));
+                            _catSprite._rb.AddForce(new Vector2(-forge/2f, 0));
                         else if (Input.GetKey(KeyCode.D))
-                            _catSprite._rb.AddForce(new Vector2(forge, 0));
+                            _catSprite._rb.AddForce(new Vector2(forge/2f, 0));
                     }
                     if (!_catSprite.isGround && angle > 50 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -2));
                     if (!_catSprite.isGround && angle > 90 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -4));

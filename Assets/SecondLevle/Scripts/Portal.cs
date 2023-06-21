@@ -1,27 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] private Transform cat;
+    [SerializeField] private CatSprite _cat;
+    [SerializeField] private Knife knife;
+    [SerializeField] private logicKnife logicKnife;
+    [SerializeField] private Boosts boosts;
     [SerializeField] private AudioSource _audioSource;
     private Animator _animator;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(cat.transform.position, transform.position) < 1)
+        if (Vector3.Distance(_cat.transform.position, transform.position) < 1)
         {
-            cat.GetComponent<SpriteRenderer>().enabled = false;
+            _cat.GetComponent<SpriteRenderer>().enabled = false;
             _animator.SetInteger("state",1);
             _audioSource.Play();
         }
+        if (_animator.GetInteger("state") == 1) Save();
+    }
+    private void Save()
+    {
+        _cat.Save();
+        knife.Save();
+        logicKnife.Save();
+        boosts.Save();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

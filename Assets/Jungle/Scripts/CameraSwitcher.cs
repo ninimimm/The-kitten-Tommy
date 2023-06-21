@@ -39,7 +39,7 @@ public class CameraSwitcher : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (cat.transform.position.y > 13)
+            if (cat.transform.position.y > 19)
             {
                 timer = 0.1f;
                 background.enabled = true;

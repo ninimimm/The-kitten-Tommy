@@ -82,8 +82,8 @@ public class Boss : MonoBehaviour, IDamageable
 
     void FixedUpdate()
     {
-        if (clowd.transform.position.x > 25)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%4 + 1);
+        if (clowd.transform.position.x > 95)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%5 + 1);
         if (HP <= 0)
         {
             phoneSource.Stop();

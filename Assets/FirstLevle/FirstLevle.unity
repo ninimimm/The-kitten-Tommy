@@ -7233,6 +7233,8 @@ MonoBehaviour:
   maintainY: 0
   startY: 1
   defaulResolution: {x: 1080, y: 1980}
+  leftx: -20
+  rightx: 48
   widthOrHeight: 0.4
   camera: {fileID: 0}
 --- !u!114 &519420034

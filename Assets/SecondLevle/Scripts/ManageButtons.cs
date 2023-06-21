@@ -1,5 +1,6 @@
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ManageButtons : MonoBehaviour
 {
@@ -18,12 +19,15 @@ public class ManageButtons : MonoBehaviour
     {
         _doorAnimator = door.GetComponent<Animator>();
         _doorBoxCollider2D = door.GetComponent<BoxCollider2D>();
-        if (!ManageButtonsData.Start.Contains(gameObject.name))
+        if (SceneManager.GetActiveScene().name != "Jungle")
         {
-            ManageButtonsData.Start.Add(gameObject.name);
-            Save();
+            if (!ManageButtonsData.Start.Contains(gameObject.name))
+            {
+                ManageButtonsData.Start.Add(gameObject.name);
+                Save();
+            }
+            Load();
         }
-        Load();
     }
 
     void Update()

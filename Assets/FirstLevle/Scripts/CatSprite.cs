@@ -150,6 +150,7 @@ public class CatSprite : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Jungle") key = "";
         transform.position = spawnRevile;
         if (SceneManager.GetActiveScene().name == "ThirdLevle")
         {
@@ -215,7 +216,7 @@ public class CatSprite : MonoBehaviour
                 spriteShiftBoss.enabled = true;
                 textShiftBoss.enabled = true;
             }
-            else
+            else if (Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer) != null)
             {
                 spriteShiftSand.enabled = false;
                 textShiftSand.enabled = false;
@@ -317,26 +318,26 @@ public class CatSprite : MonoBehaviour
     {
         if (isOnWall)
         {
-            if (currentY < 1.7)
+            if (currentY < 6.3)
             {
-                if (transform.position.y > 1.7)
-                    transform.position = new Vector3(transform.position.x, 1.7f, transform.position.z);
-                else if (transform.position.y < 0.3f)
-                    transform.position = new Vector3(transform.position.x, 0.3f, transform.position.z);
+                if (transform.position.y > 6.3)
+                    transform.position = new Vector3(transform.position.x, 6.3f, transform.position.z);
+                else if (transform.position.y < 4.9f)
+                    transform.position = new Vector3(transform.position.x, 4.9f, transform.position.z);
             }
-            else if (currentY >= 1.8 && currentY < 3.8)
+            else if (currentY >= 6.4 && currentY < 8.4)
             {
-                if (transform.position.y > 3.6f)
-                    transform.position = new Vector3(transform.position.x, 3.6f, transform.position.z);
-                else if (transform.position.y < 2.3)
-                    transform.position = new Vector3(transform.position.x, 2.3f, transform.position.z);
+                if (transform.position.y > 8.2f)
+                    transform.position = new Vector3(transform.position.x, 8.2f, transform.position.z);
+                else if (transform.position.y < 6.9)
+                    transform.position = new Vector3(transform.position.x, 6.9f, transform.position.z);
             }
-            else if (currentY >= 4.3 && currentY < 6.3)
+            else if (currentY >= 8.9 && currentY < 10.9)
             {
-                if (transform.position.y > 5.7)
-                    transform.position = new Vector3(transform.position.x, 5.7f, transform.position.z);
-                else if (transform.position.y < 4.3f)
-                    transform.position = new Vector3(transform.position.x, 4.3f, transform.position.z);
+                if (transform.position.y > 10.3)
+                    transform.position = new Vector3(transform.position.x, 10.3f, transform.position.z);
+                else if (transform.position.y < 8.9f)
+                    transform.position = new Vector3(transform.position.x, 8.9f, transform.position.z);
             }
         }
     }
@@ -345,31 +346,31 @@ public class CatSprite : MonoBehaviour
     {
         if (isOnWall)
         {
-            if (transform.position.x < 35)
+            if (transform.position.x < 56)
             {
-                if (currentY < 13.6)
+                if (currentY < 18.2)
                 {
-                    if (transform.position.y > 13.6)
-                        transform.position = new Vector3(transform.position.x, 13.6f, transform.position.z);
-                    else if (transform.position.y < -3.3f)
-                        transform.position = new Vector3(transform.position.x, -3.3f, transform.position.z);
+                    if (transform.position.y > 18.2)
+                        transform.position = new Vector3(transform.position.x, 18.2f, transform.position.z);
+                    else if (transform.position.y < 1.3f)
+                        transform.position = new Vector3(transform.position.x, 1.3f, transform.position.z);
                 }
             }
-            else if (transform.position.x > 35)
+            else if (transform.position.x > 56)
             {
-                if (currentY < -0.4)
+                if (currentY < 4.2)
                 {
-                    if (transform.position.y > -0.4)
-                        transform.position = new Vector3(transform.position.x, -0.4f, transform.position.z);
-                    else if (transform.position.y < -3.3f)
-                        transform.position = new Vector3(transform.position.x, -3.3f, transform.position.z);
+                    if (transform.position.y > 4.2)
+                        transform.position = new Vector3(transform.position.x, 4.2f, transform.position.z);
+                    else if (transform.position.y < 1.3f)
+                        transform.position = new Vector3(transform.position.x, 1.3f, transform.position.z);
                 }
-                else if (currentY < 13.6)
+                else if (currentY < 18.2)
                 {
-                    if (transform.position.y > 13.6)
-                        transform.position = new Vector3(transform.position.x, 13.6f, transform.position.z);
-                    else if (transform.position.y < 1.4f)
-                        transform.position = new Vector3(transform.position.x, 1.4f, transform.position.z);
+                    if (transform.position.y > 18.2)
+                        transform.position = new Vector3(transform.position.x, 18.2f, transform.position.z);
+                    else if (transform.position.y < 6f)
+                        transform.position = new Vector3(transform.position.x, 6f, transform.position.z);
                 }
             }
         }

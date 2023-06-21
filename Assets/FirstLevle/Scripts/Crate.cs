@@ -106,7 +106,7 @@ public class Crate : MonoBehaviour, IDamageable
             }
         }   
         if (transform.position.y > 1) canFall = true;
-        if (transform.position.y < -0.3 && getHit && _spriteRenderer.enabled)
+        if (getHit && _spriteRenderer.enabled)
         {
             isUse = true;
             if (_audioSource is not null)
