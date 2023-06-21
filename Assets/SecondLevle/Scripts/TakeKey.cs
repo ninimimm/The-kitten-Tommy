@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TakeKey : MonoBehaviour
@@ -40,6 +41,8 @@ public class TakeKey : MonoBehaviour
         _catSprite = cat.GetComponent<CatSprite>();
         goldKeyImage.enabled = false;
         ironKeyImage.enabled = false;
+        if (SceneManager.GetActiveScene().name == "Jungle")
+            Save();
         if (!TakeKeyData.start.Contains(gameObject.name))
         {
             Save();

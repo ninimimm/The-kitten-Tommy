@@ -19,15 +19,14 @@ public class ManageButtons : MonoBehaviour
     {
         _doorAnimator = door.GetComponent<Animator>();
         _doorBoxCollider2D = door.GetComponent<BoxCollider2D>();
-        if (SceneManager.GetActiveScene().name != "Jungle")
+        if (SceneManager.GetActiveScene().name == "Jungle")
+            Save();
+        if (!ManageButtonsData.Start.Contains(gameObject.name))
         {
-            if (!ManageButtonsData.Start.Contains(gameObject.name))
-            {
-                ManageButtonsData.Start.Add(gameObject.name);
-                Save();
-            }
-            Load();
+            ManageButtonsData.Start.Add(gameObject.name);
+            Save();
         }
+        Load();
     }
 
     void Update()
