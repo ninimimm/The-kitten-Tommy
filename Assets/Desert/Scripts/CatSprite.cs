@@ -216,7 +216,7 @@ public class CatSprite : MonoBehaviour
                 spriteShiftBoss.enabled = true;
                 textShiftBoss.enabled = true;
             }
-            else if (Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer) != null)
+            else
             {
                 spriteShiftSand.enabled = false;
                 textShiftSand.enabled = false;
