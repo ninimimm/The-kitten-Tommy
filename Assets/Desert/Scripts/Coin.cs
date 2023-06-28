@@ -55,7 +55,13 @@ public class Coin : MonoBehaviour
             _spriteRenderer.enabled = true;
             if (SceneManager.GetActiveScene().name == "FirstLevle")
                 GoToSecondLevle.coins.Add(this);
-            else GoToFirstLevel.coins.Add(this);
+            else if (SceneManager.GetActiveScene().name == "SecondLevle")
+            {
+                GoToFirstLevel.coins.Add(this);
+                GoToThirdLevel.coins.Add(this);
+            }
+            else
+                GoToSnow.coins.Add(this);
             isStart = false;
         }
         if (_spriteRenderer.enabled && Physics2D.OverlapCircle(transform.position, distanseAttack, catLayer))

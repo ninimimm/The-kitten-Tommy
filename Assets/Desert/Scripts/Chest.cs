@@ -37,7 +37,7 @@ public class Chest : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(_cat.transform.position-new Vector3(0,0.4f,0), transform.position) < 1.2 && !isOpened)
+        if (Vector3.Distance(_cat.transform.position-new Vector3(0,0.4f,0), transform.position) < 1.3 && !isOpened)
         {
             icon.enabled = true;
             textIcon.enabled = true;

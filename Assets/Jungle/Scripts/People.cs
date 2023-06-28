@@ -25,19 +25,21 @@ public class People : MonoBehaviour,IDamageable
     [SerializeField] private float damage3;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private bool isFacingRight;
-    private float HP;
+    public float HP;
     private bool damageNow;
     public enum MovementState { stay, walk, attack1, attack2, attack3, defense, hit, death};
     public static MovementState _statePeople;
     private Rigidbody2D rb;
-    private Animator animator;
+    public Animator animator;
     private AnimatorStateInfo _stateInfo;
-    private PolygonCollider2D _poly;
-    private BoxCollider2D _boxCol;
+    public PolygonCollider2D _poly;
+    public BoxCollider2D _boxCol;
     private float idleTimer;
     private AudioSource audioSource;
     private bool canDamage;
     private bool isDeath;
+    private PeopleData data;
+    private bool isStart = true;
     
     // Start is called before the first frame update
     void Start()
@@ -48,7 +50,36 @@ public class People : MonoBehaviour,IDamageable
         audioSource = GetComponent<AudioSource>();
         HP = maxHP;
         rb = GetComponent<Rigidbody2D>();
+        if (!HawkData.start.Contains(gameObject.name))
+        {
+            HP = maxHP;
+            _healthBar.SetMaxHealth(maxHP);
+            Save();
+            HawkData.start.Add(gameObject.name);
+        }
+        Load();
         _healthBar.SetMaxHealth(maxHP);
+        _healthBar.SetHealth(HP);
+        audioSource = GetComponent<AudioSource>();
+    }
+    
+    public void Save()
+    {
+        if (this != null) 
+            SavingSystem<People,PeopleData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<People, PeopleData>.Load($"{gameObject.name}.data");
+        transform.position = new Vector3(
+            data.position[0],
+            data.position[1],
+            data.position[2]);
+        HP = data.HP;
+        _poly.enabled = data.polyEnabled;
+        _boxCol.enabled = data.boxEnabled;
+        animator.SetInteger("state",data.animatorState);
     }
 
     // Update is called once per frame
@@ -90,6 +121,11 @@ public class People : MonoBehaviour,IDamageable
             _poly.enabled = false;
             _fill.enabled = false;
             _bar.enabled = false;
+        }
+        if (isStart)
+        {
+            Load();
+            isStart = false;
         }
     }
 

@@ -86,7 +86,13 @@ public class Crate : MonoBehaviour, IDamageable
         {
             if (SceneManager.GetActiveScene().name == "FirstLevle")
                 GoToSecondLevle.crates.Add(this);
-            else GoToFirstLevel.crates.Add(this);
+            else if (SceneManager.GetActiveScene().name == "SecondLevle")
+            {
+                GoToFirstLevel.crates.Add(this);
+                GoToThirdLevel.crates.Add(this);
+            }
+            else
+                GoToSnow.crates.Add(this);
             isStart = false;
         }
 
