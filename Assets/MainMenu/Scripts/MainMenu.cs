@@ -11,7 +11,8 @@ public class MainMenu : MonoBehaviour
     public static List<HashSet<string>> starts = new ();
     public static int saveIndex;
     public static  bool isResume;
-    private string saveIndexFilePath = "C:\\Users\\nik_chern\\Desktop\\Остальное\\TheGame\\The-kitten-Tommy\\Assets\\MainMenu\\Scripts\\saveIndex.txt";
+    private string saveIndexFilePath = Path.Combine(Application.dataPath, "MainMenu\\Scripts\\saveIndex.txt");
+
     private void Start()
     {
         EventSystem.current.SetSelectedGameObject(null);
