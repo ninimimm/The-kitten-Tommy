@@ -30,7 +30,6 @@ public static class SavingSystem <TObject,TData>
     public static TData Load(string path)
     {
         fullPath = $"{Application.persistentDataPath}{path}";
-        Debug.Log(fullPath);
         if (File.Exists(fullPath))
         {
             using (var stream = new FileStream(fullPath, FileMode.Open))
@@ -47,5 +46,4 @@ public static class SavingSystem <TObject,TData>
         }
         return new TData();
     }
-
 }
