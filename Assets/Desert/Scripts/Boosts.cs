@@ -38,12 +38,13 @@ public class Boosts : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        data = SavingSystem<Boosts, BoostsData>.Load($"{gameObject.name}.data");
         currentJump = cat.jumpForce;
         timerChose = timeLite;
-        if (!BoostsData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
             Save();
-            BoostsData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
         }
         Load();
         boostsText[0].text = $"x{energyCount}";

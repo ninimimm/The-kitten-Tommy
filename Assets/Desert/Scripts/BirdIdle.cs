@@ -20,12 +20,13 @@ public class BirdIdle : MonoBehaviour
     private bool isFlying;
     void Start()
     {
+        _data = SavingSystem<BirdIdle, BirdIdleData>.Load($"{gameObject.name}.data");
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _animator.SetInteger("state", 1);
-        if (!BirdIdleData.start.Contains(gameObject.name))
+        if (!_data.start.Contains(gameObject.name))
         {
-            BirdIdleData.start.Add(gameObject.name);
+            _data.start.Add(gameObject.name);
             Save();
             _spriteRenderer.enabled = true;
         }

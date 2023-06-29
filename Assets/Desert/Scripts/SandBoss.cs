@@ -50,6 +50,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        data = SavingSystem<SandBoss, BossData>.Load($"{gameObject.name}.data");
         attackTimer = attackInterval;
         spawnTimer = -0.1f;
         HP = maxHP;
@@ -61,12 +62,12 @@ public class SandBoss : MonoBehaviour, IDamageable
         pol.enabled = true;
         cap.enabled = false;
         _catSprite = _cat.GetComponent<CatSprite>();
-        if (!SnakeData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            SnakeData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

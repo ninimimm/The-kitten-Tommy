@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [Serializable]
 public class HyenaData : IInitializable<Hyena>
 {
-    public static HashSet<string> start = new ();
+    public HashSet<string> start { get; set;} = new();
     public float HP;
     public bool polyEnabled;
     public bool capEnabled;

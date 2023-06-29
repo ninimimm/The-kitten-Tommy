@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [Serializable] 
 public class CoinData : IInitializable<Coin>
 {
-    public static HashSet<string> start = new ();
+    public HashSet<string> start { get; set;} = new();
     public Dictionary<string, float[]> positions;
 
     public CoinData() 

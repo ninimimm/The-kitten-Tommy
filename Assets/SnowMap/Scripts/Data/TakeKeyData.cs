@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class TakeKeyData : IInitializable<TakeKey>
 {
-    public static HashSet<string> start = new ();
+    public HashSet<string> start { get; set;} = new();
 
     public bool goldKeyImageEnabled;
     public bool ironKeyImageEnabled;

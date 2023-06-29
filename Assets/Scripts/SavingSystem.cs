@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public interface IInitializable<TObject>
 {
+    HashSet<string> start { get; set; }
     void Initialize(TObject obj);
 }
 
@@ -18,6 +20,8 @@ public static class SavingSystem <TObject,TData>
     {
         binaryFormatter = new BinaryFormatter();
         fullPath = $"{Application.persistentDataPath}{path}";
+        MainMenu.allPaths.Add(fullPath);
+        MainMenu.starts.Add(data.start);
         data.Initialize(obj);
         using (var stream = new FileStream(fullPath, FileMode.Create))
             binaryFormatter.Serialize(stream, data);
@@ -26,6 +30,7 @@ public static class SavingSystem <TObject,TData>
     public static TData Load(string path)
     {
         fullPath = $"{Application.persistentDataPath}{path}";
+        Debug.Log(fullPath);
         if (File.Exists(fullPath))
         {
             using (var stream = new FileStream(fullPath, FileMode.Open))

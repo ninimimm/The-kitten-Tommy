@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class DoorData : IInitializable<Door>
 {
-    public static HashSet<string> Start = new ();
+    public HashSet<string> start { get; set;} = new();
     public int animatorState;
     public bool colliderState;
     

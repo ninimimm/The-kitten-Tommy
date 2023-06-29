@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class LogicKnifeData : IInitializable<logicKnife>
 {
-    public static HashSet<string> start = new ();
+    public HashSet<string> start { get; set;} = new();
     public float damage;
 
     public LogicKnifeData(){}

@@ -29,7 +29,8 @@ public class GoToThirdLevel : MonoBehaviour
 
     void Update()
     {
-        if (Physics2D.OverlapCircle(_catSprite.groundCheck.position, _catSprite.groundCheckRadius, balloonLayer))
+        if (Physics2D.OverlapCircle(_catSprite.groundCheck1.position, _catSprite.groundCheckRadius, balloonLayer) ||
+            Physics2D.OverlapCircle(_catSprite.groundCheck2.position, _catSprite.groundCheckRadius, balloonLayer))
         {
             transform.position += speed * Time.deltaTime * movingVector ;
             _cat.transform.position += speed * Time.deltaTime * movingVector ;
@@ -42,7 +43,7 @@ public class GoToThirdLevel : MonoBehaviour
         }
             
     }
-    private void Save()
+    public void Save()
     {
         foreach (var coin in coins)
             if (coin is not null) coin.Save();

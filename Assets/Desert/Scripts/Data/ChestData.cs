@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ChestData : IInitializable<Chest>
 {
-    public static HashSet<string> start = new ();
+    public HashSet<string> start { get; set;} = new();
     public int animatorState;
     public bool isOpened;
 

@@ -13,12 +13,13 @@ public class Line : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        data = SavingSystem<Line, LineData>.Load($"{gameObject.name}.data");
         if (SceneManager.GetActiveScene().name == "FirstLevle")
             material = "based";
-        if (!LineData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
             Save();
-            LineData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
         }
         Load();
     }

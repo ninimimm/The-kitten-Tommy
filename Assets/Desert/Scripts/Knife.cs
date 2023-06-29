@@ -20,10 +20,11 @@ public class Knife : MonoBehaviour
     
     private void Start()
     {
+        data = SavingSystem<Knife, KnifeData>.Load($"{gameObject.name}.data");
         mainCamera = Camera.main;
-        if (!KnifeData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
-            KnifeData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
             Save();
         }
         Load();

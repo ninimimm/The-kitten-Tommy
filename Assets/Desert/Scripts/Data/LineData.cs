@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [Serializable]
 public class LineData : IInitializable<Line>
 {
-    public static HashSet<string> start = new ();
+    public HashSet<string> start { get; set;} = new();
     public string material;
     
     public LineData() {}

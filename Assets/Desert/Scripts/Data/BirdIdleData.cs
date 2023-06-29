@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class BirdIdleData : IInitializable<BirdIdle>
 {
-    public static HashSet<string> start = new ();
+    public HashSet<string> start { get; set;} = new();
     public Dictionary<string, float[]> positions;
     public int animatorState;
 

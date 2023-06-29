@@ -152,9 +152,9 @@ public class GrabbingHook : MonoBehaviour
                     if (angle < 110 && !_catSprite.isGround)
                     {
                         if (Input.GetKey(KeyCode.A))
-                            _catSprite._rb.AddForce(new Vector2(-forge/2f, 0));
+                            _catSprite._rb.AddForce(new Vector2(-forge, 0));
                         else if (Input.GetKey(KeyCode.D))
-                            _catSprite._rb.AddForce(new Vector2(forge/2f, 0));
+                            _catSprite._rb.AddForce(new Vector2(forge, 0));
                     }
                     if (!_catSprite.isGround && angle > 50 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -2));
                     if (!_catSprite.isGround && angle > 90 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -4));
@@ -181,8 +181,8 @@ public class GrabbingHook : MonoBehaviour
             }
             
             else if (scroll < 0 &&
-                     !Physics2D.OverlapCircle(_catSprite.groundCheck.position, _catSprite.groundCheckRadius * 1.8f,
-                         _catSprite.groundLayer))
+                     !(Physics2D.OverlapCircle(_catSprite.groundCheck1.position, _catSprite.groundCheckRadius * 1.8f, _catSprite.groundLayer) ||
+                       Physics2D.OverlapCircle(_catSprite.groundCheck2.position, _catSprite.groundCheckRadius * 1.8f, _catSprite.groundLayer)))
             {
                 if (writeText != null)
                 {

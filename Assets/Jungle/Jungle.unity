@@ -9641,6 +9641,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2863324559156932465, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863324559156932465, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0274
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863324559156932465, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0719
+      objectReference: {fileID: 0}
     - target: {fileID: 5705279651581221962, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.055
@@ -9651,11 +9663,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872387, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.55
+      value: 1.221
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872387, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.47
+      value: 1.398
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872387, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9786,6 +9798,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 223864070}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: groundCheck1
+      value: 
+      objectReference: {fileID: 333282437}
+    - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: groundCheck2
+      value: 
+      objectReference: {fileID: 333282436}
+    - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: poisonSprite
       value: 
       objectReference: {fileID: 21300000, guid: c06d3764f0823484fbfefad732771dcc, type: 3}
@@ -9847,7 +9867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: groundCheckRadius
-      value: 0.31
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: distanseCheckpoint
@@ -9899,11 +9919,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8160257154268857812, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.007
+      value: -0.0241
       objectReference: {fileID: 0}
     - target: {fileID: 8160257154268857812, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.052
+      value: -0.0725
       objectReference: {fileID: 0}
     - target: {fileID: 8160257155176001788, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_RootOrder
@@ -9915,7 +9935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8792474989578157231, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8792474989578157231, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9924,6 +9944,16 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5705279651709872396, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+--- !u!4 &333282436 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2863324559156932465, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+  m_PrefabInstance: {fileID: 333282435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &333282437 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8160257154268857812, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+  m_PrefabInstance: {fileID: 333282435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &334543314
 GameObject:
   m_ObjectHideFlags: 0
@@ -30863,7 +30893,7 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 1.5695223
+  m_Distance: 1.856137
   m_DampingRatio: 0
   m_Frequency: 1000
 --- !u!1 &604276616
@@ -83441,6 +83471,9 @@ MonoBehaviour:
   - {fileID: 1135092950}
   - {fileID: 1053328815}
   - {fileID: 485091678}
+  goToSecond: {fileID: 0}
+  goToFirst: {fileID: 0}
+  goToSnow: {fileID: 472103731}
 --- !u!114 &1835671303
 MonoBehaviour:
   m_ObjectHideFlags: 0

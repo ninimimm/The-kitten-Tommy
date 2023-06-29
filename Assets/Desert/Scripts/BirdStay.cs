@@ -15,13 +15,14 @@ public class BirdStay : MonoBehaviour
     private BirdStayData _data;
     void Start()
     {
+        _data = SavingSystem<BirdStay, BirdStayData>.Load($"{gameObject.name}.data");
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _animator.SetInteger("state", 0);
         _spriteRenderer.sortingLayerName = default;
-        if (!BirdStayData.start.Contains(gameObject.name))
+        if (!_data.start.Contains(gameObject.name))
         {
-            BirdStayData.start.Add(gameObject.name);
+            _data.start.Add(gameObject.name);
             Save();
             _spriteRenderer.enabled = true;
         }

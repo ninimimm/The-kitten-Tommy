@@ -45,6 +45,7 @@ public class Scorpio : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        data = SavingSystem<Scorpio, ScorpioData>.Load($"{gameObject.name}.data");
         HP = maxHP;
         _healthBar.SetMaxHealth(maxHP);
         animator = GetComponent<Animator>();
@@ -54,12 +55,12 @@ public class Scorpio : MonoBehaviour, IDamageable
         polygonCollider.enabled = false;
         boxCollider.enabled = true;
         audioSource = GetComponent<AudioSource>();
-        if (!ScorpioData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            ScorpioData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

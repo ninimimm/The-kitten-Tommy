@@ -16,13 +16,14 @@ public class logicKnife : MonoBehaviour
     // Start is called before the first frame update
     void Start()    
     {
+        data = SavingSystem<logicKnife, LogicKnifeData>.Load($"{gameObject.name}.data");
         flySource.Play();
         _knifeSpriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = transform.right * speed;
-        if (!LogicKnifeData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
-            LogicKnifeData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
             Save();
         }
         Load();

@@ -20,6 +20,7 @@ public class Chest : MonoBehaviour
 
     void Start()
     {
+        _data = SavingSystem<Chest, ChestData>.Load($"{gameObject.name}.data");
         icon.enabled = false;
         textIcon.enabled = false;
         _animator = GetComponent<Animator>();
@@ -28,10 +29,11 @@ public class Chest : MonoBehaviour
         _poly[1].enabled = true;
         _poly[0].enabled = false;
         _animator.SetInteger("state", 0);
-        if (!ChestData.start.Contains(gameObject.name))
+        if (!_data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
-            ChestData.start.Add(gameObject.name);
+            _data.start.Add(gameObject.name);
             Save();
+            Debug.Log("save chest");
         }
     }
 

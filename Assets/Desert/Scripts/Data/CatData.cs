@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 [Serializable]
 public class CatData : IInitializable<CatSprite>
 {
-    public static HashSet<string> start = new ();
+    public HashSet<string> start { get; set;} = new();
     public float HP;
     public int countHealth;
     public int takeDamage;

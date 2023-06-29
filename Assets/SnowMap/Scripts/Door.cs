@@ -19,15 +19,16 @@ public class Door : MonoBehaviour
     private DoorData _data;
     void Start()
     {
+        _data = SavingSystem<Door, DoorData>.Load($"{gameObject.name}.data");
         _takeKey = logicKeys.GetComponent<TakeKey>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         _catSprite = cat.GetComponent<CatSprite>();
         animator = GetComponent<Animator>();
         if (SceneManager.GetActiveScene().name == "Jungle")
             Save();
-        if (!DoorData.Start.Contains(gameObject.name))
+        if (!_data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
-            DoorData.Start.Add(gameObject.name);
+            _data.start.Add(gameObject.name);
             Save();
         }
         Load();

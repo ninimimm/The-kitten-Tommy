@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [Serializable]
 public class BoostsData : IInitializable<Boosts>
 {
-    public static HashSet<string> start = new ();
+    public HashSet<string> start { get; set;} = new();
     public int energyCount;
     public int fishCount;
     public int waterCount;

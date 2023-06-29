@@ -43,11 +43,12 @@ public class Crate : MonoBehaviour, IDamageable
     public bool isUse;
     private void Start()
     {
+        data = SavingSystem<Crate, CrateData>.Load($"{gameObject.name}.data");
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (!CrateData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
-            CrateData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
             Save();
         }
         Load();

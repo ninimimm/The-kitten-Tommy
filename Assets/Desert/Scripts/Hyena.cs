@@ -33,6 +33,7 @@ public class Hyena : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        data = SavingSystem<Hyena, HyenaData>.Load($"{gameObject.name}.data");
         HP = maxHP;
         _healthBar.SetMaxHealth(maxHP);
         coordinates = transform.position;
@@ -43,12 +44,12 @@ public class Hyena : MonoBehaviour, IDamageable
         pol.enabled = false;
         cap.enabled = true;
         catSprite = _cat.GetComponent<CatSprite>();
-        if (!SnakeData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            SnakeData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

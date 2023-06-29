@@ -23,7 +23,8 @@ public class CatSprite : MonoBehaviour
     [SerializeField] public KnifeBar _knifeBar;
     [SerializeField] public Text _textMoney;
     [SerializeField] public Text _textHealth;
-    [SerializeField] public Transform groundCheck;
+    [SerializeField] public Transform groundCheck1;
+    [SerializeField] public Transform groundCheck2;
     [SerializeField] public float groundCheckRadius;
     [SerializeField] public LayerMask groundLayer;
     [SerializeField] public Transform checkpointCheck;
@@ -150,6 +151,7 @@ public class CatSprite : MonoBehaviour
 
     private void Start()
     {
+        data = SavingSystem<CatSprite, CatData>.Load($"{gameObject.name}.data");
         if (SceneManager.GetActiveScene().name == "Jungle") key = "";
         transform.position = spawnRevile;
         if (SceneManager.GetActiveScene().name == "ThirdLevle")
@@ -168,24 +170,21 @@ public class CatSprite : MonoBehaviour
         _grabbingHook = GetComponent<GrabbingHook>();
         currentScene = SceneManager.GetActiveScene().name;
         canTakeDamage = true;
-        if (currentScene != "Training")
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
-            if (!CatData.start.Contains(gameObject.name))
-            {
-                HP = maxHP;
-                _healthBar.SetMaxHealth(maxHP);
-                countHealth = maxCountHealth;
-                _textHealth.text = maxCountHealth.ToString();
-                Save();
-                CatData.start.Add(gameObject.name);
-            }
-            Load();
-            _textMoney.text = money.ToString();
-            knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
+            HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
-            _healthBar.SetHealth(HP);   
-            _textHealth.text = countHealth.ToString();
+            countHealth = maxCountHealth;
+            _textHealth.text = maxCountHealth.ToString();
+            Save();
+            data.start.Add(gameObject.name);
         }
+        Load();
+        _textMoney.text = money.ToString();
+        knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
+        _healthBar.SetMaxHealth(maxHP);
+        _healthBar.SetHealth(HP);   
+        _textHealth.text = countHealth.ToString();
     }
 
     private void FixedUpdate()
@@ -206,7 +205,8 @@ public class CatSprite : MonoBehaviour
             stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
             if (stateInfo.IsName("shit")) isNowShit = true;
             else isNowShit = false;
-            isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            isGround = Physics2D.OverlapCircle(groundCheck1.position, groundCheckRadius, groundLayer) ||
+                       Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, groundLayer);
             if (isGround) isJumpOnWall = false;
             isCheckpoint = Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer);
             if (isCheckpoint)
@@ -269,7 +269,9 @@ public class CatSprite : MonoBehaviour
 
     private void UpdateWall()
     {
-        if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, wallLayer) && !isJumpOnWall)
+        if (Physics2D.OverlapCircle(groundCheck1.position, groundCheckRadius, wallLayer) || 
+            Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, wallLayer) &&
+            !isJumpOnWall)
         {
             _rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         }
@@ -300,7 +302,8 @@ public class CatSprite : MonoBehaviour
         }
 
         if (isOnWall &&
-            !Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, wallLayer) &&
+            !(Physics2D.OverlapCircle(groundCheck1.position, groundCheckRadius, wallLayer) ||
+              Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, wallLayer)) &&
             !isJumpOnWall)
         {
             _rb.constraints = RigidbodyConstraints2D.None;
@@ -418,8 +421,10 @@ public class CatSprite : MonoBehaviour
     {
         move = isNowShit || _grabbingHook.isHookedStatic || isJumpOnWall ? 0 : isOnWall? Input.GetAxisRaw("Vertical") : Input.GetAxisRaw("Horizontal");
         moveInWater = isNowShit ? 0 : Input.GetAxis("Horizontal");
-        isIce = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, iceLayer);
-        isWater = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
+        isIce = Physics2D.OverlapCircle(groundCheck1.position, groundCheckRadius, iceLayer) ||
+                Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, iceLayer);
+        isWater = Physics2D.OverlapCircle(groundCheck1.position, groundCheckRadius, waterLayer) ||
+                  Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, waterLayer);
         if (!isIce && !isWater && !isOnWall)
         {
             _rb.gravityScale = normalGravity;
@@ -484,7 +489,10 @@ public class CatSprite : MonoBehaviour
             if (timerJump > 0) timerJump -= Time.deltaTime;
             if (timerJump > 0)
             {
-                if (isGround && !(_grabbingHook.isHookedDynamic && Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, crateLayer)))
+                if (isGround && 
+                    !(_grabbingHook.isHookedDynamic && 
+                      (Physics2D.OverlapCircle(groundCheck1.position, groundCheckRadius, crateLayer) ||
+                       Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, waterLayer))))
                 {
                     jumpSourse.volume = volumeJump;
                     jumpSourse.Play();
@@ -583,7 +591,8 @@ public class CatSprite : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(smallAttack.position,distanseSmallAttack);
-        Gizmos.DrawWireSphere(groundCheck.position,groundCheckRadius);
+        Gizmos.DrawWireSphere(groundCheck1.position,groundCheckRadius);
+        Gizmos.DrawWireSphere(groundCheck2.position,groundCheckRadius);
         Gizmos.DrawWireSphere(checkpointCheck.position,distanseCheckpoint);
     }
     public void TakeDamage(float damage)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 [Serializable]
 public class HawkData : IInitializable<Hawk>
 {
-    public static HashSet<string> start = new ();
+    public HashSet<string> start { get; set;} = new();
     public float HP;
     public bool capsFirstEnabled;
     public bool capsSecondEnabled;

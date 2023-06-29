@@ -17,11 +17,12 @@ public class Coin : MonoBehaviour
 
     private void Start()
     {
+        data = SavingSystem<Coin, CoinData>.Load($"{gameObject.name}.data");
         _catSprite = _cat.GetComponent<CatSprite>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (!CoinData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
-            CoinData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
             Save();
             _spriteRenderer.enabled = true;
         }

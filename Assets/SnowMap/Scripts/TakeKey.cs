@@ -35,6 +35,7 @@ public class TakeKey : MonoBehaviour
     private AnimatorStateInfo ironCheStateInfo;
     void Start()
     {
+        data = SavingSystem<TakeKey, TakeKeyData>.Load($"{gameObject.name}.data");
         _catTransform = cat.GetComponent<Transform>();
         _animatorGoldChest = goldChest.GetComponent<Animator>();
         _animatorIronChest = ironChest.GetComponent<Animator>();
@@ -43,10 +44,10 @@ public class TakeKey : MonoBehaviour
         ironKeyImage.enabled = false;
         if (SceneManager.GetActiveScene().name == "Jungle")
             Save();
-        if (!TakeKeyData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
             Save();
-            TakeKeyData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
         }
         Load();
     }

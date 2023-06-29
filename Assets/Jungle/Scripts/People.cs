@@ -44,18 +44,19 @@ public class People : MonoBehaviour,IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        data = SavingSystem<People, PeopleData>.Load($"{gameObject.name}.data");
         _poly = GetComponent<PolygonCollider2D>();
         _boxCol = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         HP = maxHP;
         rb = GetComponent<Rigidbody2D>();
-        if (!HawkData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            HawkData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

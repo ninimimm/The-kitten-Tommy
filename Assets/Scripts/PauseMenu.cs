@@ -8,6 +8,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject helpGameMenu;
     [SerializeField] private GameObject[] crates;
     [SerializeField] private GameObject[] stones;
+    [SerializeField] private GoToSecondLevle goToSecond;
+    [SerializeField] private GoToFirstLevel goToFirst;
+    [SerializeField] private GoToSnow goToSnow;
     private Vector3[] _transforms = new Vector3[5];
     private Vector3[] _transformsStones = new Vector3[3];
     private int i;
@@ -71,6 +74,12 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
+        MainMenu.saveIndex = SceneManager.GetActiveScene().buildIndex;
+        if (MainMenu.saveIndex == 2)
+            goToSecond.Save();
+        else if (MainMenu.saveIndex == 3)
+            goToFirst.Save();
+        else goToSnow.Save();
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }

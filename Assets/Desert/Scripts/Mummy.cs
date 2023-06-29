@@ -40,6 +40,7 @@ public class Mummy : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        data = SavingSystem<Mummy, MummyData>.Load($"{gameObject.name}.data");
         _catSprite = _cat.GetComponent<CatSprite>();
         _sandBoss = boss.GetComponent<SandBoss>();
         HP = maxHP;
@@ -52,12 +53,12 @@ public class Mummy : MonoBehaviour, IDamageable
         _bossAnimator = Boss.GetComponent<Animator>();
         cap.enabled = true;
         pol.enabled = false;
-        if (!SnakeData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            SnakeData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

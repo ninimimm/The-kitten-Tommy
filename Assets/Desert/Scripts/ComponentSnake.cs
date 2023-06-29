@@ -31,6 +31,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
 
     void Start()
     {
+        data = SavingSystem<ComponentSnake, SnakeData>.Load($"{gameObject.name}.data");
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         poly = GetComponent<PolygonCollider2D>();
@@ -38,12 +39,12 @@ public class ComponentSnake : MonoBehaviour, IDamageable
         _healthBar.SetMaxHealth(maxHP);
         HP = maxHP;
         _audioSource = GetComponent<AudioSource>();
-        if (!SnakeData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            SnakeData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

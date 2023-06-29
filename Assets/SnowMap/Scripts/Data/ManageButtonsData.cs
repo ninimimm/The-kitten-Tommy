@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ManageButtonsData : IInitializable<ManageButtons>
 {
-    public static HashSet<string> Start = new ();
+    public HashSet<string> start { get; set;} = new();
     public bool colliderState;
     public bool animatorState;
     

@@ -38,7 +38,8 @@ public class GoToSecondLevle : MonoBehaviour
     void Update()
     {
         if (_catSprite.isBossDead && 
-            Physics2D.OverlapCircle(_catSprite.groundCheck.position, _catSprite.groundCheckRadius, balloonLayer))
+            (Physics2D.OverlapCircle(_catSprite.groundCheck1.position, _catSprite.groundCheckRadius, balloonLayer) ||
+             Physics2D.OverlapCircle(_catSprite.groundCheck2.position, _catSprite.groundCheckRadius, balloonLayer)))
         {
             transform.position += speed * Time.deltaTime * movingVector ;
             _cat.transform.position += speed * Time.deltaTime * movingVector ;
@@ -51,7 +52,7 @@ public class GoToSecondLevle : MonoBehaviour
         }
     }
 
-    private void Save()
+    public void Save()
     {
         foreach (var coin in coins)
             if (coin is not null) coin.Save();
@@ -68,7 +69,8 @@ public class GoToSecondLevle : MonoBehaviour
             eatingBird.Save();
         chest.Save();
         hyena.Save();
-        boss.Save();
+        if (boss != null)
+            boss.Save();
         foreach (var mummy in mummies)
             if (mummy is not null) mummy.Save();
         grabbingHook.Save();

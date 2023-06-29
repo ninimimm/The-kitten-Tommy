@@ -17,12 +17,13 @@ public class EatingBird : MonoBehaviour
     
     void Start()
     {
+        _data = SavingSystem<EatingBird, EatingBirdData>.Load($"{gameObject.name}.data");
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _animator.SetInteger("state", value);
-        if (!EatingBirdData.start.Contains(gameObject.name))
+        if (!_data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
-            EatingBirdData.start.Add(gameObject.name);
+            _data.start.Add(gameObject.name);
             Save();
             _spriteRenderer.enabled = true;
         }

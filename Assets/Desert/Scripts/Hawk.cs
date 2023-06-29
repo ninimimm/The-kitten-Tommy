@@ -37,6 +37,7 @@ public class Hawk : MonoBehaviour, IDamageable
 
     void Start()
     {
+        data = SavingSystem<Hawk, HawkData>.Load($"{gameObject.name}.data");
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = damageVolume;
         _catSprite = Cat.GetComponent<CatSprite>();
@@ -45,12 +46,12 @@ public class Hawk : MonoBehaviour, IDamageable
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         caps = GetComponents<CapsuleCollider2D>();
-        if (!HawkData.start.Contains(gameObject.name))
+        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            HawkData.start.Add(gameObject.name);
+            data.start.Add(gameObject.name);
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);
