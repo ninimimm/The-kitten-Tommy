@@ -132,21 +132,23 @@ public class CatSprite : MonoBehaviour
         money = data.money;
         if (SceneManager.GetActiveScene().name == "FirstLevle")
             transform.position = new Vector3(
-                data.spawnFirstLevel[0], 
+                data.spawnFirstLevel[0]+1f, 
                 data.spawnFirstLevel[1], 
                 data.spawnFirstLevel[2]);
         else if (SceneManager.GetActiveScene().name == "SecondLevle")
             transform.position = new Vector3(
-                data.spawnSecondLevel[0], 
+                data.spawnSecondLevel[0]+1f, 
                 data.spawnSecondLevel[1], 
                 data.spawnSecondLevel[2]);
         else
         {
             transform.position = new Vector3(
-                data.spawnThirdLevel[0], 
-                data.spawnThirdLevel[1], 
+                data.spawnThirdLevel[0] + 1f,
+                data.spawnThirdLevel[1],
                 data.spawnThirdLevel[2]);
         }
+        spawnRevile = transform.position;
+        spawn = transform.position;
     }
 
     private void Start()

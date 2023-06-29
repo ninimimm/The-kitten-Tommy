@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -11,28 +10,19 @@ public class MainMenu : MonoBehaviour
     public static List<string> allPaths = new ();
     public static List<HashSet<string>> starts = new ();
     public static int saveIndex;
-    public static bool isResume;
-    public int saveForPlay;
-    public MainMenuData data;
+    public static  bool isResume;
+    private string saveIndexFilePath = "C:\\Users\\nik_chern\\Desktop\\Остальное\\TheGame\\The-kitten-Tommy\\Assets\\MainMenu\\Scripts\\saveIndex.txt";
     private void Start()
     {
-        Load();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(start.gameObject);
-    }
-
-    public void Save()
-    {
-        saveForPlay = saveIndex;
-        SavingSystem<MainMenu,MainMenuData>.Save(this, $"{gameObject.name}.data");
-    }
-
-
-    public void Load()
-    {
-        data = SavingSystem<MainMenu, MainMenuData>.Load($"{gameObject.name}.data");
-        saveForPlay = data.saveForPlay;
-        saveIndex = saveForPlay;
+        if (File.Exists(saveIndexFilePath))
+        {
+            using (StreamReader sr = File.OpenText(saveIndexFilePath))
+            {
+                saveIndex = int.Parse(sr.ReadLine());
+            }
+        }   
     }
 
     public void PlayGame()
@@ -47,7 +37,6 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGameResume()
     {
-        Save();
         isResume = true;
         SceneManager.LoadScene(saveIndex);
     }
@@ -60,6 +49,10 @@ public class MainMenu : MonoBehaviour
     
     public void QuitGame()
     {
+        using (StreamWriter sw = File.CreateText(saveIndexFilePath))
+        {
+            sw.WriteLine(saveIndex);
+        }
         Application.Quit();
     }
 }
