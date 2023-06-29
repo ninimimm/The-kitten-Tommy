@@ -440,7 +440,7 @@ public class CatSprite : MonoBehaviour
         else if (isIce)
         {
             _rb.gravityScale = normalGravity;
-            _rb.AddForce(new Vector2(moveInWater * slide,0), ForceMode2D.Impulse);
+            _rb.AddForce(new Vector2(moveInWater * slide,0), ForceMode2D.Force);
         }
         else if (isOnWall)
         {
