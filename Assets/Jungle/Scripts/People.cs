@@ -40,6 +40,7 @@ public class People : MonoBehaviour,IDamageable
     private bool isDeath;
     private PeopleData data;
     private bool isStart = true;
+    private int index;
     
     // Start is called before the first frame update
     void Start()
@@ -51,12 +52,14 @@ public class People : MonoBehaviour,IDamageable
         audioSource = GetComponent<AudioSource>();
         HP = maxHP;
         rb = GetComponent<Rigidbody2D>();
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            data.start.Add(gameObject.name);
+            MainMenu.isStarts[index] = false;
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

@@ -33,6 +33,7 @@ public class TakeKey : MonoBehaviour
     private TakeKeyData data;
     private AnimatorStateInfo goldCheStateInfo;
     private AnimatorStateInfo ironCheStateInfo;
+    private int index;
     void Start()
     {
         data = SavingSystem<TakeKey, TakeKeyData>.Load($"{gameObject.name}.data");
@@ -44,10 +45,12 @@ public class TakeKey : MonoBehaviour
         ironKeyImage.enabled = false;
         if (SceneManager.GetActiveScene().name == "Jungle")
             Save();
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
             Save();
-            data.start.Add(gameObject.name);
+            MainMenu.isStarts[index] = false;
         }
         Load();
     }

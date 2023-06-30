@@ -346,7 +346,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.8937378, y: 0.012451172}
+  m_AnchoredPosition: {x: -0.8937988, y: 0.012451172}
   m_SizeDelta: {x: -1.670738, y: 0.023086}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &17625000
@@ -7401,7 +7401,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.202}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.9036255, y: 0.017822266}
+  m_AnchoredPosition: {x: -0.90356445, y: 0.017822266}
   m_SizeDelta: {x: -1.786314, y: -0.148099}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &511292311
@@ -12314,7 +12314,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 4.1539917, y: -10.987244}
+  m_AnchoredPosition: {x: 4.1540527, y: -10.987244}
   m_SizeDelta: {x: 5.608163, y: 0.332089}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &839541266
@@ -15182,7 +15182,7 @@ MonoBehaviour:
   _fill: {fileID: 2111610634}
   _bar: {fileID: 1467955179}
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
-  distanseRunSourse: 2
+  distanseRunSourse: 4
   catTransform: {fileID: 4472698094485988776}
   _catSprite: {fileID: 4472698094485988768}
   damageVolume: 0.2
@@ -15275,7 +15275,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: dabe057ddc8fe794a9c875b5dc179dd8, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -19344,7 +19344,7 @@ MonoBehaviour:
   _fill: {fileID: 1818475733}
   _bar: {fileID: 545334240}
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
-  distanseRunSourse: 2
+  distanseRunSourse: 4
   catTransform: {fileID: 4472698094485988776}
   _catSprite: {fileID: 4472698094485988768}
   damageVolume: 0.2
@@ -19437,7 +19437,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: dabe057ddc8fe794a9c875b5dc179dd8, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -19716,7 +19716,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.43829346, y: 0.6699829}
+  m_AnchoredPosition: {x: 0.43823242, y: 0.6699829}
   m_SizeDelta: {x: -1.118885, y: -0.317513}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1130071606
@@ -27072,7 +27072,7 @@ MonoBehaviour:
   _fill: {fileID: 805257258}
   _bar: {fileID: 1931366878}
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
-  distanseRunSourse: 2
+  distanseRunSourse: 4
   catTransform: {fileID: 4472698094485988776}
   _catSprite: {fileID: 4472698094485988768}
   damageVolume: 0.2
@@ -27165,7 +27165,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: dabe057ddc8fe794a9c875b5dc179dd8, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -27648,7 +27648,7 @@ MonoBehaviour:
   _fill: {fileID: 1054214814}
   _bar: {fileID: 1408362381}
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
-  distanseRunSourse: 2
+  distanseRunSourse: 4
   catTransform: {fileID: 4472698094485988776}
   _catSprite: {fileID: 4472698094485988768}
   damageVolume: 0.2
@@ -27792,10 +27792,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: dabe057ddc8fe794a9c875b5dc179dd8, type: 2}
   m_audioClip: {fileID: 8300000, guid: 436bbda058022494fb47d7ad7d3fff7f, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.111
+  m_PlayOnAwake: 0
+  m_Volume: 0.08
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -31085,7 +31085,7 @@ MonoBehaviour:
   _fill: {fileID: 541969412}
   _bar: {fileID: 1126362162}
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
-  distanseRunSourse: 0.2
+  distanseRunSourse: 4
   catTransform: {fileID: 4472698094485988776}
   _catSprite: {fileID: 4472698094485988768}
   damageVolume: 0
@@ -31178,7 +31178,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: dabe057ddc8fe794a9c875b5dc179dd8, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -34548,7 +34548,7 @@ MonoBehaviour:
   _fill: {fileID: 1577026017}
   _bar: {fileID: 1132462552}
   runClip: {fileID: 8300000, guid: 5e90887e8ea7e164e90b13dc2ab6774c, type: 3}
-  distanseRunSourse: 2
+  distanseRunSourse: 4
   catTransform: {fileID: 4472698094485988776}
   _catSprite: {fileID: 4472698094485988768}
   damageVolume: 0.2
@@ -34641,7 +34641,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: dabe057ddc8fe794a9c875b5dc179dd8, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 0
   Mute: 0

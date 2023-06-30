@@ -41,15 +41,18 @@ public class Crate : MonoBehaviour, IDamageable
     private List<GameObject> fishInstance = new ();
     private List<GameObject> waterInstance = new ();
     public bool isUse;
+    private int index;
     private void Start()
     {
         data = SavingSystem<Crate, CrateData>.Load($"{gameObject.name}.data");
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
-            data.start.Add(gameObject.name);
             Save();
+            MainMenu.isStarts[index] = false;
         }
         Load();
         _audioSource = Cat.GetComponent<AudioSource>();

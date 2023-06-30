@@ -1,6 +1,7 @@
     using UnityEngine;
+    using UnityEngine.SceneManagement;
 
-public class logicKnife : MonoBehaviour
+    public class logicKnife : MonoBehaviour
 {
     [SerializeField] public float speed = 10f;
     [SerializeField] public float damage = 1;
@@ -12,6 +13,7 @@ public class logicKnife : MonoBehaviour
     private LogicKnifeData data;
     private float angle;
     private IDamageable enemy;
+    private int index;
 
     // Start is called before the first frame update
     void Start()    
@@ -21,10 +23,12 @@ public class logicKnife : MonoBehaviour
         _knifeSpriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = transform.right * speed;
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
-            data.start.Add(gameObject.name);
             Save();
+            MainMenu.isStarts[index] = false;
         }
         Load();
     }

@@ -21,7 +21,6 @@ public class Fire : MonoBehaviour
                 (distanseRunSourse - Math.Abs(catTransform.position.x-transform.position.x)) / distanseRunSourse + 0.5f : 0;
             if (!audioSource.isPlaying) 
                 audioSource.Play();
-            
         }
     }
 

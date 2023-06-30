@@ -46,6 +46,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     private Vector2 direction;
     private Vector3 spawnPosition;
     private Vector3 spawnPositionMummy;
+    private int index;
 
     // Start is called before the first frame update
     void Start()
@@ -62,12 +63,14 @@ public class SandBoss : MonoBehaviour, IDamageable
         pol.enabled = true;
         cap.enabled = false;
         _catSprite = _cat.GetComponent<CatSprite>();
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
             HP = maxHP;
-            _healthBar.SetMaxHealth(maxHP);
+            _healthBar.SetMaxHealth(maxHP); 
             Save();
-            data.start.Add(gameObject.name);
+            MainMenu.isStarts[index] = false;
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

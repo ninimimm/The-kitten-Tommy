@@ -17,6 +17,7 @@ public class Door : MonoBehaviour
     public Animator animator;
     private CatSprite _catSprite;
     private DoorData _data;
+    private int index;
     void Start()
     {
         _data = SavingSystem<Door, DoorData>.Load($"{gameObject.name}.data");
@@ -26,10 +27,12 @@ public class Door : MonoBehaviour
         animator = GetComponent<Animator>();
         if (SceneManager.GetActiveScene().name == "Jungle")
             Save();
-        if (!_data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
-            _data.start.Add(gameObject.name);
             Save();
+            MainMenu.isStarts[index] = false;
         }
         Load();
     }

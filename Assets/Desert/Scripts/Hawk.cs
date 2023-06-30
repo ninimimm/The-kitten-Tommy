@@ -34,6 +34,7 @@ public class Hawk : MonoBehaviour, IDamageable
     private Vector2 direction;
     private CatSprite _catSprite;
     private AnimatorStateInfo _stateInfo;
+    private int index;
 
     void Start()
     {
@@ -46,12 +47,14 @@ public class Hawk : MonoBehaviour, IDamageable
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         caps = GetComponents<CapsuleCollider2D>();
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            data.start.Add(gameObject.name);
+            MainMenu.isStarts[index] = false;
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

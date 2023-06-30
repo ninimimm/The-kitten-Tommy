@@ -106,6 +106,7 @@ public class CatSprite : MonoBehaviour
     public bool isOnLeft;
     public bool isInCave;
     private float currentY;
+    private int index;
 
     public void SetSpeedMultiplier(float multiplier)
     {
@@ -172,14 +173,16 @@ public class CatSprite : MonoBehaviour
         _grabbingHook = GetComponent<GrabbingHook>();
         currentScene = SceneManager.GetActiveScene().name;
         canTakeDamage = true;
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             countHealth = maxCountHealth;
             _textHealth.text = maxCountHealth.ToString();
             Save();
-            data.start.Add(gameObject.name);
+            MainMenu.isStarts[index] = false;
         }
         Load();
         _textMoney.text = money.ToString();

@@ -16,13 +16,16 @@ public static class SavingSystem <TObject,TData>
     private static BinaryFormatter binaryFormatter;
     private static TData data = new ();
     private static string fullPath;
+    private static string pathFile = "C:\\Users\\nik_chern\\Desktop\\pathFile.txt";
     public static void Save(TObject obj, string path)
     {
         binaryFormatter = new BinaryFormatter();
         fullPath = $"{Application.persistentDataPath}{path}";
-        MainMenu.allPaths.Add(fullPath);
-        MainMenu.starts.Add(data.start);
         data.Initialize(obj);
+        using (StreamWriter sw = File.AppendText(pathFile))
+        {
+            sw.WriteLine(fullPath);
+        }
         using (var stream = new FileStream(fullPath, FileMode.Create))
             binaryFormatter.Serialize(stream, data);
     }

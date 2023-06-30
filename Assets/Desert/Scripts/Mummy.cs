@@ -36,6 +36,7 @@ public class Mummy : MonoBehaviour, IDamageable
     private SandBoss _sandBoss;
     private AnimatorStateInfo _stateInfo;
     private CatSprite _catSprite;
+    private int index;
 
     // Start is called before the first frame update
     void Start()
@@ -53,12 +54,14 @@ public class Mummy : MonoBehaviour, IDamageable
         _bossAnimator = Boss.GetComponent<Animator>();
         cap.enabled = true;
         pol.enabled = false;
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            data.start.Add(gameObject.name);
+            MainMenu.isStarts[index] = false;
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

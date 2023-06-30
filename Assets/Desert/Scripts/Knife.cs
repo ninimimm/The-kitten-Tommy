@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Knife : MonoBehaviour
 {
@@ -17,15 +18,18 @@ public class Knife : MonoBehaviour
     private Vector2 direction;
     private Camera mainCamera;
     private float angle;
+    private int index;
     
     private void Start()
     {
         data = SavingSystem<Knife, KnifeData>.Load($"{gameObject.name}.data");
         mainCamera = Camera.main;
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
-            data.start.Add(gameObject.name);
             Save();
+            MainMenu.isStarts[index] = false;
         }
         Load();
         timer = attackIntervale;

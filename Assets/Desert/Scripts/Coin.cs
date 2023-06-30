@@ -14,17 +14,20 @@ public class Coin : MonoBehaviour
     private BoxCollider2D _boxCollider;
     private bool isStart = true;
     private CatSprite _catSprite;
+    private int index;
 
     private void Start()
     {
         data = SavingSystem<Coin, CoinData>.Load($"{gameObject.name}.data");
         _catSprite = _cat.GetComponent<CatSprite>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
-            data.start.Add(gameObject.name);
             Save();
             _spriteRenderer.enabled = true;
+            MainMenu.isStarts[index] = false;
         }
         Load();
         audioSource = _cat.GetComponent<AudioSource>();

@@ -17,6 +17,7 @@ public class Chest : MonoBehaviour
     private CatSprite _catSprite;
     private ChestData _data;
     private bool isStart = true;
+    private int index;
 
     void Start()
     {
@@ -29,12 +30,14 @@ public class Chest : MonoBehaviour
         _poly[1].enabled = true;
         _poly[0].enabled = false;
         _animator.SetInteger("state", 0);
-        if (!_data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
-            _data.start.Add(gameObject.name);
             Save();
-            Debug.Log("save chest");
+            MainMenu.isStarts[index] = false;
         }
+        Load();
     }
 
     void Update()
@@ -73,11 +76,6 @@ public class Chest : MonoBehaviour
                 _poly[0].enabled = true;
                 _poly[1].enabled = false;
             }
-        }
-        if (isStart)
-        {
-            Load();
-            isStart = false;
         }
     }
 

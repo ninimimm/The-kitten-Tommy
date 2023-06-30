@@ -7,14 +7,17 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Button start;
-    public static List<string> allPaths = new ();
-    public static List<HashSet<string>> starts = new ();
+    public static List<bool> isStarts = new ();
+    public static int index;
     public static int saveIndex;
     public static  bool isResume;
-    private string saveIndexFilePath = Path.Combine(Application.dataPath, "MainMenu\\Scripts\\saveIndex.txt");
+    public static string saveIndexFilePath = "C:\\Users\\nik_chern\\Desktop\\saveIndex.txt";
+    private static string pathFile = "C:\\Users\\nik_chern\\Desktop\\pathFile.txt";
 
     private void Start()
     {
+        for (var i = 0; i < 1000; i++)
+            isStarts.Add(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(start.gameObject);
         if (File.Exists(saveIndexFilePath))
@@ -26,19 +29,30 @@ public class MainMenu : MonoBehaviour
         }   
     }
 
-    public void PlayGame()
+    public void PlayGame()  
     {
         isResume = false;
-        foreach (var path in allPaths)
-            if (File.Exists(path))
-                File.Delete(path);
-        for (var i = 0; i < starts.Count; i++)
-            starts[i] = new HashSet<string>();
+        if (File.Exists(pathFile))
+        {
+            using (StreamReader sw = File.OpenText(pathFile))
+            {
+                foreach (var line in sw.ReadToEnd().Split("\n"))
+                {
+                    if (File.Exists(line))
+                        File.Delete(line);
+                }
+            }
+        }
+        for (var i = 0; i < 1000; i++)
+            isStarts[i] = true;
+        index = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void PlayGameResume()
     {
-        isResume = true;
+        for (var i = 0; i < 1000; i++)
+            isStarts[i] = false;
+        Debug.Log(saveIndex);
         SceneManager.LoadScene(saveIndex);
     }
     
@@ -54,6 +68,7 @@ public class MainMenu : MonoBehaviour
         {
             sw.WriteLine(saveIndex);
         }
+        Debug.Log(saveIndexFilePath);
         Application.Quit();
     }
 }

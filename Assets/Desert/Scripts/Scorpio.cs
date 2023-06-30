@@ -42,6 +42,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     private bool isStart = true;
     
     private AnimatorStateInfo _stateInfo;
+    private int index;
 
     private void Start()
     {
@@ -55,12 +56,14 @@ public class Scorpio : MonoBehaviour, IDamageable
         polygonCollider.enabled = false;
         boxCollider.enabled = true;
         audioSource = GetComponent<AudioSource>();
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            data.start.Add(gameObject.name);
+            MainMenu.isStarts[index] = false;
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);
@@ -89,7 +92,13 @@ public class Scorpio : MonoBehaviour, IDamageable
     private void Update()
     {
         _stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        audioSource.volume = damageVolume;
+        if (audioSource.enabled)
+        {
+            audioSource.volume = Math.Abs(catTransform.position.x-transform.position.x) < distanseRunSourse ?
+                (distanseRunSourse - Math.Abs(catTransform.position.x-transform.position.x)) / distanseRunSourse - 0.2f: 0;
+            if (!audioSource.isPlaying) 
+                audioSource.Play();
+        }
         if (!_stateInfo.IsName("ScorpioDeath"))
         {
             TryMove();

@@ -14,6 +14,7 @@ public class ManageButtons : MonoBehaviour
     private ManageButtonsData _data;
     private Animator _doorAnimator;
     private BoxCollider2D _doorBoxCollider2D;
+    private int index;
 
     private void Start()
     {
@@ -22,10 +23,12 @@ public class ManageButtons : MonoBehaviour
         _doorBoxCollider2D = door.GetComponent<BoxCollider2D>();
         if (SceneManager.GetActiveScene().name == "Jungle")
             Save();
-        if (!_data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
-            _data.start.Add(gameObject.name);
             Save();
+            MainMenu.isStarts[index] = false;
         }
         Load();
     }

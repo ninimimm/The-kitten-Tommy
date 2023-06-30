@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -74,7 +75,16 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        MainMenu.saveIndex = SceneManager.GetActiveScene().buildIndex;
+        if (SceneManager.GetActiveScene().buildIndex > 1)
+        {
+            Debug.Log("save");
+            MainMenu.saveIndex = SceneManager.GetActiveScene().buildIndex;
+            using (StreamWriter sw = File.CreateText(MainMenu.saveIndexFilePath))
+            {
+                sw.WriteLine(MainMenu.saveIndex);
+            }
+        }
+            
         if (MainMenu.saveIndex == 2)
             goToSecond.Save();
         else if (MainMenu.saveIndex == 3)

@@ -9,17 +9,21 @@ public class Line : MonoBehaviour
     [SerializeField] private Material coldHook;
 
     private LineData data;
-    public string material; 
+    public string material;
+
+    private int index;
     // Start is called before the first frame update
     void Start()
     {
         data = SavingSystem<Line, LineData>.Load($"{gameObject.name}.data");
         if (SceneManager.GetActiveScene().name == "FirstLevle")
             material = "based";
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
             Save();
-            data.start.Add(gameObject.name);
+            MainMenu.isStarts[index] = false;
         }
         Load();
     }

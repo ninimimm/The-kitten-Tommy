@@ -20,7 +20,7 @@ public class Boosts : MonoBehaviour
     [SerializeField] private float timeToShield;
     [SerializeField] private CatSprite cat;
     [SerializeField] private Shield shield;
-    private BoostsData data;
+    public static BoostsData data;
     public int state;
 
     private float timer;
@@ -35,16 +35,19 @@ public class Boosts : MonoBehaviour
     private bool _canUse;
     private bool _cdNow;
     private float currentJump;
+    private int index;
     // Start is called before the first frame update
     void Start()
     {
         data = SavingSystem<Boosts, BoostsData>.Load($"{gameObject.name}.data");
         currentJump = cat.jumpForce;
         timerChose = timeLite;
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
             Save();
-            data.start.Add(gameObject.name);
+            MainMenu.isStarts[index] = false;
         }
         Load();
         boostsText[0].text = $"x{energyCount}";

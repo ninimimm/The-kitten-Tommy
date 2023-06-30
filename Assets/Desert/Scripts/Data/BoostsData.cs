@@ -21,5 +21,5 @@ public class BoostsData : IInitializable<Boosts>
         waterCount = boosts.waterCount;
         timeToJump = boosts.timeToJump;
         timeToRun = boosts.timeToRun;
-    } 
+    }
 }

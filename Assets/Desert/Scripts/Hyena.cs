@@ -29,6 +29,7 @@ public class Hyena : MonoBehaviour, IDamageable
     private bool isStart = true;
     private Vector2 direction;
     private AnimatorStateInfo currentAnimatorState;
+    private int index;
 
     // Start is called before the first frame update
     void Start()
@@ -44,12 +45,14 @@ public class Hyena : MonoBehaviour, IDamageable
         pol.enabled = false;
         cap.enabled = true;
         catSprite = _cat.GetComponent<CatSprite>();
-        if (!data.start.Contains(gameObject.name) && !MainMenu.isResume)
+        index = MainMenu.index;
+        MainMenu.index++;
+        if (MainMenu.isStarts[index])
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
             Save();
-            data.start.Add(gameObject.name);
+            MainMenu.isStarts[index] = false;
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);
