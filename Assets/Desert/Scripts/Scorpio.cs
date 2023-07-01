@@ -42,7 +42,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     private bool isStart = true;
     
     private AnimatorStateInfo _stateInfo;
-    private int index;
+    private int index = -1;
 
     private void Start()
     {
@@ -56,8 +56,15 @@ public class Scorpio : MonoBehaviour, IDamageable
         polygonCollider.enabled = false;
         boxCollider.enabled = true;
         audioSource = GetComponent<AudioSource>();
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index])
         {
             HP = maxHP;

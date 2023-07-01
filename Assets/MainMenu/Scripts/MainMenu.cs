@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        for (var i = 0; i < 1000; i++)
+        for (var i = 0; i < 1000000; i++)
             isStarts.Add(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(start.gameObject);
@@ -43,16 +43,15 @@ public class MainMenu : MonoBehaviour
                 }
             }
         }
-        for (var i = 0; i < 1000; i++)
+        for (var i = 0; i < 1000000; i++)
             isStarts[i] = true;
         index = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void PlayGameResume()
     {
-        for (var i = 0; i < 1000; i++)
+        for (var i = 0; i < 1000000; i++)
             isStarts[i] = false;
-        Debug.Log(saveIndex);
         SceneManager.LoadScene(saveIndex);
     }
     

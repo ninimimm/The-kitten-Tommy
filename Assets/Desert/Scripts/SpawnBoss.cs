@@ -18,7 +18,7 @@ public class SpawnBoss : MonoBehaviour
     [SerializeField] private AudioSource _audioSourceMummyAttack;
 
     private Animator snakeAnim;
-    private bool canSpawn = true;
+    public bool canSpawn = true;
 
     private void Start()
     {

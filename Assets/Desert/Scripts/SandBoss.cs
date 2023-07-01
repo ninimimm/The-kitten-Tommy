@@ -46,7 +46,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     private Vector2 direction;
     private Vector3 spawnPosition;
     private Vector3 spawnPositionMummy;
-    private int index;
+    private int index = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -63,8 +63,15 @@ public class SandBoss : MonoBehaviour, IDamageable
         pol.enabled = true;
         cap.enabled = false;
         _catSprite = _cat.GetComponent<CatSprite>();
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index])
         {
             HP = maxHP;
@@ -72,7 +79,9 @@ public class SandBoss : MonoBehaviour, IDamageable
             Save();
             MainMenu.isStarts[index] = false;
         }
-        Load();
+        Debug.Log(_catSprite.canSpawn);
+        if (_catSprite.canSpawn)
+            Load();
         _healthBar.SetMaxHealth(maxHP);
         _healthBar.SetHealth(HP); 
     }
@@ -146,11 +155,6 @@ public class SandBoss : MonoBehaviour, IDamageable
             bar.enabled = false;
             _catSprite.isBossDead = true;
         }
-        if (isStart)
-        {
-            Load();
-            isStart = false;
-        }
     }
 
     void Attack()
@@ -172,7 +176,7 @@ public class SandBoss : MonoBehaviour, IDamageable
         if (MummyPrefab is null)
             return;
         var Mummy = Instantiate(MummyPrefab, new Vector3(spawnPositionMummy.x,spawnPositionMummy.y-1,
-            spawnPositionMummy.y), Quaternion.identity);
+            spawnPositionMummy.z), Quaternion.identity);
         Mummy.name += countMummy.ToString();
         countMummy++;
         var MummySrcipt = Mummy.GetComponent<Mummy>();

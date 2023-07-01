@@ -11,15 +11,22 @@ public class Line : MonoBehaviour
     private LineData data;
     public string material;
 
-    private int index;
+    private int index = -1;
     // Start is called before the first frame update
     void Start()
     {
         data = SavingSystem<Line, LineData>.Load($"{gameObject.name}.data");
         if (SceneManager.GetActiveScene().name == "FirstLevle")
             material = "based";
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
             Save();

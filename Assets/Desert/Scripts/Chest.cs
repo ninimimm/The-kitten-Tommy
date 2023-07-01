@@ -17,7 +17,8 @@ public class Chest : MonoBehaviour
     private CatSprite _catSprite;
     private ChestData _data;
     private bool isStart = true;
-    private int index;
+    private int index = -1;
+    public bool isEmpty;
 
     void Start()
     {
@@ -30,8 +31,15 @@ public class Chest : MonoBehaviour
         _poly[1].enabled = true;
         _poly[0].enabled = false;
         _animator.SetInteger("state", 0);
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index])
         {
             Save();
@@ -58,8 +66,7 @@ public class Chest : MonoBehaviour
             textIcon.enabled = false;
         }
         
-
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("empty"))
+        if (!isEmpty)
         {
             if (isOpened)
             {
@@ -72,6 +79,7 @@ public class Chest : MonoBehaviour
                     _catSprite.money += MONEY_REWARD;
                     _catSprite._textMoney.text = _catSprite.money.ToString();
                     _animator.SetInteger("state", 2);
+                    isEmpty = true;
                 }
                 _poly[0].enabled = true;
                 _poly[1].enabled = false;
@@ -88,7 +96,8 @@ public class Chest : MonoBehaviour
     public void Load()
     {
         _data = SavingSystem<Chest, ChestData>.Load($"{gameObject.name}.data");
-        isOpened = _data.isOpened;
         _animator.SetInteger("state", _data.animatorState);
+        isOpened = _data.isOpened;
+        isEmpty = _data.isEmpty;
     }
 }

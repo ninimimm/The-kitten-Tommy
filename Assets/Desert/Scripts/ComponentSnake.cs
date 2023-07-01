@@ -28,7 +28,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     private bool isStart = true;
     private AnimatorStateInfo _stateInfo;
     public bool isHit;
-    private int index;
+    private int index = -1;
 
     void Start()
     {
@@ -40,8 +40,15 @@ public class ComponentSnake : MonoBehaviour, IDamageable
         _healthBar.SetMaxHealth(maxHP);
         HP = maxHP;
         _audioSource = GetComponent<AudioSource>();
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index])
         {
             HP = maxHP;

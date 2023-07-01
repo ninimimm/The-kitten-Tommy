@@ -41,14 +41,21 @@ public class Crate : MonoBehaviour, IDamageable
     private List<GameObject> fishInstance = new ();
     private List<GameObject> waterInstance = new ();
     public bool isUse;
-    private int index;
+    private int index = -1;
     private void Start()
     {
         data = SavingSystem<Crate, CrateData>.Load($"{gameObject.name}.data");
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index])
         {
             Save();

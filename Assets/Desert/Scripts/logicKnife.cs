@@ -13,7 +13,7 @@
     private LogicKnifeData data;
     private float angle;
     private IDamageable enemy;
-    private int index;
+    private int index = -1;
 
     // Start is called before the first frame update
     void Start()    
@@ -23,8 +23,15 @@
         _knifeSpriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = transform.right * speed;
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
             Save();

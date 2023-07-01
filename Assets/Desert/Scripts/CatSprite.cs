@@ -106,7 +106,8 @@ public class CatSprite : MonoBehaviour
     public bool isOnLeft;
     public bool isInCave;
     private float currentY;
-    private int index;
+    private int index = -1;
+    public bool canSpawn;
 
     public void SetSpeedMultiplier(float multiplier)
     {
@@ -150,6 +151,7 @@ public class CatSprite : MonoBehaviour
         }
         spawnRevile = transform.position;
         spawn = transform.position;
+        canSpawn = data.canSpawn;
     }
 
     private void Start()
@@ -173,8 +175,15 @@ public class CatSprite : MonoBehaviour
         _grabbingHook = GetComponent<GrabbingHook>();
         currentScene = SceneManager.GetActiveScene().name;
         canTakeDamage = true;
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
             HP = maxHP;

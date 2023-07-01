@@ -36,11 +36,12 @@ public class Mummy : MonoBehaviour, IDamageable
     private SandBoss _sandBoss;
     private AnimatorStateInfo _stateInfo;
     private CatSprite _catSprite;
-    private int index;
+    private int index = -1;
 
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = Boss.transform.position-new Vector3(1,1,0);
         data = SavingSystem<Mummy, MummyData>.Load($"{gameObject.name}.data");
         _catSprite = _cat.GetComponent<CatSprite>();
         _sandBoss = boss.GetComponent<SandBoss>();
@@ -54,8 +55,15 @@ public class Mummy : MonoBehaviour, IDamageable
         _bossAnimator = Boss.GetComponent<Animator>();
         cap.enabled = true;
         pol.enabled = false;
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index])
         {
             HP = maxHP;
@@ -63,7 +71,8 @@ public class Mummy : MonoBehaviour, IDamageable
             Save();
             MainMenu.isStarts[index] = false;
         }
-        Load();
+        if (_catSprite.canSpawn)
+            Load();
         _healthBar.SetMaxHealth(maxHP);
         _healthBar.SetHealth(HP); 
     }
@@ -90,6 +99,7 @@ public class Mummy : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
+        _catSprite.canSpawn = true;
         _stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (_sandBoss.alive)
         {
@@ -170,11 +180,6 @@ public class Mummy : MonoBehaviour, IDamageable
                 __fill.enabled = false;
                 __bar.enabled = false;
             }
-        }
-        if (isStart)
-        {
-            Load();
-            isStart = false;
         }
     }
     void Attack()

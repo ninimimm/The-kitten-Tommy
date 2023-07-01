@@ -15,6 +15,7 @@ public class CatData : IInitializable<CatSprite>
     public float[] spawnSecondLevel;
     public float[] spawnThirdLevel;
     public bool isPoison;
+    public bool canSpawn;
 
     public CatData()
     {
@@ -51,5 +52,6 @@ public class CatData : IInitializable<CatSprite>
             spawnThirdLevel[1] = cat.transform.position.y;
             spawnThirdLevel[2] = cat.transform.position.z;
         }
+        canSpawn = catSprite.canSpawn;
     } 
 }

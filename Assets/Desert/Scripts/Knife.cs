@@ -18,14 +18,21 @@ public class Knife : MonoBehaviour
     private Vector2 direction;
     private Camera mainCamera;
     private float angle;
-    private int index;
+    private int index = -1;
     
     private void Start()
     {
         data = SavingSystem<Knife, KnifeData>.Load($"{gameObject.name}.data");
         mainCamera = Camera.main;
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
             Save();

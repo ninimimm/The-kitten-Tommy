@@ -35,15 +35,22 @@ public class Boosts : MonoBehaviour
     private bool _canUse;
     private bool _cdNow;
     private float currentJump;
-    private int index;
+    private int index = -1;
     // Start is called before the first frame update
     void Start()
     {
         data = SavingSystem<Boosts, BoostsData>.Load($"{gameObject.name}.data");
         currentJump = cat.jumpForce;
         timerChose = timeLite;
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
             Save();

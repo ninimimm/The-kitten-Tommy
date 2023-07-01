@@ -34,7 +34,7 @@ public class Hawk : MonoBehaviour, IDamageable
     private Vector2 direction;
     private CatSprite _catSprite;
     private AnimatorStateInfo _stateInfo;
-    private int index;
+    private int index = -1;
 
     void Start()
     {
@@ -47,8 +47,15 @@ public class Hawk : MonoBehaviour, IDamageable
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         caps = GetComponents<CapsuleCollider2D>();
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index])
         {
             HP = maxHP;

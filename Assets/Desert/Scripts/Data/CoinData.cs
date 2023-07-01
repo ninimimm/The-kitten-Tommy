@@ -18,16 +18,16 @@ public class CoinData : IInitializable<Coin>
         var obj = coin.gameObject;
         if (positions.TryGetValue(coin.gameObject.name, out value))
         {
-            value[0] = obj.transform.position.x; 
-            value[1] = obj.transform.position.y; 
-            value[2] = obj.transform.position.z; 
+            value[0] = coin.transform.position.x; 
+            value[1] = coin.transform.position.y; 
+            value[2] = coin.transform.position.z; 
         }
         else
         {
             positions.Add(coin.gameObject.name, new []{
-                obj.transform.position.x,
-                obj.transform.position.y,
-                obj.transform.position.z});
+                coin.transform.position.x,
+                coin.transform.position.y,
+                coin.transform.position.z});
         }
     } 
 }

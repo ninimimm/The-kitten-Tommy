@@ -14,15 +14,22 @@ public class Coin : MonoBehaviour
     private BoxCollider2D _boxCollider;
     private bool isStart = true;
     private CatSprite _catSprite;
-    private int index;
+    private int index = -1;
 
     private void Start()
     {
         data = SavingSystem<Coin, CoinData>.Load($"{gameObject.name}.data");
         _catSprite = _cat.GetComponent<CatSprite>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        index = MainMenu.index;
-        MainMenu.index++;
+        if (index == -1)
+        {
+            index = MainMenu.index;
+            MainMenu.index += 100;
+        }
+        else
+        {
+            index++;
+        }
         if (MainMenu.isStarts[index])
         {
             Save();
@@ -47,7 +54,7 @@ public class Coin : MonoBehaviour
         data = SavingSystem<Coin, CoinData>.Load($"{gameObject.name}.data");
         transform.position = new Vector3(
             data.positions[gameObject.name][0],
-            data.positions[gameObject.name][1],
+            data.positions[gameObject.name][1]+1,
             data.positions[gameObject.name][2]);
     }
     
