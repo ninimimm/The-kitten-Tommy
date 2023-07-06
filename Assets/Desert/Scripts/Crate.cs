@@ -223,7 +223,7 @@ public class Crate : MonoBehaviour, IDamageable
         {
             foreach (var water in waterInstance)
             {
-                if (water != null && water != null && Vector3.Distance(water.transform.position, Cat.transform.position) < 1.1)
+                if (water != null && water != null && Vector3.Distance(water.transform.position + new Vector3(0,0.5f,0), Cat.transform.position) < 0.8)
                 {
                     boosts.waterCount++;
                     boosts.boostsText[2].text = "x" + boosts.waterCount;

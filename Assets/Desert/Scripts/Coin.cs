@@ -54,7 +54,7 @@ public class Coin : MonoBehaviour
         data = SavingSystem<Coin, CoinData>.Load($"{gameObject.name}.data");
         transform.position = new Vector3(
             data.positions[gameObject.name][0],
-            data.positions[gameObject.name][1]+1,
+            data.positions[gameObject.name][1],
             data.positions[gameObject.name][2]);
     }
     

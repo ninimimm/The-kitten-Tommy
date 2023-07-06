@@ -47,6 +47,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     private Vector3 spawnPosition;
     private Vector3 spawnPositionMummy;
     private int index = -1;
+    public Experience XP;
 
     // Start is called before the first frame update
     void Start()
@@ -205,6 +206,7 @@ public class SandBoss : MonoBehaviour, IDamageable
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;
+        if (HP <= 0 && !animator.GetCurrentAnimatorStateInfo(0).IsName("death")) XP.Die();
     }
     private void Flip(float horizontalDirection)
     {

@@ -48,7 +48,7 @@ public class Knife : MonoBehaviour
         if (timer > attackIntervale)
             nowIsShoot = false;
         if (nowIsShoot) timer += Time.deltaTime;
-        else if (Input.GetButtonDown("Fire1"))
+        else if (Input.GetButtonDown("Fire1") && !catSprite.inMiniMap)
         {
             timer = 0;
             Shoot();

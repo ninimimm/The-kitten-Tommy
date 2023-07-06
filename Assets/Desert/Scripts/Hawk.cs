@@ -19,6 +19,7 @@ public class Hawk : MonoBehaviour, IDamageable
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
     [SerializeField] private float damageVolume;
+    [SerializeField] private Experience XP;
     public float distanseAttack = 0.2f;
     public Transform attack;
     public LayerMask catLayer;
@@ -176,6 +177,7 @@ public class Hawk : MonoBehaviour, IDamageable
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;
+        if (HP <= 0 && !_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_death")) XP.Die();
     }
     private void OnDrawGizmosSelected()
     {

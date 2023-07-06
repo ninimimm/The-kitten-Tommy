@@ -15,6 +15,7 @@ public class Hyena : MonoBehaviour, IDamageable
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
+    [SerializeField] private Experience XP;
     public PolygonCollider2D pol;
     public CapsuleCollider2D cap;
     private bool damageNow;
@@ -162,6 +163,7 @@ public class Hyena : MonoBehaviour, IDamageable
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;
+        if (HP <= 0 && !currentAnimatorState.IsName("HyenaDeath")) XP.Die();
     }
     private void Flip(float horizontalDirection)
     {

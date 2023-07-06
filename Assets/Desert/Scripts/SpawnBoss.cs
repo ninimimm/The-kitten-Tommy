@@ -16,6 +16,7 @@ public class SpawnBoss : MonoBehaviour
     [SerializeField] private AudioSource _audioSourceBossHurt;
     [SerializeField] private AudioSource _audioSourceMummyHurt;
     [SerializeField] private AudioSource _audioSourceMummyAttack;
+    [SerializeField] private Experience XP;
 
     private Animator snakeAnim;
     public bool canSpawn = true;
@@ -44,6 +45,7 @@ public class SpawnBoss : MonoBehaviour
         var boss = Instantiate(Boss, spawnPosition, Quaternion.identity);
         GoToSecondLevle.boss = boss.GetComponent<SandBoss>();
         var sandBoss = boss.GetComponent<SandBoss>();
+        sandBoss.XP = XP;
         sandBoss._cat = Cat;
         sandBoss.MummyPrefab = Mummy;
         sandBoss._healthBar = healthBar;

@@ -28,6 +28,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     [SerializeField] private CatSprite _catSprite;
     [SerializeField] private float damageVolume;
     [SerializeField] private WriteText _writeText;
+    [SerializeField] private Experience XP;
     private AudioSource audioSource;
     private float idleTimer;
     private bool damageNow;
@@ -101,8 +102,8 @@ public class Scorpio : MonoBehaviour, IDamageable
         _stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (audioSource.enabled)
         {
-            audioSource.volume = Math.Abs(catTransform.position.x-transform.position.x) < distanseRunSourse ?
-                (distanseRunSourse - Math.Abs(catTransform.position.x-transform.position.x)) / distanseRunSourse - 0.2f: 0;
+            audioSource.volume = Vector3.Distance(catTransform.position,transform.position) < distanseRunSourse ?
+                (distanseRunSourse - Vector3.Distance(catTransform.position, transform.position)) / distanseRunSourse - 0.2f: 0;
             if (!audioSource.isPlaying) 
                 audioSource.Play();
         }
@@ -179,6 +180,7 @@ public class Scorpio : MonoBehaviour, IDamageable
         HP -= damage;
         _healthBar.SetHealth(HP);
         damageNow = true;
+        if (HP <= 0 && !_stateInfo.IsName("ScorpioDeath")) XP.Die();
     }
 
     private void TryAttack()

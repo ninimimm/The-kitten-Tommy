@@ -16,10 +16,13 @@ public class CatSprite : MonoBehaviour
     public enum MovementState { Stay, Run, jumpup, jumpdown, hit, damage, shit, death, revival };
     
     public float HP;
+    public float XP;
     [SerializeField] public float maxHP;
+    [SerializeField] public float mapXP;
     [SerializeField] public float speed = 4.0f;
     [SerializeField] public float jumpForce = 7f;
     [SerializeField] public HealthBar _healthBar;
+    [SerializeField] public HealthBar greenBar;
     [SerializeField] public KnifeBar _knifeBar;
     [SerializeField] public Text _textMoney;
     [SerializeField] public Text _textHealth;
@@ -66,6 +69,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteShiftBoss;
     [SerializeField] private TextMeshProUGUI textShiftBoss;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private GameObject windPrefab;
     
     public bool isWater;
     public int countHealth;
@@ -108,6 +112,7 @@ public class CatSprite : MonoBehaviour
     private float currentY;
     private int index = -1;
     public bool canSpawn;
+    public bool inMiniMap;
 
     public void SetSpeedMultiplier(float multiplier)
     {
@@ -139,13 +144,13 @@ public class CatSprite : MonoBehaviour
                 data.spawnFirstLevel[2]);
         else if (SceneManager.GetActiveScene().name == "SecondLevle")
             transform.position = new Vector3(
-                data.spawnSecondLevel[0]+1f, 
+                data.spawnSecondLevel[0], 
                 data.spawnSecondLevel[1], 
                 data.spawnSecondLevel[2]);
         else
         {
             transform.position = new Vector3(
-                data.spawnThirdLevel[0] + 1f,
+                data.spawnThirdLevel[0],
                 data.spawnThirdLevel[1],
                 data.spawnThirdLevel[2]);
         }
@@ -188,6 +193,7 @@ public class CatSprite : MonoBehaviour
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
+            greenBar.SetMaxHealth(mapXP);
             countHealth = maxCountHealth;
             _textHealth.text = maxCountHealth.ToString();
             Save();
@@ -197,58 +203,64 @@ public class CatSprite : MonoBehaviour
         _textMoney.text = money.ToString();
         knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
         _healthBar.SetMaxHealth(maxHP);
-        _healthBar.SetHealth(HP);   
+        _healthBar.SetHealth(HP);
+        greenBar.SetMaxHealth(mapXP);
+        greenBar.SetHealth(XP);
         _textHealth.text = countHealth.ToString();
     }
 
     private void FixedUpdate()
     {
-        UpdateGround();
+        if (!inMiniMap)
+            UpdateGround();
     }
 
     private void Update()
     {
-        if (stateInfo.IsName("revival"))
-            revivalSourse.Play();
-        else if (!isDeath)
+        if (!inMiniMap)
         {
-            if (Input.GetKeyDown(KeyCode.N))
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%5 + 1);
-            if (Input.GetKeyDown(KeyCode.B))
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-            stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("shit")) isNowShit = true;
-            else isNowShit = false;
-            isGround = Physics2D.OverlapCircle(groundCheck1.position, groundCheckRadius, groundLayer) ||
-                       Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, groundLayer);
-            if (isGround) isJumpOnWall = false;
-            isCheckpoint = Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer);
-            if (isCheckpoint)
+            if (stateInfo.IsName("revival"))
+                revivalSourse.Play();
+            else if (!isDeath)
             {
-                spriteShiftSand.enabled = true;
-                textShiftSand.enabled = true;
-                spriteShiftBoss.enabled = true;
-                textShiftBoss.enabled = true;
+                if (Input.GetKeyDown(KeyCode.N))
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%5 + 1);
+                if (Input.GetKeyDown(KeyCode.B))
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+                stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+                if (stateInfo.IsName("shit")) isNowShit = true;
+                else isNowShit = false;
+                isGround = Physics2D.OverlapCircle(groundCheck1.position, groundCheckRadius, groundLayer) ||
+                           Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, groundLayer);
+                if (isGround) isJumpOnWall = false;
+                isCheckpoint = Physics2D.OverlapCircle(checkpointCheck.position, distanseCheckpoint, checkpointLayer);
+                if (isCheckpoint)
+                {
+                    spriteShiftSand.enabled = true;
+                    textShiftSand.enabled = true;
+                    spriteShiftBoss.enabled = true;
+                    textShiftBoss.enabled = true;
+                }
+                else
+                {
+                    spriteShiftSand.enabled = false;
+                    textShiftSand.enabled = false;
+                    spriteShiftBoss.enabled = false;
+                    textShiftBoss.enabled = false;
+                }
+                _knifeBar.SetHealth(knife.timer);
+                UpdateLight();
+                UpdateFly();
+                UpdateCheckpoint();
+                UpdateWall();
+                if (isInCave)
+                    FreezeYInTree();
+                else
+                    FreezeYPutTree();
+                UpdateJump();
             }
-            else
-            {
-                spriteShiftSand.enabled = false;
-                textShiftSand.enabled = false;
-                spriteShiftBoss.enabled = false;
-                textShiftBoss.enabled = false;
-            }
-            _knifeBar.SetHealth(knife.timer);
-            UpdateLight();
-            UpdateFly();
-            UpdateCheckpoint();
-            UpdateWall();
-            if (isInCave)
-                FreezeYInTree();
-            else
-                FreezeYPutTree();
-            UpdateJump();
+            SwitchAnimation();  
         }
-        SwitchAnimation();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -570,6 +582,8 @@ public class CatSprite : MonoBehaviour
         
                 if (Input.GetKeyDown(KeyCode.W) && !isWater && !isOnWall)
                     Attake();
+                else if (Input.GetKeyDown(KeyCode.S) && !isWater && !isOnWall)
+                    Wind();
 
                 if (damageNow)
                 {
@@ -599,6 +613,23 @@ public class CatSprite : MonoBehaviour
             hitEnemies = Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, enemyLayers);
             foreach (var enemy in hitEnemies)
                 enemy.GetComponent<IDamageable>()?.TakeDamage(takeDamage);
+        }
+    }
+
+    void Wind()
+    {
+        if (XP > mapXP / 5)
+        {
+            XP -= mapXP / 5;
+            greenBar.SetHealth(XP);
+            var wind = Instantiate(windPrefab, transform.position + new Vector3(1, -0.3f, 0), Quaternion.identity);
+            wind.transform.localScale = transform.rotation.y == 0 ? 
+                wind.transform.localScale : 
+                new Vector3(-wind.transform.localScale.x,wind.transform.localScale.y,wind.transform.localScale.z);
+            wind.GetComponent<Wind>().isRight = transform.rotation.y == 0;
+            wind.transform.position = transform.rotation.y == 0
+                ? wind.transform.position
+                : wind.transform.position - new Vector3(2, 0, 0);
         }
     }
     

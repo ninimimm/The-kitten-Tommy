@@ -37,7 +37,7 @@ TagManager:
   - wall
   - collider
   - stone
-  - 
+  - wind
   - 
   m_SortingLayers:
   - name: Default

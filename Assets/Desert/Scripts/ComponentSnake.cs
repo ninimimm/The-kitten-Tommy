@@ -11,6 +11,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip damageClip;
     [SerializeField] private CatSprite _catSprite;
     [SerializeField] private WriteText _writeText;
+    [SerializeField] private Experience XP;
     private AudioSource _audioSource;
     public Animator _animator;
     public enum MovementState { stay, Walk, attake, death, hurt };
@@ -154,6 +155,7 @@ public class ComponentSnake : MonoBehaviour, IDamageable
         damageNow = true;
         HP -= damage;
         _healthBar.SetHealth(HP);
+        if (HP <= 0 && !_animator.GetCurrentAnimatorStateInfo(0).IsName("death")) XP.Die();
     }
     private void OnDrawGizmosSelected()
     {
