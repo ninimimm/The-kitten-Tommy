@@ -5,6 +5,7 @@
 {
     [SerializeField] public float speed = 10f;
     [SerializeField] public float damage = 1;
+    [SerializeField] private LayerMask enemiesLayer;
     public AudioSource flySource;
     public AudioSource hitSource;
     public PoisonKnife _poisonKnife;
@@ -79,7 +80,7 @@
                 else
                 {
                     hitSource.Play();
-                    enemy.TakeDamage(damage);
+                    enemy.TakeDamage(damage, false);
                 }
             }
             Destroy(gameObject);

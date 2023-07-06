@@ -25,7 +25,7 @@ public class Stone : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Player")
         {
-            cat.TakeDamage(damage);
+            cat.TakeDamage(damage, false);
             rigidbody2D.bodyType = RigidbodyType2D.Static;
             transform.position = startPosition;
         }

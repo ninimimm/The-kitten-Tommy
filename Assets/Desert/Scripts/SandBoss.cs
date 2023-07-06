@@ -48,6 +48,7 @@ public class SandBoss : MonoBehaviour, IDamageable
     private Vector3 spawnPositionMummy;
     private int index = -1;
     public Experience XP;
+    private bool stan;
 
     // Start is called before the first frame update
     void Start()
@@ -111,24 +112,37 @@ public class SandBoss : MonoBehaviour, IDamageable
     {
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("death") && data.animatorState != 3)
         {
-            attackTimer -= Time.deltaTime;
-            spawnTimer -= Time.deltaTime;
-            direction = new Vector2(0, 0);
-            if (Vector3.Distance(_cat.transform.position, transform.position) > distanceWalk && 
-                Vector3.Distance(_cat.transform.position, transform.position) < distanseStay)
+            if (!stan)
             {
-                direction.x = _cat.transform.position.x > transform.position.x ? 1 : -1;
-                stateBoss = MovementState.walk;    
+                attackTimer -= Time.deltaTime;
+                spawnTimer -= Time.deltaTime;
+                direction = new Vector2(0, 0);
+                if (Vector3.Distance(_cat.transform.position, transform.position) > distanceWalk && 
+                    Vector3.Distance(_cat.transform.position, transform.position) < distanseStay)
+                {
+                    direction.x = _cat.transform.position.x > transform.position.x ? 1 : -1;
+                    stateBoss = MovementState.walk;    
+                }
+                else
+                    stateBoss = MovementState.stay;
+                if (attackTimer <= 0 && stateBoss != MovementState.attake && Vector3.Distance(_cat.transform.position, transform.position) < distanseAttack)
+                {
+                    stateBoss = MovementState.attake;
+                    attackTimer = attackInterval;
+                }
+                if (stateBoss == MovementState.attake)
+                    Attack();
+                
+                if (spawnTimer <= 0)
+                {
+                    Spawn();
+                    spawnTimer = spawnInterval;
+                }
+                Flip(direction.x);
+                _rb.velocity = direction * speed;
             }
-            else
-                stateBoss = MovementState.stay;
-            if (attackTimer <= 0 && stateBoss != MovementState.attake && Vector3.Distance(_cat.transform.position, transform.position) < distanseAttack)
-            {
-                stateBoss = MovementState.attake;
-                attackTimer = attackInterval;
-            }
-            if (stateBoss == MovementState.attake)
-                Attack();
+            else stateBoss = MovementState.stay;
+            
             if (damageNow && HP > 0)
             {
                 stateBoss = MovementState.hurt;
@@ -136,15 +150,6 @@ public class SandBoss : MonoBehaviour, IDamageable
             }
             else if (damageNow && HP <= 0)
                 stateBoss = MovementState.death;
-
-            if (spawnTimer <= 0)
-            {
-                Spawn();
-                spawnTimer = spawnInterval;
-            }
-                
-            Flip(direction.x);
-            _rb.velocity = direction * speed;
             animator.SetInteger("state", (int)stateBoss);
         }
         else
@@ -199,14 +204,18 @@ public class SandBoss : MonoBehaviour, IDamageable
         MummySrcipt._audioSourceMummyHurt = _audioSourceMummyHurt;
     }
     
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isStan)
     {
-        if (!_audioSourceBossHurt.isPlaying && !animator.GetCurrentAnimatorStateInfo(0).IsName("death"))
-            _audioSourceBossHurt.Play();
-        HP -= damage;
-        _healthBar.SetHealth(HP);
-        damageNow = true;
-        if (HP <= 0 && !animator.GetCurrentAnimatorStateInfo(0).IsName("death")) XP.Die();
+        stan = isStan;
+        if (!stan && damage > 0)
+        {
+            if (!_audioSourceBossHurt.isPlaying && !animator.GetCurrentAnimatorStateInfo(0).IsName("death"))
+                _audioSourceBossHurt.Play();
+            HP -= damage;
+            _healthBar.SetHealth(HP);
+            damageNow = true;
+            if (HP <= 0 && !animator.GetCurrentAnimatorStateInfo(0).IsName("death")) XP.Die();
+        }
     }
     private void Flip(float horizontalDirection)
     {

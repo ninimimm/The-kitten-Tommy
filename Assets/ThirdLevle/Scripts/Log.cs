@@ -10,7 +10,7 @@ public class Log : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && _boss != null && _cat != null)
         {
-            _cat.TakeDamage(damage);
+            _cat.TakeDamage(damage, false);
             _boss.GetComponent<Boss>().LogDestroyed(this);
         }
     }

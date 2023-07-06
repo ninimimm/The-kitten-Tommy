@@ -172,7 +172,7 @@ public class Crate : MonoBehaviour, IDamageable
             }
         }
     }
-    public void TakeDamage(float damage) => getHit = true;
+    public void TakeDamage(float damage, bool isStan) => getHit = true;
 
     public void Save()
     {

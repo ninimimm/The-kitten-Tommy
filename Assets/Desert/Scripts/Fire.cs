@@ -52,7 +52,7 @@ public class Fire : MonoBehaviour
         while (!(playerInFire is null))
         {
             yield return new WaitForSeconds(damageInterval);
-            playerInFire.TakeDamage(fireDamage);
+            playerInFire.TakeDamage(fireDamage, false);
         }
     }
 }

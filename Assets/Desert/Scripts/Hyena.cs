@@ -31,6 +31,7 @@ public class Hyena : MonoBehaviour, IDamageable
     private Vector2 direction;
     private AnimatorStateInfo currentAnimatorState;
     private int index = -1;
+    private bool stan;
 
     // Start is called before the first frame update
     void Start()
@@ -103,12 +104,21 @@ public class Hyena : MonoBehaviour, IDamageable
 
     private void ProcessMovementAndAttack()
     {
-        GetMovementDirection();
-        UpdateStateBasedOnHealth();
-        Flip(direction.x);
-        _rb.velocity = direction * speed;
-        if (!currentAnimatorState.IsName("HyenaAttack")) Attack();
-        animator.SetInteger("state", (int)stateHyena);
+        if (!stan)
+        {
+            GetMovementDirection();
+            UpdateStateBasedOnHealth();
+            Flip(direction.x);
+            _rb.velocity = direction * speed;
+            if (!currentAnimatorState.IsName("HyenaAttack")) Attack();
+            animator.SetInteger("state", (int)stateHyena);
+        }
+        else
+        {
+            UpdateStateBasedOnHealth();
+            stateHyena = MovementState.stay;
+            animator.SetInteger("state", (int)stateHyena);
+        }
     }
 
     private void GetMovementDirection()
@@ -154,16 +164,20 @@ public class Hyena : MonoBehaviour, IDamageable
             !currentAnimatorState.IsName("HyenaAttack"))
         {
             stateHyena = MovementState.attake;
-            catSprite.TakeDamage(damage);
+            catSprite.TakeDamage(damage, false);
         }
     }
     
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isStan)
     {
-        HP -= damage;
-        _healthBar.SetHealth(HP);
-        damageNow = true;
-        if (HP <= 0 && !currentAnimatorState.IsName("HyenaDeath")) XP.Die();
+        stan = isStan;
+        if (!stan && damage > 0)
+        {
+            HP -= damage;
+            _healthBar.SetHealth(HP);
+            damageNow = true;
+            if (HP <= 0 && !currentAnimatorState.IsName("HyenaDeath")) XP.Die();
+        }
     }
     private void Flip(float horizontalDirection)
     {

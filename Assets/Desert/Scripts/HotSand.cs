@@ -19,7 +19,7 @@ public class HotSand : MonoBehaviour
             if (kitten != null)
             {
                 kitten.SetSpeedMultiplier(slowFactor);
-                kitten.TakeDamage(0.1f);
+                kitten.TakeDamage(0.1f, false);
             }
         }
     }

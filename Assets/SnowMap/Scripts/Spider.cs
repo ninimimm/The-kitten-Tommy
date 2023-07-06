@@ -48,7 +48,7 @@ public class Spider : MonoBehaviour
                 timerWait -= Time.deltaTime;
                 if (timerWait < 0)
                 {
-                    _catSprite.TakeDamage(damage);
+                    _catSprite.TakeDamage(damage, false);
                     timerWait = timeToWait;
                 }
             }

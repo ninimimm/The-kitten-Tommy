@@ -41,6 +41,7 @@ public class People : MonoBehaviour,IDamageable
     private PeopleData data;
     private bool isStart = true;
     private int index = -1;
+    private bool stan;
     
     // Start is called before the first frame update
     void Start()
@@ -100,31 +101,34 @@ public class People : MonoBehaviour,IDamageable
         if (!_stateInfo.IsName("death"))
         {
             _healthBar.SetHealth(HP);
-            TryMove();
-            TryIdle();
-            if ((IsInLeftBound() || IsInRightBound()) && canDamage)
+            if (!stan)
             {
-                Random rnd = new Random();
-                var number = rnd.Next(0, 6);
-                canDamage = false;
-                if (number == 0)
+                TryMove();
+                TryIdle();
+                if ((IsInLeftBound() || IsInRightBound()) && canDamage)
                 {
-                    _statePeople = MovementState.attack1;
-                    animator.SetInteger("state", (int)_statePeople);
-                }
+                    Random rnd = new Random();
+                    var number = rnd.Next(0, 6);
+                    canDamage = false;
+                    if (number == 0)
+                    {
+                        _statePeople = MovementState.attack1;
+                        animator.SetInteger("state", (int)_statePeople);
+                    }
 
-                if (number == 1)
-                {
-                    _statePeople = MovementState.attack2;
-                    animator.SetInteger("state", (int)_statePeople);
+                    if (number == 1)
+                    {
+                        _statePeople = MovementState.attack2;
+                        animator.SetInteger("state", (int)_statePeople);
+                    }
+                    if (number == 2)
+                    {
+                        _statePeople = MovementState.attack3;
+                        animator.SetInteger("state", (int)_statePeople);
+                    }
                 }
-                if (number == 2)
-                {
-                    _statePeople = MovementState.attack3;
-                    animator.SetInteger("state", (int)_statePeople);
-                }
+                if (!isDeath) animator.SetInteger("state", (int)_statePeople);
             }
-            if (!isDeath) animator.SetInteger("state", (int)_statePeople);
         }
         else
         {
@@ -143,17 +147,17 @@ public class People : MonoBehaviour,IDamageable
     public void Attake1()
     {
         if (Physics2D.OverlapCircle(attack1Transform.position, distanceAttack1Transform, catLayer))
-            _catSprite.TakeDamage(damage1);
+            _catSprite.TakeDamage(damage1, false);
     }
     public void Attake2()
     {
         if (Physics2D.OverlapCircle(attack2Transform.position, distanceAttack2Transform, catLayer))
-            _catSprite.TakeDamage(damage2);
+            _catSprite.TakeDamage(damage2, false);
     }
     public void Attake3()
     {
         if (Physics2D.OverlapCircle(attack2Transform.position, distanceAttack2Transform, catLayer))
-            _catSprite.TakeDamage(damage3);
+            _catSprite.TakeDamage(damage3, false);
     }
     private void TryMove()
     {
@@ -188,17 +192,21 @@ public class People : MonoBehaviour,IDamageable
         isFacingRight = !isFacingRight;
         transform.Rotate(Vector3.up, 180.0f, Space.World);
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isStan)
     {
-        if(!_stateInfo.IsName("hit") && !_stateInfo.IsName("death"))
-            audioSource.PlayOneShot(damageClip);
-        HP -= damage;
-        _healthBar.SetHealth(HP);
-        damageNow = true;
-        if (HP <= 0)
+        stan = isStan;
+        if (!stan && damage > 0)
         {
-            isDeath = true;
-            animator.SetInteger("state", (int)MovementState.death);
+            if(!_stateInfo.IsName("hit") && !_stateInfo.IsName("death"))
+                audioSource.PlayOneShot(damageClip);
+            HP -= damage;
+            _healthBar.SetHealth(HP);
+            damageNow = true;
+            if (HP <= 0)
+            {
+                isDeath = true;
+                animator.SetInteger("state", (int)MovementState.death);
+            }
         }
     }
     private void OnDrawGizmosSelected()

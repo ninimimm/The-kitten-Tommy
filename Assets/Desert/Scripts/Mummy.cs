@@ -37,6 +37,7 @@ public class Mummy : MonoBehaviour, IDamageable
     private AnimatorStateInfo _stateInfo;
     private CatSprite _catSprite;
     private int index = -1;
+    private bool stan;
 
     // Start is called before the first frame update
     void Start()
@@ -107,29 +108,36 @@ public class Mummy : MonoBehaviour, IDamageable
             coordinates.y = 0;
             if (!_stateInfo.IsName("MummyDeath"))
             {
-                Vector2 direction = new Vector2(0, 0);
-                if (Vector3.Distance(_cat.transform.position, coordinates) < distanceWalk)
+                if (!stan)
                 {
-                    direction.x = _cat.transform.position.x > transform.position.x ? 1 : -1;
-                    stateMommy = MovementState.walk;
-                }
-                else if (Vector3.Distance(_cat.transform.position, coordinates) >= distanceWalk &&
-                         Vector3.Distance(coordinates, transform.position) > 0.1)
-                {
-                    direction.x = (coordinates.x - transform.position.x);
-                    direction.y = 0;
-                    if (_bossAnimator.GetCurrentAnimatorStateInfo(0).IsName("walk"))
-                        stateMommy = MovementState.walk;
-                    if (Math.Abs(Boss.transform.position.x - transform.position.x) < 1)
+                    Vector2 direction = new Vector2(0, 0);
+                    if (Vector3.Distance(_cat.transform.position, coordinates) < distanceWalk)
                     {
-                        stateMommy = MovementState.stay;
-                        direction = new Vector2(0, 0);
+                        direction.x = _cat.transform.position.x > transform.position.x ? 1 : -1;
+                        stateMommy = MovementState.walk;
                     }
+                    else if (Vector3.Distance(_cat.transform.position, coordinates) >= distanceWalk &&
+                             Vector3.Distance(coordinates, transform.position) > 0.1)
+                    {
+                        direction.x = (coordinates.x - transform.position.x);
+                        direction.y = 0;
+                        if (_bossAnimator.GetCurrentAnimatorStateInfo(0).IsName("walk"))
+                            stateMommy = MovementState.walk;
+                        if (Math.Abs(Boss.transform.position.x - transform.position.x) < 1)
+                        {
+                            stateMommy = MovementState.stay;
+                            direction = new Vector2(0, 0);
+                        }
+                    }
+                    else
+                        stateMommy = MovementState.stay;
+                    Attack();
+                    Flip(direction.x);
+                    _rb.velocity = direction * speed;
                 }
-                else
-                    stateMommy = MovementState.stay;
-    
-                Attack();
+                else stateMommy = MovementState.stay;
+
+
                 if (damageNow && HP > 0)
                 {
                     stateMommy = MovementState.hurt;
@@ -137,8 +145,6 @@ public class Mummy : MonoBehaviour, IDamageable
                 }
                 else if (damageNow && HP <= 0)
                     stateMommy = MovementState.death;
-                Flip(direction.x);
-                _rb.velocity = direction * speed;
                 animator.SetInteger("state", (int)stateMommy);
             }
             else
@@ -153,15 +159,20 @@ public class Mummy : MonoBehaviour, IDamageable
         {
             if (!_stateInfo.IsName("MummyDeath"))
             {
-                Vector2 direction = new Vector2(0, 0);
-                if (Vector3.Distance(_cat.transform.position, coordinates) < distanceWalk)
+                if (!stan)
                 {
-                    direction.x = _cat.transform.position.x > transform.position.x ? 1 : -1;
-                    stateMommy = MovementState.walk;
+                    Vector2 direction = new Vector2(0, 0);
+                    if (Vector3.Distance(_cat.transform.position, coordinates) < distanceWalk)
+                    {
+                        direction.x = _cat.transform.position.x > transform.position.x ? 1 : -1;
+                        stateMommy = MovementState.walk;
+                    }
+                    else
+                        stateMommy = MovementState.stay;
+                    Attack();
+                    Flip(direction.x);
+                    _rb.velocity = direction * speed;
                 }
-                else
-                    stateMommy = MovementState.stay;
-                Attack();
                 if (damageNow && HP > 0)
                 {
                     stateMommy = MovementState.hurt;
@@ -169,8 +180,6 @@ public class Mummy : MonoBehaviour, IDamageable
                 }
                 else if (damageNow && HP <= 0)
                     stateMommy = MovementState.death;
-                Flip(direction.x);
-                _rb.velocity = direction * speed;
                 animator.SetInteger("state", (int)stateMommy);
             }
             else
@@ -191,17 +200,21 @@ public class Mummy : MonoBehaviour, IDamageable
             stateMommy = MovementState.attake;
             if (!_audioSourceMummyAttack.isPlaying)
                 _audioSourceMummyAttack.Play();
-            _catSprite.TakeDamage(damage);
+            _catSprite.TakeDamage(damage,false);
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isStan)
     {
-        if (!_audioSourceMummyHurt.isPlaying && !animator.GetCurrentAnimatorStateInfo(0).IsName("MummyDeath"))
-            _audioSourceMummyHurt.Play();
-        HP -= damage;
-        _healthBar.SetHealth(HP);
-        damageNow = true;
+        stan = isStan;
+        if (!stan && damage > 0)
+        {
+            if (!_audioSourceMummyHurt.isPlaying && !animator.GetCurrentAnimatorStateInfo(0).IsName("MummyDeath"))
+                _audioSourceMummyHurt.Play();
+            HP -= damage;
+            _healthBar.SetHealth(HP);
+            damageNow = true;
+        }
     }
     private void Flip(float horizontalDirection)
     {

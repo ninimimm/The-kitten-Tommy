@@ -36,6 +36,7 @@ public class Hawk : MonoBehaviour, IDamageable
     private CatSprite _catSprite;
     private AnimatorStateInfo _stateInfo;
     private int index = -1;
+    private bool stan;
 
     void Start()
     {
@@ -112,26 +113,30 @@ public class Hawk : MonoBehaviour, IDamageable
 
     private void Move()
     {
-        direction = new Vector2(0, 0);
-
-        if (Mathf.Abs(transform.position.y - Cat.transform.position.y) < maxY &&
-            Mathf.Abs(transform.position.x - Cat.transform.position.x) < followRange)
+        if (!stan)
         {
-            if (Cat.transform.position.x > transform.position.x + 0.1)
-                direction.x = 1;
-            else if (Cat.transform.position.x < transform.position.x - 0.1)
-                direction.x = -1;
-            direction.y = Cat.transform.position.y > transform.position.y ? 0.1f : -0.1f;
-            _stateHawk = MovementState.fly;
-        }
-        else if (Math.Abs(direction.y) < 0.2 )
-            _stateHawk = MovementState.stay;
+            direction = new Vector2(0, 0);
+            if (Mathf.Abs(transform.position.y - Cat.transform.position.y) < maxY &&
+                Mathf.Abs(transform.position.x - Cat.transform.position.x) < followRange)
+            {
+                if (Cat.transform.position.x > transform.position.x + 0.1)
+                    direction.x = 1;
+                else if (Cat.transform.position.x < transform.position.x - 0.1)
+                    direction.x = -1;
+                direction.y = Cat.transform.position.y > transform.position.y ? 0.1f : -0.1f;
+                _stateHawk = MovementState.fly;
+            }
+            else if (Math.Abs(direction.y) < 0.2)
+                _stateHawk = MovementState.stay;
 
-        if (transform.position.y > maxY)
-            direction.y = -0.5f;
-        else if (transform.position.y < minY)
-            direction.y = 0.5f;
-        Attack();
+            if (transform.position.y > maxY)
+                direction.y = -0.5f;
+            else if (transform.position.y < minY)
+                direction.y = 0.5f;
+            Attack();
+            _rigidbody2D.velocity = direction * speed;
+        }
+        else _stateHawk = MovementState.stay;
         if (damageNow && HP > 0)
         {
             _stateHawk = MovementState.hurt;
@@ -140,7 +145,6 @@ public class Hawk : MonoBehaviour, IDamageable
         else if (damageNow && HP <= 0)
             _stateHawk = MovementState.death;
         _animator.SetInteger("state", (int)_stateHawk);
-        _rigidbody2D.velocity = direction * speed;
         Flip(direction.x);
         
     }
@@ -153,7 +157,7 @@ public class Hawk : MonoBehaviour, IDamageable
             {
                 _stateHawk = MovementState.attack;
                 _animator.SetInteger("state", (int)_stateHawk);
-                _catSprite.TakeDamage(damage);;
+                _catSprite.TakeDamage(damage, false);
             }
         }
     }
@@ -170,14 +174,18 @@ public class Hawk : MonoBehaviour, IDamageable
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isStan)
     {
-        if (!_audioSource.isPlaying && !_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_death"))
-            _audioSource.PlayOneShot(damageClip);
-        HP -= damage;
-        _healthBar.SetHealth(HP);
-        damageNow = true;
-        if (HP <= 0 && !_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_death")) XP.Die();
+        stan = isStan;
+        if (!stan && damage > 0)
+        {
+            if (!_audioSource.isPlaying && !_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_death"))
+                _audioSource.PlayOneShot(damageClip);
+            HP -= damage;
+            _healthBar.SetHealth(HP);
+            damageNow = true;
+            if (HP <= 0 && !_animator.GetCurrentAnimatorStateInfo(0).IsName("hawk_death")) XP.Die();
+        }
     }
     private void OnDrawGizmosSelected()
     {

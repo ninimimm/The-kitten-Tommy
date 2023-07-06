@@ -14,7 +14,7 @@ public class MoveNut : MonoBehaviour
         if (hitObj)
         {
             if (Physics2D.OverlapCircle(transform.position, 0.1f, 7)) Destroy(gameObject);
-            hitObj.GetComponent<CatSprite>()?.TakeDamage(takeDamage);
+            hitObj.GetComponent<CatSprite>()?.TakeDamage(takeDamage, false);
         }
         if (moveRight)
             transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);

@@ -612,7 +612,7 @@ public class CatSprite : MonoBehaviour
             _stateCat = MovementState.hit;
             hitEnemies = Physics2D.OverlapCircleAll(smallAttack.position, distanseSmallAttack, enemyLayers);
             foreach (var enemy in hitEnemies)
-                enemy.GetComponent<IDamageable>()?.TakeDamage(takeDamage);
+                enemy.GetComponent<IDamageable>()?.TakeDamage(takeDamage, false);
         }
     }
 
@@ -640,7 +640,7 @@ public class CatSprite : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck2.position,groundCheckRadius);
         Gizmos.DrawWireSphere(checkpointCheck.position,distanseCheckpoint);
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isStan)
     {
         if (canTakeDamage)
         {

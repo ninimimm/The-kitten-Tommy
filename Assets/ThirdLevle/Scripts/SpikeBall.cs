@@ -33,8 +33,8 @@ public class SpikeBall : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Player")
         {
-            if (spriteRenderer.sprite.name == "PinkSpikesBall") boss.TakeDamage(bossDamage);
-            else cat.TakeDamage(catDamage);
+            if (spriteRenderer.sprite.name == "PinkSpikesBall") boss.TakeDamage(bossDamage, false);
+            else cat.TakeDamage(catDamage, false);
             rb.bodyType = RigidbodyType2D.Static;
             transform.position = _startPosition;
             spriteRenderer.enabled = false;

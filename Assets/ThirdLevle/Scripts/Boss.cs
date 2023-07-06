@@ -358,7 +358,7 @@ public class Boss : MonoBehaviour, IDamageable
             _centreTimer = timeCentre;
         }
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isStan)
     {
         HP -= damage;
         _healthBar.SetHealth(HP);

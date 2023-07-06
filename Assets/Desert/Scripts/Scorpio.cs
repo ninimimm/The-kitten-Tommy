@@ -44,6 +44,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     
     private AnimatorStateInfo _stateInfo;
     private int index = -1;
+    private bool stan;
 
     private void Start()
     {
@@ -109,9 +110,17 @@ public class Scorpio : MonoBehaviour, IDamageable
         }
         if (!_stateInfo.IsName("ScorpioDeath"))
         {
-            TryMove();
-            TryIdle();
-            TryAttack();
+            if (!stan)
+            {
+                TryMove();
+                TryIdle();
+                TryAttack();
+            }
+            else
+            {
+                rb.velocity = new Vector3(0,0,0);
+                stateScorpio = MovementState.idle;
+            }
             TryChangeOnDamageState();
             animator.SetInteger("stateScorpio", (int)stateScorpio);
         }
@@ -171,16 +180,20 @@ public class Scorpio : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isStan)
     {
-        _writeText.LKM.GetComponent<SpriteRenderer>().enabled = false;
-        _writeText.scorpioTarget.GetComponent<SpriteRenderer>().enabled = false;
-        if(!_stateInfo.IsName("ScorpioHurt") && !_stateInfo.IsName("ScorpioDeath"))
-            audioSource.PlayOneShot(damageClip);
-        HP -= damage;
-        _healthBar.SetHealth(HP);
-        damageNow = true;
-        if (HP <= 0 && !_stateInfo.IsName("ScorpioDeath")) XP.Die();
+        stan = isStan;
+        if (!stan && damage > 0)
+        {
+            _writeText.LKM.GetComponent<SpriteRenderer>().enabled = false;
+            _writeText.scorpioTarget.GetComponent<SpriteRenderer>().enabled = false;
+            if(!_stateInfo.IsName("ScorpioHurt") && !_stateInfo.IsName("ScorpioDeath"))
+                audioSource.PlayOneShot(damageClip);
+            HP -= damage;
+            _healthBar.SetHealth(HP);
+            damageNow = true;
+            if (HP <= 0 && !_stateInfo.IsName("ScorpioDeath")) XP.Die();
+        }
     }
 
     private void TryAttack()
@@ -189,7 +202,7 @@ public class Scorpio : MonoBehaviour, IDamageable
         {
             stateScorpio = MovementState.attack;
             animator.SetInteger("stateScorpio", (int)stateScorpio);
-            _catSprite.TakeDamage(damage);
+            _catSprite.TakeDamage(damage, false);
         }
     }
 

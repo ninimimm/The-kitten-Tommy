@@ -32,7 +32,7 @@ public class PoisonKnife : MonoBehaviour
                 _timerWait -= Time.deltaTime;
                 if (_timerWait < 0)
                 {
-                    target.TakeDamage(_logicKnife.damage);
+                    target.TakeDamage(_logicKnife.damage, false);
                     _timerWait = timeToWait;
                 }
             }

@@ -40,7 +40,7 @@ public class Ball : MonoBehaviour
                     if (CanDamage)
                     {
                         CanDamage = false;
-                        hitObject.GetComponent<CatSprite>().TakeDamage(damage);
+                        hitObject.GetComponent<CatSprite>().TakeDamage(damage, false);
                         playerHit = true;
                     }
                 }
