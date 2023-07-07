@@ -35,7 +35,7 @@ public class DialogManager : MonoBehaviour
     public void StartDialog(Dialog dialog)
     {
         dialogIsStart = true;
-        nameText.text = dialog.name;
+        nameText.text = dialog.root.speaker;
         sentences.Clear();
         sentences.Enqueue(dialog.root);
         DisplayNextSentense();
@@ -51,6 +51,7 @@ public class DialogManager : MonoBehaviour
 
         var current = sentences.Dequeue();
         dialogText.text = current.text;
+        nameText.text = current.speaker;
 
         currentResponses.Clear();
         int responseNumber = 1;

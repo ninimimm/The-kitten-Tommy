@@ -5,6 +5,5 @@ using UnityEngine;
 [System.Serializable]
 public class Dialog
 {
-    public string name;
     public DialogNode root;
 }
