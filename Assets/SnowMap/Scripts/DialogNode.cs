@@ -4,15 +4,15 @@ using UnityEngine;
 [System.Serializable]
 public class DialogNode
 {
-    public string speaker;
+    public string tag; // тег узла
     [TextArea(3, 10)] 
     public string text; // текст вопроса или ответа
     public List<DialogNode> responses; // список возможных ответов
+    public string jumpTag; // тег узла для перехода
 
-    public DialogNode(string text, string speaker)
+    public DialogNode(string text)
     {
-        this.speaker = speaker;
         this.text = text;
-        this.responses = new List<DialogNode>();
+        responses = new List<DialogNode>();
     }
 }
