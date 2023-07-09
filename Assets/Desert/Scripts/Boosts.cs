@@ -51,7 +51,7 @@ public class Boosts : MonoBehaviour
         {
             index++;
         }
-        if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
+            if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
             Save();
             MainMenu.isStarts[index] = false;

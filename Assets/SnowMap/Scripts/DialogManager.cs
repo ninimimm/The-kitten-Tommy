@@ -32,7 +32,7 @@ public class DialogManager : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             stopTyping = true;
         }
@@ -86,7 +86,7 @@ public class DialogManager : MonoBehaviour
         stopTyping = false;
         isTyping = true;
         textComponent.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        foreach (char letter in sentence)
         {
             textComponent.text += letter;
             if (stopTyping)
@@ -107,11 +107,12 @@ public class DialogManager : MonoBehaviour
     IEnumerator TypeResponses(TextMeshProUGUI textComponent)
     {
         stopTyping = false;
+        isTyping = true;
         while (responsesQueue.Count > 0)
         {
             string response = responsesQueue.Dequeue();
             int letterCount = 0; // Добавьте счетчик символов
-            foreach (char letter in response.ToCharArray())
+            foreach (char letter in response)
             {
                 textComponent.text += letter;
                 letterCount++; // Увеличивайте счетчик на каждой итерации

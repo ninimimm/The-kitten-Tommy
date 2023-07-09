@@ -50,6 +50,24 @@ public class GrabbingHook : MonoBehaviour
             GroundHook();
     }
 
+    private void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.Mouse1) && _joint2DStatic.connectedBody is not null && isHookedStatic)
+        {
+            Vector2 currentDirection = _raycast.point - new Vector2(transform.position.x, transform.position.y);
+            float angle = Vector2.Angle(Vector2.up, currentDirection);
+            if (angle < 110 && !_catSprite.isGround)
+            {
+                if (Input.GetKey(KeyCode.A))
+                    _catSprite._rb.AddForce(new Vector2(-forge, 0));
+                else if (Input.GetKey(KeyCode.D))
+                    _catSprite._rb.AddForce(new Vector2(forge, 0));
+            }
+            if (!_catSprite.isGround && angle > 50 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -2));
+            if (!_catSprite.isGround && angle > 90 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -4));
+        }
+    }
+
     private void CrateCoinHook()
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -144,23 +162,7 @@ public class GrabbingHook : MonoBehaviour
             }
             line.SetPosition(0, transform.position - new Vector3(0, 0.55f, 0));
             if (_joint2DStatic.connectedBody is not null)
-            {
-                if (isHookedStatic)
-                {
-                    Vector2 currentDirection = _raycast.point - new Vector2(transform.position.x, transform.position.y);
-                    float angle = Vector2.Angle(Vector2.up, currentDirection);
-                    if (angle < 110 && !_catSprite.isGround)
-                    {
-                        if (Input.GetKey(KeyCode.A))
-                            _catSprite._rb.AddForce(new Vector2(-forge, 0));
-                        else if (Input.GetKey(KeyCode.D))
-                            _catSprite._rb.AddForce(new Vector2(forge, 0));
-                    }
-                    if (!_catSprite.isGround && angle > 50 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -2));
-                    if (!_catSprite.isGround && angle > 90 && _catSprite._rb.velocity.y > 0) _catSprite._rb.AddForce(new Vector2(0, -4));
-                }
                 line.SetPosition(1, _joint2DStatic.connectedBody.transform.position + (Vector3)_joint2DStatic.connectedAnchor + new Vector3(0,0.1f,0));
-            }
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1))
         {

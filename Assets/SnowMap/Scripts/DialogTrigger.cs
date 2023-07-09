@@ -12,7 +12,7 @@ public class DialogTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !_dialogManager.IsTyping())
+        if (Input.GetKeyDown(KeyCode.Return) && !_dialogManager.IsTyping())
             if (_dialogManager.dialogIsStart)
                 _dialogManager.DisplayNextSentense();
             else TriggerDialog();

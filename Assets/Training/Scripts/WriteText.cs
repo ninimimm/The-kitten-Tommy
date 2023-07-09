@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WriteText : MonoBehaviour
@@ -53,87 +54,93 @@ public class WriteText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Q.enabled = false;
-            arrow.enabled = false;
-        }
-        LKM.transform.position = scorpoi3.transform.position-new Vector3(0,0.5f,0);
-        snakeTarget.transform.Rotate(0,0,0.5f);
-        scorpioTarget.transform.Rotate(0,0,0.5f);
-        platformTarget.transform.Rotate(0,0,0.5f);
-        platformTarget.transform.Rotate(0,0,0.5f);
-        LKM2.transform.position = new Vector3(crateTarget.transform.position.x, LKM2.transform.position.y, LKM2.transform.position.z);
-        if (Input.GetKeyDown(KeyCode.A))
-            A.enabled = false;
-        if (Input.GetKeyDown(KeyCode.D))
-            D.enabled = false;
-        if (!A.enabled && !D.enabled) isMove = true;
-        
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Spase.enabled = false;
-            isJump = true;
-        }
-        
-        if (_grabbing.isHookedStatic && firstTime1 && !_cat.GetComponent<CatSprite>().isGround && !final)
-        {
-            firstTime1 = false;
-            PKM1.enabled = false;
-            platformTarget.GetComponent<SpriteRenderer>().enabled = false;
-            Spase2.enabled = false;
-            plus.enabled = false;
-            PKM2.enabled = true;
-            A2.enabled = true;
-            D2.enabled = true;
-            crateTarget.GetComponent<SpriteRenderer>().enabled = true;
-        }
-
-        if (!firstTime1)
+        if (SceneManager.GetActiveScene().name == "Home")
         {
             if (Input.GetKeyDown(KeyCode.A))
-                A2.enabled = false;
-            else if (Input.GetKeyDown(KeyCode.D))
-                D2.enabled = false;
-            if (!Spase2.enabled && !A2.enabled && !D2.enabled && firstTime3)
+                A.enabled = false;
+            if (Input.GetKeyDown(KeyCode.D))
+                D.enabled = false;
+            if (!A.enabled && !D.enabled) isMove = true;
+            
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                firstTime3 = false;
-                mouseWheelUp.enabled = true;
+                Spase.enabled = false;
+                isJump = true;
             }
-            if (!firstTime3 && !mouseWheelUp.enabled && !Spase2.enabled && !A2.enabled && !D2.enabled && firstTime4)
+            
+            if (_grabbing.isHookedStatic && firstTime1 && !_cat.GetComponent<CatSprite>().isGround && !final)
             {
-                firstTime4 = false;
-                mouseWheelDown.enabled = true;
+                firstTime1 = false;
+                PKM1.enabled = false;
+                platformTarget.GetComponent<SpriteRenderer>().enabled = false;
+                Spase2.enabled = false;
+                plus.enabled = false;
+                PKM2.enabled = true;
+                A2.enabled = true;
+                D2.enabled = true;
+                crateTarget.GetComponent<SpriteRenderer>().enabled = true;
             }
-            if (!_grabbing.isHookedStatic)
+            
+            if (!firstTime1)
             {
-                firstTime1 = true;
-                A2.enabled = false;
-                D2.enabled = false;
-                mouseWheelUp.enabled = false;
-                mouseWheelDown.enabled = false;
-                PKM1.enabled = true;
-                platformTarget.GetComponent<SpriteRenderer>().enabled = true;
-                Spase2.enabled = true;
-                plus.enabled = true;
-                firstTime3 = true;
-                firstTime4 = true;
+                if (Input.GetKeyDown(KeyCode.A))
+                    A2.enabled = false;
+                else if (Input.GetKeyDown(KeyCode.D))
+                    D2.enabled = false;
+                if (!Spase2.enabled && !A2.enabled && !D2.enabled && firstTime3)
+                {
+                    firstTime3 = false;
+                    mouseWheelUp.enabled = true;
+                }
+                if (!firstTime3 && !mouseWheelUp.enabled && !Spase2.enabled && !A2.enabled && !D2.enabled && firstTime4)
+                {
+                    firstTime4 = false;
+                    mouseWheelDown.enabled = true;
+                }
+                if (!_grabbing.isHookedStatic)
+                {
+                    firstTime1 = true;
+                    A2.enabled = false;
+                    D2.enabled = false;
+                    mouseWheelUp.enabled = false;
+                    mouseWheelDown.enabled = false;
+                    PKM1.enabled = true;
+                    platformTarget.GetComponent<SpriteRenderer>().enabled = true;
+                    Spase2.enabled = true;
+                    plus.enabled = true;
+                    firstTime3 = true;
+                    firstTime4 = true;
+                }
             }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Q.enabled = false;
+                arrow.enabled = false;
+            }
+            LKM.transform.position = scorpoi3.transform.position-new Vector3(0,0.5f,0);
+            snakeTarget.transform.Rotate(0,0,0.5f);
+            scorpioTarget.transform.Rotate(0,0,0.5f);
+            platformTarget.transform.Rotate(0,0,0.5f);
+            platformTarget.transform.Rotate(0,0,0.5f);
+            LKM2.transform.position = new Vector3(crateTarget.transform.position.x, LKM2.transform.position.y, LKM2.transform.position.z);
         
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !PKM2.enabled)
-        {
-            LKM2.enabled = false;
-            crateTarget.GetComponent<SpriteRenderer>().enabled = false;
-        }
+        
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !PKM2.enabled)
+            {
+                LKM2.enabled = false;
+                crateTarget.GetComponent<SpriteRenderer>().enabled = false;
+            }
 
-        if (final)
-        {
-            PKM1.enabled = false;
-            Spase2.enabled = false;
-            plus.enabled = false;
-            platformTarget.GetComponent<SpriteRenderer>().enabled = false;
+            if (final)
+            {
+                PKM1.enabled = false;
+                Spase2.enabled = false;
+                plus.enabled = false;
+                platformTarget.GetComponent<SpriteRenderer>().enabled = false;
+            }
         }
     }
 }
