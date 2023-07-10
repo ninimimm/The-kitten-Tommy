@@ -133,14 +133,13 @@ public class WriteText : MonoBehaviour
                 LKM2.enabled = false;
                 crateTarget.GetComponent<SpriteRenderer>().enabled = false;
             }
-
-            if (final)
-            {
-                PKM1.enabled = false;
-                Spase2.enabled = false;
-                plus.enabled = false;
-                platformTarget.GetComponent<SpriteRenderer>().enabled = false;
-            }
+        }
+        if (final)
+        {
+            PKM1.enabled = false;
+            Spase2.enabled = false;
+            plus.enabled = false;
+            platformTarget.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }

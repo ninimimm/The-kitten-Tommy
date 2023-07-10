@@ -42,7 +42,7 @@ public class EatingBird : MonoBehaviour
                 _audioSource.volume = volume;
                 _audioSource.PlayOneShot(flySound);
             }
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("fly")) transform.position += speed * Time.deltaTime * movingVector ;
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("fly")) transform.position += speed * Time.deltaTime * movingVector;
             if (transform.position.y > 6) _spriteRenderer.enabled = false;
         }
     }
