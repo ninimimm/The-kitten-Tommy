@@ -1275,7 +1275,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Events:
     m_Signals:
-    - {fileID: 11400000, guid: ab617ccd47657024da3a1f20bd64194e, type: 2}
     - {fileID: 11400000, guid: 8545628c72ef919438cfe4b7b89552c0, type: 2}
     - {fileID: 11400000, guid: 224c0cc6f4ed6bf4aa6c041f90cf6bc9, type: 2}
     - {fileID: 11400000, guid: 5e85801c76f63a8449f6b3f1213f3f0b, type: 2}
@@ -1287,20 +1286,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4f9f85195a63357448a2e2c90c2fcc40, type: 2}
     - {fileID: 11400000, guid: e24ff5c1cd44d7f48a8b65df5fcf722e, type: 2}
     m_Events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 744610177}
-          m_TargetAssemblyTypeName: CutsceneManager, Assembly-CSharp
-          m_MethodName: WriteText1
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 744610177}
@@ -1429,9 +1414,9 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1266697097}
-          m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-          m_MethodName: LoadMenu
+        - m_Target: {fileID: 744610177}
+          m_TargetAssemblyTypeName: CutsceneManager, Assembly-CSharp
+          m_MethodName: NextScene
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4207,7 +4192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605185844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4297, y: -4204, z: -615}
+  m_LocalPosition: {x: 2578, y: -7795, z: -615}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []

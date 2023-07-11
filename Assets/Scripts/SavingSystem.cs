@@ -16,7 +16,7 @@ public static class SavingSystem <TObject,TData>
     private static BinaryFormatter binaryFormatter;
     private static TData data = new ();
     private static string fullPath;
-    private static string pathFile = "C:\\Users\\nik_chern\\Desktop\\pathFile.txt";
+    private static string pathFile = "pathFile.txt";
     public static void Save(TObject obj, string path)
     {
         binaryFormatter = new BinaryFormatter();

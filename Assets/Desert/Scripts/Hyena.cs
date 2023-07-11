@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Hyena : MonoBehaviour, IDamageable
@@ -31,7 +32,7 @@ public class Hyena : MonoBehaviour, IDamageable
     private Vector2 direction;
     private AnimatorStateInfo currentAnimatorState;
     private int index = -1;
-    private bool stan;
+    public bool stan;
 
     // Start is called before the first frame update
     void Start()
@@ -70,21 +71,23 @@ public class Hyena : MonoBehaviour, IDamageable
 
     public void Save()
     {
-        if (this != null) 
-            SavingSystem<Hyena,HyenaData>.Save(this, $"{gameObject.name}.data");
+        if (this != null && SceneManager.GetActiveScene().name != "Home") SavingSystem<Hyena,HyenaData>.Save(this, $"{gameObject.name}.data");
     }
     
     public void Load()
     {
-        data = SavingSystem<Hyena, HyenaData>.Load($"{gameObject.name}.data");
-        transform.position = new Vector3(
-            data.position[0],
-            data.position[1],
-            data.position[2]);
-        HP = data.HP;
-        pol.enabled = data.polyEnabled;
-        cap.enabled = data.capEnabled;
-        animator.SetInteger("state",data.animatorState);
+        if (SceneManager.GetActiveScene().name != "Home")
+        {
+            data = SavingSystem<Hyena, HyenaData>.Load($"{gameObject.name}.data");
+            transform.position = new Vector3(
+                data.position[0],
+                data.position[1],
+                data.position[2]);
+            HP = data.HP;
+            pol.enabled = data.polyEnabled;
+            cap.enabled = data.capEnabled;
+            animator.SetInteger("state",data.animatorState);
+        }
     }
     
     // Update is called once per frame

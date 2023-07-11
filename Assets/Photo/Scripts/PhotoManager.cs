@@ -83,7 +83,7 @@ public class PhotoManager : MonoBehaviour
         
         
         
-        
+        textWrite.isE = false;
         duration = 2f;
         targetPosition = textWrite.vector;
         textWrite.vector.x += 0.35f;
@@ -106,6 +106,5 @@ public class PhotoManager : MonoBehaviour
         transform.position = targetPosition;
         transform.localScale = targetScale;
         _textMeshPro.text = $"{int.Parse(_textMeshPro.text.Split("/")[0]) + 1}/{_textMeshPro.text.Split("/")[1]}";
-        textWrite.isE = false;
     }
 }

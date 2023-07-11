@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         if (SceneManager.GetActiveScene().name == "FirstLevleComic" && Input.GetKeyDown(KeyCode.Escape))
-            ToLoadMenu();   
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseGame)
@@ -85,11 +85,9 @@ public class PauseMenu : MonoBehaviour
             }
         }
             
-        if (MainMenu.saveIndex == 2)
-            goToSecond.Save();
-        else if (MainMenu.saveIndex == 3)
-            goToFirst.Save();
-        else goToSnow.Save();
+        if (MainMenu.saveIndex == 4) goToSecond.Save();
+        else if (MainMenu.saveIndex == 5) goToFirst.Save();
+        else if (MainMenu.saveIndex == 6) goToSnow.Save();
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }

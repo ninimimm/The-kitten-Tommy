@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Teacher : MonoBehaviour
@@ -26,6 +27,8 @@ public class Teacher : MonoBehaviour
     [SerializeField] private GameObject clawsTarget;
     [SerializeField] private LayerMask knifeLayer;
     [SerializeField] private LayerMask catLayer;
+    [SerializeField] private Hyena hyenaForKill;
+    [SerializeField] private Hyena hyenaForWind;
     [TextArea(3, 10)]
     [SerializeField] private string[] textForTeacher;
     private Animator _animator;
@@ -37,9 +40,14 @@ public class Teacher : MonoBehaviour
     private bool _useHookHint;
     private bool _useKnifeHint;
     private bool _useClawsHint;
+    private bool _useKillAndExperienceHint;
+    private bool _useWindHint;
+    private bool _useEndHint;
     private bool _wellDone;
     private bool _knifeTraining;
     private bool _clawsTraining;
+    private bool _killAndExperienceTraining;
+    private bool _windTraining;
     private Rigidbody2D _rigidbody2D;
     private Collider2D _attackColliders;
     void Start()
@@ -53,9 +61,87 @@ public class Teacher : MonoBehaviour
     {
         if (_end)
         {
-            icon.enabled = false;
-            textIcon.enabled = false;
+            if (transform.position.x <= 40f) transform.position += speed * Time.deltaTime * (movingVector * 2);
+            else _animator.SetInteger("state", 0);
+            if (Input.GetKeyDown(KeyCode.E) && _useEndHint)
+            {
+                if (_wellDone)
+                {
+                    _wellDone = false;
+                    StartCoroutine(TypeSentence(textForTeacher[6], teacherText));
+                }
+                else _stopTyping = true;
+            }
+            EndTraining();
             if (Input.GetKeyDown(KeyCode.Return)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else if (_windTraining)
+        {
+            if (transform.position.x <= 33f) transform.position += speed * Time.deltaTime * (movingVector * 2);
+            else _animator.SetInteger("state", 0);
+            if (catSprite.XP < 10)
+            {
+                catSprite.XP = 10;
+                catSprite.greenBar.SetHealth(10);
+            }
+            if (Input.GetKeyDown(KeyCode.E) && _useWindHint)
+            {
+                if (_wellDone)
+                {
+                    _wellDone = false;
+                    StartCoroutine(TypeSentence(textForTeacher[5], teacherText));
+                }
+                else _stopTyping = true;
+            }
+            if (Input.GetKeyDown(KeyCode.Return) && _useWindHint)
+            {
+                StopAllCoroutines();
+                _wellDone = false;
+                _stopTyping = false;
+                StartCoroutine(TypeSentence(textForTeacher[5], teacherText));
+            }
+            WindTraining();
+            if (hyenaForWind.stan)
+            {
+                _end = true;
+                StopAllCoroutines();
+                textBox.enabled = false;
+                helpText.enabled = false;
+                teacherText.text = "";
+                _animator.SetInteger("state", 2);
+                helpText.text = "E - пропустить/дальше";
+            }
+        }
+        else if (_killAndExperienceTraining)
+        {
+            if (transform.position.x <= 26f) transform.position += speed * Time.deltaTime * (movingVector * 2);
+            else _animator.SetInteger("state", 0);
+            if (Input.GetKeyDown(KeyCode.E) && _useKillAndExperienceHint)
+            {
+                if (_wellDone)
+                {
+                    _wellDone = false;
+                    StartCoroutine(TypeSentence(textForTeacher[4], teacherText));
+                }
+                else _stopTyping = true;
+            }
+            if (Input.GetKeyDown(KeyCode.Return) && _useKillAndExperienceHint)
+            {
+                StopAllCoroutines();
+                _wellDone = false;
+                _stopTyping = false;
+                StartCoroutine(TypeSentence(textForTeacher[4], teacherText));
+            }
+            KillAndExpperienceTraining();
+            if (hyenaForKill.stateHyena == Hyena.MovementState.death)
+            {
+                _windTraining = true;
+                StopAllCoroutines();
+                textBox.enabled = false;
+                helpText.enabled = false;
+                teacherText.text = "";
+                _animator.SetInteger("state", 2);
+            }
         }
         else if (_clawsTraining)
         {
@@ -81,12 +167,12 @@ public class Teacher : MonoBehaviour
             _attackColliders = Physics2D.OverlapCircle(clawsTarget.transform.position, 0.1f, catLayer);
             if (_attackColliders && Input.GetKeyDown(KeyCode.W))
             {
-                _end = true;
+                _killAndExperienceTraining = true;
                 StopAllCoroutines();
-                teacherText.text = "";
+                textBox.enabled = false;
                 helpText.enabled = false;
-                StartCoroutine(TypeSentence(textForTeacher[4], teacherText));
-                textBox.enabled = true;
+                teacherText.text = "";
+                _animator.SetInteger("state", 2);
             }
         }
         else if (_knifeTraining)
@@ -164,7 +250,7 @@ public class Teacher : MonoBehaviour
     {
         if (!_useHookHint)
         {
-            if (Vector3.Distance(cat.transform.position, transform.position) < 0.5f)
+            if (Vector3.Distance(cat.transform.position, transform.position) < 1f)
             {
                 icon.enabled = true;
                 textIcon.enabled = true;
@@ -209,7 +295,7 @@ public class Teacher : MonoBehaviour
     {
         if (!_useKnifeHint)
         {
-            if (Vector3.Distance(cat.transform.position, transform.position) < 0.5f && _animator.GetInteger("state") == 0)
+            if (Vector3.Distance(cat.transform.position, transform.position) < 1f && _animator.GetInteger("state") == 0)
             {
                 icon.enabled = true;
                 textIcon.enabled = true;
@@ -235,7 +321,7 @@ public class Teacher : MonoBehaviour
     {
         if (!_useClawsHint)
         {
-            if (Vector3.Distance(cat.transform.position, transform.position) < 0.5f && _animator.GetInteger("state") == 0)
+            if (Vector3.Distance(cat.transform.position, transform.position) < 1f && _animator.GetInteger("state") == 0)
             {
                 icon.enabled = true;
                 textIcon.enabled = true;
@@ -260,5 +346,83 @@ public class Teacher : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(knifeTarget.transform.position + new Vector3(-0.07f, 0.12f, 0f), 0.1f);
+    }
+    
+    private void KillAndExpperienceTraining()
+    {
+        if (!_useKillAndExperienceHint)
+        {
+            if (Vector3.Distance(cat.transform.position, transform.position) < 1f && _animator.GetInteger("state") == 0)
+            {
+                icon.enabled = true;
+                textIcon.enabled = true;
+            }
+            else
+            {
+                icon.enabled = false;
+                textIcon.enabled = false;
+            }
+        }
+        if (icon.enabled && Input.GetKeyDown(KeyCode.E))
+        {
+            _useKillAndExperienceHint = true;
+            icon.enabled = false;
+            textIcon.enabled = false;
+            textBox.enabled = true;
+            helpText.enabled = true;
+            StartCoroutine(TypeSentence(textForTeacher[4], teacherText));
+        }
+    }
+    
+    private void WindTraining()
+    {
+        if (!_useWindHint)
+        {
+            if (Vector3.Distance(cat.transform.position, transform.position) < 1f && _animator.GetInteger("state") == 0)
+            {
+                icon.enabled = true;
+                textIcon.enabled = true;
+            }
+            else
+            {
+                icon.enabled = false;
+                textIcon.enabled = false;
+            }
+        }
+        if (icon.enabled && Input.GetKeyDown(KeyCode.E))
+        {
+            _useWindHint = true;
+            icon.enabled = false;
+            textIcon.enabled = false;
+            textBox.enabled = true;
+            helpText.enabled = true;
+            StartCoroutine(TypeSentence(textForTeacher[5], teacherText));
+        }
+    }
+    
+    private void EndTraining()
+    {
+        if (!_useEndHint)
+        {
+            if (Vector3.Distance(cat.transform.position, transform.position) < 1f && _animator.GetInteger("state") == 0)
+            {
+                icon.enabled = true;
+                textIcon.enabled = true;
+            }
+            else
+            {
+                icon.enabled = false;
+                textIcon.enabled = false;
+            }
+        }
+        if (icon.enabled && Input.GetKeyDown(KeyCode.E))
+        {
+            _useEndHint = true;
+            icon.enabled = false;
+            textIcon.enabled = false;
+            textBox.enabled = true;
+            helpText.enabled = true;
+            StartCoroutine(TypeSentence(textForTeacher[6], teacherText));
+        }
     }
 }

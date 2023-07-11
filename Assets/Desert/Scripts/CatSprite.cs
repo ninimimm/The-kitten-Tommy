@@ -119,49 +119,51 @@ public class CatSprite : MonoBehaviour
         speedMultiplier = multiplier;
     }
 
-    
+
     public void Save()
     {
-        if (this != null) 
-            SavingSystem<CatSprite,CatData>.Save(this, $"{gameObject.name}.data");
+        if (this != null && SceneManager.GetActiveScene().name != "Home") SavingSystem<CatSprite,CatData>.Save(this, $"{gameObject.name}.data");
     }
 
 
     public void Load()
     {
-        data = SavingSystem<CatSprite, CatData>.Load($"{gameObject.name}.data");
-        isPoison = data.isPoison;
-        if (isPoison) knifeSprite = poisonSprite;
-        HP = data.HP;
-        countHealth = data.countHealth;
-        takeDamage = data.takeDamage;
-        key = data.key;
-        money = data.money;
-        if (SceneManager.GetActiveScene().name == "FirstLevle")
-            transform.position = new Vector3(
-                data.spawnFirstLevel[0]+1f, 
-                data.spawnFirstLevel[1], 
-                data.spawnFirstLevel[2]);
-        else if (SceneManager.GetActiveScene().name == "SecondLevle")
-            transform.position = new Vector3(
-                data.spawnSecondLevel[0], 
-                data.spawnSecondLevel[1], 
-                data.spawnSecondLevel[2]);
-        else
+        if (SceneManager.GetActiveScene().name != "Home")
         {
-            transform.position = new Vector3(
-                data.spawnThirdLevel[0],
-                data.spawnThirdLevel[1],
-                data.spawnThirdLevel[2]);
+            data = SavingSystem<CatSprite, CatData>.Load($"{gameObject.name}.data");
+            isPoison = data.isPoison;
+            if (isPoison) knifeSprite = poisonSprite;
+            HP = data.HP;
+            countHealth = data.countHealth;
+            takeDamage = data.takeDamage;
+            key = data.key;
+            money = data.money;
+            if (SceneManager.GetActiveScene().name == "FirstLevle")
+                transform.position = new Vector3(
+                    data.spawnFirstLevel[0]+1f, 
+                    data.spawnFirstLevel[1], 
+                    data.spawnFirstLevel[2]);
+            else if (SceneManager.GetActiveScene().name == "SecondLevle")
+                transform.position = new Vector3(
+                    data.spawnSecondLevel[0], 
+                    data.spawnSecondLevel[1], 
+                    data.spawnSecondLevel[2]);
+            else
+            {
+                transform.position = new Vector3(
+                    data.spawnThirdLevel[0],
+                    data.spawnThirdLevel[1],
+                    data.spawnThirdLevel[2]);
+            }
+            spawnRevile = transform.position;
+            spawn = transform.position;
+            canSpawn = data.canSpawn;
         }
-        spawnRevile = transform.position;
-        spawn = transform.position;
-        canSpawn = data.canSpawn;
     }
 
     private void Start()
     {
-        data = SavingSystem<CatSprite, CatData>.Load($"{gameObject.name}.data");
+        if (SceneManager.GetActiveScene().name != "Home") data = SavingSystem<CatSprite, CatData>.Load($"{gameObject.name}.data");
         if (SceneManager.GetActiveScene().name == "Jungle") key = "";
         transform.position = spawnRevile;
         if (SceneManager.GetActiveScene().name == "ThirdLevle")
@@ -180,14 +182,25 @@ public class CatSprite : MonoBehaviour
         _grabbingHook = GetComponent<GrabbingHook>();
         currentScene = SceneManager.GetActiveScene().name;
         canTakeDamage = true;
-        if (index == -1)
+        if (SceneManager.GetActiveScene().name != "Home")
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            if (index == -1)
+            {
+                index = MainMenu.index;
+                MainMenu.index += 100;
+            }
+            else
+            {
+                index++;
+            }
+            _textMoney.text = money.ToString();
         }
         else
         {
-            index++;
+            HP = maxHP;
+            _healthBar.SetMaxHealth(maxHP);
+            countHealth = maxCountHealth;
+            _textHealth.text = countHealth.ToString();
         }
         if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
         {
@@ -200,13 +213,15 @@ public class CatSprite : MonoBehaviour
             MainMenu.isStarts[index] = false;
         }
         Load();
-        _textMoney.text = money.ToString();
         knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
-        _healthBar.SetMaxHealth(maxHP);
-        _healthBar.SetHealth(HP);
+        if (SceneManager.GetActiveScene().name != "Home")
+        {
+            _healthBar.SetMaxHealth(maxHP);
+            _healthBar.SetHealth(HP);
+            _textHealth.text = countHealth.ToString();
+        }
         greenBar.SetMaxHealth(mapXP);
         greenBar.SetHealth(XP);
-        _textHealth.text = countHealth.ToString();
     }
 
     private void FixedUpdate()
@@ -624,7 +639,7 @@ public class CatSprite : MonoBehaviour
 
     void Wind()
     {
-        if (XP > mapXP / 5)
+        if (XP >= mapXP / 5)
         {
             XP -= mapXP / 5;
             greenBar.SetHealth(XP);

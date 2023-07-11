@@ -11,8 +11,8 @@ public class MainMenu : MonoBehaviour
     public static int index;
     public static int saveIndex;
     public static  bool isResume;
-    public static string saveIndexFilePath = "C:\\Users\\nik_chern\\Desktop\\saveIndex.txt";
-    private static string pathFile = "C:\\Users\\nik_chern\\Desktop\\pathFile.txt";
+    public static string saveIndexFilePath = "saveIndex.txt";
+    private static string pathFile = "pathFile.txt";
 
     private void Start()
     {
