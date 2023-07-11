@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-<<<<<<< HEAD
 using UnityEngine.UI;
-=======
->>>>>>> 2f225f42ce22e39613f548cd8da066d1e4d4b291
+
 
 public class CutsceneManager : MonoBehaviour
 {
@@ -271,15 +269,8 @@ public class CutsceneManager : MonoBehaviour
         }
         yield return new WaitForSeconds(wait); 
     }
-<<<<<<< HEAD
+
     public void NextScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-=======
-    
-    public void NextScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
->>>>>>> 2f225f42ce22e39613f548cd8da066d1e4d4b291
 }
 
 
