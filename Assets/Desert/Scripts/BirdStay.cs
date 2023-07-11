@@ -34,7 +34,6 @@ public class BirdStay : MonoBehaviour
     {
         if (_spriteRenderer.enabled)
         {
-            
             if ((_cat.position - transform.position).sqrMagnitude < scaryDistance * scaryDistance && !_audioSource.isPlaying)
             {
                 _animator.SetInteger("state", 2);

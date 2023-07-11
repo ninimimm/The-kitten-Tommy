@@ -28,7 +28,7 @@ public class SpawnBoss : MonoBehaviour
 
     private void Update()
     {
-        if (snakeAnim.GetCurrentAnimatorStateInfo(0).IsName("death") && canSpawn && Cat.transform.position.x > 36)
+        if (canSpawn && Cat.transform.position.x > 36)
         {
             canSpawn = false;
             SpawnBossInstance();

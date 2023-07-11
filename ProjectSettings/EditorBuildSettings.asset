@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/MainMenu/MainMenu.unity
+    guid: abc48ec6963475b4f96c0ff6e0328ae4
+  - enabled: 1
+    path: Assets/Photo/Photo.unity
+    guid: 7f6122399bf5f9e458a4e1dee4b883f6
+  - enabled: 1
     path: Assets/Comic/FirstLevleComic.unity
     guid: 9dbe9ca5eaa0f8142ab862f280c0dcb2
   - enabled: 1
-    path: Assets/MainMenu/MainMenu.unity
-    guid: abc48ec6963475b4f96c0ff6e0328ae4
+    path: Assets/Home/Home.unity
+    guid: 2ca01400ed2e51f40b4b9ea3d1f939ae
   - enabled: 1
     path: Assets/Desert/FirstLevle.unity
     guid: 2cda990e2423bbf4892e6590ba056729

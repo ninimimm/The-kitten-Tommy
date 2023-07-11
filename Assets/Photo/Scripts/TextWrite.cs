@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TextWrite : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI textNumber;
     public TextMeshProUGUI textField;
     public Vector3 vector = new Vector3(-6, 7, 0);
     [TextArea(3, 10)]
@@ -18,6 +21,12 @@ public class TextWrite : MonoBehaviour
     private void Start()
     {
         StartTyping();
+    }
+
+    private void Update()
+    {
+        if (textNumber.text.Split("/")[0] == "9")
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void StartTyping()

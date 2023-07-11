@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         if (SceneManager.GetActiveScene().name == "FirstLevleComic" && Input.GetKeyDown(KeyCode.Escape))
-            ToLoadMenu();   
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseGame)
