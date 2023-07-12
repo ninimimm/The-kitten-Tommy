@@ -15,6 +15,13 @@ public class MarketFirstLevel : MonoBehaviour
     [SerializeField] private AudioSource buyingSource;
     [SerializeField] public SpriteRenderer icon;
     [SerializeField] public TextMeshProUGUI textIcon;
+    [SerializeField] private float timeWait;
+    [SerializeField] private SpriteRenderer market1;
+    [SerializeField] private SpriteRenderer market2;
+    [SerializeField] private SpriteRenderer market3;
+    [SerializeField] private SpriteRenderer market4;
+    [SerializeField] private SpriteRenderer market5;
+    private float timer;
     private Transform _catTransform;
     private SpriteRenderer _spriteRenderer;
     private CatSprite _catSprite;
@@ -33,6 +40,16 @@ public class MarketFirstLevel : MonoBehaviour
     
     void Update()
     {
+        if (timer > 0)
+            timer -= Time.deltaTime;
+        else
+        {
+            market1.enabled = false;
+            market2.enabled = false;
+            market3.enabled = false;
+            market4.enabled = false;
+            market5.enabled = false;
+        }
         if (Math.Abs(transform.position.x - _catTransform.position.x) < 1 && Math.Abs(transform.position.y - _catTransform.position.y) < 1.5
                                                                           && !_catSprite.isWater)
         {
@@ -48,6 +65,8 @@ public class MarketFirstLevel : MonoBehaviour
                     _catSprite.money -= 2;
                     _knife.attackIntervale *= knifeIntervalUpgrade;
                     _catSprite._knifeBar.SetMaxHealth(_knife.attackIntervale);
+                    market1.enabled = true;
+                    timer = timeWait;
                 }
                 else if (Input.GetKeyDown(KeyCode.Alpha2) && _catSprite.money >= 3)
                 {
@@ -55,6 +74,8 @@ public class MarketFirstLevel : MonoBehaviour
                     _catSprite.money -= 3;
                     _catSprite.countHealth += 1;
                     _catSprite._textHealth.text = _catSprite.countHealth.ToString();
+                    market2.enabled = true;
+                    timer = timeWait;
                 }
                 else if (Input.GetKeyDown(KeyCode.Alpha3) && _catSprite.money >= 2)
                 {
@@ -62,12 +83,16 @@ public class MarketFirstLevel : MonoBehaviour
                     _catSprite.money -= 2;
                     _catSprite.HP = _catSprite.maxHP;
                     _catSprite._healthBar.SetMaxHealth(_catSprite.maxHP);
+                    market3.enabled = true;
+                    timer = timeWait;
                 }
                 else if (Input.GetKeyDown(KeyCode.Alpha4) && _catSprite.money >= 1)
                 {
                     buyingSource.Play();
                     _catSprite.money -= 1;
                     _logicKnife.damage += knifeDamageUpgrade;
+                    market4.enabled = true;
+                    timer = timeWait;
                 }
                 else if (Input.GetKeyDown(KeyCode.Alpha5) && _catSprite.money >= 1)
                 {
@@ -80,6 +105,8 @@ public class MarketFirstLevel : MonoBehaviour
                         line.material = "gold";
                     }
                     grabbingHook.enabled = false;
+                    market5.enabled = true;
+                    timer = timeWait;
                 }
                 _catSprite._textMoney.text = _catSprite.money.ToString();
             }

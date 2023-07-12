@@ -220,8 +220,6 @@ public class CatSprite : MonoBehaviour
             _healthBar.SetHealth(HP);
             _textHealth.text = countHealth.ToString();
         }
-        greenBar.SetMaxHealth(mapXP);
-        greenBar.SetHealth(XP);
     }
 
     private void FixedUpdate()
@@ -234,6 +232,8 @@ public class CatSprite : MonoBehaviour
     {
         if (!inMiniMap)
         {
+            greenBar.SetMaxHealth(mapXP);
+            greenBar.SetHealth(XP);
             if (stateInfo.IsName("revival"))
                 revivalSourse.Play();
             else if (!isDeath)
@@ -642,7 +642,6 @@ public class CatSprite : MonoBehaviour
         if (XP >= mapXP / 5)
         {
             XP -= mapXP / 5;
-            greenBar.SetHealth(XP);
             var wind = Instantiate(windPrefab, transform.position + new Vector3(1, -0.3f, 0), Quaternion.identity);
             wind.transform.localScale = transform.rotation.y == 0 ? 
                 wind.transform.localScale : 
@@ -652,6 +651,8 @@ public class CatSprite : MonoBehaviour
                 ? wind.transform.position
                 : wind.transform.position - new Vector3(2, 0, 0);
         }
+        greenBar.SetMaxHealth(mapXP);
+        greenBar.SetHealth(XP);
     }
     
     private void OnDrawGizmosSelected()
