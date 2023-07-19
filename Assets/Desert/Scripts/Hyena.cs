@@ -17,6 +17,7 @@ public class Hyena : MonoBehaviour, IDamageable
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
     [SerializeField] private Experience XP;
+    private AudioSource _audioSource;
     public PolygonCollider2D pol;
     public CapsuleCollider2D cap;
     private bool damageNow;
@@ -45,6 +46,7 @@ public class Hyena : MonoBehaviour, IDamageable
         pol = GetComponent<PolygonCollider2D>();
         cap = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         pol.enabled = false;
         cap.enabled = true;
         catSprite = _cat.GetComponent<CatSprite>();
@@ -176,6 +178,7 @@ public class Hyena : MonoBehaviour, IDamageable
         stan = isStan;
         if (!stan && damage > 0)
         {
+            _audioSource.Play();
             HP -= damage;
             _healthBar.SetHealth(HP);
             damageNow = true;

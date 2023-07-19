@@ -62,7 +62,7 @@ public class GoToSecondLevle : MonoBehaviour
         snake.Save();
         _birdIdle.Save();
         foreach (var scorpio in scorpios)
-            scorpio.Save();
+            if (scorpio is not null) scorpio.Save();
         _hawk.Save();
         _birdStay.Save();
         foreach (var eatingBird in eatingBirds)

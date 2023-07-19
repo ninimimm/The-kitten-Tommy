@@ -116,17 +116,17 @@ public class CutsceneManager : MonoBehaviour
         //textsToWrite.Enqueue((" что и блистательные пески\nпустыни, окутывающие их дом.\n\n", BigPause));
         
         textsToWrite.Enqueue(("Среди этих пушистых обитателей\nпустыни был один маленький\nкотик по имени Томми,", smallPause));
-        textsToWrite.Enqueue((" чья история только начинается разворачиваться перед нами.",BigPause));
+        textsToWrite.Enqueue((" чья история\nтолько разворачивается перед нами.",BigPause));
         
         StartCoroutine(WriteTexts(Text1));
     }
     public void WriteText2()
     {
         textsToWrite.Enqueue(("Это было место,", smallPause));
-        textsToWrite.Enqueue((" которое Томми несомненно любил всем своим маленьким сердцем.\n\n",BigPause));
+        textsToWrite.Enqueue((" которое Томми\nнесомненно любил всем своим\nмаленьким сердцем.\n\n",BigPause));
 
-        textsToWrite.Enqueue(("Он был поглощен окружающими его чудесами,", smallPause));
-        textsToWrite.Enqueue((" и проводил долгие часы, наблюдая за парящими над его головой птицами.\n\n", BigPause));
+        textsToWrite.Enqueue(("Он был поглощен окружающими его\nчудесами,", smallPause));
+        textsToWrite.Enqueue((" и проводил долгие часы,\nнаблюдая за парящими над его головой птицами.\n\n", BigPause));
 
         //textsToWrite.Enqueue(("Каждый звук природы был для него мелодией.", smallPause));
         //textsToWrite.Enqueue((" Шелест ветра,", smallPause));
@@ -143,17 +143,17 @@ public class CutsceneManager : MonoBehaviour
     
     public void WriteText3()
     {
-        textsToWrite.Enqueue(("Однажды Томми,", smallPause));
-        textsToWrite.Enqueue((" в то время как его семья занималась делами и охотой,", smallPause));
-        textsToWrite.Enqueue((" обратил свое внимание на листик.\n\n",BigPause));
+        textsToWrite.Enqueue(("Однажды,", smallPause));
+        textsToWrite.Enqueue((" Томми обратил свое внимание на подхваченный ветром листик,", smallPause));
+        textsToWrite.Enqueue((" который\nтанцевал в воздухе.\n\n",BigPause));
 
         //textsToWrite.Enqueue(("Это был листик.", BigPause));
         //textsToWrite.Enqueue((" подхваченный игривым пустынным ветром,", smallPause));
         //textsToWrite.Enqueue((" который, казалось, танцевал в воздухе.\n\n",BigPause));
 
-        textsToWrite.Enqueue(("Томми начал прыгать и бегать за ним,", smallPause));
-        textsToWrite.Enqueue((" пытаясь поймать его,", smallPause));
-        textsToWrite.Enqueue((" но листик всегда ускользал от его лап.", BigPause));
+        textsToWrite.Enqueue(("Он начал прыгать и бегать за ним,", smallPause));
+        textsToWrite.Enqueue((" но листик всегда ускользал от его лап,", smallPause));
+        textsToWrite.Enqueue((" словно зная, что это всего лишь игра.", BigPause));
         //textsToWrite.Enqueue((" что это всего лишь игра.\n\n", BigPause)); , словно зная,
 
         //textsToWrite.Enqueue(("Эта забава наполнила его сердце радостью и восторгом,", smallPause));
@@ -166,41 +166,35 @@ public class CutsceneManager : MonoBehaviour
     
     public void WriteText4()
     {
-        textsToWrite.Enqueue(("Листок увлекал Томми все дальше и дальше от дома,", smallPause));
-        textsToWrite.Enqueue((" всегда оставаясь на шаг впереди.\n\n", BigPause));
+        textsToWrite.Enqueue(("Листок увлекал Томми все дальше и\nдальше от дома,", smallPause));
+        textsToWrite.Enqueue((" пока небо не разорвалось громким звуком.\n\n", BigPause));
 
-        textsToWrite.Enqueue((" Но вдруг молния,", smallPause));
-        textsToWrite.Enqueue((" яркая и страшная,", smallPause));
-        textsToWrite.Enqueue((" прорезала небесный свод, наполнив воздух электричеством.", smallPause));
-        textsToWrite.Enqueue((" Этот внезапный и громкий звук,", smallPause));
-        textsToWrite.Enqueue((" словно треск лопающегося стекла,", smallPause));
-        textsToWrite.Enqueue((" заставил Томми остановиться.\n\n",BigPause));
+        textsToWrite.Enqueue(("Молния, яркая и страшная прорезала\nнебесный свод,", smallPause));
+        textsToWrite.Enqueue((" наполнив воздух\nэлектричеством.\n\n", BigPause));
+        textsToWrite.Enqueue(("Томми замер, ", smallPause));
+        textsToWrite.Enqueue((" внезапно осознав,", smallPause));
+        textsToWrite.Enqueue((" насколько далеко он ушел от дома.\n\n",BigPause));
         
         
-        textsToWrite.Enqueue(("Он внезапно осознал насколько далеко он ушел от дома.", smallPause));
-        textsToWrite.Enqueue((" Сердце его замерло от страха и изумления,", smallPause));
-        textsToWrite.Enqueue((" а маленький хвост встал дыбом.\n\n",BigPause));
+        //textsToWrite.Enqueue(("Он внезапно осознал насколько далеко он ушел от дома.", smallPause));
+        //textsToWrite.Enqueue((" Сердце его замерло от страха и изумления,", smallPause));
+        //textsToWrite.Enqueue((" а маленький хвост встал дыбом.\n\n",BigPause));
 
         StartCoroutine(WriteTexts(Text4));
     }
     
     public void WriteText5()
     {
-        textsToWrite.Enqueue(("Томми, обернувшись на звук громкой молнии,", smallPause));
-        textsToWrite.Enqueue((" в ужасе увидел чудовище.", smallPause));
-        textsToWrite.Enqueue((" Это было торнадо, огромный вихрь,", smallPause));
-        textsToWrite.Enqueue(("  взметавший песок и облака пыли в небо, исчезающее в высоте.\n\n",BigPause));
+        textsToWrite.Enqueue(("Томми обернулся на звук громкой молнии.", smallPause));
+        textsToWrite.Enqueue(("\nЭто было торнадо,", smallPause));
+        textsToWrite.Enqueue((" взметавшее песок и облака пыли в небо, исчезающие в высоте.\n\n",BigPause));
 
-        textsToWrite.Enqueue(("Его ничего не подозревающая семья,", smallPause));
-        textsToWrite.Enqueue((" которая была слишком занята своими делами, чтобы заметить поднимающуюся угрозу,", smallPause));
-        textsToWrite.Enqueue((" была подхвачена мощным вихрем.", smallPause));
-        textsToWrite.Enqueue((" Томми замер от ужаса от того,", smallPause));
-        textsToWrite.Enqueue((" что они, были подняты в воздух и унесены прочь.\n\n",BigPause));
+        textsToWrite.Enqueue(("Его ничего не подозревающая семья была\nподхвачена мощным вихрем,", smallPause));
+        textsToWrite.Enqueue((" поднята в воздух и унесена прочь.\n\n",BigPause));
 
-
-        textsToWrite.Enqueue(("В его маленьком сердце внезапно поселилась огромная пустота.", smallPause));
-        textsToWrite.Enqueue((" Он вдруг понял, что его мир, который еще минуту назад казался ему таким безопасным и знакомым,", smallPause));
-        textsToWrite.Enqueue((" в одно мгновение был разрушен.\n\n",BigPause));
+        
+        textsToWrite.Enqueue(("Мир, который еще минуту назад казался ему таким безопасным и знакомым,", smallPause));
+        textsToWrite.Enqueue((" в одно\nмгновение был разрушен.\n\n",BigPause));
 
         StartCoroutine(WriteTexts(Text5));
     }
@@ -208,39 +202,37 @@ public class CutsceneManager : MonoBehaviour
     public void WriteText6()
     {
         textsToWrite.Enqueue(("В его глазах отражался страх и ужас,", smallPause));
-        textsToWrite.Enqueue((" сердце билось в бешеном ритме, когда он смотрел на этот вихрь песка и грома.\n\n",BigPause));
+        textsToWrite.Enqueue((" и сердце билось в бешеном ритме.\n\n",BigPause));
 
-        textsToWrite.Enqueue(("Он мог только стоять и смотреть, не веря своим глазам.", smallPause));
-        textsToWrite.Enqueue((" Все, что он знал и любил, было унесено в этой буре.\n\n",BigPause));
+        textsToWrite.Enqueue(("Это было как злой сон,", smallPause));
+        textsToWrite.Enqueue((" слишком ужасный, чтобы быть реальностью.", smallPause));
+        textsToWrite.Enqueue((" Он не верил\nсвоим глазам.", smallPause));
+        textsToWrite.Enqueue((" Все, что он знал и любил,\nбыло унесено в этой буре.\n\n",BigPause));
 
 
-        textsToWrite.Enqueue(("Когда буря утихомиривалась, а песчаный вихрь начал исчезать, оставив за собой только пустыню,", smallPause));
-        textsToWrite.Enqueue((" Томми все еще стоял на том же месте.", smallPause));
-        textsToWrite.Enqueue((" Он ощущал огромную пустоту в своем сердце,", smallPause));
-        textsToWrite.Enqueue((" и его маленькое тело дрожало от страха и холода.\n\n",BigPause));
+        //textsToWrite.Enqueue(("Когда буря утихомиривалась, а песчаный вихрь начал исчезать, оставив за собой только пустыню,", smallPause));
+        //textsToWrite.Enqueue((" Томми все еще стоял на том же месте.", smallPause));
+        //textsToWrite.Enqueue((" Он ощущал огромную пустоту в своем сердце,", smallPause));
+        //textsToWrite.Enqueue((" и его маленькое тело дрожало от страха и холода.\n\n",BigPause));
 
         StartCoroutine(WriteTexts(Text6));
     }
     
     public void WriteText7()
     {
-        textsToWrite.Enqueue(("Ворвавшись в дом, Томми обнаружил своего дедушку-кота.", smallPause));
-        textsToWrite.Enqueue((" Казалось, он понимал больше, чем мог выразить словами.", smallPause));
-        textsToWrite.Enqueue((" Внимательно вглядевшись в лицо Томми, дедушка глубоко вздохнул и начал свой рассказ:\n\n",BigPause));
+        textsToWrite.Enqueue(("Ворвавшись в дом, Томми обнаружил\nсвоего дедушку-кота.\n\n", BigPause));
 
-        textsToWrite.Enqueue(("\"Твою семью, мой мальчик, унесло в облачный мир\",", smallPause));
+        textsToWrite.Enqueue(("\"Твою семью, мой мальчик, унесло в\nоблачный мир\",", smallPause));
         textsToWrite.Enqueue((" - грустно произнес он, глядя на ошеломленного Томми.\n\n",BigPause));
         
         textsToWrite.Enqueue(("\"Это место, где живет Брут, самый злобный и опасный пес из всех, кого я знал.", smallPause));
-        textsToWrite.Enqueue((" Он не терпит котов и угрожает всем, кто попадает на его территорию.\"\n\n",BigPause));
-        
-        textsToWrite.Enqueue(("Дедушка рассказывал Томми о том, какие опасности и испытания могут поджидать его, если он решит спасти свою семью.\n\n",BigPause));
+        textsToWrite.Enqueue((" Он не\nтерпит котов и угрожает всем, кто попадает на его территорию.\"\n\n",BigPause));
 
         StartCoroutine(WriteTexts(Text7));
     }
     public void WriteText8()
     {
-        textsToWrite.Enqueue(("И отправился он в путешествие...",BigPause));
+        textsToWrite.Enqueue(("И он отправился на поиски своей семьи...",BigPause));
         StartCoroutine(WriteTexts(Text8));
     }
     

@@ -9,6 +9,8 @@ public class Button : MonoBehaviour
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private string key;
     [SerializeField] private GameObject manager;
+    [SerializeField] public BoxCollider2D boxCol1;
+    [SerializeField] public BoxCollider2D boxCol2;
     public enum MovementState { Stay, Pressed};
     public MovementState state;
     private Animator _animator;
@@ -42,6 +44,11 @@ public class Button : MonoBehaviour
         }
     }
 
+    public void Switch()
+    {
+        boxCol1.enabled = false;
+        boxCol2.enabled = true;
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(_pressedTransform.position,distancePressed);

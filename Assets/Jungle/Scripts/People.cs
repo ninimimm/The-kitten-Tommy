@@ -25,6 +25,7 @@ public class People : MonoBehaviour,IDamageable
     [SerializeField] private float damage3;
     [SerializeField] private LayerMask catLayer;
     [SerializeField] private bool isFacingRight;
+    [SerializeField] private Experience XP;
     public float HP;
     private bool damageNow;
     public enum MovementState { stay, walk, attack1, attack2, attack3, defense, hit, death};
@@ -207,6 +208,7 @@ public class People : MonoBehaviour,IDamageable
                 isDeath = true;
                 animator.SetInteger("state", (int)MovementState.death);
             }
+            if (HP <= 0 && !_stateInfo.IsName("death")) XP.Die();
         }
     }
     private void OnDrawGizmosSelected()

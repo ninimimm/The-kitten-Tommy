@@ -54,6 +54,11 @@ public class ManageButtons : MonoBehaviour
                 timer = timeToWait;
                 foreach (var button in buttons)
                     button.isUnpressSoundPlayed = false;
+                foreach (var button in buttons)
+                {
+                    button.boxCol1.enabled = true;
+                    button.boxCol2.enabled = false;
+                }
             }
         }
         

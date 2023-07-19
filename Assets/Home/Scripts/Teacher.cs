@@ -12,6 +12,7 @@ using UnityEngine.UI;
 
 public class Teacher : MonoBehaviour
 {
+    [SerializeField] private Boosts _boosts;
     [SerializeField] private GameObject cat;
     [SerializeField] private CatSprite catSprite;
     [SerializeField] private SpriteRenderer icon;
@@ -48,6 +49,7 @@ public class Teacher : MonoBehaviour
     private bool _clawsTraining;
     private bool _killAndExperienceTraining;
     private bool _windTraining;
+    private bool startWindTraining;
     private Rigidbody2D _rigidbody2D;
     private Collider2D _attackColliders;
     void Start()
@@ -61,38 +63,32 @@ public class Teacher : MonoBehaviour
     {
         if (_end)
         {
-            if (transform.position.x <= 40f) transform.position += speed * Time.deltaTime * (movingVector * 2);
+            if (transform.position.x <= 40f) transform.position += speed * 2 * Time.deltaTime * movingVector;
             else _animator.SetInteger("state", 0);
-            if (Input.GetKeyDown(KeyCode.E) && _useEndHint)
-            {
-                if (_wellDone)
-                {
-                    _wellDone = false;
-                    StartCoroutine(TypeSentence(textForTeacher[6], teacherText));
-                }
-                else _stopTyping = true;
-            }
+            if (Input.GetKeyDown(KeyCode.E) && _useEndHint) _stopTyping = true;
             EndTraining();
             if (Input.GetKeyDown(KeyCode.Return)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else if (_windTraining)
         {
-            if (transform.position.x <= 33f) transform.position += speed * Time.deltaTime * (movingVector * 2);
+            if (!startWindTraining)
+            {
+                _boosts.energyCount = 5;
+                _boosts.boostsText[0].text = "x" + 5;
+                _boosts.fishCount = 5;
+                _boosts.boostsText[1].text = "x" + 5;
+                _boosts.waterCount = 5;
+                _boosts.boostsText[2].text = "x" + 5;
+                startWindTraining = true;
+            }
+            if (transform.position.x <= 33f) transform.position += speed * 2 * Time.deltaTime * movingVector;
             else _animator.SetInteger("state", 0);
             if (catSprite.XP < 10)
             {
                 catSprite.XP = 10;
                 catSprite.greenBar.SetHealth(10);
             }
-            if (Input.GetKeyDown(KeyCode.E) && _useWindHint)
-            {
-                if (_wellDone)
-                {
-                    _wellDone = false;
-                    StartCoroutine(TypeSentence(textForTeacher[5], teacherText));
-                }
-                else _stopTyping = true;
-            }
+            if (Input.GetKeyDown(KeyCode.E) && _useWindHint) _stopTyping = true;
             if (Input.GetKeyDown(KeyCode.Return) && _useWindHint)
             {
                 StopAllCoroutines();
@@ -114,17 +110,9 @@ public class Teacher : MonoBehaviour
         }
         else if (_killAndExperienceTraining)
         {
-            if (transform.position.x <= 26f) transform.position += speed * Time.deltaTime * (movingVector * 2);
+            if (transform.position.x <= 26f) transform.position += speed * 2 * Time.deltaTime * movingVector;
             else _animator.SetInteger("state", 0);
-            if (Input.GetKeyDown(KeyCode.E) && _useKillAndExperienceHint)
-            {
-                if (_wellDone)
-                {
-                    _wellDone = false;
-                    StartCoroutine(TypeSentence(textForTeacher[4], teacherText));
-                }
-                else _stopTyping = true;
-            }
+            if (Input.GetKeyDown(KeyCode.E) && _useKillAndExperienceHint) _stopTyping = true;
             if (Input.GetKeyDown(KeyCode.Return) && _useKillAndExperienceHint)
             {
                 StopAllCoroutines();
@@ -145,17 +133,9 @@ public class Teacher : MonoBehaviour
         }
         else if (_clawsTraining)
         {
-            if (transform.position.x <= 21f) transform.position += speed * Time.deltaTime * (movingVector * 2);
+            if (transform.position.x <= 21f) transform.position += speed * 2 * Time.deltaTime * movingVector;
             else _animator.SetInteger("state", 0);
-            if (Input.GetKeyDown(KeyCode.E) && _useClawsHint)
-            {
-                if (_wellDone)
-                {
-                    _wellDone = false;
-                    StartCoroutine(TypeSentence(textForTeacher[3], teacherText));
-                }
-                else _stopTyping = true;
-            }
+            if (Input.GetKeyDown(KeyCode.E) && _useClawsHint) _stopTyping = true;
             if (Input.GetKeyDown(KeyCode.Return) && _useClawsHint)
             {
                 StopAllCoroutines();
@@ -179,15 +159,7 @@ public class Teacher : MonoBehaviour
         {
             if (transform.position.x <= 12f) transform.position += speed * Time.deltaTime * movingVector;
             else _animator.SetInteger("state", 0);
-            if (Input.GetKeyDown(KeyCode.E) && _useKnifeHint)
-            {
-                if (_wellDone)
-                {
-                    _wellDone = false;
-                    StartCoroutine(TypeSentence(textForTeacher[2], teacherText));
-                }
-                else _stopTyping = true;
-            }
+            if (Input.GetKeyDown(KeyCode.E) && _useKnifeHint) _stopTyping = true;
             if (Input.GetKeyDown(KeyCode.Return) && _useKnifeHint)
             {
                 StopAllCoroutines();
@@ -219,7 +191,7 @@ public class Teacher : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E) && _useHookHint)
             {
-                if (_wellDone)
+                if (_wellDone && _isHello)
                 {
                     _wellDone = false;
                     _isHello = !_isHello;

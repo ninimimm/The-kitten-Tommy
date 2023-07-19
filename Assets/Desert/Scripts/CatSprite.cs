@@ -239,7 +239,7 @@ public class CatSprite : MonoBehaviour
             else if (!isDeath)
             {
                 if (Input.GetKeyDown(KeyCode.N))
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%5 + 1);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex%7 + 1);
                 if (Input.GetKeyDown(KeyCode.B))
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
                 stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
