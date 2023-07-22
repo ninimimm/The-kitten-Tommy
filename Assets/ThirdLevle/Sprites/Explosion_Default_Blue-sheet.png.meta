@@ -1,0 +1,1523 @@
+fileFormatVersion: 2
+guid: 799ca37b09fd8ee4faeba71ccca5a78d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a232c95e2390864c8a1b0a2acbadc32
+      internalID: -1046037019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c25a163e9cefe54b9245b265601ec73
+      internalID: -1333153575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fa368802ecda964197cc6c0ec7f4682
+      internalID: -1067665655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e13a5d624a8136845ba2a926415bb3cb
+      internalID: 1929836375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd4fbe5add1f65e4dae61e60cdbf784e
+      internalID: -214095559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b907cfbf39c6a14691f762521437f90
+      internalID: -883149676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72b4584e2c5defe4da28bef22e98c2fd
+      internalID: 2081166410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1127
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbab0f22ad6104940bfc377c49df24ee
+      internalID: 1427000575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b63caaaafd408b946a9556b8c7223462
+      internalID: -1369270110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_9
+      rect:
+        serializedVersion: 2
+        x: 1449
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34da6a163910a264fa7b86b1cb8bebe1
+      internalID: 1956542451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9c8abc92948dc74083ac1635dd7a37d
+      internalID: 579362300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_11
+      rect:
+        serializedVersion: 2
+        x: 1771
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4e30eeca0cde9f47b447fdef1f362fe
+      internalID: 725036448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_12
+      rect:
+        serializedVersion: 2
+        x: 1932
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf68346afc0412843bb7acddb3d7731c
+      internalID: -1648204260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_13
+      rect:
+        serializedVersion: 2
+        x: 2093
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf56a7c7d3c5a5c4d996bec0e13e8e6c
+      internalID: -415523259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_14
+      rect:
+        serializedVersion: 2
+        x: 2254
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f753f845e0855b47bdb3a21a2d4d325
+      internalID: -161298044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_15
+      rect:
+        serializedVersion: 2
+        x: 2415
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7797b648a34dffd49a4288742a71e753
+      internalID: -2086332314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_16
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5480a5ae640e3b4fb407a5a3e18876b
+      internalID: -1163891591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_17
+      rect:
+        serializedVersion: 2
+        x: 2737
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5791a021d0bf5e498075ec6738a59e1
+      internalID: -117497305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_18
+      rect:
+        serializedVersion: 2
+        x: 2898
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95aa984be2f830f45abc4333cb676570
+      internalID: -2109628610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_19
+      rect:
+        serializedVersion: 2
+        x: 3059
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1389f959cd55cb448b14bd7292d8639b
+      internalID: -1497826760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_20
+      rect:
+        serializedVersion: 2
+        x: 3220
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fb8b652fc2dbfe40bd7be5948ae956a
+      internalID: 2064503214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_21
+      rect:
+        serializedVersion: 2
+        x: 3381
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b98de52fe0da7f4ca81425f395f9197
+      internalID: 2040375493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_22
+      rect:
+        serializedVersion: 2
+        x: 3542
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6494d17ab56bf474bab47736268833dc
+      internalID: -431906352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_23
+      rect:
+        serializedVersion: 2
+        x: 3703
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae51ee510fae6ec4ab342ce1525e359f
+      internalID: -1457578443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_24
+      rect:
+        serializedVersion: 2
+        x: 3864
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85b51b74dfd7bb24584397fa8220b5a9
+      internalID: 568127964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_25
+      rect:
+        serializedVersion: 2
+        x: 4025
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c24e0ec88ba9884186b71707d744ab5
+      internalID: -891761854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_26
+      rect:
+        serializedVersion: 2
+        x: 4186
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2be081c48b35ff14e831289f4c70c23a
+      internalID: -1461417616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_27
+      rect:
+        serializedVersion: 2
+        x: 4347
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beda03667b7e6284fa9c7589f694f015
+      internalID: 1882475140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_28
+      rect:
+        serializedVersion: 2
+        x: 4508
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e24d5f3044727bb4985cc867d8dfa94d
+      internalID: -221577718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_29
+      rect:
+        serializedVersion: 2
+        x: 4669
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85b395cbf30bcf840ac4e1739ac50dea
+      internalID: 798346838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_30
+      rect:
+        serializedVersion: 2
+        x: 4830
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1993dc3ea4f3e964189bbdc67f0023e0
+      internalID: -1831868331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_31
+      rect:
+        serializedVersion: 2
+        x: 4991
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9af82715b318a446a43d2556f5ac766
+      internalID: 870143793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_32
+      rect:
+        serializedVersion: 2
+        x: 5152
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a9b926aa49dd634388acc6478e0e801
+      internalID: -727515881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_33
+      rect:
+        serializedVersion: 2
+        x: 5313
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2e91137efdf8974396797a9352dc987
+      internalID: -1965137947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_34
+      rect:
+        serializedVersion: 2
+        x: 5474
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe1ae49eece819944a326279ef68aff6
+      internalID: 1304521655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_35
+      rect:
+        serializedVersion: 2
+        x: 5635
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31210d3d0b2b0814787a4c14f6c20cbb
+      internalID: 914598147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_36
+      rect:
+        serializedVersion: 2
+        x: 5796
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b64482c8f4aca0498cebeb5433eecdc
+      internalID: -1284104109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_37
+      rect:
+        serializedVersion: 2
+        x: 5957
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b280e546fc5fe941b328c06e44c8335
+      internalID: -893831435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_38
+      rect:
+        serializedVersion: 2
+        x: 6118
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 964b7d126d65a764688e29713ae9e078
+      internalID: 172630414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_39
+      rect:
+        serializedVersion: 2
+        x: 6279
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20f62f8ba3f60214594ac0cd03ec9581
+      internalID: 927851009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_40
+      rect:
+        serializedVersion: 2
+        x: 6440
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57cf2efd4d58b074a8aaf49979977b14
+      internalID: -733179016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_41
+      rect:
+        serializedVersion: 2
+        x: 6601
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3594bdb7bba0a68439dc39d80c9b54a0
+      internalID: 1120028291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_42
+      rect:
+        serializedVersion: 2
+        x: 6762
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f93b051ff57f5940bade7561c9c0878
+      internalID: 622234574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_43
+      rect:
+        serializedVersion: 2
+        x: 6923
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfc426a88c1c63e43b47a12e9eec2227
+      internalID: 1174487729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_44
+      rect:
+        serializedVersion: 2
+        x: 7084
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55cba92bcec48d546ad2d91d0fe16b18
+      internalID: -782321853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_45
+      rect:
+        serializedVersion: 2
+        x: 7245
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab51e81debdc60e4f8a7482964eba806
+      internalID: -1845481615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_46
+      rect:
+        serializedVersion: 2
+        x: 7406
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 418116b7e1f20c540a36f23f3680a532
+      internalID: -463686103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_47
+      rect:
+        serializedVersion: 2
+        x: 7567
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f5af609e79de884db25a85ce0e5f530
+      internalID: -1540868149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_48
+      rect:
+        serializedVersion: 2
+        x: 7728
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 624243e997edc7c43a84877baa678b60
+      internalID: -258659774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_49
+      rect:
+        serializedVersion: 2
+        x: 7889
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25f8b0c6c025b084691866b89676915b
+      internalID: 630992497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_50
+      rect:
+        serializedVersion: 2
+        x: 8050
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89512fffd41ef7e42973cc96e8f5187d
+      internalID: 1951555337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_51
+      rect:
+        serializedVersion: 2
+        x: 8211
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 245f04428446b4c448f6f7b8502463fb
+      internalID: -1094213229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_52
+      rect:
+        serializedVersion: 2
+        x: 8372
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2ffd92a2e6e9724b9b88860ff1e3cee
+      internalID: -1386980026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_53
+      rect:
+        serializedVersion: 2
+        x: 8533
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ae0b0e99fdb6c349bce9542e913be29
+      internalID: 2059958232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_54
+      rect:
+        serializedVersion: 2
+        x: 8694
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eade2e5ca413074685d4db481e3d49e
+      internalID: -2027516677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_55
+      rect:
+        serializedVersion: 2
+        x: 8855
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a604bade70b449240b965ff608e4864c
+      internalID: 840496861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_56
+      rect:
+        serializedVersion: 2
+        x: 9016
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bddd148a731b5746a1cce30321db651
+      internalID: 528630391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_57
+      rect:
+        serializedVersion: 2
+        x: 9177
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d72074ad2ee5d8a4e8fbd31877d2ab2a
+      internalID: -646606390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_58
+      rect:
+        serializedVersion: 2
+        x: 9338
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61faeff05435320449e23afefd5a3125
+      internalID: -873235120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_59
+      rect:
+        serializedVersion: 2
+        x: 9499
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24aa9258134bede4f88041e80d5621ef
+      internalID: 1417255984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_60
+      rect:
+        serializedVersion: 2
+        x: 9660
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2ce97e4436943447b78a8522487c645
+      internalID: 736762513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_Default_Blue-sheet_61
+      rect:
+        serializedVersion: 2
+        x: 9821
+        y: 0
+        width: 161
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90140618cea3e034a8fb85bf74d3e30d
+      internalID: -311958844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Explosion_Default_Blue-sheet_0: -1046037019
+      Explosion_Default_Blue-sheet_1: -1333153575
+      Explosion_Default_Blue-sheet_10: 579362300
+      Explosion_Default_Blue-sheet_11: 725036448
+      Explosion_Default_Blue-sheet_12: -1648204260
+      Explosion_Default_Blue-sheet_13: -415523259
+      Explosion_Default_Blue-sheet_14: -161298044
+      Explosion_Default_Blue-sheet_15: -2086332314
+      Explosion_Default_Blue-sheet_16: -1163891591
+      Explosion_Default_Blue-sheet_17: -117497305
+      Explosion_Default_Blue-sheet_18: -2109628610
+      Explosion_Default_Blue-sheet_19: -1497826760
+      Explosion_Default_Blue-sheet_2: -1067665655
+      Explosion_Default_Blue-sheet_20: 2064503214
+      Explosion_Default_Blue-sheet_21: 2040375493
+      Explosion_Default_Blue-sheet_22: -431906352
+      Explosion_Default_Blue-sheet_23: -1457578443
+      Explosion_Default_Blue-sheet_24: 568127964
+      Explosion_Default_Blue-sheet_25: -891761854
+      Explosion_Default_Blue-sheet_26: -1461417616
+      Explosion_Default_Blue-sheet_27: 1882475140
+      Explosion_Default_Blue-sheet_28: -221577718
+      Explosion_Default_Blue-sheet_29: 798346838
+      Explosion_Default_Blue-sheet_3: 1929836375
+      Explosion_Default_Blue-sheet_30: -1831868331
+      Explosion_Default_Blue-sheet_31: 870143793
+      Explosion_Default_Blue-sheet_32: -727515881
+      Explosion_Default_Blue-sheet_33: -1965137947
+      Explosion_Default_Blue-sheet_34: 1304521655
+      Explosion_Default_Blue-sheet_35: 914598147
+      Explosion_Default_Blue-sheet_36: -1284104109
+      Explosion_Default_Blue-sheet_37: -893831435
+      Explosion_Default_Blue-sheet_38: 172630414
+      Explosion_Default_Blue-sheet_39: 927851009
+      Explosion_Default_Blue-sheet_4: -214095559
+      Explosion_Default_Blue-sheet_40: -733179016
+      Explosion_Default_Blue-sheet_41: 1120028291
+      Explosion_Default_Blue-sheet_42: 622234574
+      Explosion_Default_Blue-sheet_43: 1174487729
+      Explosion_Default_Blue-sheet_44: -782321853
+      Explosion_Default_Blue-sheet_45: -1845481615
+      Explosion_Default_Blue-sheet_46: -463686103
+      Explosion_Default_Blue-sheet_47: -1540868149
+      Explosion_Default_Blue-sheet_48: -258659774
+      Explosion_Default_Blue-sheet_49: 630992497
+      Explosion_Default_Blue-sheet_5: -883149676
+      Explosion_Default_Blue-sheet_50: 1951555337
+      Explosion_Default_Blue-sheet_51: -1094213229
+      Explosion_Default_Blue-sheet_52: -1386980026
+      Explosion_Default_Blue-sheet_53: 2059958232
+      Explosion_Default_Blue-sheet_54: -2027516677
+      Explosion_Default_Blue-sheet_55: 840496861
+      Explosion_Default_Blue-sheet_56: 528630391
+      Explosion_Default_Blue-sheet_57: -646606390
+      Explosion_Default_Blue-sheet_58: -873235120
+      Explosion_Default_Blue-sheet_59: 1417255984
+      Explosion_Default_Blue-sheet_6: 2081166410
+      Explosion_Default_Blue-sheet_60: 736762513
+      Explosion_Default_Blue-sheet_61: -311958844
+      Explosion_Default_Blue-sheet_7: 1427000575
+      Explosion_Default_Blue-sheet_8: -1369270110
+      Explosion_Default_Blue-sheet_9: 1956542451
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

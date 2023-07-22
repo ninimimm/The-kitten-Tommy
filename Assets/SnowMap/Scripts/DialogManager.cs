@@ -17,6 +17,9 @@ public class DialogManager : MonoBehaviour
     private bool isTyping = false;
     private bool stopTyping = false; 
     private Dialog currentDialog;
+    private int count;
+    private AudioSource _audioSource;
+    private float timer;
 
     public bool IsTyping()
     {
@@ -28,6 +31,7 @@ public class DialogManager : MonoBehaviour
         sentences = new Queue<DialogNode>();
         responsesQueue = new Queue<string>();
         currentResponses = new List<DialogNode>();
+        _audioSource = GetComponent<AudioSource>();
     }
     
     void Update()
@@ -36,22 +40,33 @@ public class DialogManager : MonoBehaviour
         {
             stopTyping = true;
         }
+
         for (int i = 1; i <= currentResponses.Count; i++)
         {
-            if (Input.GetKeyDown(i.ToString()) && !isTyping)
+            if (Input.GetKeyDown(i.ToString()) && !isTyping && !_audioSource.isPlaying)
             {
-                var selectedResponse = currentResponses[i-1];
-                OnResponseSelected(currentDialog, selectedResponse, selectedResponse.jumpTag);
-                dialogText2.text = "";
+                _audioSource.PlayOneShot(currentResponses[i - 1].audioClip);
+                StartCoroutine(TypeSentence(currentResponses[i - 1].audioClip.length, i));
                 break;
             }
         }
     }
 
-
+    IEnumerator TypeSentence(float time, int i)
+    {
+        yield return new WaitForSeconds(time);
+        var selectedResponse = currentResponses[i - 1];
+        OnResponseSelected(currentDialog, selectedResponse, selectedResponse.jumpTag);
+        dialogText2.text = "";
+        dialogText2.text = "";
+        StopCoroutine(TypeSentence(time, i));
+    }
 
     public void StartDialog(Dialog dialog)
     {
+        StopAllCoroutines();
+        dialogText1.text = "";
+        dialogText2.text = "";
         currentDialog = dialog;
         dialogIsStart = true;
         sentences.Clear();
@@ -69,6 +84,7 @@ public class DialogManager : MonoBehaviour
 
         var current = sentences.Dequeue();
         StartCoroutine(TypeSentence(current.text, dialogText1));
+        _audioSource.PlayOneShot(current.audioClip);
 
         currentResponses.Clear();
         responsesQueue.Clear();
@@ -86,6 +102,10 @@ public class DialogManager : MonoBehaviour
         stopTyping = false;
         isTyping = true;
         textComponent.text = "";
+
+        if (sentence == "Да, конечно, вот тебе рыбка!" && count == 1)
+            sentence = "Я тебе уже дал рыбку!";
+        if (sentence == "Да, конечно, вот тебе рыбка!") count++;
         foreach (char letter in sentence)
         {
             textComponent.text += letter;
@@ -184,6 +204,9 @@ public class DialogManager : MonoBehaviour
 
     void EndDialog()
     {
+        StopAllCoroutines();
+        dialogText1.text = "";
+        dialogText2.text = "";
         dialogIsStart = false;
     }
 }

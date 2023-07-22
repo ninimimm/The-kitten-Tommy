@@ -19539,6 +19539,7 @@ MonoBehaviour:
   text1: {fileID: 1371652382}
   text2: {fileID: 1096802126}
   skip: {fileID: 150824207}
+  boosts: {fileID: 385220627}
 --- !u!114 &833209504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19557,21 +19558,25 @@ MonoBehaviour:
       tag: "\u0441\u0442\u0430\u0440\u0442"
       text: "\u041F\u0440\u0438\u0432\u0435\u0442, \u0434\u0440\u0443\u0433, \u0447\u0442\u043E
         \u0442\u044B \u0437\u0434\u0435\u0441\u044C \u0434\u0435\u043B\u0430\u0435\u0448\u044C?"
+      audioClip: {fileID: 8300000, guid: aef0a31d39e6c45529edf25a411a34ae, type: 3}
       responses:
       - tag: 
         text: "\u0410\u0410\u0410\u0410, \u0442\u044B \u043C\u0435\u043D\u044F \u0438\u0441\u043F\u0443\u0433\u0430\u043B!
           \u041C\u043E\u0436\u043D\u043E \u043A\u0430\u043A-\u0442\u043E \u043F\u043E
           \u0430\u043A\u043A\u0443\u0440\u0430\u0442\u043D\u0435\u0439 \u0431\u044B\u043B\u043E?"
+        audioClip: {fileID: 8300000, guid: 0db966df7776ba347ba4dfa71bf21224, type: 3}
         responses:
         - tag: 
           text: "\u0418\u0437\u0432\u0438\u043D\u0438, \u044F \u043D\u0435 \u0445\u043E\u0442\u0435\u043B,
             \u043D\u043E \u0432\u043F\u0440\u0435\u0434\u044C, \u0441\u043B\u0435\u0434\u0438
             \u0437\u0430 \u0441\u0432\u043E\u0438\u043C \u044F\u0437\u044B\u043A\u043E\u043C."
+          audioClip: {fileID: 0}
           responses:
           - tag: 
             text: "\u041E\u0439, \u044D\u0442\u043E \u044F \u043E\u0442 \u0441\u0442\u0440\u0430\u0445\u0430,
               \u043F\u0440\u043E\u0441\u0442\u0438. \u0413\u0434\u0435 \u044F \u0441\u0435\u0439\u0447\u0430\u0441
               \u043D\u0430\u0445\u043E\u0436\u0443\u0441\u044C?"
+            audioClip: {fileID: 8300000, guid: d7b33f757b8f9554bb20db04c5dad244, type: 3}
             responses:
             - tag: 
               text: "\u0412 \u043F\u0443\u0441\u0442\u044B\u043D\u0435 \u0410\u043B\u0438\u0440\u0430\u0441.
@@ -19585,10 +19590,12 @@ MonoBehaviour:
                 \u0441\u0440\u0430\u0437\u0438\u0442\u044C\u0441\u044F \u0441 \u043D\u0438\u043C,
                 \u0440\u0430\u0437 \u0442\u044B \u043E\u043A\u0430\u0437\u0430\u043B\u0441\u044F
                 \u0437\u0434\u0435\u0441\u044C."
+              audioClip: {fileID: 0}
               responses:
               - tag: 
                 text: "\u0410 \u043C\u043E\u0436\u0435\u0448\u044C \u0440\u0430\u0441\u0441\u043A\u0430\u0437\u0430\u0442\u044C
                   \u043E \u043D\u0435\u043C \u043F\u043E\u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435?"
+                audioClip: {fileID: 8300000, guid: 8fc2b5e2895c46149840d77242247af3, type: 3}
                 responses:
                 - tag: 
                   text: "\u0415\u0433\u043E \u0437\u0430\u0449\u0438\u0449\u0430\u044E\u0442
@@ -19600,6 +19607,7 @@ MonoBehaviour:
                     \u0435\u043C\u0443 \u0441 \u043D\u0435\u0431\u0430, \u0441\u043A\u0438\u0434\u044B\u0432\u0430\u044F
                     \u0432\u0437\u0440\u044B\u0432\u0430\u044E\u0449\u0438\u0435\u0441\u044F
                     \u0448\u0430\u0440\u044B"
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
@@ -19608,11 +19616,13 @@ MonoBehaviour:
           - tag: 
             text: "\u0415\u0449\u0451 \u0447\u0435\u0433\u043E! \u041A\u0430\u043A
               \u0445\u043E\u0447\u0443, \u0442\u0430\u043A \u0438 \u0433\u043E\u0432\u043E\u0440\u044E!"
+            audioClip: {fileID: 8300000, guid: ffb910116091c95458b71f17c3f3e767, type: 3}
             responses:
             - tag: 
               text: "\u041D\u0443 \u0438 \u0440\u0430\u0437\u0433\u043E\u0432\u0430\u0440\u0438\u0432\u0430\u0439
                 \u0442\u043E\u0433\u0434\u0430 \u0441\u0430\u043C \u0441 \u0441\u043E\u0431\u043E\u0439!
                 \u0423\u0434\u0430\u0447\u0438!"
+              audioClip: {fileID: 0}
               responses: []
               jumpTag: 
             jumpTag: 
@@ -19620,24 +19630,29 @@ MonoBehaviour:
             text: "\u0421\u043E\u0433\u043B\u0430\u0441\u0435\u043D, \u0431\u044B\u043B
               \u043D\u0435 \u043F\u0440\u0430\u0432. \u041D\u0435 \u0442\u0430\u043A
               \u043C\u0435\u043D\u044F \u043C\u0430\u043C\u0430 \u0432\u043E\u0441\u043F\u0438\u0442\u0430\u043B\u0430..."
+            audioClip: {fileID: 8300000, guid: 9eb4b3f0e1f1e694dbedfef640873c4a, type: 3}
             responses:
             - tag: 
               text: "\u041D\u0438\u0447\u0435\u0433\u043E, \u0442\u044B \u043F\u0440\u043E\u0441\u0442\u043E
                 \u0438\u0441\u043F\u0443\u0433\u0430\u043B\u0441\u044F."
+              audioClip: {fileID: 0}
               responses:
               - tag: 
                 text: "\u041A\u0430\u043A \u0442\u044B \u0434\u0443\u043C\u0430\u0435\u0448\u044C,
                   \u0443 \u043C\u0435\u043D\u044F \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u0441\u044F
                   \u0441\u043F\u0430\u0441\u0442\u0438 \u0441\u0432\u043E\u044E \u0441\u0435\u043C\u044C\u044E?"
+                audioClip: {fileID: 8300000, guid: 5340d9417c93e8149a3d79d243e6f24c, type: 3}
                 responses: []
                 jumpTag: "\u0432\u043E\u043F\u0440\u043E\u0441"
               - tag: 
                 text: "\u0410 \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u043C\u043D\u0435
                   \u0447\u0435\u043C-\u043D\u0438\u0431\u0443\u0434\u044C \u043F\u043E\u043C\u043E\u0447\u044C?"
+                audioClip: {fileID: 8300000, guid: ed82cbd6881c07b4cbbe7b84a73e7d24, type: 3}
                 responses:
                 - tag: 
                   text: "\u0414\u0430, \u043A\u043E\u043D\u0435\u0447\u043D\u043E,
-                    \u0432\u043E\u0442 \u0442\u0435\u0431\u0435 \u0440\u044B\u0431\u043A\u0430! "
+                    \u0432\u043E\u0442 \u0442\u0435\u0431\u0435 \u0440\u044B\u0431\u043A\u0430!"
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
@@ -19649,6 +19664,7 @@ MonoBehaviour:
         text: "\u041F\u0440\u0438\u0432\u0435\u0442, \u0447\u0435\u0440\u0432\u044F\u0447\u043E\u043A,
           \u044F \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u043B\u0441\u044F \u043D\u0430
           \u043F\u043E\u0438\u0441\u043A\u0438 \u0441\u0432\u043E\u0435\u0439 \u0441\u0435\u043C\u044C\u0438!"
+        audioClip: {fileID: 8300000, guid: 9d0b44665e669464b8e4ff9dc0efa9c6, type: 3}
         responses:
         - tag: 
           text: "\u0410 \u0447\u0442\u043E \u043F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u043E
@@ -19657,18 +19673,21 @@ MonoBehaviour:
             \u043A\u043E\u0442\u0438\u043A \u0441\u043E\u0432\u0441\u0435\u043C \u043E\u0434\u0438\u043D\u0451\u0448\u0435\u043D\u0435\u043A
             \u043F\u043E\u0441\u0440\u0435\u0434\u0438  \u043E\u0433\u0440\u043E\u043C\u043D\u043E\u0439
             \u043F\u0443\u0441\u0442\u044B\u043D\u0438?"
+          audioClip: {fileID: 0}
           responses:
           - tag: 
             text: "\u0422\u0435\u0431\u044F \u044D\u0442\u043E \u043A\u0430\u0441\u0430\u0442\u044C\u0441\u044F
               \u043D\u0435 \u0434\u043E\u043B\u0436\u043D\u043E, \u043B\u0443\u0447\u0448\u0435
               \u0441\u043A\u0430\u0436\u0438 \u043C\u043D\u0435, \u0447\u0442\u043E
               \u043C\u0435\u043D\u044F \u0436\u0434\u0451\u0442 \u0434\u0430\u043B\u044C\u0448\u0435!"
+            audioClip: {fileID: 8300000, guid: b4ca210d856557747a70e34d31500c01, type: 3}
             responses:
             - tag: 
               text: "\u0422\u044B \u043D\u0435 \u0443\u043C\u0435\u0435\u0448\u044C
                 \u0440\u0430\u0437\u0433\u043E\u0432\u0430\u0440\u0438\u0432\u0430\u0442\u044C
                 \u0441\u043E \u0441\u0442\u0430\u0440\u0448\u0438\u043C\u0438! \u0418\u0434\u0438
                 \u043F\u043E\u0443\u0447\u0438\u0441\u044C \u043C\u0430\u043D\u0435\u0440\u0430\u043C!"
+              audioClip: {fileID: 0}
               responses: []
               jumpTag: 
             jumpTag: 
@@ -19679,6 +19698,7 @@ MonoBehaviour:
               \u0438 \u0442\u0435\u043F\u0435\u0440\u044C \u043E\u043D\u0438 \u0433\u0434\u0435-\u0442\u043E
               \u0434\u0430\u043B\u0435\u043A\u043E \u0432 \u0435\u0433\u043E \u043B\u043E\u0433\u043E\u0432\u0435.
               \u041D\u043E \u044F \u043D\u0435 \u0431\u043E\u044E\u0441\u044C \u0435\u0433\u043E."
+            audioClip: {fileID: 8300000, guid: 81c612827b0b19b41b0cd4179ca854c7, type: 3}
             responses:
             - tag: "\u0432\u043E\u043F\u0440\u043E\u0441"
               text: "\u042F \u0432\u0438\u0436\u0443 \u0432 \u0442\u0435\u0431\u0435
@@ -19694,9 +19714,11 @@ MonoBehaviour:
                 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u0436\u0430 \u043E\u0434\u043D\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E
                 \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C
                 \u043F\u0443\u0441\u0442\u044B\u043D\u0438?"
+              audioClip: {fileID: 0}
               responses:
               - tag: 
                 text: "\u0413\u043E\u043C\u0435\u0440 \u0421\u0438\u043C\u043F\u0441\u043E\u043D"
+                audioClip: {fileID: 8300000, guid: 33aa8e359095d9644bc91fb6f42b081f, type: 3}
                 responses:
                 - tag: 
                   text: "\u041C\u043E\u043B\u043E\u0434\u0435\u0446! \u0422\u044B
@@ -19717,11 +19739,13 @@ MonoBehaviour:
                     \u043F\u0435\u0440\u0435\u043B\u0435\u0442\u0430\u0442\u044C
                     \u0441 \u043E\u0434\u043D\u043E\u0433\u043E \u043C\u0438\u0440\u0430
                     \u043D\u0430 \u0434\u0440\u0443\u0433\u043E\u0439, \u0438 \u043E\u0431\u0440\u0430\u0442\u043D\u043E."
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
               - tag: 
                 text: "\u0421\u043F\u0430\u043D\u0447 \u0411\u043E\u0431"
+                audioClip: {fileID: 8300000, guid: 9236f1abfd11bd449981aea2adc1c67a, type: 3}
                 responses:
                 - tag: 
                   text: "\u0422\u044B \u043E\u0442\u0432\u0435\u0442\u0438\u043B
@@ -19729,11 +19753,13 @@ MonoBehaviour:
                     \u0441\u043C\u043E\u0433\u0443 \u0442\u0435\u0431\u0435 \u043F\u0435\u0440\u0435\u0434\u0430\u0442\u044C
                     \u0441\u0432\u043E\u044E \u043C\u0443\u0434\u0440\u043E\u0441\u0442\u044C...
                     \u041F\u0440\u043E\u0449\u0430\u0439!"
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
               - tag: 
                 text: "\u0422\u0443\u0440\u0430\u043D\u0433\u0430 \u041B\u0438\u043B\u0430"
+                audioClip: {fileID: 8300000, guid: c47518315bf08614fb9f9a75fa1fcf64, type: 3}
                 responses:
                 - tag: 
                   text: "\u042D\u0442\u043E \u043D\u0435 \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439
@@ -19741,17 +19767,20 @@ MonoBehaviour:
                     \u043F\u043E\u043A\u0430 \u0441\u043B\u0430\u0431 \u0434\u043B\u044F
                     \u0442\u0430\u043A\u043E\u0433\u043E, \u0441\u0442\u0443\u043F\u0430\u0439
                     \u0434\u043E\u043C\u043E\u0439."
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
               - tag: 
                 text: "\u0420\u043E\u0431\u0438\u043D \u0413\u0443\u0434"
+                audioClip: {fileID: 8300000, guid: 4a296ba03f504734ea37a072afd3604b, type: 3}
                 responses:
                 - tag: 
                   text: "\u041F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E!
                     \u041D\u0430\u0436\u043C\u0438 Alt + F4, \u0447\u0442\u043E\u0431\u044B
                     \u0443\u0437\u043D\u0430\u0442\u044C \u0432\u0441\u0435 \u0442\u0430\u0439\u043D\u044B
                     \u043F\u0443\u0441\u0442\u044B\u043D\u0438."
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
@@ -19764,15 +19793,18 @@ MonoBehaviour:
               \u041D\u043E \u043C\u0435\u043D\u044F \u0442\u0440\u0435\u0432\u043E\u0436\u0438\u0442
               \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E\u0441\u0442\u044C.
               \u041F\u043E\u043C\u043E\u0436\u0435\u0448\u044C \u043C\u043D\u0435?"
+            audioClip: {fileID: 8300000, guid: ee85afc8ff5e6fc48922d03f58b2961c, type: 3}
             responses:
             - tag: 
               text: "\u0425\u043C\u043C... \u0414\u0430\u0436\u0435 \u043D\u0435
                 \u0437\u043D\u0430\u044E, \u0447\u0435\u043C \u0442\u0435\u0431\u0435
                 \u043F\u043E\u043C\u043E\u0447\u044C. \u0410 \u0447\u0435\u0433\u043E
                 \u0442\u044B \u0431\u043E\u0438\u0448\u044C\u0441\u044F?"
+              audioClip: {fileID: 0}
               responses:
               - tag: 
                 text: "\u0413\u0440\u0435\u043C\u0443\u0447\u0438\u0445 \u0437\u043C\u0435\u0439"
+                audioClip: {fileID: 8300000, guid: ea0b2ba4f0e733c498f3eb64906bcdd6, type: 3}
                 responses:
                 - tag: 
                   text: "\u042F \u0442\u0435\u0431\u044F \u0445\u043E\u0447\u0443
@@ -19780,30 +19812,36 @@ MonoBehaviour:
                     \u043E\u043D\u0430 \u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E
                     \u0432\u0441\u0442\u0440\u0435\u0442\u0438\u0442\u0441\u044F
                     \u043D\u0430 \u0442\u0432\u043E\u0451\u043C \u043F\u0443\u0442\u0438!"
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
               - tag: 
                 text: "\u0411\u0435\u0448\u0435\u043D\u044B\u0445 \u043C\u0430\u0440\u0442\u044B\u0448\u0435\u043A"
+                audioClip: {fileID: 8300000, guid: 8eaebf420fd10ea4ab8d7cfd2f10ee51, type: 3}
                 responses:
                 - tag: 
                   text: "\u041A \u0441\u043E\u0436\u0430\u043B\u0435\u043D\u0438\u044E,
                     \u0438\u0445 \u043D\u0435 \u0431\u0443\u0434\u0435\u0442."
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
               - tag: 
                 text: "\u0417\u044B\u0431\u0443\u0447\u0438\u0435 \u043F\u0435\u0441\u043A\u0438"
+                audioClip: {fileID: 8300000, guid: 4b0bc167870c8fc4192c6aca9b16e8a1, type: 3}
                 responses:
                 - tag: 
                   text: "\u042D\u0442\u043E \u043C\u043E\u0451 \u0441\u0430\u043C\u043E\u0435
                     \u043B\u044E\u0431\u0438\u043C\u043E\u0435 \u043C\u0435\u0441\u0442\u043E
                     \u043E\u0431\u0438\u0442\u0430\u043D\u0438\u044F."
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
               - tag: 
                 text: "\u0421\u043E\u0431\u0430\u043A"
+                audioClip: {fileID: 8300000, guid: 0e0b82d0824f50c46a15b00a9ab2c1ad, type: 3}
                 responses:
                 - tag: 
                   text: "\u042F \u0441\u043B\u044B\u0448\u0430\u043B, \u043D\u0435\u043F\u043E\u0434\u0430\u043B\u0435\u043A\u0443
@@ -19812,6 +19850,7 @@ MonoBehaviour:
                     \u0425\u043E\u0442\u044F, \u0432\u043E\u043B\u043A\u043E\u0432
                     \u0431\u043E\u044F\u0442\u044C\u0441\u044F - \u0432 \u043B\u0435\u0441
                     \u043D\u0435 \u0445\u043E\u0434\u0438\u0442\u044C!"
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
@@ -19824,6 +19863,7 @@ MonoBehaviour:
           \u0440\u0435\u0448\u0438\u043B \u043F\u0440\u043E\u0433\u0443\u043B\u044F\u0442\u044C\u0441\u044F.
           \u041C\u0435\u043D\u044F \u0437\u043E\u0432\u0443\u0442 \u0422\u043E\u043C\u043C\u0438,
           \u0430 \u0442\u044B \u043A\u0442\u043E \u0442\u0430\u043A\u043E\u0439?"
+        audioClip: {fileID: 8300000, guid: 5ec2c1ccf25e407418adf84174e9293d, type: 3}
         responses:
         - tag: 
           text: "\u042F \u0412\u043E\u0440\u043C, \u0445\u0440\u0430\u043D\u0438\u0442\u0435\u043B\u044C
@@ -19835,10 +19875,12 @@ MonoBehaviour:
             \u044F \u0441\u043B\u044B\u0448\u0443 \u043A\u0430\u0436\u0434\u043E\u0433\u043E,
             \u043A\u0442\u043E \u0441\u0442\u0443\u043F\u0430\u0435\u0442 \u043D\u0430
             \u044D\u0442\u0443 \u0437\u0435\u043C\u043B\u044E!"
+          audioClip: {fileID: 0}
           responses:
           - tag: 
             text: "\u0417\u043D\u0430\u0447\u0438\u0442, \u0442\u044B \u0432\u0438\u0434\u0435\u043B
               \u043C\u043E\u044E \u0441\u0435\u043C\u044C\u044E?"
+            audioClip: {fileID: 8300000, guid: 4c5c26fe6db383d46babb9516f8558f1, type: 3}
             responses:
             - tag: 
               text: "\u0414\u0430, \u044F \u0432\u0438\u0434\u0435\u043B, \u043D\u043E
@@ -19848,14 +19890,17 @@ MonoBehaviour:
                 \u043A\u0440\u043E\u043D\u044B\n\u0434\u0435\u0440\u0435\u0432\u044C\u0435\u0432
                 \u0448\u0443\u043C\u0435\u043B\u0438 \u043D\u0430 \u0432\u0441\u044E
                 \u043E\u043A\u0440\u0443\u0433\u0443."
+              audioClip: {fileID: 0}
               responses:
               - tag: 
                 text: "\u0410 \u0447\u0442\u043E \u043E\u043D\u0438 \u0437\u0434\u0435\u0441\u044C
                   \u0434\u0435\u043B\u0430\u043B\u0438?"
+                audioClip: {fileID: 8300000, guid: 17fed88099cea21479cc2ba345a8315b, type: 3}
                 responses:
                 - tag: 
                   text: "\u041E\u043D\u0438 \u043F\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u043E\u0432\u0430\u043B\u0438
                     \u0432 \u043F\u043E\u0438\u0441\u043A\u0430\u0445 \u0432\u043E\u0434\u044B"
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
@@ -19864,6 +19909,7 @@ MonoBehaviour:
                   \u0442\u044B \u0438\u0445 \u043D\u043E\u0447\u043B\u0435\u0433\u0430,
                   \u044F \u0431\u044B \u043F\u0435\u0440\u0435\u043D\u043E\u0447\u0435\u0432\u0430\u043B
                   \u0442\u0443\u0442."
+                audioClip: {fileID: 8300000, guid: 221a8d3540ee31446a766686c01cbb43, type: 3}
                 responses:
                 - tag: 
                   text: "\u042F \u043D\u0435 \u043F\u0440\u0438\u043F\u043E\u043C\u043D\u044E,
@@ -19874,12 +19920,14 @@ MonoBehaviour:
                     \u043E\u043D\u0438 \u0445\u043E\u0442\u0435\u043B\u0438 \u043D\u0430\u0431\u0440\u0430\u0442\u044C
                     \u0447\u0438\u0441\u0442\u043E\u0439 \u0440\u043E\u0434\u043D\u0438\u043A\u043E\u0432\u043E\u0439
                     \u0432\u043E\u0434\u044B."
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
               - tag: 
                 text: "\u041D\u043E \u0442\u0443\u0442 \u0436\u0435 \u043E\u0447\u0435\u043D\u044C
                   \u043E\u043F\u0430\u0441\u043D\u043E"
+                audioClip: {fileID: 8300000, guid: 8b0dff127ed4e7c4680cd70e21a78318, type: 3}
                 responses:
                 - tag: 
                   text: "\u041A\u043E\u043D\u0435\u0447\u043D\u043E, \u043D\u043E
@@ -19889,6 +19937,7 @@ MonoBehaviour:
                     \u0441\u043E \u0432\u0441\u0435\u043C\u0438 \u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u044F\u043C\u0438,
                     \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u0441\u0442\u0440\u0435\u0447\u0430\u043B\u0438
                     \u043D\u0430 \u0441\u0432\u043E\u0435\u043C \u043F\u0443\u0442\u0438."
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
@@ -19899,14 +19948,17 @@ MonoBehaviour:
               \u0442\u043E\u0433\u0434\u0430 \u043C\u043D\u0435, \u043D\u0435 \u0432\u0438\u0434\u0435\u043B
               \u043B\u0438 \u0442\u044B \u0437\u0434\u0435\u0441\u044C \u0437\u043B\u043E\u0433\u043E
               \u043F\u0441\u0430 \u0411\u0440\u0443\u0442\u0430?"
+            audioClip: {fileID: 8300000, guid: cd3677df46b9ba0468d6a2834a1341de, type: 3}
             responses:
             - tag: 
               text: "\u0414\u0430"
+              audioClip: {fileID: 0}
               responses:
               - tag: 
                 text: "\u0410 \u043D\u0435 \u0440\u0430\u0441\u0441\u043A\u0430\u0436\u0435\u0448\u044C
                   \u043C\u043D\u0435 \u043E \u043D\u0435\u043C \u043D\u0435\u043C\u043D\u043E\u0433\u043E?
                   \u042F \u043C\u0430\u043B\u043E \u043E \u043D\u0435\u043C \u0437\u043D\u0430\u044E..."
+                audioClip: {fileID: 8300000, guid: ba041c3a8975b724c9ddf37cc6ae2348, type: 3}
                 responses:
                 - tag: 
                   text: "\u041A\u043E\u043D\u0435\u0447\u043D\u043E. \u0411\u0440\u0443\u0442,
@@ -19924,6 +19976,7 @@ MonoBehaviour:
                     \u0431\u044B \u0442\u043E \u043D\u0438 \u0441\u0442\u0430\u043B\u043E
                     \u0438\u0441\u0442\u0440\u0435\u0431\u0438\u0442\u044C \u0432\u0441\u0435
                     \u043A\u043E\u0448\u0430\u0447\u044C\u0435 \u043F\u043E\u0441\u0435\u043B\u0435\u043D\u0438\u0435.\n"
+                  audioClip: {fileID: 0}
                   responses: []
                   jumpTag: 
                 jumpTag: 
@@ -19932,6 +19985,7 @@ MonoBehaviour:
           - tag: 
             text: "\u041D\u0430\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0431\u043E\u043B\u044C\u0448\u0438\u0435
               \u0442\u0432\u043E\u0438 \u0432\u043B\u0430\u0434\u0435\u043D\u0438\u044F?"
+            audioClip: {fileID: 8300000, guid: 51c10ef4a2309db42911eb5e19a48b75, type: 3}
             responses:
             - tag: 
               text: "\u041C\u043E\u0438 \u0432\u043B\u0430\u0434\u0435\u043D\u0438\u044F
@@ -19944,6 +19998,7 @@ MonoBehaviour:
                 \u043D\u0435\u0433\u043E \u043C\u043E\u0436\u043D\u043E \u0434\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F,
                 \u0434\u043E\u0439\u0434\u044F \u0434\u043E \u0441\u0435\u0432\u0435\u0440\u043D\u043E\u0433\u043E
                 \u043A\u043E\u043D\u0446\u0430 \u043F\u0443\u0441\u0442\u044B\u043D\u0438."
+              audioClip: {fileID: 0}
               responses: []
               jumpTag: 
             jumpTag: 
@@ -35080,6 +35135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1704350677}
   - component: {fileID: 1704350676}
+  - component: {fileID: 1704350678}
   m_Layer: 0
   m_Name: DialogManager
   m_TagString: Untagged
@@ -35118,6 +35174,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 48
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1704350678
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704350675}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: dabe057ddc8fe794a9c875b5dc179dd8, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1709457692
 GameObject:
   m_ObjectHideFlags: 0

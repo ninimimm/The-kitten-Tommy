@@ -13,8 +13,10 @@ public class Worm : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text1;
     [SerializeField] private TextMeshProUGUI text2;
     [SerializeField] private TextMeshProUGUI skip;
+    [SerializeField] private Boosts boosts;
     private Animator _animator;
     private bool _dialog;
+    private bool _giveFish;
     
     void Start()
     {
@@ -24,6 +26,12 @@ public class Worm : MonoBehaviour
     
     void Update()
     {
+        if (text1.text == "Да, конечно, вот тебе рыбка!" && !_giveFish)
+        {
+            _giveFish = true;
+            boosts.fishCount += 1;
+            boosts.boostsText[1].text = $"x{boosts.fishCount}";
+        }
         if (Input.GetKeyDown(KeyCode.E))
             _dialog = true;
         if (Vector3.Distance(transform.position, cat.transform.position) < 1.5)

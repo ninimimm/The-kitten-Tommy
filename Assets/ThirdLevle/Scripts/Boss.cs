@@ -41,6 +41,10 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private Move clowd;
     [SerializeField] private AudioSource winSource;
     [SerializeField] private AudioSource phoneSource;
+    [SerializeField] private Image dialogTextbox;
+    [SerializeField] private AudioClip phoneMusic;
+    [SerializeField] private GameObject firework1;
+    [SerializeField] private GameObject firework2;
     private bool isFireOn = true;
     public List<Log> logs = new List<Log>();
     private int _position;
@@ -56,6 +60,9 @@ public class Boss : MonoBehaviour, IDamageable
     private bool _isHole;
     private bool _isStairs;
     private bool _isCentre;
+    private bool _canStartCorroutines;
+    private bool _canChangePhoneMusic;
+    private bool stan;
     private List<Rigidbody2D> _stoneBodies = new ();
     private SpriteRenderer _spriteRenderer;
     
@@ -74,10 +81,8 @@ public class Boss : MonoBehaviour, IDamageable
             _polygonColliders[i] = fires[i].GetComponent<PolygonCollider2D>();
             _spriteRenderers[i] = fires[i].GetComponent<SpriteRenderer>();
         }
-        StartCoroutine(FireRoutine());
-        StartCoroutine(LogRoutine());
-        StartCoroutine(NewStoneAttack());
-        StartCoroutine(SpikesAttack());
+        _canStartCorroutines = true;
+        _canChangePhoneMusic = true;
     }
 
     void FixedUpdate()
@@ -120,21 +125,50 @@ public class Boss : MonoBehaviour, IDamageable
         }
         else
         {
-            for (var i = logs.Count - 1; i >= 0; i--)
+            if (!dialogTextbox.enabled && !stan)
             {
-                if (logs[i].gameObject.transform.position.x <= destroyXLeft ||
-                    logs[i].gameObject.transform.position.x >= destroyXRight)
+                if (_canChangePhoneMusic)
                 {
-                    Log logToDestroy = logs[i];
-                    logs.RemoveAt(i);
-                    Destroy(logToDestroy.gameObject);
+                    phoneSource.Stop();
+                    phoneSource.PlayOneShot(phoneMusic);
+                    _canChangePhoneMusic = false;
                 }
+                if (_canStartCorroutines)
+                {
+                    StartCoroutine(FireRoutine());
+                    StartCoroutine(LogRoutine());
+                    StartCoroutine(NewStoneAttack());
+                    StartCoroutine(SpikesAttack());
+                    _canStartCorroutines = false;
+                }
+                for (var i = logs.Count - 1; i >= 0; i--)
+                {
+                    if (logs[i].gameObject.transform.position.x <= destroyXLeft ||
+                        logs[i].gameObject.transform.position.x >= destroyXRight)
+                    {
+                        Log logToDestroy = logs[i];
+                        logs.RemoveAt(i);
+                        Destroy(logToDestroy.gameObject);
+                    }
+                }
+                if (_isRain) StoneRain();
+                if (_isMiddle) MiddleAfterOther();
+                if (_isHole) HoledRain();
+                if (_isStairs) StairsRain();
+                if (_isCentre) ToCentreRain();
             }
-            if (_isRain) StoneRain();
-            if (_isMiddle) MiddleAfterOther();
-            if (_isHole) HoledRain();
-            if (_isStairs) StairsRain();
-            if (_isCentre) ToCentreRain();
+            else
+            {
+                StopAllCoroutines();
+                _canStartCorroutines = true;
+                for (var i = 0; i < fires.Length; i++)
+                {
+                    _polygonColliders[i].enabled = false;
+                    fires[i].layer = 0;
+                    _spriteRenderers[i].enabled = false;
+                }
+                foreach (var fire in fires) fire.GetComponent<Fire>().audioSource.enabled = false;
+            }
         }
     }
 
@@ -360,7 +394,17 @@ public class Boss : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage, bool isStan)
     {
-        HP -= damage;
-        _healthBar.SetHealth(HP);
+        stan = isStan;
+        if (!stan && damage > 0 && !dialogTextbox.enabled)
+        {
+            HP -= damage;
+            _healthBar.SetHealth(HP);
+        }
+
+        if (HP <= 0)
+        {
+            firework1.SetActive(true);
+            firework2.SetActive(true);
+        }
     }
 }

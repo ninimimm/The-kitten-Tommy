@@ -3,9 +3,11 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TextWrite : MonoBehaviour
 {
+    [SerializeField] private Image im;
     [SerializeField] private TextMeshProUGUI textNumber;
     public TextMeshProUGUI textField;
     public Vector3 vector = new Vector3(-6, 7, 0);
@@ -25,7 +27,7 @@ public class TextWrite : MonoBehaviour
 
     private void Update()
     {
-        if (textNumber.text.Split("/")[0] == "9")
+        if (SceneManager.GetActiveScene().name == "Photo" && textNumber.text.Split("/")[0] == "9")
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -49,6 +51,8 @@ public class TextWrite : MonoBehaviour
 
             textField.text = ""; // Стираем предыдущий текст перед печатью нового
         }
+        im.enabled = false;
+        textField.enabled = false;
     }
 
     private IEnumerator TypeText(string text)
