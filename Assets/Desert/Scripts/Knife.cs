@@ -24,19 +24,15 @@ public class Knife : MonoBehaviour
     {
         data = SavingSystem<Knife, KnifeData>.Load($"{gameObject.name}.data");
         mainCamera = Camera.main;
-        if (index == -1)
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
         }
-        else
-        {
-            index++;
-        }
-        if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
             Save();
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
         timer = attackIntervale;

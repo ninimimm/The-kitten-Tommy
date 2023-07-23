@@ -55,14 +55,14 @@ public class GoToSecondLevle : MonoBehaviour
     public void Save()
     {
         foreach (var coin in coins)
-            if (coin is not null) coin.Save();
+            coin.Save();
         _cat.Save();
         foreach (var crate in crates)
-            if (crate is not null) crate.Save();
+            crate.Save();
         snake.Save();
         _birdIdle.Save();
         foreach (var scorpio in scorpios)
-            if (scorpio is not null) scorpio.Save();
+            scorpio.Save();
         _hawk.Save();
         _birdStay.Save();
         foreach (var eatingBird in eatingBirds)
@@ -72,7 +72,7 @@ public class GoToSecondLevle : MonoBehaviour
         if (boss != null)
             boss.Save();
         foreach (var mummy in mummies)
-            if (mummy is not null) mummy.Save();
+            mummy.Save();
         grabbingHook.Save();
         takeKey.Save();
         knife.Save();

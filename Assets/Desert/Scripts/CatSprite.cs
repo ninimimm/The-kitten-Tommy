@@ -163,7 +163,7 @@ public class CatSprite : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name != "Home") data = SavingSystem<CatSprite, CatData>.Load($"{gameObject.name}.data");
+        if (SceneManager.GetActiveScene().name != "Home" && SceneManager.GetActiveScene().name != "Photo") data = SavingSystem<CatSprite, CatData>.Load($"{gameObject.name}.data");
         if (SceneManager.GetActiveScene().name == "Jungle") key = "";
         transform.position = spawnRevile;
         if (SceneManager.GetActiveScene().name == "ThirdLevle")
@@ -182,16 +182,12 @@ public class CatSprite : MonoBehaviour
         _grabbingHook = GetComponent<GrabbingHook>();
         currentScene = SceneManager.GetActiveScene().name;
         canTakeDamage = true;
-        if (SceneManager.GetActiveScene().name != "Home")
+        if (SceneManager.GetActiveScene().name != "Home" && SceneManager.GetActiveScene().name != "Photo")
         {
-            if (index == -1)
+            if (!MainMenu.dictSave.ContainsKey(gameObject.name))
             {
-                index = MainMenu.index;
-                MainMenu.index += 100;
-            }
-            else
-            {
-                index++;
+                MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+                MainMenu.index ++;
             }
             _textMoney.text = money.ToString();
         }
@@ -202,7 +198,7 @@ public class CatSprite : MonoBehaviour
             countHealth = maxCountHealth;
             _textHealth.text = countHealth.ToString();
         }
-        if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
+        if (SceneManager.GetActiveScene().name == "FirstLevle" && MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
@@ -210,11 +206,11 @@ public class CatSprite : MonoBehaviour
             countHealth = maxCountHealth;
             _textHealth.text = maxCountHealth.ToString();
             Save();
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
         knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
-        if (SceneManager.GetActiveScene().name != "Home")
+        if (SceneManager.GetActiveScene().name != "Home" && SceneManager.GetActiveScene().name != "Photo")
         {
             _healthBar.SetMaxHealth(maxHP);
             _healthBar.SetHealth(HP);
@@ -224,7 +220,7 @@ public class CatSprite : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!inMiniMap)
+        if (!inMiniMap && !isDeath && !isRevive)
             UpdateGround();
     }
 
@@ -556,7 +552,7 @@ public class CatSprite : MonoBehaviour
     private void SwitchAnimation()
     {
         if (!isDeath && !isRevive)
-        {
+        {        
             if (Input.GetKeyDown(KeyCode.LeftShift) && !_grabbingHook.isHookedStatic && !_grabbingHook.isHookedDynamic && 
                 stateInfo.IsName("Stay"))
             {   
@@ -621,7 +617,11 @@ public class CatSprite : MonoBehaviour
         }
     }
 
-    public void Revive() => transform.position = spawnRevile;
+    public void Revive()
+    {
+        transform.position = spawnRevile;
+        isRevive = true;
+    } 
     public void ReloadScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     void Attake()
@@ -682,6 +682,7 @@ public class CatSprite : MonoBehaviour
                 _grabbingHook._joint2DDynamic.enabled = false;
                 if (countHealth <= 1)
                 {
+                    Debug.Log("death");
                     if (!isDeath) dieSourse.Play();
                     isDeath = true;
                 }

@@ -45,19 +45,15 @@ public class TakeKey : MonoBehaviour
         ironKeyImage.enabled = false;
         if (SceneManager.GetActiveScene().name == "Jungle")
             Save();
-        if (index == -1)
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
         }
-        else
-        {
-            index++;
-        }
-        if (MainMenu.isStarts[index])
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
             Save();
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
     }
@@ -132,15 +128,8 @@ public class TakeKey : MonoBehaviour
                     textGoldE.enabled = false;
                     takeKeySource.Play();
                     _animatorGoldChest.SetInteger("state", 2);
-                    _catSprite.key = "gold";
+                    _catSprite.key += "gold";
                     goldKeyImage.enabled = true;
-                    if (ironKeyImage.enabled)
-                    {
-                        _ironKey = Instantiate(ironKeyPrefab, 
-                            new Vector3(_catSprite.transform.position.x,_catSprite.transform.position.y + 1,_catSprite.transform.position.z),
-                            Quaternion.identity);
-                        ironKeyImage.enabled = false;
-                    }
                 }
             }
 
@@ -168,52 +157,11 @@ public class TakeKey : MonoBehaviour
                 {
                     takeKeySource.Play();
                     _animatorIronChest.SetInteger("state", 2);
-                    _catSprite.key = "iron";
+                    _catSprite.key += "iron";
                     ironKeyImage.enabled = true;
-                    if (goldKeyImage.enabled)
-                    {
-                        _goldKey = Instantiate(goldKeyPrefab,
-                            new Vector3(_catSprite.transform.position.x, _catSprite.transform.position.y + 1,
-                                _catSprite.transform.position.z),
-                            Quaternion.identity);
-                        goldKeyImage.enabled = false;
-                    }
                     ironE.enabled = false;
                     textIronE.enabled = false;
                 }
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (_goldKey != null && Vector3.Distance(_catSprite.transform.position, _goldKey.transform.position) < 2)
-            {
-                takeKeySource.Play();
-                Destroy(_goldKey);
-                if (_catSprite.key == "iron")
-                {
-                    ironKeyImage.enabled = false;
-                    _ironKey = Instantiate(ironKeyPrefab, 
-                        new Vector3(_catSprite.transform.position.x,_catSprite.transform.position.y + 1,_catSprite.transform.position.z),
-                        Quaternion.identity);
-                }
-                    
-                goldKeyImage.enabled = true;
-                _catSprite.key = "gold";
-
-            }
-            else if (_ironKey is not null && Vector3.Distance(_catSprite.transform.position, _ironKey.transform.position) < 2)
-            {
-                takeKeySource.Play();
-                Destroy(_ironKey);
-                if (_catSprite.key == "gold")
-                {
-                    goldKeyImage.enabled = false;
-                    _goldKey = Instantiate(goldKeyPrefab, 
-                        new Vector3(_catSprite.transform.position.x,_catSprite.transform.position.y + 1,_catSprite.transform.position.z),
-                        Quaternion.identity);
-                }
-                ironKeyImage.enabled = true;
-                _catSprite.key = "iron";
             }
         }
     }

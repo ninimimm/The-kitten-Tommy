@@ -27,19 +27,15 @@ public class Door : MonoBehaviour
         animator = GetComponent<Animator>();
         if (SceneManager.GetActiveScene().name == "Jungle")
             Save();
-        if (index == -1)
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
         }
-        else
-        {
-            index++;
-        }
-        if (MainMenu.isStarts[index])
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
             Save();
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
     }
@@ -56,12 +52,12 @@ public class Door : MonoBehaviour
             spriteE.enabled = false;
             textE.enabled = false;
         }
-        if (Input.GetKeyDown(KeyCode.E) && Math.Abs(transform.position.x - cat.transform.position.x) < 1 && _catSprite.key == key
+        if (Input.GetKeyDown(KeyCode.E) && Math.Abs(transform.position.x - cat.transform.position.x) < 1 && _catSprite.key.Contains(key)
             && animator.GetInteger("state") == 0)
         {
             openDoor.Play();
             animator.SetInteger("state", 1);
-            _catSprite.key = "";
+            _catSprite.key = _catSprite.key.Replace(key, "");
             boxCollider2D.enabled = false;
             if (key == "iron") _takeKey.ironKeyImage.enabled = false;
             else _takeKey.goldKeyImage.enabled = false;

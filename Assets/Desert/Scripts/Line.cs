@@ -18,19 +18,15 @@ public class Line : MonoBehaviour
         data = SavingSystem<Line, LineData>.Load($"{gameObject.name}.data");
         if (SceneManager.GetActiveScene().name == "FirstLevle")
             material = "based";
-        if (index == -1)
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
         }
-        else
-        {
-            index++;
-        }
-        if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
             Save();
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
     }

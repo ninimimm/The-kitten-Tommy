@@ -42,19 +42,15 @@ public class Boosts : MonoBehaviour
         data = SavingSystem<Boosts, BoostsData>.Load($"{gameObject.name}.data");
         currentJump = cat.jumpForce;
         timerChose = timeLite;
-        if (index == -1)
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
         }
-        else
-        {
-            index++;
-        }
-            if (MainMenu.isStarts[index] && SceneManager.GetActiveScene().name == "FirstLevle")
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
             Save();
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
         boostsText[0].text = $"x{energyCount}";

@@ -13,15 +13,18 @@ public class TextWrite : MonoBehaviour
     public Vector3 vector = new Vector3(-6, 7, 0);
     [TextArea(3, 10)]
     public string[] textPackages;
+    public AudioClip[] audioClips;
     public float[] delays;
     public float typingSpeed = 0.05f;
     public bool isE;
+    private AudioSource _audioSource;
 
     private Coroutine typingCoroutine;
     private int currentPackageIndex = 0;
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         StartTyping();
     }
 
@@ -44,8 +47,9 @@ public class TextWrite : MonoBehaviour
         for (int i = 0; i < textPackages.Length; i++)
         {
             string currentText = textPackages[i];
+            _audioSource.PlayOneShot(audioClips[i]);
             yield return StartCoroutine(TypeText(currentText));
-
+    
             if (i < delays.Length)
                 yield return new WaitForSeconds(delays[i]);
 

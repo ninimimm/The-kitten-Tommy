@@ -106,5 +106,6 @@ public class PhotoManager : MonoBehaviour
         transform.position = targetPosition;
         transform.localScale = targetScale;
         _textMeshPro.text = $"{int.Parse(_textMeshPro.text.Split("/")[0]) + 1}/{_textMeshPro.text.Split("/")[1]}";
+        StopAllCoroutines();
     }
 }

@@ -58,21 +58,15 @@ public class Scorpio : MonoBehaviour, IDamageable
         polygonCollider.enabled = false;
         boxCollider.enabled = true;
         audioSource = GetComponent<AudioSource>();
-        if (index == -1)
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
         }
-        else
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
-            index++;
-        }
-        if (MainMenu.isStarts[index])
-        {
-            HP = maxHP;
-            _healthBar.SetMaxHealth(maxHP);
             Save();
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
         _healthBar.SetMaxHealth(maxHP);

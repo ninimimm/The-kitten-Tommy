@@ -18,23 +18,19 @@ public class Coin : MonoBehaviour
 
     private void Start()
     {
+        GoToSecondLevle.coins.Add(gameObject.GetComponent<Coin>());
         data = SavingSystem<Coin, CoinData>.Load($"{gameObject.name}.data");
         _catSprite = _cat.GetComponent<CatSprite>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (index == -1)
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
         }
-        else
-        {
-            index++;
-        }
-        if (MainMenu.isStarts[index])
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
             Save();
-            _spriteRenderer.enabled = true;
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
         audioSource = _cat.GetComponent<AudioSource>();

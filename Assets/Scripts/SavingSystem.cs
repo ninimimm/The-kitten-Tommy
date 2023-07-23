@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public interface IInitializable<TObject>
@@ -22,10 +23,9 @@ public static class SavingSystem <TObject,TData>
         binaryFormatter = new BinaryFormatter();
         fullPath = $"{Application.persistentDataPath}{path}";
         data.Initialize(obj);
-        using (StreamWriter sw = File.AppendText(pathFile))
-        {
-            sw.WriteLine(fullPath);
-        }
+        if (!File.ReadAllText(pathFile).Contains(fullPath));
+            using (StreamWriter sw = File.AppendText(pathFile))
+                sw.WriteLine(fullPath);
         using (var stream = new FileStream(fullPath, FileMode.Create))
             binaryFormatter.Serialize(stream, data);
     }

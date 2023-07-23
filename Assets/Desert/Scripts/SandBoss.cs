@@ -65,23 +65,16 @@ public class SandBoss : MonoBehaviour, IDamageable
         pol.enabled = true;
         cap.enabled = false;
         _catSprite = _cat.GetComponent<CatSprite>();
-        if (index == -1)
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
         }
-        else
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
-            index++;
-        }
-        if (MainMenu.isStarts[index])
-        {
-            HP = maxHP;
-            _healthBar.SetMaxHealth(maxHP); 
             Save();
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
-        Debug.Log(_catSprite.canSpawn);
         if (_catSprite.canSpawn)
             Load();
         _healthBar.SetMaxHealth(maxHP);

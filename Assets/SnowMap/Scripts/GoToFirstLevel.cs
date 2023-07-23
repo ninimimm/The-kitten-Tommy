@@ -31,7 +31,7 @@ public class GoToFirstLevel : MonoBehaviour
     void Update()
     {
         if ((Physics2D.OverlapCircle(_catSprite.groundCheck1.position, _catSprite.groundCheckRadius, balloonLayer) ||
-             Physics2D.OverlapCircle(_catSprite.groundCheck1.position, _catSprite.groundCheckRadius, balloonLayer)) &&
+             Physics2D.OverlapCircle(_catSprite.groundCheck2.position, _catSprite.groundCheckRadius, balloonLayer)) &&
             Vector3.Distance(_catSprite.transform.position,transform.position) < 5)
         {
             transform.position += speed * Time.deltaTime * movingVector ;

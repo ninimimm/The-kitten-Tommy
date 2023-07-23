@@ -56,21 +56,15 @@ public class Mummy : MonoBehaviour, IDamageable
         _bossAnimator = Boss.GetComponent<Animator>();
         cap.enabled = true;
         pol.enabled = false;
-        if (index == -1)
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
         }
-        else
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
-            index++;
-        }
-        if (MainMenu.isStarts[index])
-        {
-            HP = maxHP;
-            _healthBar.SetMaxHealth(maxHP);
             Save();
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         if (_catSprite.canSpawn)
             Load();

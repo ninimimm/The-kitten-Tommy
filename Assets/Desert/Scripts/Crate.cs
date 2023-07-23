@@ -41,25 +41,20 @@ public class Crate : MonoBehaviour, IDamageable
     private List<GameObject> fishInstance = new ();
     private List<GameObject> waterInstance = new ();
     public bool isUse;
-    private int index = -1;
     private void Start()
     {
         data = SavingSystem<Crate, CrateData>.Load($"{gameObject.name}.data");
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (index == -1)
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
-            index = MainMenu.index;
-            MainMenu.index += 100;
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
         }
-        else
-        {
-            index++;
-        }
-        if (MainMenu.isStarts[index])
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
         {
             Save();
-            MainMenu.isStarts[index] = false;
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
         _audioSource = Cat.GetComponent<AudioSource>();
