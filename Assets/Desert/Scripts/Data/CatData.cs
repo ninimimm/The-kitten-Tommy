@@ -7,6 +7,7 @@ public class CatData : IInitializable<CatSprite>
 {
     public HashSet<string> start { get; set;} = new();
     public float HP;
+    public float XP;
     public int countHealth;
     public int takeDamage;
     public string key;
@@ -29,6 +30,7 @@ public class CatData : IInitializable<CatSprite>
     {
         var cat = catSprite.gameObject;
         HP = catSprite.HP;
+        XP = catSprite.XP;
         countHealth = catSprite.countHealth;
         takeDamage = catSprite.takeDamage;
         key = catSprite.key;

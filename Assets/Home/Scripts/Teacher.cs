@@ -105,7 +105,7 @@ public class Teacher : MonoBehaviour
                 helpText.enabled = false;
                 teacherText.text = "";
                 _animator.SetInteger("state", 2);
-                helpText.text = "E - пропустить/дальше";
+                helpText.text = "Enter - Начать игру       E - пропустить/дальше";
             }
         }
         else if (_killAndExperienceTraining)

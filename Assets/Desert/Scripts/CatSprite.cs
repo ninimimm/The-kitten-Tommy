@@ -18,7 +18,7 @@ public class CatSprite : MonoBehaviour
     public float HP;
     public float XP;
     [SerializeField] public float maxHP;
-    [SerializeField] public float mapXP;
+    [SerializeField] public float maxXP;
     [SerializeField] public float speed = 4.0f;
     [SerializeField] public float jumpForce = 7f;
     [SerializeField] public HealthBar _healthBar;
@@ -134,6 +134,7 @@ public class CatSprite : MonoBehaviour
             isPoison = data.isPoison;
             if (isPoison) knifeSprite = poisonSprite;
             HP = data.HP;
+            XP = data.XP;
             countHealth = data.countHealth;
             takeDamage = data.takeDamage;
             key = data.key;
@@ -202,7 +203,7 @@ public class CatSprite : MonoBehaviour
         {
             HP = maxHP;
             _healthBar.SetMaxHealth(maxHP);
-            greenBar.SetMaxHealth(mapXP);
+            greenBar.SetMaxHealth(maxXP);
             countHealth = maxCountHealth;
             _textHealth.text = maxCountHealth.ToString();
             Save();
@@ -214,6 +215,8 @@ public class CatSprite : MonoBehaviour
         {
             _healthBar.SetMaxHealth(maxHP);
             _healthBar.SetHealth(HP);
+            greenBar.SetMaxHealth(maxXP);
+            greenBar.SetHealth(XP);
             _textHealth.text = countHealth.ToString();
         }
     }
@@ -228,7 +231,7 @@ public class CatSprite : MonoBehaviour
     {
         if (!inMiniMap)
         {
-            greenBar.SetMaxHealth(mapXP);
+            greenBar.SetMaxHealth(maxXP);
             greenBar.SetHealth(XP);
             if (stateInfo.IsName("revival"))
                 revivalSourse.Play();
@@ -639,9 +642,9 @@ public class CatSprite : MonoBehaviour
 
     void Wind()
     {
-        if (XP >= mapXP / 5)
+        if (XP >= maxXP / 5)
         {
-            XP -= mapXP / 5;
+            XP -= maxXP / 5;
             var wind = Instantiate(windPrefab, transform.position + new Vector3(1, -0.3f, 0), Quaternion.identity);
             wind.transform.localScale = transform.rotation.y == 0 ? 
                 wind.transform.localScale : 
@@ -651,7 +654,7 @@ public class CatSprite : MonoBehaviour
                 ? wind.transform.position
                 : wind.transform.position - new Vector3(2, 0, 0);
         }
-        greenBar.SetMaxHealth(mapXP);
+        greenBar.SetMaxHealth(maxXP);
         greenBar.SetHealth(XP);
     }
     

@@ -2392,6 +2392,7 @@ GameObject:
   - component: {fileID: 816011016}
   - component: {fileID: 816011020}
   - component: {fileID: 816011021}
+  - component: {fileID: 816011022}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2533,6 +2534,21 @@ MonoBehaviour:
   goToSecond: {fileID: 0}
   goToFirst: {fileID: 0}
   goToSnow: {fileID: 0}
+--- !u!114 &816011022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816011015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf5bc682db24b74b9733282d038e16a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvas: {fileID: 816011015}
+  start: {fileID: 5501918}
+  isStartsNonStatic: 
 --- !u!1 &849259282
 GameObject:
   m_ObjectHideFlags: 0
@@ -5800,12 +5816,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057243760}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0bf5bc682db24b74b9733282d038e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 816011015}
   start: {fileID: 5501918}
+  isStartsNonStatic: 
 --- !u!1 &2063693789
 GameObject:
   m_ObjectHideFlags: 0

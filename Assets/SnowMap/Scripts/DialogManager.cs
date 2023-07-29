@@ -43,7 +43,7 @@ public class DialogManager : MonoBehaviour
 
         for (int i = 1; i <= currentResponses.Count; i++)
         {
-            if (Input.GetKeyDown(i.ToString()) && !isTyping && !_audioSource.isPlaying)
+            if (dialogText1.enabled && Input.GetKeyDown(i.ToString()) && !isTyping && !_audioSource.isPlaying)
             {
                 _audioSource.PlayOneShot(currentResponses[i - 1].audioClip);
                 StartCoroutine(TypeSentence(currentResponses[i - 1].audioClip.length, i));
