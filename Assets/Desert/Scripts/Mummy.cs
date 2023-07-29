@@ -192,11 +192,11 @@ public class Mummy : MonoBehaviour, IDamageable
             Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer))
         {
             stateMommy = MovementState.attake;
-            if (!_audioSourceMummyAttack.isPlaying)
-                _audioSourceMummyAttack.Play();
-            _catSprite.TakeDamage(damage,false);
+            if (!_audioSourceMummyAttack.isPlaying) _audioSourceMummyAttack.Play();
         }
     }
+
+    public void Hit() => _catSprite.TakeDamage(damage,false);
 
     public void TakeDamage(float damage, bool isStan)
     {

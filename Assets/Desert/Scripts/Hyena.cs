@@ -159,13 +159,13 @@ public class Hyena : MonoBehaviour, IDamageable
 
     void Attack()
     {
-        if (Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer) &&
-            !currentAnimatorState.IsName("HyenaAttack"))
-        {
+        if (!currentAnimatorState.IsName("HyenaAttack") && 
+            Physics2D.OverlapCircle(attack.position, distanseAttack, catLayer))
             stateHyena = MovementState.attake;
-            catSprite.TakeDamage(damage, false);
-        }
     }
+
+    public void Hit() => catSprite.TakeDamage(damage, false);
+
     
     public void TakeDamage(float damage, bool isStan)
     {

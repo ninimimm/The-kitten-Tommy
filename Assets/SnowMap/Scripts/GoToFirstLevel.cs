@@ -21,7 +21,7 @@ public class GoToFirstLevel : MonoBehaviour
     public static List<Crate> crates = new ();
     public static int countCoins;
     private CatSprite _catSprite;
-    
+    private float timer = 3;
     
     void Start()
     {
@@ -30,13 +30,15 @@ public class GoToFirstLevel : MonoBehaviour
 
     void Update()
     {
-        if ((Physics2D.OverlapCircle(_catSprite.groundCheck1.position, _catSprite.groundCheckRadius, balloonLayer) ||
+        if (timer <= 0 &&
+            (Physics2D.OverlapCircle(_catSprite.groundCheck1.position, _catSprite.groundCheckRadius, balloonLayer) ||
              Physics2D.OverlapCircle(_catSprite.groundCheck2.position, _catSprite.groundCheckRadius, balloonLayer)) &&
-            Vector3.Distance(_catSprite.transform.position,transform.position) < 5)
+            Vector3.Distance(_catSprite.transform.position, transform.position) < 5)
         {
-            transform.position += speed * Time.deltaTime * movingVector ;
-            _cat.transform.position += speed * Time.deltaTime * movingVector ;
+            transform.position += speed * Time.deltaTime * movingVector;
+            _cat.transform.position += speed * Time.deltaTime * movingVector;
         }
+        else timer -= Time.deltaTime;
 
         if (transform.position.y > 10)
         {

@@ -28,6 +28,7 @@ public class GoToSecondLevle : MonoBehaviour
     public static List<Crate> crates = new ();
     public static List<Mummy> mummies = new();
     private CatSprite _catSprite;
+    private float timer = 3;
 
     void Start()
     {
@@ -37,13 +38,14 @@ public class GoToSecondLevle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_catSprite.isBossDead && 
+        if (timer <= 0 && _catSprite.isBossDead &&
             (Physics2D.OverlapCircle(_catSprite.groundCheck1.position, _catSprite.groundCheckRadius, balloonLayer) ||
              Physics2D.OverlapCircle(_catSprite.groundCheck2.position, _catSprite.groundCheckRadius, balloonLayer)))
         {
-            transform.position += speed * Time.deltaTime * movingVector ;
-            _cat.transform.position += speed * Time.deltaTime * movingVector ;
+            transform.position += speed * Time.deltaTime * movingVector;
+            _cat.transform.position += speed * Time.deltaTime * movingVector;
         }
+        else timer -= Time.deltaTime;
 
         if (transform.position.y > 5)
         {

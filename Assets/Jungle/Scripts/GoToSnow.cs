@@ -21,6 +21,7 @@ public class GoToSnow : MonoBehaviour
     public static List<Coin> coins = new ();
     public static List<Crate> crates = new ();
     private CatSprite _catSprite;
+    private float timer = 3;
 
     void Start()
     {
@@ -30,14 +31,16 @@ public class GoToSnow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics2D.OverlapCircle(_catSprite.groundCheck1.position, _catSprite.groundCheckRadius, balloonLayer) ||
-            Physics2D.OverlapCircle(_catSprite.groundCheck2.position, _catSprite.groundCheckRadius, balloonLayer))
+        if (timer <= 0 &&
+            (Physics2D.OverlapCircle(_catSprite.groundCheck1.position, _catSprite.groundCheckRadius, balloonLayer) ||
+            Physics2D.OverlapCircle(_catSprite.groundCheck2.position, _catSprite.groundCheckRadius, balloonLayer)))
         {
-            transform.position += speed * Time.deltaTime * movingVector ;
-            _cat.transform.position += speed * Time.deltaTime * movingVector ;
+            transform.position += speed * Time.deltaTime * movingVector;
+            _cat.transform.position += speed * Time.deltaTime * movingVector;
         }
-
-        if (transform.position.y > 8)
+        else timer -= Time.deltaTime;
+        
+        if (transform.position.y > 7)
         {
             Save();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);

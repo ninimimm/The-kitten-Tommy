@@ -9030,6 +9030,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 20183949}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: maxXP
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: spawn.x
       value: 65
       objectReference: {fileID: 0}

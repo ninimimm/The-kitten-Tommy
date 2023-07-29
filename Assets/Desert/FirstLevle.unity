@@ -4498,6 +4498,10 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
+      propertyPath: maxXP
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705279651709872395, guid: d198d7e677dabd943865f00f9d4fd9fa, type: 3}
       propertyPath: spawn.x
       value: -38.72
       objectReference: {fileID: 0}
@@ -18724,7 +18728,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819988889}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18734,8 +18738,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.43823242, y: 0.6699829}
-  m_SizeDelta: {x: -1.118885, y: -0.317513}
+  m_AnchoredPosition: {x: -0.0070991516, y: -0.011291504}
+  m_SizeDelta: {x: -0.1977539, y: -0.1784668}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &819988891
 MonoBehaviour:
@@ -20575,8 +20579,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -190}
-  m_SizeDelta: {x: 5.788086, y: 0.5999756}
+  m_AnchoredPosition: {x: 37.853394, y: -132.09106}
+  m_SizeDelta: {x: 4.867, y: 0.4609}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &879395071
 MonoBehaviour:
@@ -33262,8 +33266,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.44250488, y: 0.67126465}
-  m_SizeDelta: {x: -0.89783, y: -0.141165}
+  m_AnchoredPosition: {x: -0.0028305054, y: -0.010009766}
+  m_SizeDelta: {x: 0.02331543, y: -0.0020751953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1609826036
 MonoBehaviour:
@@ -40797,7 +40801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 1
-  dieObject: {fileID: 821461602}
+  dieObject: {fileID: 1023644847}
   cat: {fileID: 236619461}
   prefab: {fileID: 1407706392973706397, guid: 07b3caeaecf99084b87fc8c91982a0e5, type: 3}
   minXP: 2
