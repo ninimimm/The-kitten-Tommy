@@ -68,6 +68,7 @@ public class Knife : MonoBehaviour
     void Shoot()
     {
         newKnife = Instantiate(knife, fireKnife.position, fireKnife.rotation);
+        newKnife.GetComponent<logicKnife>().catSprite = catSprite;
         newKnife.GetComponent<logicKnife>()._poisonKnife = _poisonKnife;
         newKnife.GetComponent<logicKnife>().flySource = flySource;
         newKnife.GetComponent<logicKnife>().hitSource = hitSource;

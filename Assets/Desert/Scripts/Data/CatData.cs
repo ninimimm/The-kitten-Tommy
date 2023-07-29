@@ -7,6 +7,7 @@ public class CatData : IInitializable<CatSprite>
 {
     public HashSet<string> start { get; set;} = new();
     public float HP;
+    public float XP;
     public int countHealth;
     public int takeDamage;
     public string key;
@@ -53,5 +54,6 @@ public class CatData : IInitializable<CatSprite>
             spawnThirdLevel[2] = cat.transform.position.z;
         }
         canSpawn = catSprite.canSpawn;
+        XP = catSprite.XP;
     } 
 }

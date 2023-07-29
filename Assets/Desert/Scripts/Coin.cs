@@ -33,7 +33,7 @@ public class Coin : MonoBehaviour
             MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
-        audioSource = _cat.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         _boxCollider = GetComponent<BoxCollider2D>();
         
     }

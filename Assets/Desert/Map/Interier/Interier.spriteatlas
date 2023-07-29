@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Interier
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 2927d095b6c6b2449bed99af0eeb204e, type: 3}
+    - {fileID: 2800000, guid: 290a669d6827669499a71348b04e5197, type: 3}
+    - {fileID: 2800000, guid: 654272169e9e7c74ca0f157c3b151b63, type: 3}
+    - {fileID: 2800000, guid: 1537dd34afdafaa49b0b9dda8495c932, type: 3}
+    - {fileID: 2800000, guid: 69214f1d68280b2418da8584582ff68a, type: 3}
+    - {fileID: 2800000, guid: dba6c4bf3d4902e468343a39e2c307c4, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 1537dd34afdafaa49b0b9dda8495c932, type: 3}
+  - {fileID: 21300000, guid: 2927d095b6c6b2449bed99af0eeb204e, type: 3}
+  - {fileID: 21300000, guid: 654272169e9e7c74ca0f157c3b151b63, type: 3}
+  - {fileID: 21300000, guid: 69214f1d68280b2418da8584582ff68a, type: 3}
+  - {fileID: 830357902, guid: 290a669d6827669499a71348b04e5197, type: 3}
+  - {fileID: 1356229613, guid: 290a669d6827669499a71348b04e5197, type: 3}
+  - {fileID: -81467245, guid: 290a669d6827669499a71348b04e5197, type: 3}
+  - {fileID: 21300000, guid: dba6c4bf3d4902e468343a39e2c307c4, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Platform
+  - blackSmallGrass
+  - LeftPeacePit
+  - RightPeacePit
+  - cactuses_3
+  - cactuses_2
+  - cactuses_0
+  - Sand
+  m_RenderDataMap: {}
+  m_Tag: Interier
+  m_IsVariant: 0

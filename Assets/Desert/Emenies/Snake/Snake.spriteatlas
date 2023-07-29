@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snake
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 50
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: fc793f1e03592ed4884690391e687f15, type: 3}
+    - {fileID: 2800000, guid: 0da01046b0aa0b648a8c06c05e9337f4, type: 3}
+    - {fileID: 2800000, guid: d61f77aad0709f245bb52f1762a0c832, type: 3}
+    - {fileID: 2800000, guid: d9c299be62859be4bb3e654ad19d5d87, type: 3}
+    - {fileID: 2800000, guid: de0095141021fd745b5d896e56c7965a, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -2010195995, guid: de0095141021fd745b5d896e56c7965a, type: 3}
+  - {fileID: 1187483305, guid: de0095141021fd745b5d896e56c7965a, type: 3}
+  - {fileID: 1920482414, guid: de0095141021fd745b5d896e56c7965a, type: 3}
+  - {fileID: 9382084, guid: de0095141021fd745b5d896e56c7965a, type: 3}
+  - {fileID: -1742498147, guid: 0da01046b0aa0b648a8c06c05e9337f4, type: 3}
+  - {fileID: 2127596849, guid: 0da01046b0aa0b648a8c06c05e9337f4, type: 3}
+  - {fileID: 1506568904, guid: 0da01046b0aa0b648a8c06c05e9337f4, type: 3}
+  - {fileID: -1878944494, guid: 0da01046b0aa0b648a8c06c05e9337f4, type: 3}
+  - {fileID: 1391240340, guid: 0da01046b0aa0b648a8c06c05e9337f4, type: 3}
+  - {fileID: -996028480, guid: 0da01046b0aa0b648a8c06c05e9337f4, type: 3}
+  - {fileID: 1482533041, guid: d61f77aad0709f245bb52f1762a0c832, type: 3}
+  - {fileID: -1030238540, guid: d61f77aad0709f245bb52f1762a0c832, type: 3}
+  - {fileID: 140544155, guid: d61f77aad0709f245bb52f1762a0c832, type: 3}
+  - {fileID: -1154117671, guid: d61f77aad0709f245bb52f1762a0c832, type: 3}
+  - {fileID: 21300000, guid: fc793f1e03592ed4884690391e687f15, type: 3}
+  - {fileID: -1995165106, guid: d9c299be62859be4bb3e654ad19d5d87, type: 3}
+  - {fileID: -154600754, guid: d9c299be62859be4bb3e654ad19d5d87, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Snake_walk_2
+  - Snake_walk_3
+  - Snake_walk_0
+  - Snake_walk_1
+  - Snake_attack_5
+  - Snake_attack_4
+  - Snake_attack_1
+  - Snake_attack_0
+  - Snake_attack_3
+  - Snake_attack_2
+  - Snake_death_3
+  - Snake_death_2
+  - Snake_death_1
+  - Snake_death_0
+  - Snake
+  - Snake_hurt_0
+  - Snake_hurt_1
+  m_RenderDataMap: {}
+  m_Tag: Snake
+  m_IsVariant: 0

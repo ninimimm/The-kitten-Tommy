@@ -17,6 +17,7 @@ public class GoToSnow : MonoBehaviour
     [SerializeField] private Boosts boosts;
     [SerializeField] private List<People> peoples;
     [SerializeField] private Door[] doors;
+    [SerializeField] private Slime[] slimes;
     public static int countCoins;
     public static List<Coin> coins = new ();
     public static List<Crate> crates = new ();
@@ -46,20 +47,17 @@ public class GoToSnow : MonoBehaviour
 
     public void Save()
     {
-        foreach (var coin in coins)
-            if (coin is not null) coin.Save();
+        foreach (var coin in coins) coin.Save();
         _cat.Save();
-        foreach (var crate in crates)
-            if (crate is not null) crate.Save();
+        foreach (var crate in crates) crate.Save();
         chest.Save();
         grabbingHook.Save();
         takeKey.Save();
         knife.Save();
         logicKnife.Save();
         boosts.Save();
-        foreach (var people in peoples)
-            people.Save();
-        foreach (var door in doors)
-            if (door is not null) door.Save();
+        foreach (var people in peoples) people.Save();
+        foreach (var door in doors) door.Save();
+        foreach (var slime in slimes) slime.Save();
     }
 }

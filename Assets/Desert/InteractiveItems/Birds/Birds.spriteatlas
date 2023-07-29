@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Birds
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 50
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: bc18601d8e9ba4940bdfbf1f675f238e, type: 3}
+    - {fileID: 2800000, guid: 011cf8725e6a8f7469a6d1fbc2c1bd56, type: 3}
+    - {fileID: 2800000, guid: 365bbed10d829ab41b9bd8c8f8f13a9e, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -1521626558, guid: 365bbed10d829ab41b9bd8c8f8f13a9e, type: 3}
+  - {fileID: 419064684, guid: 365bbed10d829ab41b9bd8c8f8f13a9e, type: 3}
+  - {fileID: 1321975017, guid: 365bbed10d829ab41b9bd8c8f8f13a9e, type: 3}
+  - {fileID: -1384096440, guid: 365bbed10d829ab41b9bd8c8f8f13a9e, type: 3}
+  - {fileID: -848621799, guid: 011cf8725e6a8f7469a6d1fbc2c1bd56, type: 3}
+  - {fileID: -477991157, guid: 011cf8725e6a8f7469a6d1fbc2c1bd56, type: 3}
+  - {fileID: 1345261900, guid: 011cf8725e6a8f7469a6d1fbc2c1bd56, type: 3}
+  - {fileID: -1903669242, guid: 011cf8725e6a8f7469a6d1fbc2c1bd56, type: 3}
+  - {fileID: 351232988, guid: 011cf8725e6a8f7469a6d1fbc2c1bd56, type: 3}
+  - {fileID: 324657944, guid: 011cf8725e6a8f7469a6d1fbc2c1bd56, type: 3}
+  - {fileID: 466543055, guid: 011cf8725e6a8f7469a6d1fbc2c1bd56, type: 3}
+  - {fileID: 493791166, guid: bc18601d8e9ba4940bdfbf1f675f238e, type: 3}
+  - {fileID: 355154384, guid: bc18601d8e9ba4940bdfbf1f675f238e, type: 3}
+  - {fileID: -1616327767, guid: bc18601d8e9ba4940bdfbf1f675f238e, type: 3}
+  - {fileID: 1600178342, guid: bc18601d8e9ba4940bdfbf1f675f238e, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - pigeonIdle_2
+  - pigeonIdle_3
+  - pigeonIdle_0
+  - pigeonIdle_1
+  - pigeonFly_1
+  - pigeonFly_0
+  - pigeonFly_3
+  - pigeonFly_2
+  - pigeonFly_5
+  - pigeonFly_4
+  - pigeonFly_6
+  - pigeonEating_2
+  - pigeonEating_3
+  - pigeonEating_0
+  - pigeonEating_1
+  m_RenderDataMap: {}
+  m_Tag: Birds
+  m_IsVariant: 0

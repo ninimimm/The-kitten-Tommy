@@ -11,8 +11,8 @@ public class Chest : MonoBehaviour
     [SerializeField] private AudioSource _audioMoneySource;
     [SerializeField] private SpriteRenderer icon;
     [SerializeField] private TextMeshProUGUI textIcon;
+    [SerializeField] public BoxCollider2D[] _poly;
     public Animator _animator;
-    public PolygonCollider2D[] _poly;
     public bool isOpened;
     private CatSprite _catSprite;
     private ChestData _data;
@@ -26,7 +26,7 @@ public class Chest : MonoBehaviour
         icon.enabled = false;
         textIcon.enabled = false;
         _animator = GetComponent<Animator>();
-        _poly = GetComponents<PolygonCollider2D>();
+        _poly = GetComponents<BoxCollider2D>();
         _catSprite = _cat.GetComponent<CatSprite>();
         _poly[1].enabled = true;
         _poly[0].enabled = false;
@@ -46,7 +46,28 @@ public class Chest : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(_cat.transform.position-new Vector3(0,0.4f,0), transform.position) < 1.3 && !isOpened)
+        if (!isEmpty)
+        {
+            if (isOpened)
+            {
+                _animator.SetInteger("state", 1);
+                
+                if (icon.enabled && Input.GetKeyDown(KeyCode.E) )
+                {
+                    _audioMoneySource.Play();
+                    _catSprite.money += MONEY_REWARD;
+                    _catSprite._textMoney.text = _catSprite.money.ToString();
+                    _animator.SetInteger("state", 2);
+                    isEmpty = true;
+                    icon.enabled = false;
+                    textIcon.enabled = false;
+                }
+                _poly[0].enabled = true;
+                _poly[1].enabled = false;
+            }
+        }
+        if (Vector3.Distance(_cat.transform.position-new Vector3(0,0.4f,0), 
+                !isOpened ? transform.position : transform.position + new Vector3(0.35f,0,0)) < 1.3 && (!isOpened || !isEmpty))
         {
             icon.enabled = true;
             textIcon.enabled = true;
@@ -54,32 +75,13 @@ public class Chest : MonoBehaviour
             {
                 _audioOpenSource.Play();
                 isOpened = true;
+                icon.transform.position += new Vector3(0.5f, 0f, 0f);
             }
         }
         else
         {
             icon.enabled = false;
             textIcon.enabled = false;
-        }
-        
-        if (!isEmpty)
-        {
-            if (isOpened)
-            {
-                icon.enabled = false;
-                textIcon.enabled = false;
-                _animator.SetInteger("state", 1);
-                if (Vector3.Distance(_cat.transform.position, transform.position) < 0.85)
-                {
-                    _audioMoneySource.Play();
-                    _catSprite.money += MONEY_REWARD;
-                    _catSprite._textMoney.text = _catSprite.money.ToString();
-                    _animator.SetInteger("state", 2);
-                    isEmpty = true;
-                }
-                _poly[0].enabled = true;
-                _poly[1].enabled = false;
-            }
         }
     }
 

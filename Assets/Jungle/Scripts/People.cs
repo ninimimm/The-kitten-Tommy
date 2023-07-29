@@ -105,21 +105,17 @@ public class People : MonoBehaviour,IDamageable
                     Random rnd = new Random();
                     var number = rnd.Next(0, 6);
                     canDamage = false;
-                    if (number == 0)
+                    switch (number)
                     {
-                        _statePeople = MovementState.attack1;
-                        animator.SetInteger("state", (int)_statePeople);
-                    }
-
-                    if (number == 1)
-                    {
-                        _statePeople = MovementState.attack2;
-                        animator.SetInteger("state", (int)_statePeople);
-                    }
-                    if (number == 2)
-                    {
-                        _statePeople = MovementState.attack3;
-                        animator.SetInteger("state", (int)_statePeople);
+                        case 0:
+                            _statePeople = MovementState.attack1;
+                            break;
+                        case 1:
+                            _statePeople = MovementState.attack2;
+                            break;
+                        case 2:
+                            _statePeople = MovementState.attack3;
+                            break;
                     }
                 }
                 if (!isDeath) animator.SetInteger("state", (int)_statePeople);

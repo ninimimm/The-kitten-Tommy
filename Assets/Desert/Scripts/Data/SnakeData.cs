@@ -6,8 +6,9 @@ public class SnakeData : IInitializable<ComponentSnake>
 {
     public HashSet<string> start { get; set;} = new();
     public float HP;
-    public bool polyEnabled;
-    public bool capEnabled;
+    public bool cap1Enabled;
+    public bool cap2Enabled;
+    public bool cap3Enabled;
     public int animatorState;
     public float[] position;
     
@@ -20,8 +21,9 @@ public class SnakeData : IInitializable<ComponentSnake>
     {
         var obj = snake.gameObject;
         HP = snake.HP;
-        polyEnabled = snake.poly.enabled;
-        capEnabled = snake.cap.enabled;
+        cap1Enabled = snake.cap1.enabled;
+        cap2Enabled = snake.cap2.enabled;
+        cap3Enabled = snake.cap3.enabled;
         animatorState = snake._animator.GetInteger("state");
         position[0] = snake.transform.position.x;
         position[1] = snake.transform.position.y;

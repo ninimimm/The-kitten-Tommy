@@ -25,7 +25,7 @@ public class Monster : MonoBehaviour, IDamageable
     [SerializeField] private PolygonCollider2D poly1;
     [SerializeField] private PolygonCollider2D poly2;
     [SerializeField] private PolygonCollider2D poly3;
-    private float HP;
+    public float HP;
     private float timer;
     private float number;
     public enum MovementState { idle, run1, death2, death1, attack2, attack1, run2}
@@ -37,17 +37,46 @@ public class Monster : MonoBehaviour, IDamageable
     private bool attack;
 
     private AudioSource _audioSource;
-    private Animator _animator;
+    public Animator animator;
     private Rigidbody2D _rigidbody2D;
+
+    private MonsterData data;
     // Start is called before the first frame update
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         HP = maxHP;
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
+        {
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
+        }
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
+        {
+            Save();
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
+        }
+        Load();
         _healthBar.SetMaxHealth(maxHP);
         _healthBar.SetHealth(HP);
+    }
+    public void Save()
+    {
+        if (this != null) 
+            SavingSystem<Monster,MonsterData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<Monster, MonsterData>.Load($"{gameObject.name}.data");
+        transform.position = new Vector3(
+            data.position[0],
+            data.position[1],
+            data.position[2]);
+        HP = data.HP;
+        animator.SetInteger("state",data.animatorState);
     }
 
     // Update is called once per frame
@@ -68,49 +97,49 @@ public class Monster : MonoBehaviour, IDamageable
             {
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 if (timer > 0) transform.position += speed * 2 * Time.deltaTime * movingVector;
-                _animator.SetInteger("state", (int)MovementState.run1);
+                animator.SetInteger("state", (int)MovementState.run1);
             }
             else if (number > chanse[0] && number <= chanse[1])
             {
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 if (timer > 0) transform.position -= speed * 2 * Time.deltaTime * movingVector;
-                _animator.SetInteger("state", (int)MovementState.run1);
+                animator.SetInteger("state", (int)MovementState.run1);
             }
             else if (number > chanse[1] && number <= chanse[2])
             {
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 if (timer > 0) transform.position += speed * 2 * Time.deltaTime * movingVector;
-                _animator.SetInteger("state", (int)MovementState.run2);
+                animator.SetInteger("state", (int)MovementState.run2);
             }
             else if (number > chanse[2] && number <= chanse[3])
             {
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 if (timer > 0) transform.position -= speed * 2 * Time.deltaTime * movingVector;
-                _animator.SetInteger("state", (int)MovementState.run2);
+                animator.SetInteger("state", (int)MovementState.run2);
             }
             else if (number > chanse[3] && number <= chanse[4] && !attack)
             {
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 attack = true;
-                _animator.SetInteger("state", (int)MovementState.attack1);
+                animator.SetInteger("state", (int)MovementState.attack1);
             }
             else if (number > chanse[4] && number <= chanse[5] && !attack)
             {
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 attack = true;
-                _animator.SetInteger("state", (int)MovementState.attack1);
+                animator.SetInteger("state", (int)MovementState.attack1);
             }
             else if (number > chanse[5] && number <= chanse[6] && !attack)
             {
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 attack = true;
-                _animator.SetInteger("state", (int)MovementState.attack2);
+                animator.SetInteger("state", (int)MovementState.attack2);
             }
             else if (number > chanse[6] && number <= chanse[7] && !attack)
             {
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 attack = true;
-                _animator.SetInteger("state", (int)MovementState.attack2);
+                animator.SetInteger("state", (int)MovementState.attack2);
             }
         }
         else
@@ -118,7 +147,7 @@ public class Monster : MonoBehaviour, IDamageable
             poly1.enabled = false;
             fill.enabled = false;   
             fillBox.enabled = false;
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("death1"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("death1"))
                 poly2.enabled = true;
             else poly3.enabled = true;
         }
@@ -145,17 +174,17 @@ public class Monster : MonoBehaviour, IDamageable
         if (!stan && damage > 0)
         {
             var rnd = new Random();
-            if (!_audioSource.isPlaying && !_animator.GetCurrentAnimatorStateInfo(0).IsName("death1")
-                                        && !_animator.GetCurrentAnimatorStateInfo(0).IsName("death2"))
+            if (!_audioSource.isPlaying && !animator.GetCurrentAnimatorStateInfo(0).IsName("death1")
+                                        && !animator.GetCurrentAnimatorStateInfo(0).IsName("death2"))
                 _audioSource.PlayOneShot(damageClip);
             HP -= damage;
             _healthBar.SetHealth(HP);
             damageNow = true;
-            if (HP <= 0 && !_animator.GetCurrentAnimatorStateInfo(0).IsName("death1")
-                        && !_animator.GetCurrentAnimatorStateInfo(0).IsName("death2"))
+            if (HP <= 0 && !animator.GetCurrentAnimatorStateInfo(0).IsName("death1")
+                        && !animator.GetCurrentAnimatorStateInfo(0).IsName("death2"))
             {
                 XP.Die();
-                _animator.SetInteger("state", rnd.Next(2, 3));
+                animator.SetInteger("state", rnd.Next(2, 3));
             }
         }
     }

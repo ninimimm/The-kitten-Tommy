@@ -12,6 +12,9 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     [SerializeField] private CatSprite _catSprite;
     [SerializeField] private WriteText _writeText;
     [SerializeField] private Experience XP;
+    [SerializeField] public CapsuleCollider2D cap1;
+    [SerializeField] public CapsuleCollider2D cap2;
+    [SerializeField] public CapsuleCollider2D cap3;
     private AudioSource _audioSource;
     public Animator _animator;
     public enum MovementState { stay, Walk, attake, death, hurt };
@@ -23,8 +26,6 @@ public class ComponentSnake : MonoBehaviour, IDamageable
     public int takeDamage = 1;
     private bool rotation = true;
     private bool damageNow;
-    public PolygonCollider2D poly;
-    public CapsuleCollider2D cap;
     private SnakeData data;
     private bool isStart = true;
     private AnimatorStateInfo _stateInfo;
@@ -37,8 +38,6 @@ public class ComponentSnake : MonoBehaviour, IDamageable
         data = SavingSystem<ComponentSnake, SnakeData>.Load($"{gameObject.name}.data");
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        poly = GetComponent<PolygonCollider2D>();
-        cap = GetComponent<CapsuleCollider2D>();
         _healthBar.SetMaxHealth(maxHP);
         HP = maxHP;
         _audioSource = GetComponent<AudioSource>();
@@ -71,8 +70,9 @@ public class ComponentSnake : MonoBehaviour, IDamageable
             data.position[1],
             data.position[2]);
         HP = data.HP;
-        poly.enabled = data.polyEnabled;
-        cap.enabled = data.capEnabled;
+        cap1.enabled = data.cap1Enabled;
+        cap2.enabled = data.cap2Enabled;
+        cap3.enabled = data.cap2Enabled;
         _animator.SetInteger("state",data.animatorState);
     }
 
@@ -119,8 +119,9 @@ public class ComponentSnake : MonoBehaviour, IDamageable
         else
         {
             _rb.velocity = new Vector2(0, 0);
-            poly.enabled = false;
-            cap.enabled = true;
+            cap1.enabled = false;
+            cap2.enabled = false;
+            cap3.enabled = true;
             _fill.enabled = false;
             _bar.enabled = false;
         }

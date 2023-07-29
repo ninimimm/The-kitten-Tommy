@@ -6,8 +6,8 @@ public class HyenaData : IInitializable<Hyena>
 {
     public HashSet<string> start { get; set;} = new();
     public float HP;
-    public bool polyEnabled;
-    public bool capEnabled;
+    public bool cap1Enabled;
+    public bool cap2Enabled;
     public int animatorState;
     public float[] position;
     
@@ -19,8 +19,8 @@ public class HyenaData : IInitializable<Hyena>
     public void Initialize(Hyena hyena)
     {
         HP = hyena.HP;
-        polyEnabled = hyena.pol.enabled;
-        capEnabled = hyena.cap.enabled;
+        cap1Enabled = hyena.cap1.enabled;
+        cap2Enabled = hyena.cap2.enabled;
         animatorState = hyena.animator.GetInteger("state");
         position[0] = hyena.transform.position.x;
         position[1] = hyena.transform.position.y;

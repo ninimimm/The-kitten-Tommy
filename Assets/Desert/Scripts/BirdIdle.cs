@@ -34,7 +34,7 @@ public class BirdIdle : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (_spriteRenderer.enabled)
         {

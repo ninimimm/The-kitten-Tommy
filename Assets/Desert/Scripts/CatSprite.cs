@@ -70,6 +70,7 @@ public class CatSprite : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textShiftBoss;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private GameObject windPrefab;
+    [SerializeField] public Joystick joystick;
     
     public bool isWater;
     public int countHealth;
@@ -94,8 +95,8 @@ public class CatSprite : MonoBehaviour
     private Collider2D[] hitEnemies;
     private float moveInWater;
     private AnimatorStateInfo stateInfo;
-    private bool isDeath;
-    private bool isRevive;
+    public bool isDeath;
+    public bool isRevive;
     public bool isPoison;
     public bool isOnWall;
     [Range(0, 1f)] public float volumeRun;
@@ -113,6 +114,10 @@ public class CatSprite : MonoBehaviour
     private int index = -1;
     public bool canSpawn;
     public bool inMiniMap;
+    #if UNITY_ANDROID
+    private bool joysticUP;
+    private bool isAttack;
+    #endif 
 
     public void SetSpeedMultiplier(float multiplier)
     {
@@ -158,6 +163,7 @@ public class CatSprite : MonoBehaviour
             spawnRevile = transform.position;
             spawn = transform.position;
             canSpawn = data.canSpawn;
+            XP = data.XP;
         }
     }
 
@@ -208,12 +214,14 @@ public class CatSprite : MonoBehaviour
             Save();
             MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
-        Load();
         knife.knife.GetComponent<SpriteRenderer>().sprite = knifeSprite;
         if (SceneManager.GetActiveScene().name != "Home" && SceneManager.GetActiveScene().name != "Photo")
         {
+            Load();
             _healthBar.SetMaxHealth(maxHP);
             _healthBar.SetHealth(HP);
+            greenBar.SetMaxHealth(mapXP);
+            greenBar.SetHealth(XP);
             _textHealth.text = countHealth.ToString();
         }
     }
@@ -228,6 +236,9 @@ public class CatSprite : MonoBehaviour
     {
         if (!inMiniMap)
         {
+            #if UNITY_ANDROID
+            UpdateForAndroid();
+            #endif 
             greenBar.SetMaxHealth(mapXP);
             greenBar.SetHealth(XP);
             if (stateInfo.IsName("revival"))
@@ -279,6 +290,14 @@ public class CatSprite : MonoBehaviour
             SwitchAnimation();  
         }
     }
+
+    private void UpdateForAndroid()
+    {
+        #if UNITY_ANDROID
+        if (joystick.Vertical >= 0) joysticUP = true;
+        #endif
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 14)
@@ -462,7 +481,12 @@ public class CatSprite : MonoBehaviour
 
     private void UpdateGround()
     {
+        #if UNITY_STANDALONE_WIN
         move = isNowShit || _grabbingHook.isHookedStatic || isJumpOnWall ? 0 : isOnWall? Input.GetAxisRaw("Vertical") : Input.GetAxisRaw("Horizontal");
+        #elif UNITY_ANDROID
+        move = isNowShit || _grabbingHook.isHookedStatic || isJumpOnWall ? 0 : isOnWall? joystick.Vertical > 0 ? 1 : -1: joystick.Horizontal > 0 ? 1 : -1;
+        if (joystick.Horizontal == 0) move = 0;
+        #endif
         moveInWater = isNowShit ? 0 : Input.GetAxis("Horizontal");
         isIce = Physics2D.OverlapCircle(groundCheck1.position, groundCheckRadius, iceLayer) ||
                 Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, iceLayer);
@@ -499,7 +523,15 @@ public class CatSprite : MonoBehaviour
 
     private void UpdateJump()
     {
-        if (isOnWall && Input.GetButtonDown("Jump"))
+        #if UNITY_STANDALONE_WIN
+        var click = Input.GetButtonDown("Jump");
+        #elif UNITY_ANDROID     
+        bool click;
+        if (isOnWall) click = joystick.Horizontal < -0.3f;
+        else click = joystick.Vertical > 0.3f;
+        #endif
+        
+        if (isOnWall && click)
         {
             move = 0;
             _rb.constraints = RigidbodyConstraints2D.None;
@@ -528,7 +560,7 @@ public class CatSprite : MonoBehaviour
         }
         else
         {
-            if (Input.GetButtonDown("Jump")) timerJump = timeToJump;
+            if (click) timerJump = timeToJump;
             if (timerJump > 0) timerJump -= Time.deltaTime;
             if (timerJump > 0)
             {
@@ -596,12 +628,24 @@ public class CatSprite : MonoBehaviour
 
                 if (_rb.velocity.y > 1f) _stateCat = MovementState.jumpup;
                 else if (_rb.velocity.y < - 1f) _stateCat = MovementState.jumpdown;
-        
+                #if UNITY_STANDALONE_WIN
                 if (Input.GetKeyDown(KeyCode.W) && !isWater && !isOnWall)
                     Attake();
                 else if (Input.GetKeyDown(KeyCode.S) && !isWater && !isOnWall)
                     Wind();
-
+                #elif UNITY_ANDROID
+                if (isAttack)
+                {
+                    _stateCat = MovementState.hit;
+                    isAttack = false;
+                }
+                else if (joystick.Vertical < -0.5f && joysticUP && !isWater && !isOnWall)
+                {
+                    joysticUP = false;
+                    Wind();
+                }
+                #endif
+                
                 if (damageNow)
                 {
                     _stateCat = MovementState.damage;
@@ -617,6 +661,11 @@ public class CatSprite : MonoBehaviour
         }
     }
 
+    public void ButtonAttack()
+    {
+        if (!isWater && !isOnWall) Attake();
+    }
+    
     public void Revive()
     {
         transform.position = spawnRevile;
@@ -626,6 +675,9 @@ public class CatSprite : MonoBehaviour
 
     void Attake()
     {
+        #if UNITY_ANDROID
+        isAttack = true;
+        #endif
         if (_stateCat == MovementState.damage) return;
         if (!stateInfo.IsName("hit"))
         {

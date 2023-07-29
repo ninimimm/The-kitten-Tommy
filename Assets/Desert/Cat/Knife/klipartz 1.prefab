@@ -266,6 +266,7 @@ MonoBehaviour:
   enemiesLayer:
     serializedVersion: 2
     m_Bits: 5376
+  catSprite: {fileID: 0}
   flySource: {fileID: 1613179520581933271, guid: d84bdc67f7b241c498a3ea886f8f8aae, type: 3}
   hitSource: {fileID: 6085099026597195566, guid: 2db5267cb694f424ca4cfde742b7a77f, type: 3}
   _poisonKnife: {fileID: 0}

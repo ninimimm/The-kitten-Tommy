@@ -33,7 +33,7 @@ public class Scorpio : MonoBehaviour, IDamageable
     private float idleTimer;
     private bool damageNow;
     public BoxCollider2D boxCollider;
-    public PolygonCollider2D polygonCollider;
+    public CapsuleCollider2D polygonCollider;
     public Animator animator;
     private Rigidbody2D rb;
     private bool isFacingRight;
@@ -54,7 +54,7 @@ public class Scorpio : MonoBehaviour, IDamageable
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
-        polygonCollider = GetComponent<PolygonCollider2D>();
+        polygonCollider = GetComponent<CapsuleCollider2D>();
         polygonCollider.enabled = false;
         boxCollider.enabled = true;
         audioSource = GetComponent<AudioSource>();
@@ -179,8 +179,6 @@ public class Scorpio : MonoBehaviour, IDamageable
         stan = isStan;
         if (!stan && damage > 0)
         {
-            _writeText.LKM.GetComponent<SpriteRenderer>().enabled = false;
-            _writeText.scorpioTarget.GetComponent<SpriteRenderer>().enabled = false;
             if(!_stateInfo.IsName("ScorpioHurt") && !_stateInfo.IsName("ScorpioDeath"))
                 audioSource.PlayOneShot(damageClip);
             HP -= damage;

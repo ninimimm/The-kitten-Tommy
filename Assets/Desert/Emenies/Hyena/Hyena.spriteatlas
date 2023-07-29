@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hyena
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 50
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: c06cbea25236f8b4dbabad6dd95d0f6d, type: 3}
+    - {fileID: 2800000, guid: 43d598f9c94834642a2cac27f6547c6b, type: 3}
+    - {fileID: 2800000, guid: 4721fc5ef4b953d498115c6f1eb2de9a, type: 3}
+    - {fileID: 2800000, guid: f0809f370a92c274daf761efac9a37a8, type: 3}
+    - {fileID: 2800000, guid: 663e12188097de34f90c517ef711b681, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -850748687, guid: c06cbea25236f8b4dbabad6dd95d0f6d, type: 3}
+  - {fileID: -811199704, guid: c06cbea25236f8b4dbabad6dd95d0f6d, type: 3}
+  - {fileID: -708311358, guid: c06cbea25236f8b4dbabad6dd95d0f6d, type: 3}
+  - {fileID: -1868288683, guid: c06cbea25236f8b4dbabad6dd95d0f6d, type: 3}
+  - {fileID: -441241179, guid: c06cbea25236f8b4dbabad6dd95d0f6d, type: 3}
+  - {fileID: -69113712, guid: c06cbea25236f8b4dbabad6dd95d0f6d, type: 3}
+  - {fileID: 1178268583, guid: f0809f370a92c274daf761efac9a37a8, type: 3}
+  - {fileID: 982768488, guid: f0809f370a92c274daf761efac9a37a8, type: 3}
+  - {fileID: 536395020, guid: f0809f370a92c274daf761efac9a37a8, type: 3}
+  - {fileID: 1492073574, guid: f0809f370a92c274daf761efac9a37a8, type: 3}
+  - {fileID: -514790996, guid: 663e12188097de34f90c517ef711b681, type: 3}
+  - {fileID: 1913359054, guid: 663e12188097de34f90c517ef711b681, type: 3}
+  - {fileID: -927181524, guid: 663e12188097de34f90c517ef711b681, type: 3}
+  - {fileID: 34770489, guid: 663e12188097de34f90c517ef711b681, type: 3}
+  - {fileID: 1713019314, guid: 663e12188097de34f90c517ef711b681, type: 3}
+  - {fileID: 423414518, guid: 663e12188097de34f90c517ef711b681, type: 3}
+  - {fileID: -5467504, guid: 43d598f9c94834642a2cac27f6547c6b, type: 3}
+  - {fileID: -199755511, guid: 43d598f9c94834642a2cac27f6547c6b, type: 3}
+  - {fileID: 119939541, guid: 43d598f9c94834642a2cac27f6547c6b, type: 3}
+  - {fileID: 1215807499, guid: 43d598f9c94834642a2cac27f6547c6b, type: 3}
+  - {fileID: -798001844, guid: 43d598f9c94834642a2cac27f6547c6b, type: 3}
+  - {fileID: -2014957058, guid: 43d598f9c94834642a2cac27f6547c6b, type: 3}
+  - {fileID: 183660036, guid: 4721fc5ef4b953d498115c6f1eb2de9a, type: 3}
+  - {fileID: 198589895, guid: 4721fc5ef4b953d498115c6f1eb2de9a, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Hyena_attack_4
+  - Hyena_attack_5
+  - Hyena_attack_2
+  - Hyena_attack_3
+  - Hyena_attack_0
+  - Hyena_attack_1
+  - Hyena_idle_0
+  - Hyena_idle_1
+  - Hyena_idle_2
+  - Hyena_idle_3
+  - Hyena_walk_5
+  - Hyena_walk_4
+  - Hyena_walk_1
+  - Hyena_walk_0
+  - Hyena_walk_3
+  - Hyena_walk_2
+  - Hyena_death_4
+  - Hyena_death_5
+  - Hyena_death_2
+  - Hyena_death_3
+  - Hyena_death_0
+  - Hyena_death_1
+  - Hyena_hurt_1
+  - Hyena_hurt_0
+  m_RenderDataMap: {}
+  m_Tag: Hyena
+  m_IsVariant: 0

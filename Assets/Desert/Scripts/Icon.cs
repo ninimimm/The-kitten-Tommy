@@ -15,6 +15,7 @@ public class Icon : MonoBehaviour
         {
             _timer = moveTime;
             movingVector.y *= -1;
+            movingVector.x *= -1;
         }
         if (_timer >= 0)
         {

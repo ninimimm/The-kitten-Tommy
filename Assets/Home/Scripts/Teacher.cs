@@ -52,22 +52,37 @@ public class Teacher : MonoBehaviour
     private bool startWindTraining;
     private Rigidbody2D _rigidbody2D;
     private Collider2D _attackColliders;
+    private bool isEPressed;
+    private bool isEnterPressed;
+    private bool isWPressed;
     void Start()
     {
         _animator = GetComponent<Animator>();
         _isHello = true;
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
-    
+
+    public void ButtonE() => isEPressed = true;
+    public void ButtonEnter() => isEnterPressed = true;
+    public void ButtonW() => isWPressed = true;
     void Update()
     {
         if (_end)
         {
             if (transform.position.x <= 40f) transform.position += speed * 2 * Time.deltaTime * movingVector;
             else _animator.SetInteger("state", 0);
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.E) && _useEndHint) _stopTyping = true;
+            #elif UNITY_ANDROID
+            if (isEPressed && _useEndHint) _stopTyping = true;
+            #endif
             EndTraining();
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.Return)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            #elif UNITY_ANDROID
+            if (isEnterPressed) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);;
+            #endif
+            
         }
         else if (_windTraining)
         {
@@ -88,7 +103,13 @@ public class Teacher : MonoBehaviour
                 catSprite.XP = 10;
                 catSprite.greenBar.SetHealth(10);
             }
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.E) && _useWindHint) _stopTyping = true;
+            #elif UNITY_ANDROID
+            if (isEPressed && _useEndHint) _stopTyping = true;
+            #endif
+            
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.Return) && _useWindHint)
             {
                 StopAllCoroutines();
@@ -96,6 +117,16 @@ public class Teacher : MonoBehaviour
                 _stopTyping = false;
                 StartCoroutine(TypeSentence(textForTeacher[5], teacherText));
             }
+            #elif UNITY_ANDROID
+            if (isEnterPressed && _useWindHint)
+            {
+                StopAllCoroutines();
+                _wellDone = false;
+                _stopTyping = false;
+                StartCoroutine(TypeSentence(textForTeacher[5], teacherText));
+            }
+            #endif
+            
             WindTraining();
             if (hyenaForWind.stan)
             {
@@ -112,7 +143,13 @@ public class Teacher : MonoBehaviour
         {
             if (transform.position.x <= 26f) transform.position += speed * 2 * Time.deltaTime * movingVector;
             else _animator.SetInteger("state", 0);
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.E) && _useKillAndExperienceHint) _stopTyping = true;
+            #elif UNITY_ANDROID
+            if (isEPressed && _useKillAndExperienceHint) _stopTyping = true;
+            #endif
+            
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.Return) && _useKillAndExperienceHint)
             {
                 StopAllCoroutines();
@@ -120,6 +157,17 @@ public class Teacher : MonoBehaviour
                 _stopTyping = false;
                 StartCoroutine(TypeSentence(textForTeacher[4], teacherText));
             }
+            #elif UNITY_ANDROID
+            if (isEnterPressed && _useKillAndExperienceHint)
+            {
+                StopAllCoroutines();
+                _wellDone = false;
+                _stopTyping = false;
+                StartCoroutine(TypeSentence(textForTeacher[4], teacherText));
+            }
+            #endif
+            
+            
             KillAndExpperienceTraining();
             if (hyenaForKill.stateHyena == Hyena.MovementState.death)
             {
@@ -135,7 +183,15 @@ public class Teacher : MonoBehaviour
         {
             if (transform.position.x <= 21f) transform.position += speed * 2 * Time.deltaTime * movingVector;
             else _animator.SetInteger("state", 0);
+            
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.E) && _useClawsHint) _stopTyping = true;
+            #elif UNITY_ANDROID
+            if (isEPressed && _useClawsHint) _stopTyping = true;
+            #endif
+            
+            
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.Return) && _useClawsHint)
             {
                 StopAllCoroutines();
@@ -143,8 +199,19 @@ public class Teacher : MonoBehaviour
                 _stopTyping = false;
                 StartCoroutine(TypeSentence(textForTeacher[3], teacherText));
             }
+            #elif UNITY_ANDROID
+            if (isEnterPressed && _useClawsHint)
+            {
+                StopAllCoroutines();
+                _wellDone = false;
+                _stopTyping = false;
+                StartCoroutine(TypeSentence(textForTeacher[3], teacherText));
+            }
+            #endif
+            
             ClawsTraining();
             _attackColliders = Physics2D.OverlapCircle(clawsTarget.transform.position, 0.1f, catLayer);
+            #if UNITY_STANDALONE_WIN
             if (_attackColliders && Input.GetKeyDown(KeyCode.W))
             {
                 _killAndExperienceTraining = true;
@@ -153,13 +220,32 @@ public class Teacher : MonoBehaviour
                 helpText.enabled = false;
                 teacherText.text = "";
                 _animator.SetInteger("state", 2);
+            };
+            #elif UNITY_ANDROID
+            if (_attackColliders && isWPressed)
+            {
+                _killAndExperienceTraining = true;
+                StopAllCoroutines();
+                textBox.enabled = false;
+                helpText.enabled = false;
+                teacherText.text = "";
+                _animator.SetInteger("state", 2);
             }
+            #endif
+            
         }
         else if (_knifeTraining)
         {
             if (transform.position.x <= 12f) transform.position += speed * Time.deltaTime * movingVector;
             else _animator.SetInteger("state", 0);
+            
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.E) && _useKnifeHint) _stopTyping = true;
+            #elif UNITY_ANDROID
+            if (isEPressed && _useKnifeHint) _stopTyping = true;
+            #endif
+            
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.Return) && _useKnifeHint)
             {
                 StopAllCoroutines();
@@ -167,6 +253,17 @@ public class Teacher : MonoBehaviour
                 _stopTyping = false;
                 StartCoroutine(TypeSentence(textForTeacher[2], teacherText));
             }
+            #elif UNITY_ANDROID
+            if (isEnterPressed && _useKnifeHint)
+            {
+                StopAllCoroutines();
+                _wellDone = false;
+                _stopTyping = false;
+                StartCoroutine(TypeSentence(textForTeacher[2], teacherText));
+            }
+            #endif
+            
+            
             KnifeTraining();
             _attackColliders = Physics2D.OverlapCircle(knifeTarget.transform.position + new Vector3(-0.07f, 0.12f, 0f), 0.1f, knifeLayer);
             if (_attackColliders)
@@ -181,6 +278,7 @@ public class Teacher : MonoBehaviour
         }
         else
         {
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.Return) && _useHookHint)
             {
                 StopAllCoroutines();
@@ -189,6 +287,18 @@ public class Teacher : MonoBehaviour
                 _stopTyping = false;
                 StartCoroutine(TypeSentence(textForTeacher[0], teacherText));
             }
+            #elif UNITY_ANDROID
+            if (isEnterPressed && _useHookHint)
+            {
+                StopAllCoroutines();
+                _isHello = true;
+                _isHook = false;
+                _stopTyping = false;
+                StartCoroutine(TypeSentence(textForTeacher[0], teacherText));
+            }
+            #endif
+            
+            #if UNITY_STANDALONE_WIN
             if (Input.GetKeyDown(KeyCode.E) && _useHookHint)
             {
                 if (_wellDone && _isHello)
@@ -199,6 +309,20 @@ public class Teacher : MonoBehaviour
                 }
                 else _stopTyping = true;
             }
+            #elif UNITY_ANDROID
+            if (isEPressed && _useHookHint)
+            {
+                if (_wellDone && _isHello)
+                {
+                    _wellDone = false;
+                    _isHello = !_isHello;
+                    _isHook = !_isHook;
+                }
+                else _stopTyping = true;
+            }
+            #endif
+            
+            
             if (_isHook)
             {
                 StartCoroutine(TypeSentence(textForTeacher[1], teacherText));
@@ -216,6 +340,9 @@ public class Teacher : MonoBehaviour
                 _rigidbody2D.AddForce(jumpVector, ForceMode2D.Impulse);
             }
         }
+        isEPressed = false;
+        isEnterPressed = false;
+        isWPressed = false;
     }
 
     private void JumpTraining()
@@ -233,6 +360,8 @@ public class Teacher : MonoBehaviour
                 textIcon.enabled = false;
             }
         }
+        
+        #if UNITY_STANDALONE_WIN
         if (icon.enabled && Input.GetKeyDown(KeyCode.E))
         {
             _useHookHint = true;
@@ -242,6 +371,17 @@ public class Teacher : MonoBehaviour
             helpText.enabled = true;
             StartCoroutine(TypeSentence(textForTeacher[0], teacherText));
         }
+        #elif UNITY_ANDROID
+        if (icon.enabled && isEPressed)
+        {
+            _useHookHint = true;
+            icon.enabled = false;
+            textIcon.enabled = false;
+            textBox.enabled = true;
+            helpText.enabled = true;
+            StartCoroutine(TypeSentence(textForTeacher[0], teacherText));
+        }
+        #endif
     }
     
     IEnumerator TypeSentence(string sentence, TextMeshProUGUI textComponent)
@@ -278,6 +418,9 @@ public class Teacher : MonoBehaviour
                 textIcon.enabled = false;
             }
         }
+        
+        
+        #if UNITY_STANDALONE_WIN
         if (icon.enabled && Input.GetKeyDown(KeyCode.E))
         {
             _useKnifeHint = true;
@@ -287,6 +430,17 @@ public class Teacher : MonoBehaviour
             helpText.enabled = true;
             StartCoroutine(TypeSentence(textForTeacher[2], teacherText));
         }
+        #elif UNITY_ANDROID
+        if (icon.enabled && isEPressed)
+        {
+            _useKnifeHint = true;
+            icon.enabled = false;
+            textIcon.enabled = false;
+            textBox.enabled = true;
+            helpText.enabled = true;
+            StartCoroutine(TypeSentence(textForTeacher[2], teacherText));
+        }
+        #endif
     }
 
     private void ClawsTraining()
@@ -304,6 +458,8 @@ public class Teacher : MonoBehaviour
                 textIcon.enabled = false;
             }
         }
+        
+        #if UNITY_STANDALONE_WIN
         if (icon.enabled && Input.GetKeyDown(KeyCode.E))
         {
             _useClawsHint = true;
@@ -313,6 +469,18 @@ public class Teacher : MonoBehaviour
             helpText.enabled = true;
             StartCoroutine(TypeSentence(textForTeacher[3], teacherText));
         }
+        #elif UNITY_ANDROID
+        if (icon.enabled && isEPressed)
+        {
+            _useClawsHint = true;
+            icon.enabled = false;
+            textIcon.enabled = false;
+            textBox.enabled = true;
+            helpText.enabled = true;
+            StartCoroutine(TypeSentence(textForTeacher[3], teacherText));
+        }
+        #endif
+        
     }
     
     private void OnDrawGizmosSelected()
@@ -335,6 +503,8 @@ public class Teacher : MonoBehaviour
                 textIcon.enabled = false;
             }
         }
+        
+        #if UNITY_STANDALONE_WIN
         if (icon.enabled && Input.GetKeyDown(KeyCode.E))
         {
             _useKillAndExperienceHint = true;
@@ -344,6 +514,18 @@ public class Teacher : MonoBehaviour
             helpText.enabled = true;
             StartCoroutine(TypeSentence(textForTeacher[4], teacherText));
         }
+        #elif UNITY_ANDROID
+        if (icon.enabled && isEPressed)
+        {
+            _useKillAndExperienceHint = true;
+            icon.enabled = false;
+            textIcon.enabled = false;
+            textBox.enabled = true;
+            helpText.enabled = true;
+            StartCoroutine(TypeSentence(textForTeacher[4], teacherText));
+        }
+        #endif
+        
     }
     
     private void WindTraining()
@@ -361,6 +543,7 @@ public class Teacher : MonoBehaviour
                 textIcon.enabled = false;
             }
         }
+        #if UNITY_STANDALONE_WIN
         if (icon.enabled && Input.GetKeyDown(KeyCode.E))
         {
             _useWindHint = true;
@@ -370,6 +553,17 @@ public class Teacher : MonoBehaviour
             helpText.enabled = true;
             StartCoroutine(TypeSentence(textForTeacher[5], teacherText));
         }
+        #elif UNITY_ANDROID
+        if (icon.enabled && isEPressed)
+        {
+            _useWindHint = true;
+            icon.enabled = false;
+            textIcon.enabled = false;
+            textBox.enabled = true;
+            helpText.enabled = true;
+            StartCoroutine(TypeSentence(textForTeacher[5], teacherText));
+        }
+        #endif
     }
     
     private void EndTraining()
@@ -387,6 +581,8 @@ public class Teacher : MonoBehaviour
                 textIcon.enabled = false;
             }
         }
+        
+        #if UNITY_STANDALONE_WIN
         if (icon.enabled && Input.GetKeyDown(KeyCode.E))
         {
             _useEndHint = true;
@@ -396,5 +592,17 @@ public class Teacher : MonoBehaviour
             helpText.enabled = true;
             StartCoroutine(TypeSentence(textForTeacher[6], teacherText));
         }
+        #elif UNITY_ANDROID
+        if (icon.enabled && isEPressed)
+        {
+            _useEndHint = true;
+            icon.enabled = false;
+            textIcon.enabled = false;
+            textBox.enabled = true;
+            helpText.enabled = true;
+            StartCoroutine(TypeSentence(textForTeacher[6], teacherText));
+        }
+        #endif
+        
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    [SerializeField] private MainMenu _mainMenu;
     private Resolution[] _resolutions; 
     //public Dropdown resolutionDropdown;
     private void Start()

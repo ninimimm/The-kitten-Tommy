@@ -22,7 +22,7 @@ public class Slime : MonoBehaviour, IDamageable
     [SerializeField] private float damage;
     [SerializeField] private Image fill;
     [SerializeField] private Image fillBox;
-    private float HP;
+    public float HP;
     private float timer;
     private float number;
     public enum MovementState { stay, walk, jump, damage, death }
@@ -33,19 +33,49 @@ public class Slime : MonoBehaviour, IDamageable
     private bool isJump;
 
     private AudioSource _audioSource;
-    private Animator _animator;
+    public Animator _animator;
     private Rigidbody2D _rigidbody2D;
+
+    private SlimeData data;
     // Start is called before the first frame update
     void Start()
     {
+        data = SavingSystem<Slime, SlimeData>.Load($"{gameObject.name}.data");
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         HP = maxHP;
+        if (!MainMenu.dictSave.ContainsKey(gameObject.name))
+        {
+            MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
+            MainMenu.index ++;
+        }
+        if (MainMenu.isStarts[MainMenu.dictSave[gameObject.name]])
+        {
+            Save();
+            MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
+        }
+        Load();
         _healthBar.SetMaxHealth(maxHP);
         _healthBar.SetHealth(HP);
     }
 
+    public void Save()
+    {
+        if (this != null) 
+            SavingSystem<Slime,SlimeData>.Save(this, $"{gameObject.name}.data");
+    }
+    
+    public void Load()
+    {
+        data = SavingSystem<Slime, SlimeData>.Load($"{gameObject.name}.data");
+        transform.position = new Vector3(
+            data.position[0],
+            data.position[1],
+            data.position[2]);
+        HP = data.HP;
+        _animator.SetInteger("state",data.animatorState);
+    }
     // Update is called once per frame
     void Update()
     {

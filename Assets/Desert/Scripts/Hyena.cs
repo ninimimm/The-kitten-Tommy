@@ -17,9 +17,9 @@ public class Hyena : MonoBehaviour, IDamageable
     [SerializeField] private Image _fill;
     [SerializeField] private Image _bar;
     [SerializeField] private Experience XP;
+    [SerializeField] public CapsuleCollider2D cap1;
+    [SerializeField] public CapsuleCollider2D cap2;
     private AudioSource _audioSource;
-    public PolygonCollider2D pol;
-    public CapsuleCollider2D cap;
     private bool damageNow;
     public enum MovementState { stay, walk, attake, death, hurt };
     public MovementState stateHyena;
@@ -43,12 +43,10 @@ public class Hyena : MonoBehaviour, IDamageable
         _healthBar.SetMaxHealth(maxHP);
         coordinates = transform.position;
         _rb = GetComponent<Rigidbody2D>();
-        pol = GetComponent<PolygonCollider2D>();
-        cap = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
-        pol.enabled = false;
-        cap.enabled = true;
+        cap1.enabled = false;
+        cap2.enabled = true;
         catSprite = _cat.GetComponent<CatSprite>();
         if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
@@ -80,8 +78,8 @@ public class Hyena : MonoBehaviour, IDamageable
                 data.position[1],
                 data.position[2]);
             HP = data.HP;
-            pol.enabled = data.polyEnabled;
-            cap.enabled = data.capEnabled;
+            cap1.enabled = data.cap1Enabled;
+            cap2.enabled = data.cap2Enabled;
             animator.SetInteger("state",data.animatorState);
         }
     }
@@ -151,8 +149,8 @@ public class Hyena : MonoBehaviour, IDamageable
 
     private void HandleDeathState()
     {
-        pol.enabled = true;
-        cap.enabled = false;
+        cap1.enabled = true;
+        cap2.enabled = false;
         _fill.enabled = false;
         _bar.enabled = false;
     }

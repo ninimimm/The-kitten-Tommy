@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hawk
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 50
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 8ffc8ce60998e0040a294f920e034f2f, type: 3}
+    - {fileID: 2800000, guid: efa7abfeeeaaa834ca6ca091f9bd9c10, type: 3}
+    - {fileID: 2800000, guid: 081811a4c2edf21419ae650354bf5a9c, type: 3}
+    - {fileID: 2800000, guid: 339201694a90cde4ba5dbe0611f6e686, type: 3}
+    - {fileID: 2800000, guid: 3f20767dfb4f6a447b20d552b449d701, type: 3}
+    - {fileID: 2800000, guid: db15f61e02e5fbd43ad0ef9e572de979, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -722224505, guid: 081811a4c2edf21419ae650354bf5a9c, type: 3}
+  - {fileID: 1720276486, guid: 081811a4c2edf21419ae650354bf5a9c, type: 3}
+  - {fileID: 611519366, guid: 081811a4c2edf21419ae650354bf5a9c, type: 3}
+  - {fileID: -2123464772, guid: 081811a4c2edf21419ae650354bf5a9c, type: 3}
+  - {fileID: -1250825689, guid: 8ffc8ce60998e0040a294f920e034f2f, type: 3}
+  - {fileID: -198194804, guid: 8ffc8ce60998e0040a294f920e034f2f, type: 3}
+  - {fileID: 242445251, guid: 8ffc8ce60998e0040a294f920e034f2f, type: 3}
+  - {fileID: -954963680, guid: 8ffc8ce60998e0040a294f920e034f2f, type: 3}
+  - {fileID: 1859781776, guid: 339201694a90cde4ba5dbe0611f6e686, type: 3}
+  - {fileID: -1985161508, guid: 339201694a90cde4ba5dbe0611f6e686, type: 3}
+  - {fileID: -1147052362, guid: 339201694a90cde4ba5dbe0611f6e686, type: 3}
+  - {fileID: -1394902561, guid: 339201694a90cde4ba5dbe0611f6e686, type: 3}
+  - {fileID: -224082600, guid: 3f20767dfb4f6a447b20d552b449d701, type: 3}
+  - {fileID: -672938763, guid: 3f20767dfb4f6a447b20d552b449d701, type: 3}
+  - {fileID: 853774612, guid: 3f20767dfb4f6a447b20d552b449d701, type: 3}
+  - {fileID: -1845438924, guid: 3f20767dfb4f6a447b20d552b449d701, type: 3}
+  - {fileID: 38561032, guid: db15f61e02e5fbd43ad0ef9e572de979, type: 3}
+  - {fileID: -689234658, guid: db15f61e02e5fbd43ad0ef9e572de979, type: 3}
+  - {fileID: 21300000, guid: efa7abfeeeaaa834ca6ca091f9bd9c10, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - hawk_attack_2
+  - hawk_attack_3
+  - hawk_attack_0
+  - hawk_attack_1
+  - hawk_walk_1
+  - hawk_walk_0
+  - hawk_walk_3
+  - hawk_walk_2
+  - hawk_death_2
+  - hawk_death_3
+  - hawk_death_0
+  - hawk_death_1
+  - hawk_fly_3
+  - hawk_fly_2
+  - hawk_fly_1
+  - hawk_fly_0
+  - hawk_hurt_1
+  - hawk_hurt_0
+  - hawk_stay
+  m_RenderDataMap: {}
+  m_Tag: Hawk
+  m_IsVariant: 0

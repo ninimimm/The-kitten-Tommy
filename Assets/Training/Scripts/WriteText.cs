@@ -122,7 +122,8 @@ public class WriteText : MonoBehaviour
             }
             LKM.transform.position = scorpoi3.transform.position-new Vector3(0,0.5f,0);
             snakeTarget.transform.Rotate(0,0,0.5f);
-            scorpioTarget.transform.Rotate(0,0,0.5f);
+            if (scorpioTarget != null)
+                scorpioTarget.transform.Rotate(0,0,0.5f);
             platformTarget.transform.Rotate(0,0,0.5f);
             platformTarget.transform.Rotate(0,0,0.5f);
             LKM2.transform.position = new Vector3(crateTarget.transform.position.x, LKM2.transform.position.y, LKM2.transform.position.z);

@@ -16,6 +16,10 @@ public class GoToThirdLevel : MonoBehaviour
     [SerializeField] private logicKnife logicKnife;
     [SerializeField] private Boosts boosts;
     [SerializeField] private Door[] doors;
+    [SerializeField] private Hyena snowWolf;
+    [SerializeField] private Monster[] monsters;
+    [SerializeField] private People[] people;
+    [SerializeField] private ManageButtons manageButtons;
     public static List<Coin> coins = new ();
     public static List<Crate> crates = new ();
     public static int countCoins;
@@ -46,20 +50,20 @@ public class GoToThirdLevel : MonoBehaviour
     }
     public void Save()
     {
-        foreach (var coin in coins)
-            if (coin is not null) coin.Save();
+        foreach (var coin in coins) coin.Save();
         _cat.Save();
-        foreach (var crate in crates)
-            if (crate is not null) crate.Save();
-        foreach (var scorpio in scorpios)
-            if (scorpio is not null) scorpio.Save();
+        foreach (var crate in crates) crate.Save();
+        foreach (var scorpio in scorpios) scorpio.Save();
         chest.Save();
         grabbingHook.Save();
         knife.Save();
         logicKnife.Save();
         boosts.Save();
         takeKey.Save();
-        foreach (var door in doors)
-            if (door is not null) door.Save();
+        foreach (var door in doors) door.Save();
+        snowWolf.Save();
+        foreach (var monster in monsters) monster.Save();
+        foreach (var guy in people) guy.Save();
+        manageButtons.Save();
     }
 }

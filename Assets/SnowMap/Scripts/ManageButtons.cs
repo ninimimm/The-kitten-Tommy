@@ -9,6 +9,7 @@ public class ManageButtons : MonoBehaviour
     [SerializeField] public GameObject door;
     public StringBuilder keys = new ();
     public Button[] buttons;
+    
     [SerializeField] private float timeToWait;
     public float timer;
     private ManageButtonsData _data;
@@ -21,8 +22,6 @@ public class ManageButtons : MonoBehaviour
         _data = SavingSystem<ManageButtons, ManageButtonsData>.Load($"{gameObject.name}.data");
         _doorAnimator = door.GetComponent<Animator>();
         _doorBoxCollider2D = door.GetComponent<BoxCollider2D>();
-        if (SceneManager.GetActiveScene().name == "Jungle")
-            Save();
         if (!MainMenu.dictSave.ContainsKey(gameObject.name))
         {
             MainMenu.dictSave.Add(gameObject.name,MainMenu.index);
@@ -79,5 +78,6 @@ public class ManageButtons : MonoBehaviour
         _data = SavingSystem<ManageButtons, ManageButtonsData>.Load($"{gameObject.name}.data");
         _doorAnimator.SetBool("opened",_data.animatorState);
         _doorBoxCollider2D.enabled = _data.colliderState;
+        if (!_data.colliderState) door.GetComponent<DarkDoor>().isSoundPlayed = true;
     }
 }

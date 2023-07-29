@@ -6,6 +6,7 @@
     [SerializeField] public float speed = 10f;
     [SerializeField] public float damage = 1;
     [SerializeField] private LayerMask enemiesLayer;
+    [SerializeField] public CatSprite catSprite;
     public AudioSource flySource;
     public AudioSource hitSource;
     public PoisonKnife _poisonKnife;
@@ -35,6 +36,7 @@
             MainMenu.isStarts[MainMenu.dictSave[gameObject.name]] = false;
         }
         Load();
+        if (catSprite.isPoison) GetComponent<SpriteRenderer>().sprite = catSprite.poisonSprite;
     }
     
     public void Save()
@@ -57,6 +59,7 @@
 
         // Set the knife's rotation
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle+30));
+        
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
